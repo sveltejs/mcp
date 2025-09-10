@@ -1,0 +1,67 @@
+{
+	"name": "@sveltejs/mcp",
+	"version": "0.0.1",
+	"description": "The official Svelte MCP server implementation",
+	"type": "module",
+	"main": "src/index.js",
+	"scripts": {
+		"start": "node src/index.js",
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"prepare": "svelte-kit sync || echo ''",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"format": "prettier --write .",
+		"lint": "prettier --check . && eslint .",
+		"test:unit": "vitest",
+		"test": "npm run test:unit -- --run",
+		"db:push": "drizzle-kit push",
+		"db:generate": "drizzle-kit generate",
+		"db:migrate": "drizzle-kit migrate",
+		"db:studio": "drizzle-kit studio"
+	},
+	"keywords": [
+		"svelte",
+		"tmcp",
+		"mcp",
+		"server"
+	],
+	"private": true,
+	"devDependencies": {
+		"@types/node": "^22",
+		"@eslint/compat": "^1.2.5",
+		"@eslint/js": "^9.18.0",
+		"@sveltejs/adapter-vercel": "^5.6.3",
+		"@sveltejs/kit": "^2.22.0",
+		"@sveltejs/vite-plugin-svelte": "^6.0.0",
+		"drizzle-kit": "^0.30.2",
+		"drizzle-orm": "^0.40.0",
+		"eslint": "^9.18.0",
+		"eslint-config-prettier": "^10.0.1",
+		"eslint-plugin-svelte": "^3.0.0",
+		"globals": "^16.0.0",
+		"prettier": "^3.4.2",
+		"prettier-plugin-svelte": "^3.3.3",
+		"svelte": "^5.0.0",
+		"svelte-check": "^4.0.0",
+		"typescript": "^5.0.0",
+		"typescript-eslint": "^8.20.0",
+		"vite": "^7.0.4",
+		"vite-plugin-devtools-json": "^1.0.0",
+		"vitest": "^3.2.3"
+	},
+	"dependencies": {
+		"@neondatabase/serverless": "^0.10.4",
+		"tmcp": "^1.12.2",
+		"@tmcp/adapter-valibot": "^0.1.4",
+		"valibot": "^1.1.0",
+		"@tmcp/transport-stdio": "^0.1.3",
+		"@tmcp/transport-http": "^0.6.0"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
+	}
+}
