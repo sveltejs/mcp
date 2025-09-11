@@ -1,10 +1,10 @@
 import { DATABASE_URL } from '$env/static/private';
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
-import * as schema from './schema.js';
+import { createClient } from '@libsql/client';
+import { drizzle } from 'drizzle-orm/libsql';
+import * as schema from './schema';
 
 if (!DATABASE_URL) throw new Error('DATABASE_URL is not set');
 
-const client = neon(DATABASE_URL);
+const client = createClient({ url: DATABASE_URL });
 
-export const db = drizzle(client, { schema });
+export const db = drizzle(client, { schema, logger: true });
