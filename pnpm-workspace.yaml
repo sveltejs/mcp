@@ -1,4 +1,4 @@
 packages:
   - '*'
 
-useNodeVersion: 24.8.0
+useNodeVersion: 22.19.0
