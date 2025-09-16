@@ -6,5 +6,9 @@ services:
       - "6277:6277"
     environment:
       - DANGEROUSLY_OMIT_AUTH=true
+      - NO_BROWSER=true
+      - HOST=0.0.0.0
+      - BROWSER=none
+      - SKIP_BROWSER=true
     restart: unless-stopped
     container_name: mcp-inspector
