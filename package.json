@@ -36,6 +36,8 @@
 		"@sveltejs/adapter-vercel": "^5.6.3",
 		"@sveltejs/kit": "^2.22.0",
 		"@sveltejs/vite-plugin-svelte": "^6.0.0",
+		"@types/eslint-scope": "^8.3.2",
+		"@types/estree": "^1.0.8",
 		"@types/node": "^24.3.1",
 		"@typescript-eslint/types": "^8.43.0",
 		"drizzle-kit": "^0.30.2",

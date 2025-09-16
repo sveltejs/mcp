@@ -51,6 +51,12 @@ importers:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^6.0.0
         version: 6.2.0(svelte@5.38.8)(vite@7.1.5(@types/node@24.3.1))
+      '@types/eslint-scope':
+        specifier: ^8.3.2
+        version: 8.3.2
+      '@types/estree':
+        specifier: ^1.0.8
+        version: 1.0.8
       '@types/node':
         specifier: ^24.3.1
         version: 24.3.1
@@ -892,6 +898,15 @@ packages:
 
   '@types/deep-eql@4.0.2':
     resolution: {integrity: sha512-c9h9dVVMigMPc4bwTvC5dxqtqJZwQPePsWjPlpSOnojbor6pGqdk541lfA7AqFQr5pB1BRdq0juY9db81BwyFw==}
+
+  '@types/eslint-scope@8.3.2':
+    resolution: {integrity: sha512-ygPtnKRQjbXB6LKQ+m6SLyZDMgFeQFVNCkjUK/HivS58Ce6JBjxpVzHbE1+RS6pC5fP4FQg4qh8lvVSm2oxYZw==}
+
+  '@types/eslint@9.6.1':
+    resolution: {integrity: sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==}
+
+  '@types/esrecurse@4.3.1':
+    resolution: {integrity: sha512-xJBAbDifo5hpffDBuHl0Y8ywswbiAp/Wi7Y/GtAgSlZyIABppyurxVueOPE8LUQOxdlgi6Zqce7uoEpqNTeiUw==}
 
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
@@ -2710,6 +2725,20 @@ snapshots:
   '@types/cookie@0.6.0': {}
 
   '@types/deep-eql@4.0.2': {}
+
+  '@types/eslint-scope@8.3.2':
+    dependencies:
+      '@types/eslint': 9.6.1
+      '@types/esrecurse': 4.3.1
+      '@types/estree': 1.0.8
+      eslint-visitor-keys: 4.2.1
+
+  '@types/eslint@9.6.1':
+    dependencies:
+      '@types/estree': 1.0.8
+      '@types/json-schema': 7.0.15
+
+  '@types/esrecurse@4.3.1': {}
 
   '@types/estree@1.0.8': {}
 

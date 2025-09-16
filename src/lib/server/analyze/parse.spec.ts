@@ -1,14 +1,14 @@
 import type { TSESTree } from '@typescript-eslint/types';
 import { describe, expect, it } from 'vitest';
 import { walk } from '$lib/index.js';
-import { parse } from './parse';
+import { parse, type ParseResult } from './parse.js';
 
 // ----------------------------------------------------------------------
 // Helpers
 // ----------------------------------------------------------------------
 
 function find_declaration_identifier(
-	result: ReturnType<typeof parse>,
+	result: ParseResult,
 	matches: (id: TSESTree.Identifier, path: Array<TSESTree.Node> | null) => boolean,
 ): TSESTree.Identifier {
 	const { ast } = result;
@@ -30,7 +30,7 @@ function find_declaration_identifier(
 	return found;
 }
 
-function variable_declaration_from_id(result: ReturnType<typeof parse>, id: TSESTree.Identifier) {
+function variable_declaration_from_id(result: ParseResult, id: TSESTree.Identifier) {
 	const { all_variables: all_variables } = result;
 	const variable = all_variables.find((v) => (v.defs ?? []).some((d) => d.name === id));
 	if (!variable) {
@@ -44,7 +44,7 @@ function variable_declaration_from_id(result: ReturnType<typeof parse>, id: TSES
 // Assertions
 // ----------------------------------------------------------------------
 
-function assert_svelte_file(result: ReturnType<typeof parse>) {
+function assert_svelte_file(result: ParseResult) {
 	const { all_references } = result;
 
 	const declaration_id = find_declaration_identifier(result, (id, path) => {
@@ -64,7 +64,7 @@ function assert_svelte_file(result: ReturnType<typeof parse>) {
 	expect(references_to_name.length).toBeGreaterThan(0);
 }
 
-function assert_sveltejs_file(result: ReturnType<typeof parse>) {
+function assert_sveltejs_file(result: ParseResult) {
 	const { all_references: all_references } = result;
 
 	const declaration_id = find_declaration_identifier(result, (id, path) => {
