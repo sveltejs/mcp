@@ -19,4 +19,4 @@ docker-compose up
 ```
 
 - MCP Inspector: http://localhost:6274/ (Connect with `http://host.docker.internal:5173/mcp` + Streamable HTTP)
-- http://localhost:8081/ - SQLite frontend
+- http://localhost:8081/ - Adminer SQLite frontend
