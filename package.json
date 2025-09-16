@@ -4,10 +4,15 @@
 	"description": "The official Svelte MCP server implementation",
 	"type": "module",
 	"main": "src/index.js",
+	"bin": {
+		"svelte-mcp": "./dist/lib/stdio.js"
+	},
 	"scripts": {
 		"start": "node src/index.js",
 		"dev": "vite dev",
 		"build": "vite build",
+		"build:mcp": "tsc --project tsconfig.build.json",
+		"prepublishOnly": "pnpm build:mcp",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",

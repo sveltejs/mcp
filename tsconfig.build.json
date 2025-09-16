@@ -1,0 +1,30 @@
+{
+	"compilerOptions": {
+		"target": "ES2023",
+		"lib": ["ES2023"],
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"allowJs": true,
+		"checkJs": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": true,
+		"declaration": true,
+		"outDir": "./dist",
+		"rootDir": "./src"
+	},
+	"include": [
+		"src/lib/stdio.ts",
+		"src/lib/mcp/**/*"
+	],
+	"exclude": [
+		"node_modules",
+		"dist",
+		"src/routes/**/*",
+		"src/app.html",
+		"src/hooks.server.ts"
+	]
+}
