@@ -21,8 +21,7 @@ function adminer_object() {
             echo '<input type="hidden" name="auth[username]" value="">';
             echo '<input type="hidden" name="auth[password]" value="">';
             echo '<input type="hidden" name="auth[db]" value="/tmp/test.db">';
-            echo '<p>Connecting to SQLite database...</p>';
-            echo '<script>document.forms[0].submit();</script>';
+            echo '<p><input type="submit" value="Connect to SQLite Database"></p>';
         }
     }
 
