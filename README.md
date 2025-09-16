@@ -6,8 +6,8 @@ Repo for the official Svelte MCP server.
 
 ```
 pnpm i
-pnpm dev
 cp .env.example .env
+pnpm dev
 ```
 
 1. Set the VOYAGE_API_KEY for embeddings support
