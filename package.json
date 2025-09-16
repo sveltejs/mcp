@@ -6,7 +6,7 @@
 	"main": "src/index.js",
 	"scripts": {
 		"start": "node src/index.js",
-		"dev": "vite dev",
+		"dev": "vite dev --host",
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
