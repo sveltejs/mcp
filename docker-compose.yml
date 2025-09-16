@@ -1,0 +1,11 @@
+services:
+  mcp-inspector:
+    image: ghcr.io/modelcontextprotocol/inspector:latest
+    network_mode: host
+    ports:
+      - "6274:6274"
+      - "6277:6277"
+    environment:
+      - DANGEROUSLY_OMIT_AUTH=true
+    restart: unless-stopped
+    container_name: mcp-inspector
