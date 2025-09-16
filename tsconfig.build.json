@@ -16,15 +16,6 @@
 		"outDir": "./dist",
 		"rootDir": "./src"
 	},
-	"include": [
-		"src/lib/stdio.ts",
-		"src/lib/mcp/**/*"
-	],
-	"exclude": [
-		"node_modules",
-		"dist",
-		"src/routes/**/*",
-		"src/app.html",
-		"src/hooks.server.ts"
-	]
+	"include": ["src/lib/stdio.ts", "src/lib/mcp/**/*"],
+	"exclude": ["node_modules", "dist", "src/routes/**/*", "src/app.html", "src/hooks.server.ts"]
 }
