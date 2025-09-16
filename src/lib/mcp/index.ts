@@ -7,6 +7,7 @@ import { McpServer } from 'tmcp';
 import * as v from 'valibot';
 import { parse } from '../server/analyze/parse.js';
 import * as autofixers from './autofixers.js';
+import { eslint } from './eslint.js';
 
 const server = new McpServer(
 	{
@@ -61,6 +62,20 @@ server.tool(
 				{ output: content, parsed, desired_svelte_version },
 				autofixer,
 			);
+		}
+
+		const results = await eslint.lintText(code, { filePath: filename || './Component.svelte' });
+
+		for (const message of results[0].messages) {
+			if (message.severity === 2) {
+				content.issues.push(
+					`ESLint Error: ${message.message} at line ${message.line}, column ${message.column}`,
+				);
+			} else if (message.severity === 1) {
+				content.suggestions.push(
+					`ESLint Warning: ${message.message} at line ${message.line}, column ${message.column}`,
+				);
+			}
 		}
 
 		return {
