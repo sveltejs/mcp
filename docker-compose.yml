@@ -9,3 +9,15 @@ services:
       - HOST=0.0.0.0
     restart: unless-stopped
     container_name: mcp-inspector-sveltejs-mcp
+
+  adminer:
+    image: adminer:latest
+    ports:
+      - '8081:8080'
+    environment:
+      - ADMINER_DEFAULT_SERVER=sqlite
+      - ADMINER_DESIGN=nette
+    volumes:
+      - ./test.db:/var/www/html/test.db
+    restart: unless-stopped
+    container_name: adminer-sveltejs-mcp
