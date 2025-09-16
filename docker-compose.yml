@@ -7,6 +7,5 @@ services:
     environment:
       - DANGEROUSLY_OMIT_AUTH=true
       - HOST=0.0.0.0
-      - ALLOWED_ORIGINS=http://localhost:6274,http://host.docker.internal:6274
     restart: unless-stopped
-    container_name: mcp-inspector
+    container_name: mcp-inspector-sveltejs-mcp
