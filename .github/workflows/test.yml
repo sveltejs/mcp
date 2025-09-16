@@ -1,0 +1,42 @@
+name: Test
+
+on:
+  push:
+    branches: [main, redesign]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm i
+
+      - name: Build project
+        run: pnpm run build
+        env:
+          DATABASE_URL: file:test.db
+          VOYAGE_API_KEY: dummy-key
+
+      - name: Run tests
+        run: pnpm run test
+        env:
+          DATABASE_URL: file:test.db
+          VOYAGE_API_KEY: dummy-key
