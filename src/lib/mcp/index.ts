@@ -23,7 +23,7 @@ const server = new McpServer(
 			completions: {},
 		},
 		instructions:
-			'This is the official Svelte MCP server. It MUST be used whenever svelte development is involved. It can provide official documentation, code examples and correct your code',
+			'This is the official Svelte MCP server. It MUST be used whenever svelte development is involved. It can provide official documentation, code examples and correct your code. After you correct the component call this tool again to confirm all the issues are fixed.',
 	},
 );
 
@@ -35,6 +35,7 @@ server.tool(
 			'Given a svelte component or module returns a list of suggestions to fix any issues it has. This tool MUST be used whenever the user is asking to write svelte code before sending the code back to the user',
 		schema: v.object({
 			code: v.string(),
+			desired_svelte_version: v.number(),
 			filename: v.optional(v.string()),
 		}),
 		outputSchema: v.object({
@@ -48,14 +49,18 @@ server.tool(
 			openWorldHint: false,
 		},
 	},
-	async ({ code, filename }) => {
+	async ({ code, filename, desired_svelte_version }) => {
 		const content: { issues: string[]; suggestions: string[] } = { issues: [], suggestions: [] };
 
 		const parsed = parse(code, filename ?? 'Component.svelte');
 
 		// Run each autofixer separately to avoid interrupting logic flow
 		for (const autofixer of Object.values(autofixers)) {
-			walk(parsed.ast as unknown as Node, { output: content, parsed }, autofixer);
+			walk(
+				parsed.ast as unknown as Node,
+				{ output: content, parsed, desired_svelte_version },
+				autofixer,
+			);
 		}
 
 		return {

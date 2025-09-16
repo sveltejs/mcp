@@ -1,10 +1,15 @@
 import type { Node } from 'estree';
+import type { AST } from 'svelte-eslint-parser';
 import type { Visitors } from 'zimmerframe';
 import type { ParseResult } from '../server/analyze/parse.js';
 
 export type Autofixer = Visitors<
-	Node,
-	{ output: { issues: string[]; suggestions: string[] }; parsed: ParseResult }
+	Node | AST.SvelteNode,
+	{
+		output: { issues: string[]; suggestions: string[] };
+		parsed: ParseResult;
+		desired_svelte_version: number;
+	}
 >;
 
 export const assign_in_effect: Autofixer = {
@@ -37,6 +42,16 @@ export const assign_in_effect: Autofixer = {
 					}
 				}
 			}
+		}
+	},
+};
+
+export const no_labeled_statement: Autofixer = {
+	SvelteReactiveStatement(node, { state }) {
+		if (state.desired_svelte_version >= 5) {
+			state.output.issues.push(
+				`The labeled statement is legacy svelte 4 syntax. Please use \`$effect\` or better \`$derived\``,
+			);
 		}
 	},
 };
