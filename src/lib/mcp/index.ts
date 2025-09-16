@@ -1,4 +1,4 @@
-import { mix_visitors, walk } from '$lib';
+import { mix_visitors, walk } from '../index.js';
 import { ValibotJsonSchemaAdapter } from '@tmcp/adapter-valibot';
 import { HttpTransport } from '@tmcp/transport-http';
 import { StdioTransport } from '@tmcp/transport-stdio';

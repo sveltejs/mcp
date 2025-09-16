@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { walk as _walk } from 'zimmerframe';
-import type { Autofixer } from './mcp/autofixers';
+import type { Autofixer } from './mcp/autofixers.js';
 
 export type WalkParams<
 	T extends {

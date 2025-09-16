@@ -1,6 +1,6 @@
 import type { Node } from 'estree';
 import type { Visitors } from 'zimmerframe';
-import type { ParseResult } from '$lib/server/analyze/parse.js';
+import type { ParseResult } from '../server/analyze/parse.js';
 
 export type Autofixer = Visitors<
 	Node,
