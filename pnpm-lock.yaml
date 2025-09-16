@@ -29,6 +29,9 @@ importers:
       valibot:
         specifier: ^1.1.0
         version: 1.1.0(typescript@5.9.2)
+      zimmerframe:
+        specifier: ^1.1.4
+        version: 1.1.4
     devDependencies:
       '@eslint/compat':
         specifier: ^1.2.5
