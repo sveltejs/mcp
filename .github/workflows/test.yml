@@ -29,6 +29,12 @@ jobs:
       - name: Install dependencies
         run: pnpm i
 
+      - name: Build project
+        run: pnpm run build
+        env:
+          DATABASE_URL: file:test.db
+          VOYAGE_API_KEY: dummy-key
+
       - name: Run tests
         run: pnpm run test
         env:
