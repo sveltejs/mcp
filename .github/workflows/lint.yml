@@ -31,3 +31,6 @@ jobs:
 
       - name: Run linting
         run: pnpm run lint
+        env:
+          DATABASE_URL: file:test.db
+          VOYAGE_API_KEY: dummy-key

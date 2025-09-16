@@ -31,3 +31,6 @@ jobs:
 
       - name: Run type check
         run: pnpm run check
+        env:
+          DATABASE_URL: file:test.db
+          VOYAGE_API_KEY: dummy-key
