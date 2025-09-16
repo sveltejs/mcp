@@ -1,0 +1,4 @@
+packages:
+  - '*'
+
+useNodeVersion: 24.8.0
