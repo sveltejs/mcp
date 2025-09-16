@@ -1,4 +1,4 @@
-import { mix_visitors, walk } from '../index.js';
+import { walk } from '../index.js';
 import { ValibotJsonSchemaAdapter } from '@tmcp/adapter-valibot';
 import { HttpTransport } from '@tmcp/transport-http';
 import { StdioTransport } from '@tmcp/transport-stdio';
@@ -53,7 +53,10 @@ server.tool(
 
 		const parsed = parse(code, filename ?? 'Component.svelte');
 
-		walk(parsed.ast as unknown as Node, { output: content, parsed }, mix_visitors(autofixers));
+		// Run each autofixer separately to avoid interrupting logic flow
+		for (const autofixer of Object.values(autofixers)) {
+			walk(parsed.ast as unknown as Node, { output: content, parsed }, autofixer);
+		}
 
 		return {
 			content: [
