@@ -11,13 +11,15 @@ services:
     container_name: mcp-inspector-sveltejs-mcp
 
   adminer:
-    image: adminer:latest
+    image: adminer:4.6.2
     ports:
       - '8081:8080'
-    environment:
-      - ADMINER_DEFAULT_SERVER=sqlite
-      - ADMINER_DESIGN=nette
     volumes:
-      - ./test.db:/var/www/html/test.db
+      - ./test.db:/tmp/test.db
+      - ./bypass.php:/var/www/html/bypass.php
+    environment:
+      - ADMINER_DEFAULT_SERVER=sqlite:/tmp/test.db
+      - ADMINER_DESIGN=hydra
     restart: unless-stopped
     container_name: adminer-sveltejs-mcp
+    command: ["php", "-S", "[::]:8080", "-t", "/var/www/html", "/var/www/html/bypass.php"]
