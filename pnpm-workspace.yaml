@@ -1,0 +1,4 @@
+packages:
+  - '*'
+
+useNodeVersion: 22.19.0

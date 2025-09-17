@@ -1,0 +1,10 @@
+{
+	"servers": {
+		"Svelte MCP": {
+			"type": "stdio",
+			"command": "node",
+			"args": ["dist/lib/stdio.js"]
+		}
+	},
+	"inputs": []
+}
