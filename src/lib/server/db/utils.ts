@@ -26,7 +26,9 @@ export function vector(arr: number[]) {
  * .execute();
  */
 export function distance(column: Column, arr: number[], as = 'distance') {
-	return sql<number>`vector_distance_cos(${column}, vector32(${JSON.stringify(arr)}))`.as(as);
+	return sql<number>`CASE ${column} ISNULL WHEN 1 THEN 1 ELSE vector_distance_cos(${column}, vector32(${JSON.stringify(arr)})) END`.as(
+		as,
+	);
 }
 
 /**

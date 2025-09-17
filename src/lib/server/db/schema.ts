@@ -12,9 +12,80 @@ import { float_32_array } from './utils';
  * to the generated migration file
  */
 
-// this is just an example of a vector table...we can change this with the docs table later
-export const vector_table = sqliteTable('vector_table', {
+export const distillations = sqliteTable('distillations', {
 	id: integer('id').primaryKey(),
-	text: text('text'),
-	vector: float_32_array('vector', { dimensions: 3 }),
+	preset_name: text('preset_name').notNull(),
+	version: text('version').notNull(),
+	content: text('content').notNull(),
+	size_kb: integer('size_kb').notNull(),
+	document_count: integer('document_count').notNull(),
+	distillation_job_id: integer('distillation_job_id').references(() => distillation_jobs.id),
+	created_at: integer('created_at', { mode: 'timestamp' })
+		.notNull()
+		.$defaultFn(() => new Date()),
+});
+
+export const distillation_jobs = sqliteTable('distillation_jobs', {
+	id: integer('id').primaryKey(),
+	preset_name: text('preset_name').notNull(),
+	batch_id: text('batch_id'),
+	status: text('status', { enum: ['pending', 'processing', 'completed', 'failed'] }).notNull(),
+	model_used: text('model_used').notNull(),
+	total_files: integer('total_files').notNull(),
+	processed_files: integer('processed_files').notNull().default(0),
+	successful_files: integer('successful_files').notNull().default(0),
+	minimize_applied: integer('minimize_applied', { mode: 'boolean' }).notNull().default(false),
+	total_input_tokens: integer('total_input_tokens').notNull().default(0),
+	total_output_tokens: integer('total_output_tokens').notNull().default(0),
+	started_at: integer('started_at', { mode: 'timestamp' }),
+	completed_at: integer('completed_at', { mode: 'timestamp' }),
+	error_message: text('error_message'),
+	metadata: text('metadata', { mode: 'json' })
+		.$type<Record<string, unknown>>()
+		.notNull()
+		.default({}),
+	created_at: integer('created_at', { mode: 'timestamp' })
+		.notNull()
+		.$defaultFn(() => new Date()),
+	updated_at: integer('updated_at', { mode: 'timestamp' })
+		.notNull()
+		.$defaultFn(() => new Date()),
+});
+
+export const content = sqliteTable('content', {
+	id: integer('id').primaryKey(),
+	path: text('path').notNull(),
+	filename: text('filename').notNull(),
+	content: text('content').notNull(),
+	size_bytes: integer('size_bytes').notNull(),
+	embeddings: float_32_array('embeddings', { dimensions: 1024 }),
+	metadata: text('metadata', { mode: 'json' })
+		.$type<Record<string, unknown>>()
+		.notNull()
+		.default({}),
+	created_at: integer('created_at', { mode: 'timestamp' })
+		.notNull()
+		.$defaultFn(() => new Date()),
+	updated_at: integer('updated_at', { mode: 'timestamp' })
+		.notNull()
+		.$defaultFn(() => new Date()),
+});
+
+export const content_distilled = sqliteTable('content_distilled', {
+	id: integer('id').primaryKey(),
+	path: text('path').notNull(),
+	filename: text('filename').notNull(),
+	content: text('content').notNull(),
+	size_bytes: integer('size_bytes').notNull(),
+	embeddings: float_32_array('embeddings', { dimensions: 1024 }),
+	metadata: text('metadata', { mode: 'json' })
+		.$type<Record<string, unknown>>()
+		.notNull()
+		.default({}),
+	created_at: integer('created_at', { mode: 'timestamp' })
+		.notNull()
+		.$defaultFn(() => new Date()),
+	updated_at: integer('updated_at', { mode: 'timestamp' })
+		.notNull()
+		.$defaultFn(() => new Date()),
 });
