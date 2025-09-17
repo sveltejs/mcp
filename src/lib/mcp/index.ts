@@ -7,7 +7,7 @@ import { McpServer } from 'tmcp';
 import * as v from 'valibot';
 import { parse } from '../server/analyze/parse.js';
 import * as autofixers from './autofixers.js';
-import { eslintForSvelte5, eslintForSvelte4 } from './eslint.js';
+import { get_linter } from './eslint.js';
 
 const server = new McpServer(
 	{
@@ -36,11 +36,12 @@ server.tool(
 			'Given a svelte component or module returns a list of suggestions to fix any issues it has. This tool MUST be used whenever the user is asking to write svelte code before sending the code back to the user',
 		schema: v.object({
 			code: v.string(),
-			version: v.pipe(
-				v.optional(v.union([v.literal(4), v.literal(5)])),
-				v.description('The version of svelte to use'),
+			desired_svelte_version: v.pipe(
+				v.union([v.literal(4), v.literal(5)]),
+				v.description(
+					'The desired svelte version...if possible read this from the package.json of the user project, otherwise use some hint from the wording (if the user asks for runes it wants version 5). Default to 5 in case of doubt.',
+				),
 			),
-			desired_svelte_version: v.number(),
 			filename: v.optional(v.string()),
 		}),
 		outputSchema: v.object({
@@ -54,7 +55,7 @@ server.tool(
 			openWorldHint: false,
 		},
 	},
-	async ({ code, version, filename, desired_svelte_version }) => {
+	async ({ code, filename, desired_svelte_version }) => {
 		const content: { issues: string[]; suggestions: string[] } = { issues: [], suggestions: [] };
 
 		const parsed = parse(code, filename ?? 'Component.svelte');
@@ -68,7 +69,7 @@ server.tool(
 			);
 		}
 
-		const eslint = version === 5 ? eslintForSvelte5 : eslintForSvelte4;
+		const eslint = get_linter(desired_svelte_version);
 		const results = await eslint.lintText(code, { filePath: filename || './Component.svelte' });
 
 		for (const message of results[0].messages) {
