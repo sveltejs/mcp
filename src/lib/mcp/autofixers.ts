@@ -45,13 +45,3 @@ export const assign_in_effect: Autofixer = {
 		}
 	},
 };
-
-export const no_labeled_statement: Autofixer = {
-	SvelteReactiveStatement(node, { state }) {
-		if (state.desired_svelte_version >= 5) {
-			state.output.issues.push(
-				`The labeled statement is legacy svelte 4 syntax. Please use \`$effect\` or better \`$derived\``,
-			);
-		}
-	},
-};

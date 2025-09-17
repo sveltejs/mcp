@@ -8,6 +8,7 @@ import * as v from 'valibot';
 import { parse } from '../server/analyze/parse.js';
 import * as autofixers from './autofixers.js';
 import { get_linter } from './eslint.js';
+import { compile } from 'svelte/compiler';
 
 const server = new McpServer(
 	{
@@ -45,8 +46,9 @@ server.tool(
 			filename: v.optional(v.string()),
 		}),
 		outputSchema: v.object({
-			issues: v.optional(v.array(v.string())),
-			suggestions: v.optional(v.array(v.string())),
+			issues: v.array(v.string()),
+			suggestions: v.array(v.string()),
+			require_another_tool_call_after_fixing: v.boolean(),
 		}),
 		annotations: {
 			title: 'Svelte Autofixer',
@@ -56,32 +58,60 @@ server.tool(
 		},
 	},
 	async ({ code, filename, desired_svelte_version }) => {
-		const content: { issues: string[]; suggestions: string[] } = { issues: [], suggestions: [] };
+		const content: {
+			issues: string[];
+			suggestions: string[];
+			require_another_tool_call_after_fixing: boolean;
+		} = { issues: [], suggestions: [], require_another_tool_call_after_fixing: false };
+		try {
+			// compile without generating to get warnings and errors
 
-		const parsed = parse(code, filename ?? 'Component.svelte');
+			const compilation_result = compile(code, {
+				filename: filename || 'Component.svelte',
+				generate: false,
+				runes: desired_svelte_version >= 5,
+			});
 
-		// Run each autofixer separately to avoid interrupting logic flow
-		for (const autofixer of Object.values(autofixers)) {
-			walk(
-				parsed.ast as unknown as Node,
-				{ output: content, parsed, desired_svelte_version },
-				autofixer,
+			for (const warning of compilation_result.warnings) {
+				content.issues.push(
+					`${warning.message} at line ${warning.start?.line}, column ${warning.start?.column}`,
+				);
+			}
+
+			const parsed = parse(code, filename ?? 'Component.svelte');
+
+			// Run each autofixer separately to avoid interrupting logic flow
+			for (const autofixer of Object.values(autofixers)) {
+				walk(
+					parsed.ast as unknown as Node,
+					{ output: content, parsed, desired_svelte_version },
+					autofixer,
+				);
+			}
+
+			const eslint = get_linter(desired_svelte_version);
+			const results = await eslint.lintText(code, { filePath: filename || './Component.svelte' });
+
+			for (const message of results[0].messages) {
+				if (message.severity === 2) {
+					content.issues.push(
+						`${message.message} at line ${message.line}, column ${message.column}`,
+					);
+				} else if (message.severity === 1) {
+					content.suggestions.push(
+						`${message.message} at line ${message.line}, column ${message.column}`,
+					);
+				}
+			}
+		} catch (e: unknown) {
+			const error = e as Error & { start?: { line: number; column: number } };
+			content.issues.push(
+				`${error.message} at line ${error.start?.line}, column ${error.start?.column}`,
 			);
 		}
 
-		const eslint = get_linter(desired_svelte_version);
-		const results = await eslint.lintText(code, { filePath: filename || './Component.svelte' });
-
-		for (const message of results[0].messages) {
-			if (message.severity === 2) {
-				content.issues.push(
-					`ESLint Error: ${message.message} at line ${message.line}, column ${message.column}`,
-				);
-			} else if (message.severity === 1) {
-				content.suggestions.push(
-					`ESLint Warning: ${message.message} at line ${message.line}, column ${message.column}`,
-				);
-			}
+		if (content.issues.length > 0 || content.suggestions.length > 0) {
+			content.require_another_tool_call_after_fixing = true;
 		}
 
 		return {
