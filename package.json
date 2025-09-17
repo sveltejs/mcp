@@ -26,7 +26,8 @@
 		"db:push": "drizzle-kit push",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
-		"db:studio": "drizzle-kit studio"
+		"db:studio": "drizzle-kit studio",
+		"inspect": "DANGEROUSLY_OMIT_AUTH=true npx @modelcontextprotocol/inspector"
 	},
 	"keywords": [
 		"svelte",
@@ -39,6 +40,7 @@
 		"@eslint/compat": "^1.2.5",
 		"@eslint/js": "^9.18.0",
 		"@libsql/client": "^0.14.0",
+		"@modelcontextprotocol/inspector": "^0.16.7",
 		"@sveltejs/adapter-vercel": "^5.6.3",
 		"@sveltejs/kit": "^2.22.0",
 		"@sveltejs/vite-plugin-svelte": "^6.0.0",
