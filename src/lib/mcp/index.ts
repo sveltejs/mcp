@@ -89,6 +89,65 @@ server.tool(
 	},
 );
 
+// Handler functions
+const listSectionsHandler = async (): Promise<{
+	content: Array<{ type: string; text: string }>;
+}> => {
+	return {
+		content: [
+			{
+				type: 'text',
+				text: 'tool list_sections called',
+			},
+		],
+	};
+};
+
+const getDocumentationHandler = async ({
+	section,
+}: {
+	section: string | string[];
+}): Promise<{
+	content: Array<{ type: string; text: string }>;
+}> => {
+	return {
+		content: [
+			{
+				type: 'text',
+				text: 'tool get_documentation called',
+			},
+		],
+	};
+};
+
+// List sections tool
+server.tool(
+	{
+		name: 'list_sections',
+		description:
+			'Lists all available Svelte 5 and SvelteKit documentation sections in a structured format. Returns sections as a list of "* title: [section_title], path: [file_path]" - you can use either the title or path when querying a specific section via the get_documentation tool. Always run list_sections first for any query related to Svelte development to discover available content.',
+	},
+	listSectionsHandler,
+);
+
+// Get documentation tool
+server.tool(
+	{
+		name: 'get_documentation',
+		description:
+			'Retrieves full documentation content for Svelte 5 or SvelteKit sections. Supports flexible search by title (e.g., "$state", "routing") or file path (e.g., "docs/svelte/state.md"). Can accept a single section name or an array of sections. Before running this, make sure to analyze the users query, as well as the output from list_sections (which should be called first). Then ask for ALL relevant sections the user might require. For example, if the user asks to build anything interactive, you will need to fetch all relevant runes, and so on.',
+		schema: v.object({
+			section: v.pipe(
+				v.union([v.string(), v.array(v.string())]),
+				v.description(
+					'The section name(s) to retrieve. Can search by title (e.g., "$state", "load functions") or file path (e.g., "docs/svelte/state.md"). Supports single string and array of strings',
+				),
+			),
+		}),
+	},
+	getDocumentationHandler,
+);
+
 export const http_transport = new HttpTransport(server, {
 	cors: true,
 });
