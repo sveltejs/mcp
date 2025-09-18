@@ -1,6 +1,6 @@
 import type { AssignmentExpression, Identifier, Node, UpdateExpression } from 'estree';
 import type { Autofixer, AutofixerState } from '.';
-import { left_most_id } from '../ast/utils';
+import { left_most_id } from '../ast/utils.js';
 import type { SvelteNode } from 'svelte-eslint-parser/lib/ast';
 import type { Context } from 'zimmerframe';
 
