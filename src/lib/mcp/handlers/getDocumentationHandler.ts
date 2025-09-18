@@ -6,7 +6,7 @@ export const getDocumentationHandler = async ({
 	content: Array<{ type: 'text'; text: string }>;
 }> => {
 	let sections: string[];
-	
+
 	if (Array.isArray(section)) {
 		sections = section.filter((s): s is string => typeof s === 'string');
 	} else if (
@@ -30,9 +30,7 @@ export const getDocumentationHandler = async ({
 		sections = [];
 	}
 
-	const sectionsList = sections.length > 0 
-		? sections.join(', ') 
-		: 'no sections';
+	const sectionsList = sections.length > 0 ? sections.join(', ') : 'no sections';
 
 	return {
 		content: [
