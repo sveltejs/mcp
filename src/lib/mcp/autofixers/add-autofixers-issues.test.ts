@@ -273,4 +273,75 @@ describe('add_autofixers_issues', () => {
 			},
 		);
 	});
+
+	describe('derived_with_function', () => {
+		it(`should add suggestions when using a function as the first argument to $derived`, () => {
+			const content = run_autofixers_on_code(`
+			<script>
+				const value = $derived(() => {
+					return 43;
+				});
+			</script>`);
+
+			expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+			expect(content.suggestions).toContain(
+				'You are passing a function to $derived when declaring "value" but $derived expects an expression. You can use $derived.by instead.',
+			);
+		});
+
+		it(`should add suggestions when using a function as the first argument to $derived in classes`, () => {
+			const content = run_autofixers_on_code(`
+			<script>
+				class Double {
+					value = $derived(() => 43);
+				}
+			</script>`);
+
+			expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+			expect(content.suggestions).toContain(
+				'You are passing a function to $derived when declaring "value" but $derived expects an expression. You can use $derived.by instead.',
+			);
+		});
+
+		it(`should add suggestions when using a function as the first argument to $derived in classes constructors`, () => {
+			const content = run_autofixers_on_code(`
+			<script>
+				class Double {
+					value;
+
+					constructor(){
+						this.value = $derived(function() { return 44; });
+					}
+				}
+			</script>`);
+
+			expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+			expect(content.suggestions).toContain(
+				'You are passing a function to $derived when declaring "value" but $derived expects an expression. You can use $derived.by instead.',
+			);
+		});
+
+		it(`should add suggestions when using a function as the first argument to $derived without the declaring part if it's not an identifier`, () => {
+			const content = run_autofixers_on_code(`
+			<script>
+				const { destructured } = $derived(() => 43);
+			</script>`);
+
+			expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+			expect(content.suggestions).toContain(
+				'You are passing a function to $derived but $derived expects an expression. You can use $derived.by instead.',
+			);
+		});
+
+		it(`should add suggestions when using a function as the first argument to $derived.by`, () => {
+			const content = run_autofixers_on_code(`
+			<script>
+				const { destructured } = $derived.by(() => 43);
+			</script>`);
+
+			expect(content.suggestions).not.toContain(
+				'You are passing a function to $derived but $derived expects an expression. You can use $derived.by instead.',
+			);
+		});
+	});
 });
