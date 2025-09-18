@@ -1,5 +1,5 @@
 export const listSectionsHandler = async (): Promise<{
-	content: Array<{ type: string; text: string }>;
+	content: Array<{ type: 'text'; text: string }>;
 }> => {
 	return {
 		content: [
