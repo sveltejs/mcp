@@ -1,14 +1,11 @@
-import { walk } from '../index.js';
 import { ValibotJsonSchemaAdapter } from '@tmcp/adapter-valibot';
 import { HttpTransport } from '@tmcp/transport-http';
 import { StdioTransport } from '@tmcp/transport-stdio';
-import type { Node } from 'estree';
 import { McpServer } from 'tmcp';
 import * as v from 'valibot';
-import { parse } from '../server/analyze/parse.js';
-import * as autofixers from './autofixers.js';
-import { get_linter } from './eslint.js';
-import { compile } from 'svelte/compiler';
+import { add_autofixers_issues } from './autofixers/add-autofixers-issues.js';
+import { add_compile_issues } from './autofixers/add-compile-issues.js';
+import { add_eslint_issues } from './autofixers/add-eslint-issues.js';
 
 const server = new McpServer(
 	{
@@ -64,45 +61,11 @@ server.tool(
 			require_another_tool_call_after_fixing: boolean;
 		} = { issues: [], suggestions: [], require_another_tool_call_after_fixing: false };
 		try {
-			// compile without generating to get warnings and errors
+			add_compile_issues(content, code, desired_svelte_version, filename);
 
-			const compilation_result = compile(code, {
-				filename: filename || 'Component.svelte',
-				generate: false,
-				runes: desired_svelte_version >= 5,
-			});
+			add_autofixers_issues(content, code, desired_svelte_version, filename);
 
-			for (const warning of compilation_result.warnings) {
-				content.issues.push(
-					`${warning.message} at line ${warning.start?.line}, column ${warning.start?.column}`,
-				);
-			}
-
-			const parsed = parse(code, filename ?? 'Component.svelte');
-
-			// Run each autofixer separately to avoid interrupting logic flow
-			for (const autofixer of Object.values(autofixers)) {
-				walk(
-					parsed.ast as unknown as Node,
-					{ output: content, parsed, desired_svelte_version },
-					autofixer,
-				);
-			}
-
-			const eslint = get_linter(desired_svelte_version);
-			const results = await eslint.lintText(code, { filePath: filename || './Component.svelte' });
-
-			for (const message of results[0].messages) {
-				if (message.severity === 2) {
-					content.issues.push(
-						`${message.message} at line ${message.line}, column ${message.column}`,
-					);
-				} else if (message.severity === 1) {
-					content.suggestions.push(
-						`${message.message} at line ${message.line}, column ${message.column}`,
-					);
-				}
-			}
+			await add_eslint_issues(content, code, desired_svelte_version, filename);
 		} catch (e: unknown) {
 			const error = e as Error & { start?: { line: number; column: number } };
 			content.issues.push(
