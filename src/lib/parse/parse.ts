@@ -2,6 +2,7 @@ import ts_parser from '@typescript-eslint/parser';
 import type { CallExpression, Identifier } from 'estree';
 import type { Reference, Variable } from 'eslint-scope';
 import { parseForESLint as svelte_eslint_parse } from 'svelte-eslint-parser';
+import { runes } from '../constants.js';
 
 type Scope = {
 	variables?: Variable[];
@@ -17,25 +18,6 @@ function collect_scopes(scope: Scope, acc: Scope[] = []) {
 	for (const child of scope.childScopes ?? []) collect_scopes(child, acc);
 	return acc;
 }
-
-const runes = [
-	'$state',
-	'$state.raw',
-	'$state.snapshot',
-	'$effect',
-	'$effect.pre',
-	'$effect.tracking',
-	'$effect.pending',
-	'$effect.root',
-	'$derived',
-	'$derived.by',
-	'$inspect',
-	'$inspect.trace',
-	'$props',
-	'$props.id',
-	'$bindable',
-	'$host',
-] as const;
 
 export type ParseResult = ReturnType<typeof parse>;
 

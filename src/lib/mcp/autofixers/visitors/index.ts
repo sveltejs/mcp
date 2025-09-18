@@ -13,3 +13,4 @@ export type Autofixer = Visitors<Node | AST.SvelteNode, AutofixerState>;
 
 export * from './assign-in-effect.js';
 export * from './set-or-update-state.js';
+export * from './imported-runes.js';
