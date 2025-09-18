@@ -5,7 +5,6 @@ export const getDocumentationHandler = async ({
 }): Promise<{
 	content: Array<{ type: string; text: string }>;
 }> => {
-	// Parse sections with error checking
 	let sections: string[];
 	
 	if (Array.isArray(section)) {
@@ -15,7 +14,6 @@ export const getDocumentationHandler = async ({
 		section.trim().startsWith('[') &&
 		section.trim().endsWith(']')
 	) {
-		// Try to parse JSON string array
 		try {
 			const parsed = JSON.parse(section);
 			if (Array.isArray(parsed)) {
@@ -24,17 +22,14 @@ export const getDocumentationHandler = async ({
 				sections = [section];
 			}
 		} catch (parseError) {
-			// JSON parse failed, treat as single string
 			sections = [section];
 		}
 	} else if (typeof section === 'string') {
 		sections = [section];
 	} else {
-		// Fallback for unexpected input
 		sections = [];
 	}
 
-	// Return formatted message
 	const sectionsList = sections.length > 0 
 		? sections.join(', ') 
 		: 'no sections';
