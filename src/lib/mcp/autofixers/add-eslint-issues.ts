@@ -48,7 +48,7 @@ function base_config(svelte_config: Config): ESLint.Options['baseConfig'] {
 	];
 }
 
-export function get_linter(version: number) {
+function get_linter(version: number) {
 	if (version < 5) {
 		return (svelte_4_linter ??= new ESLint({
 			overrideConfigFile: true,
@@ -67,4 +67,24 @@ export function get_linter(version: number) {
 			},
 		}),
 	}));
+}
+
+export async function add_eslint_issues(
+	content: { issues: string[]; suggestions: string[] },
+	code: string,
+	desired_svelte_version: number,
+	filename = 'Component.svelte',
+) {
+	const eslint = get_linter(desired_svelte_version);
+	const results = await eslint.lintText(code, { filePath: filename || './Component.svelte' });
+
+	for (const message of results[0].messages) {
+		if (message.severity === 2) {
+			content.issues.push(`${message.message} at line ${message.line}, column ${message.column}`);
+		} else if (message.severity === 1) {
+			content.suggestions.push(
+				`${message.message} at line ${message.line}, column ${message.column}`,
+			);
+		}
+	}
 }
