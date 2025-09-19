@@ -1,25 +1,12 @@
-diff --git a/lib/configs/flat/recommended.js b/lib/configs/flat/recommended.js
-index cc0668c77de2e65f0ba9feb67d0c95f9d807a5a3..5eb6b02cf3133de6a22f1eb89a6a341f91fd933b 100644
---- a/lib/configs/flat/recommended.js
-+++ b/lib/configs/flat/recommended.js
-@@ -16,7 +16,6 @@ const config = [
-             'svelte/no-dupe-use-directives': 'error',
-             'svelte/no-export-load-in-svelte-module-in-kit-pages': 'error',
-             'svelte/no-immutable-reactive-statements': 'error',
--            'svelte/no-inner-declarations': 'error',
-             'svelte/no-inspect': 'warn',
-             'svelte/no-navigation-without-resolve': 'error',
-             'svelte/no-not-function-handler': 'error',
-diff --git a/lib/utils/eslint-core.js b/lib/utils/eslint-core.js
-index 115228b92992ebf528dd66d4d4b2f83b28a272e2..bbd233bf47a113c33474241cab19d0f65ed4a9e8 100644
---- a/lib/utils/eslint-core.js
-+++ b/lib/utils/eslint-core.js
-@@ -60,7 +60,5 @@ export function getCoreRule(ruleName) {
-     catch {
-         // getRules() is no longer available in flat config.
-     }
--    const { builtinRules } = require('eslint/use-at-your-own-risk');
--    ruleMap = builtinRules;
--    return builtinRules.get(ruleName) || null;
-+    return null;
- }
+diff --git a/package.json b/package.json
+index 9fe4e180aac22bf0275f09d39448b39031a98483..adb0b5f7420082cfedf9306f3b43b46c1ebdb796 100644
+--- a/package.json
++++ b/package.json
+@@ -40,6 +40,7 @@
+     "@jridgewell/sourcemap-codec": "^1.5.0",
+     "esutils": "^2.0.3",
+     "globals": "^16.0.0",
++	"eslint": "^9.0.0",
+     "known-css-properties": "^0.37.0",
+     "postcss": "^8.4.49",
+     "postcss-load-config": "^3.1.4",
