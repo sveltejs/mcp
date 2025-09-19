@@ -344,4 +344,34 @@ describe('add_autofixers_issues', () => {
 			);
 		});
 	});
+
+	describe('use_runes_instead_of_store', () => {
+		describe.each([{ import: 'derived' }, { import: 'writable' }, { import: 'readable' }])(
+			'importing $import from svelte/store',
+			({ import: imported }) => {
+				it(`should add suggestions when importing '${imported}' from 'svelte/store'`, () => {
+					const content = run_autofixers_on_code(`
+				<script>
+					import { ${imported} } from 'svelte/store';
+				</script>`);
+
+					expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+					expect(content.suggestions).toContain(
+						`You are importing "${imported}" from "svelte/store". Unless the user specifically asked for stores or it's required because some library/component requires a store as input consider using runes like \`$state\` or \`$derived\` instead, all runes are globally available.`,
+					);
+				});
+			},
+		);
+
+		it(`should not add suggestions when importing other identifiers from 'svelte/store'`, () => {
+			const content = run_autofixers_on_code(`
+			<script>
+				import { get } from 'svelte/store';
+			</script>`);
+
+			expect(content.suggestions).not.toContain(
+				`You are importing "get" from "svelte/store". Unless the user specifically asked for stores or it's required because some library/component requires a store as input consider using runes like \`$state\` or \`$derived\` instead, all runes are globally available.`,
+			);
+		});
+	});
 });
