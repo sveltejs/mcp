@@ -5,7 +5,7 @@ import { McpServer } from 'tmcp';
 import * as v from 'valibot';
 import { add_autofixers_issues } from './autofixers/add-autofixers-issues.js';
 import { add_compile_issues } from './autofixers/add-compile-issues.js';
-import { add_eslint_issues } from './autofixers/add-eslint-issues.js';
+// import { add_eslint_issues } from './autofixers/add-eslint-issues.js';
 
 const server = new McpServer(
 	{
@@ -65,7 +65,7 @@ server.tool(
 
 			add_autofixers_issues(content, code, desired_svelte_version, filename);
 
-			await add_eslint_issues(content, code, desired_svelte_version, filename);
+			// await add_eslint_issues(content, code, desired_svelte_version, filename);
 		} catch (e: unknown) {
 			const error = e as Error & { start?: { line: number; column: number } };
 			content.issues.push(
