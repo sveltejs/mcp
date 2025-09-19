@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   eslint-plugin-svelte@3.12.3:
-    hash: 15df4a24c59e53dfd48ca8556392b3468e48916dd684ef4c7385ac18f709c817
+    hash: e4ab43fcc8c2826bda4f88f5a00cc14de6ecc996ee127121c60052745ff80b78
     path: patches/eslint-plugin-svelte@3.12.3.patch
 
 importers:
@@ -36,7 +36,7 @@ importers:
         version: 9.36.0
       eslint-plugin-svelte:
         specifier: ^3.12.3
-        version: 3.12.3(patch_hash=15df4a24c59e53dfd48ca8556392b3468e48916dd684ef4c7385ac18f709c817)(eslint@9.36.0)(svelte@5.39.2)(ts-node@10.9.2(@types/node@24.5.2)(typescript@5.9.2))
+        version: 3.12.3(patch_hash=e4ab43fcc8c2826bda4f88f5a00cc14de6ecc996ee127121c60052745ff80b78)(eslint@9.36.0)(svelte@5.39.2)(ts-node@10.9.2(@types/node@24.5.2)(typescript@5.9.2))
       svelte-eslint-parser:
         specifier: ^1.3.2
         version: 1.3.2(svelte@5.39.2)
@@ -4739,7 +4739,7 @@ snapshots:
     dependencies:
       eslint: 9.36.0
 
-  eslint-plugin-svelte@3.12.3(patch_hash=15df4a24c59e53dfd48ca8556392b3468e48916dd684ef4c7385ac18f709c817)(eslint@9.36.0)(svelte@5.39.2)(ts-node@10.9.2(@types/node@24.5.2)(typescript@5.9.2)):
+  eslint-plugin-svelte@3.12.3(patch_hash=e4ab43fcc8c2826bda4f88f5a00cc14de6ecc996ee127121c60052745ff80b78)(eslint@9.36.0)(svelte@5.39.2)(ts-node@10.9.2(@types/node@24.5.2)(typescript@5.9.2)):
     dependencies:
       '@eslint-community/eslint-utils': 4.9.0(eslint@9.36.0)
       '@jridgewell/sourcemap-codec': 1.5.5
