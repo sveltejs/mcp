@@ -1,0 +1,12 @@
+diff --git a/lib/configs/flat/recommended.js b/lib/configs/flat/recommended.js
+index cc0668c77de2e65f0ba9feb67d0c95f9d807a5a3..5eb6b02cf3133de6a22f1eb89a6a341f91fd933b 100644
+--- a/lib/configs/flat/recommended.js
++++ b/lib/configs/flat/recommended.js
+@@ -16,7 +16,6 @@ const config = [
+             'svelte/no-dupe-use-directives': 'error',
+             'svelte/no-export-load-in-svelte-module-in-kit-pages': 'error',
+             'svelte/no-immutable-reactive-statements': 'error',
+-            'svelte/no-inner-declarations': 'error',
+             'svelte/no-inspect': 'warn',
+             'svelte/no-navigation-without-resolve': 'error',
+             'svelte/no-not-function-handler': 'error',
