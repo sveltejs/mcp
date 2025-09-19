@@ -1,6 +1,6 @@
 import { ESLint } from 'eslint';
 import svelte_parser from 'svelte-eslint-parser';
-import svelte from 'eslint-plugin-svelte';
+// import svelte from 'eslint-plugin-svelte';
 import type { Config } from '@sveltejs/kit';
 
 let svelte_5_linter: ESLint | undefined;
@@ -9,7 +9,7 @@ let svelte_4_linter: ESLint | undefined;
 
 function base_config(svelte_config: Config): ESLint.Options['baseConfig'] {
 	return [
-		...svelte.configs.recommended,
+		// ...svelte.configs.recommended,
 		{
 			files: ['*.svelte'],
 			rules: {
