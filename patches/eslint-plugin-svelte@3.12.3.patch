@@ -24,7 +24,7 @@ index 115228b92992ebf528dd66d4d4b2f83b28a272e2..bbd233bf47a113c33474241cab19d0f6
 +    return null;
  }
 diff --git a/lib/utils/rules.js b/lib/utils/rules.js
-index 23f8682ee2b4eee2c6cb74f4a37db82cbfcd0c5e..c22b98a5367058202df5ccb61a813b33312d00bf 100644
+index 23f8682ee2b4eee2c6cb74f4a37db82cbfcd0c5e..028872566a2f2fc87ab3d32c38204d238ed36bda 100644
 --- a/lib/utils/rules.js
 +++ b/lib/utils/rules.js
 @@ -30,7 +30,6 @@ import noGotoWithoutBase from '../rules/no-goto-without-base.js';
@@ -43,6 +43,22 @@ index 23f8682ee2b4eee2c6cb74f4a37db82cbfcd0c5e..c22b98a5367058202df5ccb61a813b33
  import preferDestructuredStoreProps from '../rules/prefer-destructured-store-props.js';
  import preferStyleDirective from '../rules/prefer-style-directive.js';
  import preferSvelteReactivity from '../rules/prefer-svelte-reactivity.js';
+@@ -110,7 +108,6 @@ export const rules = [
+     noIgnoredUnsubscribe,
+     noImmutableReactiveStatements,
+     noInlineStyles,
+-    noInnerDeclarations,
+     noInspect,
+     noNavigationWithoutBase,
+     noNavigationWithoutResolve,
+@@ -136,7 +133,6 @@ export const rules = [
+     noUselessChildrenSnippet,
+     noUselessMustaches,
+     preferClassDirective,
+-    preferConst,
+     preferDestructuredStoreProps,
+     preferStyleDirective,
+     preferSvelteReactivity,
 diff --git a/package.json b/package.json
 index 9fe4e180aac22bf0275f09d39448b39031a98483..adb0b5f7420082cfedf9306f3b43b46c1ebdb796 100644
 --- a/package.json
