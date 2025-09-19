@@ -10,3 +10,16 @@ index cc0668c77de2e65f0ba9feb67d0c95f9d807a5a3..5eb6b02cf3133de6a22f1eb89a6a341f
              'svelte/no-inspect': 'warn',
              'svelte/no-navigation-without-resolve': 'error',
              'svelte/no-not-function-handler': 'error',
+diff --git a/lib/utils/eslint-core.js b/lib/utils/eslint-core.js
+index 115228b92992ebf528dd66d4d4b2f83b28a272e2..bbd233bf47a113c33474241cab19d0f65ed4a9e8 100644
+--- a/lib/utils/eslint-core.js
++++ b/lib/utils/eslint-core.js
+@@ -60,7 +60,5 @@ export function getCoreRule(ruleName) {
+     catch {
+         // getRules() is no longer available in flat config.
+     }
+-    const { builtinRules } = require('eslint/use-at-your-own-risk');
+-    ruleMap = builtinRules;
+-    return builtinRules.get(ruleName) || null;
++    return null;
+ }
