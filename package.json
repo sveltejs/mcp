@@ -37,8 +37,6 @@
 	],
 	"private": true,
 	"devDependencies": {
-		"@eslint/compat": "^1.2.5",
-		"@eslint/js": "^9.18.0",
 		"@libsql/client": "^0.14.0",
 		"@modelcontextprotocol/inspector": "^0.16.7",
 		"@sveltejs/adapter-vercel": "^5.6.3",
@@ -63,6 +61,8 @@
 		"vitest": "^3.2.3"
 	},
 	"dependencies": {
+		"@eslint/compat": "^1.2.5",
+		"@eslint/js": "^9.18.0",
 		"@tmcp/adapter-valibot": "^0.1.4",
 		"@tmcp/transport-http": "^0.6.0",
 		"@tmcp/transport-stdio": "^0.1.3",
