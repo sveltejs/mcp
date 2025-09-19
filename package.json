@@ -78,9 +78,6 @@
 	"pnpm": {
 		"onlyBuiltDependencies": [
 			"esbuild"
-		],
-		"patchedDependencies": {
-			"eslint-plugin-svelte@3.12.3": "patches/eslint-plugin-svelte@3.12.3.patch"
-		}
+		]
 	}
 }
