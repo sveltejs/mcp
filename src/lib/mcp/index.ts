@@ -6,6 +6,7 @@ import * as v from 'valibot';
 import { add_autofixers_issues } from './autofixers/add-autofixers-issues.js';
 import { add_compile_issues } from './autofixers/add-compile-issues.js';
 import { add_eslint_issues } from './autofixers/add-eslint-issues.js';
+import { basename } from 'node:path';
 
 const server = new McpServer(
 	{
@@ -35,12 +36,17 @@ server.tool(
 		schema: v.object({
 			code: v.string(),
 			desired_svelte_version: v.pipe(
-				v.union([v.literal(4), v.literal(5)]),
+				v.union([v.literal(4), v.literal(5), v.literal('4'), v.literal('5')]),
 				v.description(
 					'The desired svelte version...if possible read this from the package.json of the user project, otherwise use some hint from the wording (if the user asks for runes it wants version 5). Default to 5 in case of doubt.',
 				),
 			),
-			filename: v.optional(v.string()),
+			filename: v.pipe(
+				v.optional(v.string()),
+				v.description(
+					'The filename of the component if available, it MUST be only the Component name with .svelte or .svelte.ts extension and not the entire path.',
+				),
+			),
 		}),
 		outputSchema: v.object({
 			issues: v.array(v.string()),
@@ -54,18 +60,23 @@ server.tool(
 			openWorldHint: false,
 		},
 	},
-	async ({ code, filename, desired_svelte_version }) => {
+	async ({ code, filename: filename_or_path, desired_svelte_version }) => {
 		const content: {
 			issues: string[];
 			suggestions: string[];
 			require_another_tool_call_after_fixing: boolean;
 		} = { issues: [], suggestions: [], require_another_tool_call_after_fixing: false };
 		try {
-			add_compile_issues(content, code, desired_svelte_version, filename);
+			// just in case the LLM sends a full path we extract the filename...it's not really needed
+			// but it's nice to have a filename in the errors
 
-			add_autofixers_issues(content, code, desired_svelte_version, filename);
+			const filename = filename_or_path ? basename(filename_or_path) : 'Component.svelte';
 
-			await add_eslint_issues(content, code, desired_svelte_version, filename);
+			add_compile_issues(content, code, +desired_svelte_version, filename);
+
+			add_autofixers_issues(content, code, +desired_svelte_version, filename);
+
+			await add_eslint_issues(content, code, +desired_svelte_version, filename);
 		} catch (e: unknown) {
 			const error = e as Error & { start?: { line: number; column: number } };
 			content.issues.push(
