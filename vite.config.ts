@@ -8,6 +8,12 @@ export default defineConfig(({ mode }) => {
 
 	return {
 		plugins: [sveltekit(), devtoolsJson()],
+		server:
+			mode === 'tunnel'
+				? {
+						allowedHosts: true,
+					}
+				: undefined,
 		test: {
 			expect: { requireAssertions: true },
 			projects: [

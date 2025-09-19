@@ -10,6 +10,7 @@
 	"scripts": {
 		"start": "node src/index.js",
 		"dev": "vite dev",
+		"tunnel": "vite dev -m tunnel",
 		"build": "vite build",
 		"build:mcp": "tsc --project tsconfig.build.json",
 		"prepublishOnly": "pnpm build:mcp",
