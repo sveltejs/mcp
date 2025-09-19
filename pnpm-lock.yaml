@@ -21,7 +21,7 @@ importers:
         specifier: ^8.43.0
         version: 8.44.0(eslint@9.36.0)(typescript@5.9.2)
       eslint:
-        specifier: ^9.18.0
+        specifier: ^9.36.0
         version: 9.36.0
       eslint-plugin-svelte:
         specifier: ^3.0.0
