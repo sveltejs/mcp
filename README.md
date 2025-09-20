@@ -37,4 +37,4 @@ https://local.drizzle.studio/
 
 To try the mcp server you can run `pnpm build:mcp`...the local `mpc.json` file it's already using the output of that folder so you can use it automatically in VSCode/Cursor.
 
-To try it as a HTTP mcp you can use cloudflare tunnels to expose it `cloudflared tunnel --url http://localhost:[port]` and then running the server with `pnpm tunnel` (pay attention as this will expose your dev server to the world wide web).
+To try the MCP over HTTP and/or remotely, you can use Cloudflare tunnels to expose it via `cloudflared tunnel --url http://localhost:[port]` and then running the server with `pnpm tunnel` (pay attention as this will expose your dev server to the world wide web).
