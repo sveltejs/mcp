@@ -18,8 +18,8 @@ importers:
         specifier: ^0.1.4
         version: 0.1.4(tmcp@1.12.2(typescript@5.9.2))(valibot@1.1.0(typescript@5.9.2))
       '@tmcp/transport-http':
-        specifier: ^0.6.0
-        version: 0.6.0(tmcp@1.12.2(typescript@5.9.2))
+        specifier: ^0.6.1
+        version: 0.6.1(tmcp@1.12.2(typescript@5.9.2))
       '@tmcp/transport-stdio':
         specifier: ^0.1.3
         version: 0.1.3(tmcp@1.12.2(typescript@5.9.2))
@@ -1313,13 +1313,13 @@ packages:
       tmcp: ^1.10.2
       valibot: ^1.1.0
 
-  '@tmcp/session-manager@0.1.1':
-    resolution: {integrity: sha512-L4kuE5p+L34SzCkdF/dKEPRjOybPnjmNIdv3Vejpnj1BU8WIabBtKT4VQCFxGnO2RVtflh3Rg+OxBOe8igswRA==}
+  '@tmcp/session-manager@0.1.2':
+    resolution: {integrity: sha512-hNkEeMt7/CdD8JdjPXMlIv5OMPTp5LnBqeo1Tb/AXcm31DpgwlNbf4voJ3CeWxWAZPPZ/MgHZ682TtgGhsvXiw==}
 
-  '@tmcp/transport-http@0.6.0':
-    resolution: {integrity: sha512-/K6J/pzwGQ46sfMFPywLS73nnDCJs0Vg7TlyZ0CUF8hLYky28U85u4Vf8T/I+e4D6N2hL32rPymQpng9UKRNrw==}
+  '@tmcp/transport-http@0.6.1':
+    resolution: {integrity: sha512-DENjAfXwzDQFCXu8HhJynLpDZZMmhat3g2OR1hZA5xpXIS2tI3oC5pdEQMFa/UyHAdgHfcJyUPQeQcjBHqIZ6A==}
     peerDependencies:
-      tmcp: ^1.11.0
+      tmcp: ^1.12.2
 
   '@tmcp/transport-stdio@0.1.3':
     resolution: {integrity: sha512-xRQ5+M2E6MXJXt0aw26ezoV3r5navrhvg545LkaWg5SjD7ovITLUiCJ5fgP7L5kWeb9GpEiFqxhqFkli+7tz6A==}
@@ -4140,11 +4140,11 @@ snapshots:
       tmcp: 1.12.2(typescript@5.9.2)
       valibot: 1.1.0(typescript@5.9.2)
 
-  '@tmcp/session-manager@0.1.1': {}
+  '@tmcp/session-manager@0.1.2': {}
 
-  '@tmcp/transport-http@0.6.0(tmcp@1.12.2(typescript@5.9.2))':
+  '@tmcp/transport-http@0.6.1(tmcp@1.12.2(typescript@5.9.2))':
     dependencies:
-      '@tmcp/session-manager': 0.1.1
+      '@tmcp/session-manager': 0.1.2
       tmcp: 1.12.2(typescript@5.9.2)
 
   '@tmcp/transport-stdio@0.1.3(tmcp@1.12.2(typescript@5.9.2))':
