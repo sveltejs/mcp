@@ -1,0 +1,33 @@
+{
+	// Place your svelte-mcp workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	"Setup Function": {
+		"scope": "javascript,typescript",
+		"prefix": "!setup-mcp",
+		"body": [
+			"import type { SvelteMcp } from '../../index.js';",
+			"import * as v from 'valibot';",
+			"",
+			"export function ${1:function_name}(server: SvelteMcp) {",
+			"\t$0",
+			"}",
+		],
+		"description": "Create a setup function for a tool/resource/prompt handler"
+	},
+	"Autofixer": {
+		"scope": "javascript,typescript",
+		"prefix": "!autofixer",
+		"body": [
+			"import type { Autofixer } from '.';",
+			"export const ${1:autofixer_name}: Autofixer = {",
+			"\t$0",
+			"};",
+		],
+		"description": "Create a setup export for an autofixer"
+	}
+}
