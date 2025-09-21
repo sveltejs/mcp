@@ -2,14 +2,7 @@ import { ValibotJsonSchemaAdapter } from '@tmcp/adapter-valibot';
 import { HttpTransport } from '@tmcp/transport-http';
 import { StdioTransport } from '@tmcp/transport-stdio';
 import { McpServer } from 'tmcp';
-import * as v from 'valibot';
-import { add_autofixers_issues } from './autofixers/add-autofixers-issues.js';
-import { add_compile_issues } from './autofixers/add-compile-issues.js';
-import { add_eslint_issues } from './autofixers/add-eslint-issues.js';
-import { listSectionsHandler } from './handlers/listSectionsHandler.js';
-import { getDocumentationHandler } from './handlers/getDocumentationHandler.js';
-import { svelteAutofixerHandler } from './handlers/svelteAutofixerHandler.js';
-import { basename } from 'node:path';
+import { setup_prompts, setup_resources, setup_tools } from './handlers';
 
 const server = new McpServer(
 	{
@@ -30,146 +23,11 @@ const server = new McpServer(
 	},
 );
 
-server.tool(
-	{
-		name: 'svelte-autofixer',
-		title: 'Svelte Autofixer',
-		description:
-			'Given a svelte component or module returns a list of suggestions to fix any issues it has. This tool MUST be used whenever the user is asking to write svelte code before sending the code back to the user',
-		schema: v.object({
-			code: v.string(),
-			desired_svelte_version: v.pipe(
-				v.union([v.literal(4), v.literal(5), v.literal('4'), v.literal('5')]),
-				v.description(
-					'The desired svelte version...if possible read this from the package.json of the user project, otherwise use some hint from the wording (if the user asks for runes it wants version 5). Default to 5 in case of doubt.',
-				),
-			),
-			filename: v.pipe(
-				v.optional(v.string()),
-				v.description(
-					'The filename of the component if available, it MUST be only the Component name with .svelte or .svelte.ts extension and not the entire path.',
-				),
-			),
-		}),
-		outputSchema: v.object({
-			issues: v.array(v.string()),
-			suggestions: v.array(v.string()),
-			require_another_tool_call_after_fixing: v.boolean(),
-		}),
-		annotations: {
-			title: 'Svelte Autofixer',
-			destructiveHint: false,
-			readOnlyHint: true,
-			openWorldHint: false,
-		},
-	},
-	async ({ code, filename: filename_or_path, desired_svelte_version }) => {
-		const content: {
-			issues: string[];
-			suggestions: string[];
-			require_another_tool_call_after_fixing: boolean;
-		} = { issues: [], suggestions: [], require_another_tool_call_after_fixing: false };
-		try {
-			// just in case the LLM sends a full path we extract the filename...it's not really needed
-			// but it's nice to have a filename in the errors
+export type SvelteMcp = typeof server;
 
-			const filename = filename_or_path ? basename(filename_or_path) : 'Component.svelte';
-
-			add_compile_issues(content, code, +desired_svelte_version, filename);
-
-			add_autofixers_issues(content, code, +desired_svelte_version, filename);
-
-			await add_eslint_issues(content, code, +desired_svelte_version, filename);
-		} catch (e: unknown) {
-			const error = e as Error & { start?: { line: number; column: number } };
-			content.issues.push(
-				`${error.message} at line ${error.start?.line}, column ${error.start?.column}`,
-			);
-		}
-
-		if (content.issues.length > 0 || content.suggestions.length > 0) {
-			content.require_another_tool_call_after_fixing = true;
-		}
-
-		return {
-			content: [
-				{
-					type: 'text',
-					text: JSON.stringify(content),
-				},
-			],
-			structuredContent: content,
-		};
-	},
-);
-
-// List sections tool
-server.tool(
-	{
-		name: 'list_sections',
-		description:
-			'Lists all available Svelte 5 and SvelteKit documentation sections in a structured format. Returns sections as a list of "* title: [section_title], path: [file_path]" - you can use either the title or path when querying a specific section via the get_documentation tool. Always run list_sections first for any query related to Svelte development to discover available content.',
-	},
-	listSectionsHandler,
-);
-
-// Get documentation tool
-server.tool(
-	{
-		name: 'get_documentation',
-		description:
-			'Retrieves full documentation content for Svelte 5 or SvelteKit sections. Supports flexible search by title (e.g., "$state", "routing") or file path (e.g., "docs/svelte/state.md"). Can accept a single section name or an array of sections. Before running this, make sure to analyze the users query, as well as the output from list_sections (which should be called first). Then ask for ALL relevant sections the user might require. For example, if the user asks to build anything interactive, you will need to fetch all relevant runes, and so on.',
-		schema: v.object({
-			section: v.pipe(
-				v.union([v.string(), v.array(v.string())]),
-				v.description(
-					'The section name(s) to retrieve. Can search by title (e.g., "$state", "load functions") or file path (e.g., "docs/svelte/state.md"). Supports single string and array of strings',
-				),
-			),
-		}),
-	},
-	getDocumentationHandler,
-);
-
-server.prompt(
-	{
-		name: 'svelte-task-prompt',
-		title: 'Svelte Task Prompt',
-		description:
-			'Use this Prompt to ask for any svelte related task. It will automatically instruct the LLM on how to best use the autofixer and how to query for documentation pages.',
-		schema: v.object({
-			task: v.pipe(v.string(), v.description('The task to be performed')),
-		}),
-	},
-	async ({ task }) => {
-		// TODO: implement logic to fetch the available docs paths to return in the prompt
-		const available_docs: string[] = [];
-
-		return {
-			messages: [
-				{
-					role: 'user',
-					content: {
-						type: 'text',
-						text: `You are a Svelte expert tasked to build components and utilities for Svelte developers. If you need documentation for anything related to Svelte you can invoke the tool \`get_documentation\` with one of the following paths:
-<available-docs-paths>						
-${JSON.stringify(available_docs, null, 2)}
-</available-docs-paths>
-
-Every time you write a Svelte component or a Svelte module you MUST invoke the \`svelte-autofixer\` tool providing the code. The tool will return a list of issues or suggestions. If there are any issues or suggestions you MUST fix them and call the tool again with the updated code. You MUST keep doing this until the tool returns no issues or suggestions. Only then you can return the code to the user.
-
-This is the task you will work on:
-
-<task>
-${task}
-</task>
-`,
-					},
-				},
-			],
-		};
-	},
-);
+setup_tools(server);
+setup_resources(server);
+setup_prompts(server);
 
 export const http_transport = new HttpTransport(server, {
 	cors: true,
