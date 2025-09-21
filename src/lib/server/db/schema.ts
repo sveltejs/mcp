@@ -1,4 +1,4 @@
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { blob, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import { float_32_array } from './utils';
 
 /**
@@ -82,6 +82,20 @@ export const content_distilled = sqliteTable('content_distilled', {
 		.$type<Record<string, unknown>>()
 		.notNull()
 		.default({}),
+	created_at: integer('created_at', { mode: 'timestamp' })
+		.notNull()
+		.$defaultFn(() => new Date()),
+	updated_at: integer('updated_at', { mode: 'timestamp' })
+		.notNull()
+		.$defaultFn(() => new Date()),
+});
+
+export const cache = sqliteTable('cache', {
+	id: integer('id').primaryKey(),
+	cache_key: text('cache_key').notNull().unique(),
+	data: blob('data', { mode: 'buffer' }).notNull(),
+	size_bytes: integer('size_bytes').notNull(),
+	expires_at: integer('expires_at', { mode: 'timestamp' }).notNull(),
 	created_at: integer('created_at', { mode: 'timestamp' })
 		.notNull()
 		.$defaultFn(() => new Date()),

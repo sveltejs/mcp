@@ -5,7 +5,7 @@ import { Readable } from 'stream';
 import { createGunzip } from 'zlib';
 import { minimatch } from 'minimatch';
 import { getPresetContent } from './presetCache';
-import { CacheDbService } from '$lib/server/cacheDb';
+import { CacheDbService } from '$lib/cacheDb';
 import { log, logAlways, logErrorAlways } from '$lib/log';
 import { cleanTarballPath } from '$lib/utils/pathUtils';
 

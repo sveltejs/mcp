@@ -2,7 +2,7 @@ import { ContentSyncService } from '$lib/server/contentSync';
 import { presets } from '$lib/presets';
 import { log, logAlways, logErrorAlways } from '$lib/log';
 import { cleanDocumentationPath } from '$lib/utils/pathUtils';
-import { CacheDbService } from '$lib/server/cacheDb';
+import { CacheDbService } from '$lib/cacheDb';
 
 // Maximum age of cached content in milliseconds (24 hours)
 export const MAX_CACHE_AGE_MS = 24 * 60 * 60 * 1000;
