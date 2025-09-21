@@ -1,9 +1,9 @@
 {
-	// Place your svelte-mcp workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
-	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
-	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
-	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Place your svelte-mcp workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
 	// Placeholders with the same ids are connected.
 	// Example:
 	"Setup Function": {
@@ -17,7 +17,7 @@
 			"\t$0",
 			"}",
 		],
-		"description": "Create a setup function for a tool/resource/prompt handler"
+		"description": "Create a setup function for a tool/resource/prompt handler",
 	},
 	"Autofixer": {
 		"scope": "javascript,typescript",
@@ -28,6 +28,6 @@
 			"\t$0",
 			"};",
 		],
-		"description": "Create a setup export for an autofixer"
-	}
+		"description": "Create a setup export for an autofixer",
+	},
 }
