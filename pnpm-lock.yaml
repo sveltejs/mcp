@@ -18,8 +18,8 @@ importers:
         specifier: ^0.1.4
         version: 0.1.4(tmcp@1.12.2(typescript@5.9.2))(valibot@1.1.0(typescript@5.9.2))
       '@tmcp/transport-http':
-        specifier: ^0.6.1
-        version: 0.6.1(tmcp@1.12.2(typescript@5.9.2))
+        specifier: ^0.6.2
+        version: 0.6.2(tmcp@1.12.2(typescript@5.9.2))
       '@tmcp/transport-stdio':
         specifier: ^0.1.3
         version: 0.1.3(tmcp@1.12.2(typescript@5.9.2))
@@ -1316,8 +1316,8 @@ packages:
   '@tmcp/session-manager@0.1.2':
     resolution: {integrity: sha512-hNkEeMt7/CdD8JdjPXMlIv5OMPTp5LnBqeo1Tb/AXcm31DpgwlNbf4voJ3CeWxWAZPPZ/MgHZ682TtgGhsvXiw==}
 
-  '@tmcp/transport-http@0.6.1':
-    resolution: {integrity: sha512-DENjAfXwzDQFCXu8HhJynLpDZZMmhat3g2OR1hZA5xpXIS2tI3oC5pdEQMFa/UyHAdgHfcJyUPQeQcjBHqIZ6A==}
+  '@tmcp/transport-http@0.6.2':
+    resolution: {integrity: sha512-5zQLEPWj+q7x18g9VEhx4MsA6akgrqXz7RUzldkhLTg4T3QWcO63EWNDQhIoPN/Z64s+E25C7kkVhhK3ltH3JQ==}
     peerDependencies:
       tmcp: ^1.12.2
 
@@ -4142,7 +4142,7 @@ snapshots:
 
   '@tmcp/session-manager@0.1.2': {}
 
-  '@tmcp/transport-http@0.6.1(tmcp@1.12.2(typescript@5.9.2))':
+  '@tmcp/transport-http@0.6.2(tmcp@1.12.2(typescript@5.9.2))':
     dependencies:
       '@tmcp/session-manager': 0.1.2
       tmcp: 1.12.2(typescript@5.9.2)
