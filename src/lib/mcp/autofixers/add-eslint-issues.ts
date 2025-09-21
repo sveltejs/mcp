@@ -2,6 +2,7 @@ import { ESLint } from 'eslint';
 import svelte_parser from 'svelte-eslint-parser';
 import svelte from 'eslint-plugin-svelte';
 import type { Config } from '@sveltejs/kit';
+import ts from 'typescript-eslint';
 
 let svelte_5_linter: ESLint | undefined;
 
@@ -41,6 +42,8 @@ function base_config(svelte_config: Config): ESLint.Options['baseConfig'] {
 				sourceType: 'module',
 				parser: svelte_parser,
 				parserOptions: {
+					extraFileExtensions: ['.svelte'],
+					parser: ts.parser,
 					svelteConfig: svelte_config,
 				},
 			},
