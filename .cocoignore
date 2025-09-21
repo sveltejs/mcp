@@ -1,2 +1,3 @@
 .claude
 .github
+*.test.ts
