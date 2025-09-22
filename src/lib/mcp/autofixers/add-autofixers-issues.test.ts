@@ -374,4 +374,67 @@ describe('add_autofixers_issues', () => {
 			);
 		});
 	});
+
+	describe('bind_this_attachment', () => {
+		it('should add suggestions when using bind:this on an element', () => {
+			const content = run_autofixers_on_code(`
+			<script>
+				let a = $state();	
+			</script>
+
+			<a bind:this={a} />`);
+
+			expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+			expect(content.suggestions).toContain(
+				'The usage of `bind:this` can often be replaced with an easier to read `action` or even better an `attachment`. Consider using the latter if possible.',
+			);
+		});
+
+		it('should not add suggestions when using bind:this on a component', () => {
+			const content = run_autofixers_on_code(`
+			<script>
+				import Child from './Child.svelte';
+				let a = $state();	
+			</script>
+
+			<Child bind:this={a} />`);
+
+			expect(content.suggestions).not.toContain(
+				'The usage of `bind:this` can often be replaced with an easier to read `action` or even better an `attachment`. Consider using the latter if possible.',
+			);
+		});
+
+		it('should not add suggestions when using bind:this on a component nested in an element', () => {
+			const content = run_autofixers_on_code(`
+			<script>
+				import Child from './Child.svelte';
+				let a = $state();	
+			</script>
+
+			<div>
+				<Child bind:this={a} />
+			</div>`);
+
+			expect(content.suggestions).not.toContain(
+				'The usage of `bind:this` can often be replaced with an easier to read `action` or even better an `attachment`. Consider using the latter if possible.',
+			);
+		});
+
+		it('should add suggestions but not suggest attachments when using bind:this on an element and the desired svelte version is 4', () => {
+			const content = run_autofixers_on_code(
+				`
+			<script>
+				let a;	
+			</script>
+
+			<a bind:this={a} />`,
+				4,
+			);
+
+			expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+			expect(content.suggestions).toContain(
+				'The usage of `bind:this` can often be replaced with an easier to read `action`. Consider using the latter if possible.',
+			);
+		});
+	});
 });
