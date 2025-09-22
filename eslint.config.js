@@ -36,6 +36,23 @@ export default ts.config(
 		},
 	},
 	{
+		files: ['./src/lib/**/*'],
+		rules: {
+			'no-restricted-imports': [
+				'error',
+				{
+					patterns: [
+						{
+							group: ['$lib'],
+							message:
+								"Since we will build the mcp server with typescript we can't use `$lib` imports here, please import with relative paths",
+						},
+					],
+				},
+			],
+		},
+	},
+	{
 		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
 		languageOptions: {
 			parserOptions: {

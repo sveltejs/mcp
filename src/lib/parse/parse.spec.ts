@@ -1,6 +1,6 @@
 import type { TSESTree } from '@typescript-eslint/types';
 import { describe, expect, it } from 'vitest';
-import { walk } from '$lib/index.js';
+import { walk } from '../index.js';
 import { parse, type ParseResult } from './parse.js';
 
 // ----------------------------------------------------------------------
