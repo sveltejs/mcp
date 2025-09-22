@@ -6,6 +6,7 @@ import globals from 'globals';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript-eslint';
 import svelteConfig from './svelte.config.js';
+import eslint_plugin_import from 'eslint-plugin-import';
 
 const gitignore_path = fileURLToPath(new URL('./.gitignore', import.meta.url));
 
@@ -14,6 +15,7 @@ export default ts.config(
 	js.configs.recommended,
 	...ts.configs.recommended,
 	...svelte.configs.recommended,
+	eslint_plugin_import.flatConfigs.recommended,
 	prettier,
 	...svelte.configs.prettier,
 	{
@@ -33,11 +35,34 @@ export default ts.config(
 				},
 			],
 			'func-style': ['error', 'declaration', { allowTypeAnnotation: true }],
+			'import/no-unresolved': 'off', // this doesn't work well with typescript path mapping
+			'import/extensions': [
+				'error',
+				'ignorePackages',
+				{
+					js: 'always',
+					mjs: 'always',
+					cjs: 'always',
+					ts: 'always',
+					svelte: 'always',
+				},
+			],
 		},
 	},
 	{
 		files: ['./src/lib/**/*'],
 		rules: {
+			'import/extensions': [
+				'error',
+				'ignorePackages',
+				{
+					js: 'always',
+					mjs: 'always',
+					cjs: 'always',
+					ts: 'always',
+					svelte: 'always',
+				},
+			],
 			'no-restricted-imports': [
 				'error',
 				{

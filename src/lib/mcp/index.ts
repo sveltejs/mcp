@@ -2,7 +2,7 @@ import { ValibotJsonSchemaAdapter } from '@tmcp/adapter-valibot';
 import { HttpTransport } from '@tmcp/transport-http';
 import { StdioTransport } from '@tmcp/transport-stdio';
 import { McpServer } from 'tmcp';
-import { setup_prompts, setup_resources, setup_tools } from './handlers';
+import { setup_prompts, setup_resources, setup_tools } from './handlers/index.js';
 
 const server = new McpServer(
 	{

@@ -1,4 +1,4 @@
-import { http_transport } from '$lib/mcp';
+import { http_transport } from '$lib/mcp/index.js';
 
 export async function handle({ event, resolve }) {
 	const mcp_response = await http_transport.respond(event.request);

@@ -1,5 +1,5 @@
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
-import { float_32_array } from './utils';
+import { float_32_array } from './utils.js';
 
 /**
  * NOTE: if you modify a schema adding a vector column you need to manually add this
