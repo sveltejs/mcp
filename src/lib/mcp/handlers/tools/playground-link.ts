@@ -32,14 +32,14 @@ export function playground_link(server: SvelteMcp) {
 		{
 			name: 'playground-link',
 			description:
-				'Generates a Playground link given a Svelte code snippet. Call this tool once you have the final version of the code you want to send to the user to allow it to quickly check the code in the playground. NEVER use this tool if you have already created a file for the component. The playground accept multiple files so if are importing from other files just include them all at the root level.',
+				'Generates a Playground link given a Svelte code snippet. Once you have the final version of the code you want to send to the user, ALWAYS ask the user if it wants a playground link to allow it to quickly check the code in the playground before calling this tool. NEVER use this tool if you have written the component to a file in the user project. The playground accept multiple files so if are importing from other files just include them all at the root level.',
 			schema: v.object({
 				name: v.pipe(
 					v.string(),
 					v.description('The name of the Playground, it should reflect the user task'),
 				),
 				tailwind: v.pipe(
-					v.string(),
+					v.boolean(),
 					v.description(
 						"If the code requires Tailwind CSS to work...only send true if it it's using tailwind classes in the code",
 					),
