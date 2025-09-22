@@ -34,6 +34,8 @@ This is the task you will work on:
 <task>
 ${task}
 </task>
+
+If you are not writing the code into a file, once you have the final version of the code call the \`playground-link\` tool to generate a playground link to share with the user and present the link right after the code. The playground link MUST be generated only once you have the final version of the code and you are ready to share it, it MUST include an entry point file called \`App.svelte\` where the main component should live. If you have multiple files to include in the playground link you can include them all at the root.
 `,
 						},
 					},
