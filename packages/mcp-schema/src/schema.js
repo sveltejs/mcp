@@ -40,10 +40,7 @@ export const distillation_jobs = sqliteTable('distillation_jobs', {
 	started_at: integer('started_at', { mode: 'timestamp' }),
 	completed_at: integer('completed_at', { mode: 'timestamp' }),
 	error_message: text('error_message'),
-	metadata: text('metadata', { mode: 'json' })
-		.$type<Record<string, unknown>>()
-		.notNull()
-		.default({}),
+	metadata: text('metadata', { mode: 'json' }).notNull().default({}),
 	created_at: integer('created_at', { mode: 'timestamp' })
 		.notNull()
 		.$defaultFn(() => new Date()),
@@ -59,10 +56,7 @@ export const content = sqliteTable('content', {
 	content: text('content').notNull(),
 	size_bytes: integer('size_bytes').notNull(),
 	embeddings: float_32_array('embeddings', { dimensions: 1024 }),
-	metadata: text('metadata', { mode: 'json' })
-		.$type<Record<string, unknown>>()
-		.notNull()
-		.default({}),
+	metadata: text('metadata', { mode: 'json' }).notNull().default({}),
 	created_at: integer('created_at', { mode: 'timestamp' })
 		.notNull()
 		.$defaultFn(() => new Date()),
@@ -78,10 +72,7 @@ export const content_distilled = sqliteTable('content_distilled', {
 	content: text('content').notNull(),
 	size_bytes: integer('size_bytes').notNull(),
 	embeddings: float_32_array('embeddings', { dimensions: 1024 }),
-	metadata: text('metadata', { mode: 'json' })
-		.$type<Record<string, unknown>>()
-		.notNull()
-		.default({}),
+	metadata: text('metadata', { mode: 'json' }).notNull().default({}),
 	created_at: integer('created_at', { mode: 'timestamp' })
 		.notNull()
 		.$defaultFn(() => new Date()),

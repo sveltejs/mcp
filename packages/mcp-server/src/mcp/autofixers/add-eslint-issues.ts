@@ -81,7 +81,7 @@ export async function add_eslint_issues(
 	const eslint = get_linter(desired_svelte_version);
 	const results = await eslint.lintText(code, { filePath: filename || './Component.svelte' });
 
-	for (const message of results[0].messages) {
+	for (const message of results[0]?.messages ?? []) {
 		if (message.severity === 2) {
 			content.issues.push(`${message.message} at line ${message.line}, column ${message.column}`);
 		} else if (message.severity === 1) {

@@ -1,0 +1,20 @@
+{
+	"name": "@sveltejs/mcp-schema",
+	"version": "0.0.1",
+	"private": true,
+	"description": "",
+	"main": "index.js",
+	"exports": {
+		".": "./src/index.js",
+		"./utils": "./src/utils.js",
+		"./schema": "./src/schema.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@10.15.1",
+	"type": "module",
+	"peerDependencies": {
+		"drizzle-orm": "^0.40.1"
+	}
+}

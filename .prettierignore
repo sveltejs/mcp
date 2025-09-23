@@ -8,3 +8,4 @@ bun.lockb
 # Miscellaneous
 /static/
 /drizzle/
+/**/.svelte-kit/*
