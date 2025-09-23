@@ -1,5 +1,5 @@
 import { http_transport } from '$lib/mcp/index.js';
-import { db } from '$lib/server/db';
+import { db } from '$lib/server/db/index.js';
 
 export async function handle({ event, resolve }) {
 	const mcp_response = await http_transport.respond(event.request, {

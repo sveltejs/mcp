@@ -14,7 +14,7 @@
 	"license": "ISC",
 	"packageManager": "pnpm@10.15.1",
 	"type": "module",
-	"peerDependencies": {
+	"dependencies": {
 		"drizzle-orm": "^0.40.1"
 	}
 }

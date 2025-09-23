@@ -1,4 +1,7 @@
-import { sql, Column } from 'drizzle-orm';
+/**
+ * @import { Column } from 'drizzle-orm';
+ */
+import { sql } from 'drizzle-orm';
 import { customType } from 'drizzle-orm/sqlite-core';
 
 /**
