@@ -5,12 +5,12 @@ import svelte from 'eslint-plugin-svelte';
 import globals from 'globals';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript-eslint';
-import svelteConfig from './svelte.config.js';
+import svelteConfig from './apps/mcp-remote/svelte.config.js';
 import eslint_plugin_import from 'eslint-plugin-import';
 
 const gitignore_path = fileURLToPath(new URL('./.gitignore', import.meta.url));
 
-export default ts.config(
+export default /** @type {import("eslint").Linter.Config} */ ([
 	includeIgnoreFile(gitignore_path),
 	js.configs.recommended,
 	...ts.configs.recommended,
@@ -50,34 +50,6 @@ export default ts.config(
 		},
 	},
 	{
-		files: ['./src/lib/**/*'],
-		rules: {
-			'import/extensions': [
-				'error',
-				'ignorePackages',
-				{
-					js: 'always',
-					mjs: 'always',
-					cjs: 'always',
-					ts: 'always',
-					svelte: 'always',
-				},
-			],
-			'no-restricted-imports': [
-				'error',
-				{
-					patterns: [
-						{
-							group: ['$lib'],
-							message:
-								"Since we will build the mcp server with typescript we can't use `$lib` imports here, please import with relative paths",
-						},
-					],
-				},
-			],
-		},
-	},
-	{
 		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
 		languageOptions: {
 			parserOptions: {
@@ -88,4 +60,4 @@ export default ts.config(
 			},
 		},
 	},
-);
+]);

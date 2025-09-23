@@ -1,5 +1,5 @@
 import { parse } from '../../parse/parse.js';
-import { walk } from '../../index.js';
+import { walk } from '../../mcp/autofixers/ast/walk.js';
 import type { Node } from 'estree';
 import * as autofixers from './visitors/index.js';
 
