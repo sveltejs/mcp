@@ -1,0 +1,19 @@
+{
+	"extends": [
+		"config:recommended",
+		":preserveSemverRanges",
+		"group:allNonMajor",
+		":semanticCommitTypeAll(chore)"
+	],
+	"pin": {
+		"enabled": false
+	},
+	"ignoreDeps": ["@types/node", "esbuild", "rollup", "typescript"],
+	"packageRules": [
+		{
+			"matchPackageNames": ["vite"],
+			"matchUpdateTypes": ["major"],
+			"enabled": false
+		}
+	]
+}

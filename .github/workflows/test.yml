@@ -34,9 +34,11 @@ jobs:
         env:
           DATABASE_URL: file:test.db
           VOYAGE_API_KEY: dummy-key
+          DATABASE_TOKEN: dummy-key
 
       - name: Run tests
         run: pnpm run test
         env:
           DATABASE_URL: file:test.db
           VOYAGE_API_KEY: dummy-key
+          DATABASE_TOKEN: dummy-key
