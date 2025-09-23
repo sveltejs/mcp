@@ -1,5 +1,5 @@
 import type { Identifier } from 'estree';
-import type { Autofixer } from '.';
+import type { Autofixer } from './index.js';
 import { left_most_id } from '../ast/utils.js';
 
 export const suggest_attachments: Autofixer = {
