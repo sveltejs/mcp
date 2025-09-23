@@ -4,6 +4,7 @@
 	"description": "The official Svelte MCP server implementation",
 	"type": "module",
 	"scripts": {
+		"build": "pnpm -r run build",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
 		"lint:fix": "prettier --write . && eslint . --fix",
