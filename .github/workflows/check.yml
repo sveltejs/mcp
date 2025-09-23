@@ -33,4 +33,5 @@ jobs:
         run: pnpm run check
         env:
           DATABASE_URL: file:test.db
+          DATABASE_TOKEN: dummy-key
           VOYAGE_API_KEY: dummy-key

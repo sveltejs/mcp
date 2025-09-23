@@ -1,12 +1,16 @@
 node_modules
+/apps/**/node_modules
+/packages/**/node_modules
 
 # Output
-.output
-.vercel
-.netlify
-.wrangler
-/.svelte-kit
-/build
+/apps/**/.output
+/apps/**/.vercel
+/apps/**/.netlify
+/apps/**/.wrangler
+/**/.svelte-kit
+/apps/**/build
+/apps/**/dist
+/packages/**/dist
 
 # OS
 .DS_Store
@@ -14,14 +18,25 @@ Thumbs.db
 
 # Env
 .env
+/apps/**/.env
+/packages/**/.env
 .env.*
+/apps/**/.env.*
+/packages/**/.env.*
 !.env.example
+/apps/**/!.env.example
+/packages/**/!.env.example
 !.env.test
+/apps/**/!.env.test
+/packages/**/!.env.test
 
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+/apps/**/vite.config.js.timestamp-*
+/apps/**/vite.config.ts.timestamp-*
 
 # SQLite
 *.db
-dist
+/apps/**/*.db
+/packages/**/*.db

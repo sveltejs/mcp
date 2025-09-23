@@ -1,6 +1,6 @@
 import type { TSESTree } from '@typescript-eslint/types';
 import { describe, expect, it } from 'vitest';
-import { walk } from '../index.js';
+import { walk } from '../mcp/autofixers/ast/walk.js';
 import { parse, type ParseResult } from './parse.js';
 
 // ----------------------------------------------------------------------
@@ -57,8 +57,8 @@ function assert_svelte_file(result: ParseResult) {
 	const name_var = variable_declaration_from_id(result, declaration_id);
 	expect(Array.isArray(name_var.defs)).toBe(true);
 	expect(name_var.defs.length).toBeGreaterThan(0);
-	expect(name_var.defs[0].type).toBe('Variable');
-	expect(name_var.defs[0].name && name_var.defs[0].name.name).toBe('name');
+	expect(name_var.defs[0]?.type).toBe('Variable');
+	expect(name_var.defs[0]?.name && name_var.defs[0].name.name).toBe('name');
 
 	const references_to_name = all_references.filter((rf) => rf.resolved === name_var);
 	expect(references_to_name.length).toBeGreaterThan(0);
@@ -76,7 +76,7 @@ function assert_sveltejs_file(result: ParseResult) {
 	const v_var = variable_declaration_from_id(result, declaration_id);
 	expect(Array.isArray(v_var.defs)).toBe(true);
 	expect(v_var.defs.length).toBeGreaterThan(0);
-	expect(v_var.defs[0].type).toBeTruthy();
+	expect(v_var.defs[0]?.type).toBeTruthy();
 
 	const references_to_v = all_references.filter((rf) => rf.resolved === v_var);
 	expect(references_to_v.length).toBeGreaterThanOrEqual(2);
