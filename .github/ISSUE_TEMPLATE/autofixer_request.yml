@@ -1,0 +1,36 @@
+name: 'Autofixer Request'
+description: Request a new Autofixer for the MCP
+title: '[Autofixer Request] '
+labels: [enhancement, autofixer]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to request A new autofixer!
+  - type: textarea
+    id: problem
+    attributes:
+      label: Describe the problematic code
+      description: Please provide a clear and concise description the problem. Is much better if you can provide a code snippet the AI constantly get's wrong.
+      placeholder: The AI keeps messing with...
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Describe what the autofixer should suggest
+      description: If you were looking at this code, what would you suggest to the AI for it to fix it?
+      placeholder: You should never do this, instead do that...
+    validations:
+      required: true
+  - type: dropdown
+    id: importance
+    attributes:
+      label: Importance
+      description: How important is this feature to you?
+      options:
+        - nice to have
+        - would make my life easier
+        - the MCP is useless to me without it
+    validations:
+      required: true
