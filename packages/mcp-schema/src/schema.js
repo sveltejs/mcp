@@ -1,10 +1,5 @@
-<<<<<<< HEAD:src/lib/server/db/schema.ts
 import { blob, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
-import { float_32_array } from './utils';
-=======
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import { float_32_array } from './utils.js';
->>>>>>> main:packages/mcp-schema/src/schema.js
 
 /**
  * NOTE: if you modify a schema adding a vector column you need to manually add this

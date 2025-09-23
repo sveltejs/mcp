@@ -17,9 +17,39 @@ importers:
       '@modelcontextprotocol/inspector':
         specifier: ^0.16.7
         version: 0.16.8(@types/node@24.5.2)(typescript@5.9.2)
-      eslint:
-        specifier: ^9.36.0
-        version: 9.36.0
+      '@sveltejs/adapter-vercel':
+        specifier: ^5.6.3
+        version: 5.10.2(@sveltejs/kit@2.42.2(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.39.2)(vite@7.1.6(@types/node@24.5.2)))(svelte@5.39.2)(vite@7.1.6(@types/node@24.5.2)))(rollup@4.51.0)
+      '@sveltejs/kit':
+        specifier: ^2.22.0
+        version: 2.42.2(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.39.2)(vite@7.1.6(@types/node@24.5.2)))(svelte@5.39.2)(vite@7.1.6(@types/node@24.5.2))
+      '@sveltejs/vite-plugin-svelte':
+        specifier: ^6.0.0
+        version: 6.2.0(svelte@5.39.2)(vite@7.1.6(@types/node@24.5.2))
+      '@types/eslint-scope':
+        specifier: ^8.3.2
+        version: 8.3.2
+      '@types/estree':
+        specifier: ^1.0.8
+        version: 1.0.8
+      '@types/node':
+        specifier: ^24.3.1
+        version: 24.5.2
+      '@types/tar-stream':
+        specifier: ^3.1.4
+        version: 3.1.4
+      '@typescript-eslint/types':
+        specifier: ^8.43.0
+        version: 8.44.1
+      dotenv:
+        specifier: ^17.2.2
+        version: 17.2.2
+      drizzle-kit:
+        specifier: ^0.30.2
+        version: 0.30.6
+      drizzle-orm:
+        specifier: ^0.40.0
+        version: 0.40.1(@libsql/client@0.14.0)(gel@2.1.1)
       eslint-config-prettier:
         specifier: ^10.0.1
         version: 10.1.8(eslint@9.36.0)
@@ -32,12 +62,24 @@ importers:
       globals:
         specifier: ^16.0.0
         version: 16.4.0
+      minimatch:
+        specifier: ^10.0.3
+        version: 10.0.3
       prettier:
         specifier: ^3.4.2
         version: 3.6.2
       prettier-plugin-svelte:
         specifier: ^3.3.3
         version: 3.4.0(prettier@3.6.2)(svelte@5.39.2)
+      svelte:
+        specifier: ^5.0.0
+        version: 5.39.2
+      svelte-check:
+        specifier: ^4.0.0
+        version: 4.3.1(picomatch@4.0.3)(svelte@5.39.2)(typescript@5.9.2)
+      tar-stream:
+        specifier: ^3.1.7
+        version: 3.1.7
       typescript:
         specifier: ^5.0.0
         version: 5.9.2
@@ -59,6 +101,15 @@ importers:
       '@tmcp/transport-http':
         specifier: ^0.6.2
         version: 0.6.2(tmcp@1.13.0(typescript@5.9.2))
+      '@types/tar-stream':
+        specifier: ^3.1.4
+        version: 3.1.4
+      minimatch:
+        specifier: ^10.0.3
+        version: 10.0.3
+      tar-stream:
+        specifier: ^3.1.7
+        version: 3.1.7
     devDependencies:
       '@eslint/compat':
         specifier: ^1.3.2
@@ -84,21 +135,9 @@ importers:
       '@types/node':
         specifier: ^24.3.1
         version: 24.5.2
-<<<<<<< HEAD
-      '@types/tar-stream':
-        specifier: ^3.1.4
-        version: 3.1.4
-      '@typescript-eslint/types':
-        specifier: ^8.43.0
-        version: 8.44.0
-      dotenv:
-        specifier: ^17.2.2
-        version: 17.2.2
-=======
       '@typescript-eslint/parser':
         specifier: ^8.44.0
         version: 8.44.0(eslint@9.36.0)(typescript@5.9.2)
->>>>>>> main
       drizzle-kit:
         specifier: ^0.30.2
         version: 0.30.6
@@ -114,9 +153,6 @@ importers:
       globals:
         specifier: ^16.0.0
         version: 16.4.0
-      minimatch:
-        specifier: ^10.0.3
-        version: 10.0.3
       prettier:
         specifier: ^3.4.2
         version: 3.6.2
@@ -129,15 +165,9 @@ importers:
       svelte-check:
         specifier: ^4.0.0
         version: 4.3.1(picomatch@4.0.3)(svelte@5.39.2)(typescript@5.9.2)
-<<<<<<< HEAD
-      tar-stream:
-        specifier: ^3.1.7
-        version: 3.1.7
-=======
       svelte-eslint-parser:
         specifier: ^1.3.2
         version: 1.3.2(svelte@5.39.2)
->>>>>>> main
       typescript:
         specifier: ^5.0.0
         version: 5.9.2
@@ -1997,6 +2027,10 @@ packages:
     resolution: {integrity: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==}
     engines: {node: '>=0.10.0'}
 
+  dotenv@17.2.2:
+    resolution: {integrity: sha512-Sf2LSQP+bOlhKWWyhFsn0UsfdK/kCWRv1iuA2gXAwt3dyNabr6QSj00I2V10pidqz69soatm9ZwZvpQMTIOd5Q==}
+    engines: {node: '>=12'}
+
   drizzle-kit@0.30.6:
     resolution: {integrity: sha512-U4wWit0fyZuGuP7iNmRleQyK2V8wCuv57vf5l3MnG4z4fzNTjY/U13M8owyQ5RavqvqxBifWORaR3wIUzlN64g==}
     hasBin: true
@@ -3298,14 +3332,12 @@ packages:
   std-env@3.9.0:
     resolution: {integrity: sha512-UGvjygr6F6tpH7o2qyqR6QYpwraIjKSdtzyBdyytFOHmPZY917kwdwLG0RbOjWOnKmnm3PeHjaoLLMie7kPLQw==}
 
-<<<<<<< HEAD
-  streamx@2.22.1:
-    resolution: {integrity: sha512-znKXEBxfatz2GBNK02kRnCXjV+AA4kjZIUxeWSr3UGirZMJfTE9uiwKHobnbgxWyL/JWro8tTq+vOqAK1/qbSA==}
-=======
   stop-iteration-iterator@1.1.0:
     resolution: {integrity: sha512-eLoXW/DHyl62zxY4SCaIgnRhuMr6ri4juEYARS8E6sCEqzKpOiE521Ucofdx+KnDZl5xmvGYaaKCk5FEOxJCoQ==}
     engines: {node: '>= 0.4'}
->>>>>>> main
+
+  streamx@2.22.1:
+    resolution: {integrity: sha512-znKXEBxfatz2GBNK02kRnCXjV+AA4kjZIUxeWSr3UGirZMJfTE9uiwKHobnbgxWyL/JWro8tTq+vOqAK1/qbSA==}
 
   string-width@4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
@@ -4853,7 +4885,7 @@ snapshots:
   '@typescript-eslint/project-service@8.44.0(typescript@5.9.2)':
     dependencies:
       '@typescript-eslint/tsconfig-utils': 8.44.0(typescript@5.9.2)
-      '@typescript-eslint/types': 8.44.0
+      '@typescript-eslint/types': 8.44.1
       debug: 4.4.3
       typescript: 5.9.2
     transitivePeerDependencies:
@@ -5389,6 +5421,8 @@ snapshots:
   doctrine@2.1.0:
     dependencies:
       esutils: 2.0.3
+
+  dotenv@17.2.2: {}
 
   drizzle-kit@0.30.6:
     dependencies:
@@ -6787,7 +6821,11 @@ snapshots:
 
   std-env@3.9.0: {}
 
-<<<<<<< HEAD
+  stop-iteration-iterator@1.1.0:
+    dependencies:
+      es-errors: 1.3.0
+      internal-slot: 1.1.0
+
   streamx@2.22.1:
     dependencies:
       fast-fifo: 1.3.2
@@ -6796,12 +6834,6 @@ snapshots:
       bare-events: 2.7.0
     transitivePeerDependencies:
       - react-native-b4a
-=======
-  stop-iteration-iterator@1.1.0:
-    dependencies:
-      es-errors: 1.3.0
-      internal-slot: 1.1.0
->>>>>>> main
 
   string-width@4.2.3:
     dependencies:

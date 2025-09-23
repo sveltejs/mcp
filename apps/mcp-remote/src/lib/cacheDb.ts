@@ -23,10 +23,7 @@ export class CacheDbService {
 			const result = await db
 				.select({ data: cache.data })
 				.from(cache)
-				.where(and(
-					eq(cache.cache_key, key),
-					sql`${cache.expires_at} > ${new Date()}`
-				))
+				.where(and(eq(cache.cache_key, key), sql`${cache.expires_at} > ${new Date()}`))
 				.limit(1);
 
 			if (result.length === 0) {
@@ -73,9 +70,7 @@ export class CacheDbService {
 
 	async delete(key: string): Promise<boolean> {
 		try {
-			const result = await db
-				.delete(cache)
-				.where(eq(cache.cache_key, key));
+			const result = await db.delete(cache).where(eq(cache.cache_key, key));
 			return result.rowsAffected > 0;
 		} catch (error) {
 			console.error('Error deleting cache entry:', error);
@@ -94,9 +89,7 @@ export class CacheDbService {
 
 	async deleteExpired(): Promise<number> {
 		try {
-			const result = await db
-				.delete(cache)
-				.where(sql`${cache.expires_at} <= ${new Date()}`);
+			const result = await db.delete(cache).where(sql`${cache.expires_at} <= ${new Date()}`);
 			return result.rowsAffected;
 		} catch (error) {
 			console.error('Error deleting expired cache entries:', error);
@@ -134,10 +127,7 @@ export class CacheDbService {
 			const result = await db
 				.select({ exists: sql`1` })
 				.from(cache)
-				.where(and(
-					eq(cache.cache_key, key),
-					sql`${cache.expires_at} > ${new Date()}`
-				))
+				.where(and(eq(cache.cache_key, key), sql`${cache.expires_at} > ${new Date()}`))
 				.limit(1);
 			return result.length > 0;
 		} catch (error) {

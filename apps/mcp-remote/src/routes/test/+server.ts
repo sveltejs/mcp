@@ -4,5 +4,5 @@ import { fetchRepositoryTarball } from '$lib/fetchMarkdown';
 
 export const GET: RequestHandler = async () => {
 	const tarball_buffer = await fetchRepositoryTarball('sveltejs', 'svelte.dev');
-	return json({ data: tarballBuffer });
+	return json({ data: tarball_buffer });
 };
