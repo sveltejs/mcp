@@ -191,7 +191,7 @@ importers:
         specifier: ^8.44.0
         version: 8.44.0
 
-  packages/stdio-server:
+  packages/mcp-stdio:
     dependencies:
       eslint:
         specifier: ^9.36.0

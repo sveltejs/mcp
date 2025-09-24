@@ -1,5 +1,5 @@
 import { base_runes } from '../../../constants.js';
-import type { Autofixer } from '.';
+import type { Autofixer } from './index.js';
 
 const dollarless_runes = base_runes.map((r) => r.replace('$', ''));
 
