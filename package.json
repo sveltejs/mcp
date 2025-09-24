@@ -15,7 +15,7 @@
 		"test": "npm run test:unit -- --run",
 		"test:watch": "npm run test:unit -- --watch",
 		"inspect": "pnpm mcp-inspector",
-		"release": "pnpm run --filter ./packages/mcp-stdio/ build && changeset publish"
+		"release": "changeset publish"
 	},
 	"keywords": [
 		"svelte",
