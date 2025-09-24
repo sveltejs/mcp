@@ -6,7 +6,7 @@ Repo for the official Svelte MCP server.
 
 ```
 pnpm i
-cp .env.example .env
+cp apps/mcp-remote/.env.example apps/mcp-remote/.env
 pnpm dev
 ```
 
