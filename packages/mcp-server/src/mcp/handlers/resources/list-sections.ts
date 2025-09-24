@@ -4,6 +4,7 @@ export function list_sections(server: SvelteMcp) {
 	server.resource(
 		{
 			name: 'list-sections',
+			enabled: () => false,
 			description:
 				'The list of all the available Svelte 5 and SvelteKit documentation sections in a structured format.',
 			uri: 'svelte://list-sections',
