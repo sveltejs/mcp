@@ -1,5 +1,5 @@
 import type { Identifier, PrivateIdentifier } from 'estree';
-import type { Autofixer } from '.';
+import type { Autofixer } from './index.js';
 
 export const derived_with_function: Autofixer = {
 	CallExpression(node, { state, path }) {
@@ -7,15 +7,15 @@ export const derived_with_function: Autofixer = {
 			node.callee.type === 'Identifier' &&
 			node.callee.name === '$derived' &&
 			state.parsed.is_rune(node, ['$derived']) &&
-			(node.arguments[0].type === 'ArrowFunctionExpression' ||
-				node.arguments[0].type === 'FunctionExpression')
+			(node.arguments[0]?.type === 'ArrowFunctionExpression' ||
+				node.arguments[0]?.type === 'FunctionExpression')
 		) {
 			const parent = path[path.length - 1];
 			let variable_id: Identifier | PrivateIdentifier | undefined;
-			if (parent.type === 'VariableDeclarator' && parent.id.type === 'Identifier') {
+			if (parent?.type === 'VariableDeclarator' && parent.id.type === 'Identifier') {
 				// const something = $derived(...)
 				variable_id = parent.id;
-			} else if (parent.type === 'PropertyDefinition') {
+			} else if (parent?.type === 'PropertyDefinition') {
 				// class X { something = $derived(...) }
 				variable_id =
 					parent.key.type === 'Identifier'
@@ -23,7 +23,7 @@ export const derived_with_function: Autofixer = {
 						: parent.key.type === 'PrivateIdentifier'
 							? parent.key
 							: undefined;
-			} else if (parent.type === 'AssignmentExpression') {
+			} else if (parent?.type === 'AssignmentExpression') {
 				// this.something = $derived(...)
 				variable_id =
 					parent.left.type === 'MemberExpression'

@@ -1,0 +1,42 @@
+{
+	"name": "@sveltejs/mcp",
+	"version": "0.0.1",
+	"type": "module",
+	"license": "MIT",
+	"homepage": "https://github.com/sveltejs/mcp#readme",
+	"bugs": {
+		"url": "https://github.com/sveltejs/mcp/issues"
+	},
+	"bin": {
+		"svelte-mcp": "./dist/index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sveltejs/mcp.git",
+		"path": "packages/mcp-stdio"
+	},
+	"files": [
+		"dist"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"build": "tsdown",
+		"dev": "tsdown --watch",
+		"test": "vitest",
+		"check": "tsc --noEmit"
+	},
+	"devDependencies": {
+		"@sveltejs/mcp-server": "workspace:^",
+		"@tmcp/transport-stdio": "^0.3.0",
+		"@types/node": "^22.15.17",
+		"publint": "^0.3.13",
+		"tsdown": "^0.11.9",
+		"typescript": "^5.8.3",
+		"vitest": "^3.1.3"
+	},
+	"dependencies": {
+		"eslint": "^9.36.0"
+	}
+}

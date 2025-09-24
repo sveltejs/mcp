@@ -1,4 +1,4 @@
-import type { Autofixer } from '.';
+import type { Autofixer } from './index.js';
 
 export const use_runes_instead_of_store: Autofixer = {
 	ImportDeclaration(node, { state, next }) {

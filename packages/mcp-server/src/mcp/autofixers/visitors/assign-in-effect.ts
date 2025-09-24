@@ -1,10 +1,14 @@
 import type { AssignmentExpression, Identifier, Node, UpdateExpression } from 'estree';
-import type { Autofixer, AutofixerState } from '.';
+import type { Autofixer, AutofixerState } from './index.js';
 import { left_most_id } from '../ast/utils.js';
-import type { SvelteNode } from 'svelte-eslint-parser/lib/ast';
+import type { AST } from 'svelte-eslint-parser';
 import type { Context } from 'zimmerframe';
 
-function run_if_in_effect(path: (Node | SvelteNode)[], state: AutofixerState, to_run: () => void) {
+function run_if_in_effect(
+	path: (Node | AST.SvelteNode)[],
+	state: AutofixerState,
+	to_run: () => void,
+) {
 	const in_effect = path.findLast(
 		(node) =>
 			node.type === 'CallExpression' &&
@@ -25,7 +29,7 @@ function run_if_in_effect(path: (Node | SvelteNode)[], state: AutofixerState, to
 
 function visitor(
 	node: UpdateExpression | AssignmentExpression,
-	{ state, path }: Context<Node | SvelteNode, AutofixerState>,
+	{ state, path }: Context<Node | AST.SvelteNode, AutofixerState>,
 ) {
 	run_if_in_effect(path, state, () => {
 		function check_if_stateful_id(id: Identifier) {

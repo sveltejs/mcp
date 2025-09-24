@@ -61,6 +61,11 @@ export function svelte_autofixer(server: SvelteMcp) {
 				content.issues.push(
 					`${error.message} at line ${error.start?.line}, column ${error.start?.column}`,
 				);
+				if (error.message.includes('js_parse_error')) {
+					content.suggestions.push(
+						"The code can't be compiled because a Javascript parse error. In case you are using runes like this `$state variable_name = 3;` or `$derived variable_name = 3 * count` that's not how runes are used. You need to use them as function calls without importing them: `const variable_name = $state(3)` and `const variable_name = $derived(3 * count)`.",
+					);
+				}
 			}
 
 			if (content.issues.length > 0 || content.suggestions.length > 0) {
