@@ -51,7 +51,7 @@ export const distillation_jobs = sqliteTable('distillation_jobs', {
 
 export const content = sqliteTable('content', {
 	id: integer('id').primaryKey(),
-	path: text('path').notNull(),
+	path: text('path').notNull().unique(),
 	filename: text('filename').notNull(),
 	content: text('content').notNull(),
 	size_bytes: integer('size_bytes').notNull(),
@@ -67,7 +67,7 @@ export const content = sqliteTable('content', {
 
 export const content_distilled = sqliteTable('content_distilled', {
 	id: integer('id').primaryKey(),
-	path: text('path').notNull(),
+	path: text('path').notNull().unique(),
 	filename: text('filename').notNull(),
 	content: text('content').notNull(),
 	size_bytes: integer('size_bytes').notNull(),
