@@ -6,7 +6,7 @@ export default defineConfig([
 		platform: 'node',
 		define: {
 			// some eslint-plugin-svelte code expects __filename to exists but in an ESM environment it does not.
-			__filename: '""',
+			__filename: JSON.stringify(import.meta.url.replace('file://', '')),
 		},
 		// we need eslint at runtime but the bundler doesn't bundle `require`'s which `eslint-plugin-svelte` uses to require
 		// `eslint/use-at-your-own-risk`. If we didn't have `eslint` as an actual dependency and didn't externalize it

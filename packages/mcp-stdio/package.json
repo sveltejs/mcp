@@ -12,13 +12,12 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/sveltejs/mcp.git"
+		"url": "git+https://github.com/sveltejs/mcp.git",
+		"path": "packages/mcp-stdio"
 	},
-	"author": "Author Name <author.name@mail.com>",
 	"files": [
 		"dist"
 	],
-	"main": "./dist/index.js",
 	"publishConfig": {
 		"access": "public"
 	},
