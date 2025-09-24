@@ -12,7 +12,8 @@
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
 		"test:watch": "npm run test:unit -- --watch",
-		"inspect": "pnpm mcp-inspector"
+		"inspect": "pnpm mcp-inspector",
+		"release": "pnpm run --filter ./packages/mcp-stdio/ build && changeset publish"
 	},
 	"keywords": [
 		"svelte",
@@ -22,6 +23,7 @@
 	],
 	"private": true,
 	"devDependencies": {
+		"@changesets/cli": "^2.29.7",
 		"@eslint/compat": "^1.3.2",
 		"@eslint/js": "^9.36.0",
 		"@modelcontextprotocol/inspector": "^0.16.7",
@@ -32,6 +34,7 @@
 		"globals": "^16.0.0",
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.3",
+		"publint": "^0.3.13",
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.44.1",
 		"vitest": "^3.2.3"

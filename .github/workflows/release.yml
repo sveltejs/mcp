@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+permissions: {}
+
+jobs:
+  release:
+    permissions:
+      contents: write # to create release (changesets/action)
+      id-token: write # OpenID Connect token needed for provenance
+      pull-requests: write # to create pull request (changesets/action)
+    # prevents this action from running on forks
+    if: github.repository == 'sveltejs/vite-plugin-svelte'
+    name: Release
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # pseudo-matrix for convenience, NEVER use more than a single combination
+        node: [24]
+        os: [ubuntu-latest]
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node }}
+          package-manager-cache: false # pnpm is not installed yet
+      - name: install pnpm
+        shell: bash
+        run: |
+          PNPM_VER=$(jq -r '.packageManager | if .[0:5] == "pnpm@" then .[5:] else "packageManager in package.json does not start with pnpm@\n" | halt_error(1)  end' package.json)
+          echo installing pnpm version $PNPM_VER
+          npm i -g pnpm@$PNPM_VER
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node }}
+          package-manager-cache: true # caches pnpm via packageManager field in package.json
+      - name: install
+        run: pnpm install --frozen-lockfile --prefer-offline --ignore-scripts
+      - name: publint
+        run: pnpm check:publint
+
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        # pinned for security, always review third party action code before updating
+        uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba # v1.5.3
+        with:
+          # This expects you to have a script called release which does a build for your packages and calls changeset publish
+          publish: pnpm release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
