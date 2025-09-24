@@ -24,15 +24,14 @@ cp apps/mcp-remote/.env.example apps/mcp-remote/.env
 ### Starting the mcp-remote app in dev mode
 
 ```bash
-# Start the SvelteKit development server for mcp-remote
-cd apps/mcp-remote
+# Start the SvelteKit development server for mcp-remote (from root)
 pnpm dev
 ```
 
-Or from the root:
+Or navigate to the app directory:
 
 ```bash
-# Run dev command for all workspaces
+cd apps/mcp-remote
 pnpm dev
 ```
 

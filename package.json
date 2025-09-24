@@ -4,6 +4,7 @@
 	"description": "The official Svelte MCP server implementation",
 	"type": "module",
 	"scripts": {
+		"dev": "pnpm --filter mcp-remote dev",
 		"build": "pnpm -r run build",
 		"check": "pnpm -r run check",
 		"format": "prettier --write .",
