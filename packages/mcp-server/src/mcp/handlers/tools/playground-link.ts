@@ -13,7 +13,7 @@ async function compress_and_encode_text(input: string) {
 		} else {
 			for (let i = 0; i < value.length; i++) {
 				// decoding as utf-8 will make btoa reject the string
-				buffer += String.fromCharCode(value[i]);
+				buffer += String.fromCharCode(value[i]!);
 			}
 		}
 	}

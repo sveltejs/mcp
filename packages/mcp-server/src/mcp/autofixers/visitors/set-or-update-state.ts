@@ -1,4 +1,4 @@
-import type { Autofixer } from '.';
+import type { Autofixer } from './index.js';
 import { left_most_id } from '../ast/utils.js';
 
 const UPDATE_PROPERTIES = ['set', 'update'];
@@ -7,7 +7,7 @@ export const set_or_update_state: Autofixer = {
 	MemberExpression(node, { state, next, path }) {
 		const parent = path[path.length - 1];
 		if (
-			parent.type === 'CallExpression' &&
+			parent?.type === 'CallExpression' &&
 			parent.callee === node &&
 			node.property.type === 'Identifier' &&
 			UPDATE_PROPERTIES.includes(node.property.name)
