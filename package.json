@@ -5,6 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "pnpm -r run build",
+		"dev": "pnpm --filter @sveltejs/mcp-remote run dev",
 		"check": "pnpm -r run check",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
