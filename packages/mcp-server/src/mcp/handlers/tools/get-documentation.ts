@@ -1,6 +1,6 @@
 import type { SvelteMcp } from '../../index.js';
 import * as v from 'valibot';
-import { getSections } from '../../utils.js';
+import { getSections, fetchWithTimeout } from '../../utils.js';
 
 export function get_documentation(server: SvelteMcp) {
 	server.tool(
@@ -55,7 +55,7 @@ export function get_documentation(server: SvelteMcp) {
 
 					if (matchedSection) {
 						try {
-							const response = await fetch(matchedSection.url);
+							const response = await fetchWithTimeout(matchedSection.url);
 							if (response.ok) {
 								const content = await response.text();
 								return `## ${matchedSection.title}\n\n${content}`;
