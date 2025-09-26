@@ -10,14 +10,18 @@ function run_autofixers_on_code(code: string, desired_svelte_version = 5) {
 	return content;
 }
 
+function with_possible_inits(title: string, fn: (args: { init: string }) => void) {
+	describe.each([
+		{ init: '$state' },
+		{ init: '$state.raw' },
+		{ init: '$derived' },
+		{ init: '$derived.by' },
+	])(title, fn);
+}
+
 describe('add_autofixers_issues', () => {
 	describe('assign_in_effect', () => {
-		describe.each([
-			{ init: '$state' },
-			{ init: '$state.raw' },
-			{ init: '$derived' },
-			{ init: '$derived.by' },
-		])('($init)', ({ init }) => {
+		with_possible_inits('($init)', ({ init }) => {
 			it(`should add suggestions when assigning to a stateful variable inside an effect`, () => {
 				const content = run_autofixers_on_code(`
 				<script>
@@ -115,181 +119,183 @@ describe('add_autofixers_issues', () => {
 		});
 	});
 
-	describe.each([{ method: 'set' }, { method: 'update' }])(
-		'wrong_property_access_state ($method)',
-		({ method }) => {
-			it(`should add suggestions when using .${method}() on a stateful variable with a literal init`, () => {
-				const content = run_autofixers_on_code(`
+	with_possible_inits('($init)', ({ init }) => {
+		describe.each([{ method: 'set' }, { method: 'update' }])(
+			'wrong_property_access_state ($method)',
+			({ method }) => {
+				it(`should add suggestions when using .${method}() on a stateful variable with a literal init`, () => {
+					const content = run_autofixers_on_code(`
 			<script>
-				const count = $state(0);
+				const count = ${init}(0);
 				function update_count() {
 					count.${method}(43);
 				}
 			</script>`);
 
-				expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
-				expect(content.suggestions).toContain(
-					`You are trying to update the stateful variable "count" using "${method}". stateful variables should be updated with a normal assignment/mutation, do not use methods to update them.`,
-				);
-			});
+					expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+					expect(content.suggestions).toContain(
+						`You are trying to update the stateful variable "count" using "${method}". stateful variables should be updated with a normal assignment/mutation, do not use methods to update them.`,
+					);
+				});
 
-			it(`should add suggestions when using .${method}() on a stateful variable with an array init`, () => {
-				const content = run_autofixers_on_code(`
+				it(`should add suggestions when using .${method}() on a stateful variable with an array init`, () => {
+					const content = run_autofixers_on_code(`
 			<script>
-				const count = $state([0]);
+				const count = ${init}([0]);
 				function update_count() {
 					count.${method}([1]);
 				}
 			</script>`);
 
-				expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
-				expect(content.suggestions).toContain(
-					`You are trying to update the stateful variable "count" using "${method}". stateful variables should be updated with a normal assignment/mutation, do not use methods to update them.`,
-				);
-			});
+					expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+					expect(content.suggestions).toContain(
+						`You are trying to update the stateful variable "count" using "${method}". stateful variables should be updated with a normal assignment/mutation, do not use methods to update them.`,
+					);
+				});
 
-			it(`should add suggestions when using .${method}() on a stateful variable with conditional if it's not sure if the method could actually be present on the variable ($state({}))`, () => {
-				const content = run_autofixers_on_code(`
+				it(`should add suggestions when using .${method}() on a stateful variable with conditional if it's not sure if the method could actually be present on the variable (${init}({}))`, () => {
+					const content = run_autofixers_on_code(`
 			<script>
-				const count = $state({ value: 0 });
+				const count = ${init}({ value: 0 });
 				function update_count() {
 					count.${method}({ value: 43 });
 				}
 			</script>`);
 
-				expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
-				expect(content.suggestions).toContain(
-					`You are trying to update the stateful variable "count" using "${method}". stateful variables should be updated with a normal assignment/mutation, do not use methods to update them. However I can't verify if "count" is a state variable of an object or a class with a "${method}" method on it. Please verify that before updating the code to use a normal assignment`,
-				);
-			});
+					expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+					expect(content.suggestions).toContain(
+						`You are trying to update the stateful variable "count" using "${method}". stateful variables should be updated with a normal assignment/mutation, do not use methods to update them. However I can't verify if "count" is a state variable of an object or a class with a "${method}" method on it. Please verify that before updating the code to use a normal assignment`,
+					);
+				});
 
-			it(`should add suggestions when using .${method}() on a stateful variable with conditional if it's not sure if the method could actually be present on the variable ($state(new Class()))`, () => {
-				const content = run_autofixers_on_code(`
+				it(`should add suggestions when using .${method}() on a stateful variable with conditional if it's not sure if the method could actually be present on the variable (${init}(new Class()))`, () => {
+					const content = run_autofixers_on_code(`
 			<script>
-				const count = $state(new Class());
+				const count = ${init}(new Class());
 				function update_count() {
 					count.${method}(new Class());
 				}
 			</script>`);
 
-				expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
-				expect(content.suggestions).toContain(
-					`You are trying to update the stateful variable "count" using "${method}". stateful variables should be updated with a normal assignment/mutation, do not use methods to update them. However I can't verify if "count" is a state variable of an object or a class with a "${method}" method on it. Please verify that before updating the code to use a normal assignment`,
-				);
-			});
+					expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+					expect(content.suggestions).toContain(
+						`You are trying to update the stateful variable "count" using "${method}". stateful variables should be updated with a normal assignment/mutation, do not use methods to update them. However I can't verify if "count" is a state variable of an object or a class with a "${method}" method on it. Please verify that before updating the code to use a normal assignment`,
+					);
+				});
 
-			it(`should add suggestions when using .${method}() on a stateful variable with conditional if it's not sure if the method could actually be present on the variable ($state(variable_name))`, () => {
-				const content = run_autofixers_on_code(`
+				it(`should add suggestions when using .${method}() on a stateful variable with conditional if it's not sure if the method could actually be present on the variable (${init}(variable_name))`, () => {
+					const content = run_autofixers_on_code(`
 			<script>
 				const { init } = $props();
-				const count = $state(init);
+				const count = ${init}(init);
 				function update_count() {
 					count.${method}(43);
 				}
 			</script>`);
 
-				expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
-				expect(content.suggestions).toContain(
-					`You are trying to update the stateful variable "count" using "${method}". stateful variables should be updated with a normal assignment/mutation, do not use methods to update them. However I can't verify if "count" is a state variable of an object or a class with a "${method}" method on it. Please verify that before updating the code to use a normal assignment`,
-				);
-			});
+					expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+					expect(content.suggestions).toContain(
+						`You are trying to update the stateful variable "count" using "${method}". stateful variables should be updated with a normal assignment/mutation, do not use methods to update them. However I can't verify if "count" is a state variable of an object or a class with a "${method}" method on it. Please verify that before updating the code to use a normal assignment`,
+					);
+				});
 
-			it(`should not add suggestions when using .${method} on a stateful variable if it's not a method call`, () => {
-				const content = run_autofixers_on_code(`
+				it(`should not add suggestions when using .${method} on a stateful variable if it's not a method call`, () => {
+					const content = run_autofixers_on_code(`
 			<script>
-				const count = $state({});
+				const count = ${init}({});
 				function update_count() {
 					console.log(count.${method});
 				}
 			</script>`);
 
-				expect(content.suggestions).not.toContain(
-					`You are trying to update the stateful variable "count" using "${method}". stateful variables should be updated with a normal assignment/mutation, do not use methods to update them. However I can't verify if "count" is a state variable of an object or a class with a "${method}" method on it. Please verify that before updating the code to use a normal assignment`,
-				);
-			});
-		},
-	);
+					expect(content.suggestions).not.toContain(
+						`You are trying to update the stateful variable "count" using "${method}". stateful variables should be updated with a normal assignment/mutation, do not use methods to update them. However I can't verify if "count" is a state variable of an object or a class with a "${method}" method on it. Please verify that before updating the code to use a normal assignment`,
+					);
+				});
+			},
+		);
 
-	describe.each([{ property: '$' }])(
-		'wrong_property_access_state property ($property)',
-		async ({ property }) => {
-			it(`should add suggestions when reading .${property} on a stateful variable with a literal init`, () => {
-				const content = run_autofixers_on_code(`
+		describe.each([{ property: '$' }])(
+			'wrong_property_access_state property ($property)',
+			async ({ property }) => {
+				it(`should add suggestions when reading .${property} on a stateful variable with a literal init`, () => {
+					const content = run_autofixers_on_code(`
 			<script>
-				const count = $state(0);
+				const count = ${init}(0);
 				function read_count() {
 					count.${property};
 				}
 			</script>`);
 
-				expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
-				expect(content.suggestions).toContain(
-					`You are trying to read the stateful variable "count" using "${property}". stateful variables should be read just by accessing them like normal variable, do not use properties to read them.`,
-				);
-			});
+					expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+					expect(content.suggestions).toContain(
+						`You are trying to read the stateful variable "count" using "${property}". stateful variables should be read just by accessing them like normal variable, do not use properties to read them.`,
+					);
+				});
 
-			it(`should add suggestions when reading .${property} on a stateful variable with an array init`, () => {
-				const content = run_autofixers_on_code(`
+				it(`should add suggestions when reading .${property} on a stateful variable with an array init`, () => {
+					const content = run_autofixers_on_code(`
 			<script>
-				const count = $state([1]);
+				const count = ${init}([1]);
 				function read_count() {
 					count.${property};
 				}
 			</script>`);
 
-				expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
-				expect(content.suggestions).toContain(
-					`You are trying to read the stateful variable "count" using "${property}". stateful variables should be read just by accessing them like normal variable, do not use properties to read them.`,
-				);
-			});
+					expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+					expect(content.suggestions).toContain(
+						`You are trying to read the stateful variable "count" using "${property}". stateful variables should be read just by accessing them like normal variable, do not use properties to read them.`,
+					);
+				});
 
-			it(`should add suggestions when reading .${property} on a stateful variable with conditional if it's not sure if the property could actually be present on the variable ($state({}))`, () => {
-				const content = run_autofixers_on_code(`
+				it(`should add suggestions when reading .${property} on a stateful variable with conditional if it's not sure if the property could actually be present on the variable (${init}({}))`, () => {
+					const content = run_autofixers_on_code(`
 			<script>
-				const count = $state({ value: 0 });
+				const count = ${init}({ value: 0 });
 				function read_count() {
 					count.${property};
 				}
 			</script>`);
 
-				expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
-				expect(content.suggestions).toContain(
-					`You are trying to read the stateful variable "count" using "${property}". stateful variables should be read just by accessing them like normal variable, do not use properties to read them. However I can't verify if "count" is a state variable of an object or a class with a "${property}" property on it. Please verify that before updating the code to use a normal access`,
-				);
-			});
+					expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+					expect(content.suggestions).toContain(
+						`You are trying to read the stateful variable "count" using "${property}". stateful variables should be read just by accessing them like normal variable, do not use properties to read them. However I can't verify if "count" is a state variable of an object or a class with a "${property}" property on it. Please verify that before updating the code to use a normal access`,
+					);
+				});
 
-			it(`should add suggestions when reading .${property} on a stateful variable with conditional if it's not sure if the property could actually be present on the variable ($state(new Class()))`, () => {
-				const content = run_autofixers_on_code(`
+				it(`should add suggestions when reading .${property} on a stateful variable with conditional if it's not sure if the property could actually be present on the variable (${init}(new Class()))`, () => {
+					const content = run_autofixers_on_code(`
 			<script>
-				const count = $state(new Class());
+				const count = ${init}(new Class());
 				function read_count() {
 					count.${property};
 				}
 			</script>`);
 
-				expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
-				expect(content.suggestions).toContain(
-					`You are trying to read the stateful variable "count" using "${property}". stateful variables should be read just by accessing them like normal variable, do not use properties to read them. However I can't verify if "count" is a state variable of an object or a class with a "${property}" property on it. Please verify that before updating the code to use a normal access`,
-				);
-			});
+					expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+					expect(content.suggestions).toContain(
+						`You are trying to read the stateful variable "count" using "${property}". stateful variables should be read just by accessing them like normal variable, do not use properties to read them. However I can't verify if "count" is a state variable of an object or a class with a "${property}" property on it. Please verify that before updating the code to use a normal access`,
+					);
+				});
 
-			it(`should add suggestions when reading .${property} on a stateful variable with conditional if it's not sure if the property could actually be present on the variable ($state(variable_name))`, () => {
-				const content = run_autofixers_on_code(`
+				it(`should add suggestions when reading .${property} on a stateful variable with conditional if it's not sure if the property could actually be present on the variable (${init}(variable_name))`, () => {
+					const content = run_autofixers_on_code(`
 			<script>
 				const { init } = $props();
-				const count = $state(init);
+				const count = ${init}(init);
 				function read_count() {
 					count.${property};
 				}
 			</script>`);
 
-				expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
-				expect(content.suggestions).toContain(
-					`You are trying to read the stateful variable "count" using "${property}". stateful variables should be read just by accessing them like normal variable, do not use properties to read them. However I can't verify if "count" is a state variable of an object or a class with a "${property}" property on it. Please verify that before updating the code to use a normal access`,
-				);
-			});
-		},
-	);
+					expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+					expect(content.suggestions).toContain(
+						`You are trying to read the stateful variable "count" using "${property}". stateful variables should be read just by accessing them like normal variable, do not use properties to read them. However I can't verify if "count" is a state variable of an object or a class with a "${property}" property on it. Please verify that before updating the code to use a normal access`,
+					);
+				});
+			},
+		);
+	});
 
 	describe('imported_runes', () => {
 		describe.each([{ source: 'svelte' }, { source: 'svelte/runes' }])(

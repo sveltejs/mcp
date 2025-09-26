@@ -22,7 +22,7 @@ export const wrong_property_access_state: Autofixer = {
 					const init = definition.node.init;
 					if (
 						init?.type === 'CallExpression' &&
-						state.parsed.is_rune(init, ['$state', '$state.raw'])
+						state.parsed.is_rune(init, ['$state', '$state.raw', '$derived', '$derived.by'])
 					) {
 						let suggestion = is_property
 							? `You are trying to read the stateful variable "${id.name}" using "${node.property.name}". stateful variables should be read just by accessing them like normal variable, do not use properties to read them.`
