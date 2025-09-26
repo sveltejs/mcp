@@ -5,8 +5,9 @@ export async function list_sections(server: SvelteMcp) {
 	const sections = await get_sections();
 
 	sections.forEach((section) => {
-		const resource_name = section.title.toLowerCase().replace(/\s+/g, '-');
-		const resource_uri = `svelte://docs/${resource_name}`;
+		const section_name = section.title.toLowerCase().replace(/\s+/g, '-');
+		const resource_name = `docs/svelte/${section_name}`;
+		const resource_uri = `svelte://docs/${section_name}`;
 
 		server.resource(
 			{
