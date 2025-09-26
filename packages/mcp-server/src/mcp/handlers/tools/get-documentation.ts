@@ -45,30 +45,31 @@ export function get_documentation(server: SvelteMcp) {
 			}
 
 			const availableSections = await getSections();
-			const results: string[] = [];
 
-			for (const requestedSection of sections) {
-				const matchedSection = availableSections.find(
-					s => s.title.toLowerCase() === requestedSection.toLowerCase() ||
-					     s.url === requestedSection
-				);
+			const results = await Promise.all(
+				sections.map(async (requestedSection) => {
+					const matchedSection = availableSections.find(
+						s => s.title.toLowerCase() === requestedSection.toLowerCase() ||
+						     s.url === requestedSection
+					);
 
-				if (matchedSection) {
-					try {
-						const response = await fetch(matchedSection.url);
-						if (response.ok) {
-							const content = await response.text();
-							results.push(`## ${matchedSection.title}\n\n${content}`);
-						} else {
-							results.push(`## ${matchedSection.title}\n\nError: Could not fetch documentation (HTTP ${response.status})`);
+					if (matchedSection) {
+						try {
+							const response = await fetch(matchedSection.url);
+							if (response.ok) {
+								const content = await response.text();
+								return `## ${matchedSection.title}\n\n${content}`;
+							} else {
+								return `## ${matchedSection.title}\n\nError: Could not fetch documentation (HTTP ${response.status})`;
+							}
+						} catch (error) {
+							return `## ${matchedSection.title}\n\nError: Failed to fetch documentation - ${error}`;
 						}
-					} catch (error) {
-						results.push(`## ${matchedSection.title}\n\nError: Failed to fetch documentation - ${error}`);
+					} else {
+						return `## ${requestedSection}\n\nError: Section not found. Available sections: ${availableSections.map(s => s.title).join(', ')}`;
 					}
-				} else {
-					results.push(`## ${requestedSection}\n\nError: Section not found. Available sections: ${availableSections.map(s => s.title).join(', ')}`);
-				}
-			}
+				})
+			);
 
 			return {
 				content: [
