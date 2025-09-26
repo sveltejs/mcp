@@ -3,7 +3,7 @@
 		"Svelte MCP": {
 			"type": "stdio",
 			"command": "node",
-			"args": ["dist/lib/stdio.js"]
+			"args": ["packages/mcp-stdio/dist/index.js"]
 		}
 	},
 	"inputs": []
