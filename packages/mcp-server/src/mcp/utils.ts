@@ -3,11 +3,11 @@ export async function fetch_with_timeout(
 	timeout_ms: number = 10000,
 ): Promise<Response> {
 	try {
-		const response = await fetch(url, { signal: AbortSignal.timeout(timeoutMs) });
+		const response = await fetch(url, { signal: AbortSignal.timeout(timeout_ms) });
 		return response;
 	} catch (error) {
 		if (error instanceof Error && error.name === 'AbortError') {
-			throw new Error(`Request timed out after ${timeoutMs}ms`);
+			throw new Error(`Request timed out after ${timeout_ms}ms`);
 		}
 		throw error;
 	}
