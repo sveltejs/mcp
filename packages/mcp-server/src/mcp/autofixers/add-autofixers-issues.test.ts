@@ -12,99 +12,106 @@ function run_autofixers_on_code(code: string, desired_svelte_version = 5) {
 
 describe('add_autofixers_issues', () => {
 	describe('assign_in_effect', () => {
-		it(`should add suggestions when assigning to a stateful variable inside an effect`, () => {
-			const content = run_autofixers_on_code(`
-			<script>
-				const count = $state(0);
-				$effect(() => {
-					count = 43;
-				});
-			</script>`);
+		describe.each([
+			{ init: '$state' },
+			{ init: '$state.raw' },
+			{ init: '$derived' },
+			{ init: '$derived.by' },
+		])('($init)', ({ init }) => {
+			it(`should add suggestions when assigning to a stateful variable inside an effect`, () => {
+				const content = run_autofixers_on_code(`
+				<script>
+					const count = ${init}(0);
+					$effect(() => {
+						count = 43;
+					});
+				</script>`);
 
-			expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
-			expect(content.suggestions).toContain(
-				'The stateful variable "count" is assigned inside an $effect which is generally consider a malpractice. Consider using $derived if possible.',
-			);
-		});
+				expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+				expect(content.suggestions).toContain(
+					'The stateful variable "count" is assigned inside an $effect which is generally consider a malpractice. Consider using $derived if possible.',
+				);
+			});
 
-		it(`should add a suggestion for each variable assigned within an effect`, () => {
-			const content = run_autofixers_on_code(`
-			<script>
-				const count = $state(0);
-				const count2 = $state(0);
-				$effect(() => {
-					count = 43;
-					count2 = 44;
-				});
-			</script>`);
+			it(`should add a suggestion for each variable assigned within an effect`, () => {
+				const content = run_autofixers_on_code(`
+				<script>
+					const count = $state(0);
+					const count2 = $state(0);
+					$effect(() => {
+						count = 43;
+						count2 = 44;
+					});
+				</script>`);
 
-			expect(content.suggestions.length).toBeGreaterThanOrEqual(2);
-			expect(content.suggestions).toContain(
-				'The stateful variable "count" is assigned inside an $effect which is generally consider a malpractice. Consider using $derived if possible.',
-			);
-			expect(content.suggestions).toContain(
-				'The stateful variable "count2" is assigned inside an $effect which is generally consider a malpractice. Consider using $derived if possible.',
-			);
-		});
-		it(`should not add a suggestion for variables that are not assigned within an effect`, () => {
-			const content = run_autofixers_on_code(`
-			<script>
-				const count = $state(0);
-			</script>
-			
-			<button onclick={() => count = 43}>Increment</button>
-			`);
-
-			expect(content.suggestions).not.toContain(
-				'The stateful variable "count" is assigned inside an $effect which is generally consider a malpractice. Consider using $derived if possible.',
-			);
-		});
-
-		it("should not add a suggestions for variables that are assigned within an effect but aren't stateful", () => {
-			const content = run_autofixers_on_code(`
-			<script>
-				const count = 0;
+				expect(content.suggestions.length).toBeGreaterThanOrEqual(2);
+				expect(content.suggestions).toContain(
+					'The stateful variable "count" is assigned inside an $effect which is generally consider a malpractice. Consider using $derived if possible.',
+				);
+				expect(content.suggestions).toContain(
+					'The stateful variable "count2" is assigned inside an $effect which is generally consider a malpractice. Consider using $derived if possible.',
+				);
+			});
+			it(`should not add a suggestion for variables that are not assigned within an effect`, () => {
+				const content = run_autofixers_on_code(`
+				<script>
+					const count = ${init}(0);
+				</script>
 				
-				$effect(() => {
-					count = 43;
-				});
-			</script>`);
+				<button onclick={() => count = 43}>Increment</button>
+				`);
 
-			expect(content.suggestions).not.toContain(
-				'The stateful variable "count" is assigned inside an $effect which is generally consider a malpractice. Consider using $derived if possible.',
-			);
-		});
+				expect(content.suggestions).not.toContain(
+					'The stateful variable "count" is assigned inside an $effect which is generally consider a malpractice. Consider using $derived if possible.',
+				);
+			});
 
-		it(`should add a suggestion for variables that are assigned within an effect with an update`, () => {
-			const content = run_autofixers_on_code(`
-			<script>
-				let count = $state(0);
-				
-				$effect(() => {
-					count++;
-				});
-			</script>
-			`);
+			it("should not add a suggestions for variables that are assigned within an effect but aren't stateful", () => {
+				const content = run_autofixers_on_code(`
+				<script>
+					const count = 0;
+					
+					$effect(() => {
+						count = 43;
+					});
+				</script>`);
 
-			expect(content.suggestions).toContain(
-				'The stateful variable "count" is assigned inside an $effect which is generally consider a malpractice. Consider using $derived if possible.',
-			);
-		});
+				expect(content.suggestions).not.toContain(
+					'The stateful variable "count" is assigned inside an $effect which is generally consider a malpractice. Consider using $derived if possible.',
+				);
+			});
 
-		it(`should add a suggestion for variables that are mutated within an effect`, () => {
-			const content = run_autofixers_on_code(`
-			<script>
-				let count = $state({ value: 0 });
-				
-				$effect(() => {
-					count.value = 42;
-				});
-			</script>
-			`);
+			it(`should add a suggestion for variables that are assigned within an effect with an update`, () => {
+				const content = run_autofixers_on_code(`
+				<script>
+					let count = ${init}(0);
+					
+					$effect(() => {
+						count++;
+					});
+				</script>
+				`);
 
-			expect(content.suggestions).toContain(
-				'The stateful variable "count" is assigned inside an $effect which is generally consider a malpractice. Consider using $derived if possible.',
-			);
+				expect(content.suggestions).toContain(
+					'The stateful variable "count" is assigned inside an $effect which is generally consider a malpractice. Consider using $derived if possible.',
+				);
+			});
+
+			it(`should add a suggestion for variables that are mutated within an effect`, () => {
+				const content = run_autofixers_on_code(`
+				<script>
+					let count = ${init}({ value: 0 });
+					
+					$effect(() => {
+						count.value = 42;
+					});
+				</script>
+				`);
+
+				expect(content.suggestions).toContain(
+					'The stateful variable "count" is assigned inside an $effect which is generally consider a malpractice. Consider using $derived if possible.',
+				);
+			});
 		});
 	});
 

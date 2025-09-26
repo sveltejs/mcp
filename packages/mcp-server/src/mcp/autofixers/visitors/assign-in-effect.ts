@@ -39,7 +39,7 @@ function visitor(
 				const init = definition.node.init;
 				if (
 					init?.type === 'CallExpression' &&
-					state.parsed.is_rune(init, ['$state', '$state.raw'])
+					state.parsed.is_rune(init, ['$state', '$state.raw', '$derived', '$derived.by'])
 				) {
 					state.output.suggestions.push(
 						`The stateful variable "${id.name}" is assigned inside an $effect which is generally consider a malpractice. Consider using $derived if possible.`,
