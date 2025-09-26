@@ -66,7 +66,19 @@ export function get_documentation(server: SvelteMcp) {
 							return `## ${matchedSection.title}\n\nError: Failed to fetch documentation - ${error}`;
 						}
 					} else {
-						return `## ${requestedSection}\n\nError: Section not found. Available sections: ${availableSections.map(s => s.title).join(', ')}`;
+						const formattedSections = availableSections
+							.map(
+								(section) =>
+									`* title: ${section.title}, use_cases: ${section.use_cases}, path: ${section.url}`,
+							)
+							.join('\n');
+
+						const introText = 'List of available Svelte documentation sections and its inteneded uses:';
+
+						const outroText =
+							'Use the title or path with the get-documentation tool to get more details about a specific section.';
+
+						return `## ${requestedSection}\n\nError: Section not found.\n\n${introText}\n\n${formattedSections}\n\n${outroText}`;
 					}
 				})
 			);
