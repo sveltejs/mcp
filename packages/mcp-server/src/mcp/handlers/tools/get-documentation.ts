@@ -49,8 +49,9 @@ export function get_documentation(server: SvelteMcp) {
 			const results = await Promise.all(
 				sections.map(async (requestedSection) => {
 					const matchedSection = availableSections.find(
-						s => s.title.toLowerCase() === requestedSection.toLowerCase() ||
-						     s.url === requestedSection
+						(s) =>
+							s.title.toLowerCase() === requestedSection.toLowerCase() ||
+							s.url === requestedSection,
 					);
 
 					if (matchedSection) {
@@ -60,19 +61,28 @@ export function get_documentation(server: SvelteMcp) {
 								const content = await response.text();
 								return { success: true, content: `## ${matchedSection.title}\n\n${content}` };
 							} else {
-								return { success: false, content: `## ${matchedSection.title}\n\nError: Could not fetch documentation (HTTP ${response.status})` };
+								return {
+									success: false,
+									content: `## ${matchedSection.title}\n\nError: Could not fetch documentation (HTTP ${response.status})`,
+								};
 							}
 						} catch (error) {
-							return { success: false, content: `## ${matchedSection.title}\n\nError: Failed to fetch documentation - ${error}` };
+							return {
+								success: false,
+								content: `## ${matchedSection.title}\n\nError: Failed to fetch documentation - ${error}`,
+							};
 						}
 					} else {
-						return { success: false, content: `## ${requestedSection}\n\nError: Section not found.` };
+						return {
+							success: false,
+							content: `## ${requestedSection}\n\nError: Section not found.`,
+						};
 					}
-				})
+				}),
 			);
 
-			const hasAnySuccess = results.some(result => result.success);
-			let finalText = results.map(r => r.content).join('\n\n---\n\n');
+			const hasAnySuccess = results.some((result) => result.success);
+			let finalText = results.map((r) => r.content).join('\n\n---\n\n');
 
 			if (!hasAnySuccess) {
 				const formattedSections = availableSections
