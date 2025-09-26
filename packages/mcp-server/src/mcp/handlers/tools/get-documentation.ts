@@ -1,6 +1,6 @@
 import type { SvelteMcp } from '../../index.js';
 import * as v from 'valibot';
-import { getSections, fetchWithTimeout } from '../../utils.js';
+import { get_sections, fetch_with_timeout } from '../../utils.js';
 
 export function get_documentation(server: SvelteMcp) {
 	server.tool(
@@ -44,67 +44,68 @@ export function get_documentation(server: SvelteMcp) {
 				sections = [];
 			}
 
-			const availableSections = await getSections();
+			const available_sections = await get_sections();
 
 			const results = await Promise.all(
-				sections.map(async (requestedSection) => {
-					const matchedSection = availableSections.find(
+				sections.map(async (requested_section) => {
+					const matched_section = available_sections.find(
 						(s) =>
-							s.title.toLowerCase() === requestedSection.toLowerCase() ||
-							s.url === requestedSection,
+							s.title.toLowerCase() === requested_section.toLowerCase() ||
+							s.url === requested_section,
 					);
 
-					if (matchedSection) {
+					if (matched_section) {
 						try {
-							const response = await fetchWithTimeout(matchedSection.url);
+							const response = await fetch_with_timeout(matched_section.url);
 							if (response.ok) {
 								const content = await response.text();
-								return { success: true, content: `## ${matchedSection.title}\n\n${content}` };
+								return { success: true, content: `## ${matched_section.title}\n\n${content}` };
 							} else {
 								return {
 									success: false,
-									content: `## ${matchedSection.title}\n\nError: Could not fetch documentation (HTTP ${response.status})`,
+									content: `## ${matched_section.title}\n\nError: Could not fetch documentation (HTTP ${response.status})`,
 								};
 							}
 						} catch (error) {
 							return {
 								success: false,
-								content: `## ${matchedSection.title}\n\nError: Failed to fetch documentation - ${error}`,
+								content: `## ${matched_section.title}\n\nError: Failed to fetch documentation - ${error}`,
 							};
 						}
 					} else {
 						return {
 							success: false,
-							content: `## ${requestedSection}\n\nError: Section not found.`,
+							content: `## ${requested_section}\n\nError: Section not found.`,
 						};
 					}
 				}),
 			);
 
-			const hasAnySuccess = results.some((result) => result.success);
-			let finalText = results.map((r) => r.content).join('\n\n---\n\n');
+			const has_any_success = results.some((result) => result.success);
+			let final_text = results.map((r) => r.content).join('\n\n---\n\n');
 
-			if (!hasAnySuccess) {
-				const formattedSections = availableSections
+			if (!has_any_success) {
+				const formatted_sections = available_sections
 					.map(
 						(section) =>
 							`* title: ${section.title}, use_cases: ${section.use_cases}, path: ${section.url}`,
 					)
 					.join('\n');
 
-				const introText = 'List of available Svelte documentation sections and its inteneded uses:';
+				const intro_text =
+					'List of available Svelte documentation sections and its inteneded uses:';
 
-				const outroText =
+				const outro_text =
 					'Use the title or path with the get-documentation tool to get more details about a specific section.';
 
-				finalText += `\n\n---\n\n${introText}\n\n${formattedSections}\n\n${outroText}`;
+				final_text += `\n\n---\n\n${intro_text}\n\n${formatted_sections}\n\n${outro_text}`;
 			}
 
 			return {
 				content: [
 					{
 						type: 'text',
-						text: finalText,
+						text: final_text,
 					},
 				],
 			};
