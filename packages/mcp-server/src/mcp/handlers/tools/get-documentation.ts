@@ -58,36 +58,43 @@ export function get_documentation(server: SvelteMcp) {
 							const response = await fetchWithTimeout(matchedSection.url);
 							if (response.ok) {
 								const content = await response.text();
-								return `## ${matchedSection.title}\n\n${content}`;
+								return { success: true, content: `## ${matchedSection.title}\n\n${content}` };
 							} else {
-								return `## ${matchedSection.title}\n\nError: Could not fetch documentation (HTTP ${response.status})`;
+								return { success: false, content: `## ${matchedSection.title}\n\nError: Could not fetch documentation (HTTP ${response.status})` };
 							}
 						} catch (error) {
-							return `## ${matchedSection.title}\n\nError: Failed to fetch documentation - ${error}`;
+							return { success: false, content: `## ${matchedSection.title}\n\nError: Failed to fetch documentation - ${error}` };
 						}
 					} else {
-						const formattedSections = availableSections
-							.map(
-								(section) =>
-									`* title: ${section.title}, use_cases: ${section.use_cases}, path: ${section.url}`,
-							)
-							.join('\n');
-
-						const introText = 'List of available Svelte documentation sections and its inteneded uses:';
-
-						const outroText =
-							'Use the title or path with the get-documentation tool to get more details about a specific section.';
-
-						return `## ${requestedSection}\n\nError: Section not found.\n\n${introText}\n\n${formattedSections}\n\n${outroText}`;
+						return { success: false, content: `## ${requestedSection}\n\nError: Section not found.` };
 					}
 				})
 			);
+
+			const hasAnySuccess = results.some(result => result.success);
+			let finalText = results.map(r => r.content).join('\n\n---\n\n');
+
+			if (!hasAnySuccess) {
+				const formattedSections = availableSections
+					.map(
+						(section) =>
+							`* title: ${section.title}, use_cases: ${section.use_cases}, path: ${section.url}`,
+					)
+					.join('\n');
+
+				const introText = 'List of available Svelte documentation sections and its inteneded uses:';
+
+				const outroText =
+					'Use the title or path with the get-documentation tool to get more details about a specific section.';
+
+				finalText += `\n\n---\n\n${introText}\n\n${formattedSections}\n\n${outroText}`;
+			}
 
 			return {
 				content: [
 					{
 						type: 'text',
-						text: results.join('\n\n---\n\n'),
+						text: finalText,
 					},
 				],
 			};
