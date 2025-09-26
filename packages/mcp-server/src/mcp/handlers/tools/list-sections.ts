@@ -12,14 +12,22 @@ export function list_sections(server: SvelteMcp) {
 		async () => {
 			const sections = await getSections();
 			const formattedSections = sections
-				.map(section => `* title: ${section.title}, path: ${section.url}`)
+				.map(
+					(section) =>
+						`* title: ${section.title}, use cases: ${section.use_cases}, path: ${section.url}`,
+				)
 				.join('\n');
+
+			const introText = 'List of available Svelte documentation sections and its inteneded uses:';
+
+			const outroText =
+				'Use the title or path with the get-documentation tool to get more details about a specific section.';
 
 			return {
 				content: [
 					{
 						type: 'text',
-						text: formattedSections,
+						text: `${introText}\n\n${formattedSections}\n\n${outroText}`,
 					},
 				],
 			};
