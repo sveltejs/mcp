@@ -1,6 +1,7 @@
 import type { SvelteMcp } from '../../index.js';
 import * as v from 'valibot';
 import { get_sections, fetch_with_timeout } from '../../utils.js';
+import { SECTIONS_LIST_INTRO, SECTIONS_LIST_OUTRO } from './prompts.js';
 
 export function get_documentation(server: SvelteMcp) {
 	server.tool(
@@ -102,13 +103,7 @@ export function get_documentation(server: SvelteMcp) {
 					)
 					.join('\n');
 
-				const intro_text =
-					'List of available Svelte documentation sections and its inteneded uses:';
-
-				const outro_text =
-					'Use the title or path with the get-documentation tool to get more details about a specific section.';
-
-				final_text += `\n\n---\n\n${intro_text}\n\n${formatted_sections}\n\n${outro_text}`;
+				final_text += `\n\n---\n\n${SECTIONS_LIST_INTRO}\n\n${formatted_sections}\n\n${SECTIONS_LIST_OUTRO}`;
 			}
 
 			return {

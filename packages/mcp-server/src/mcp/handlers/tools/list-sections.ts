@@ -1,5 +1,6 @@
 import type { SvelteMcp } from '../../index.js';
 import { get_sections } from '../../utils.js';
+import { SECTIONS_LIST_INTRO, SECTIONS_LIST_OUTRO } from './prompts.js';
 
 export function list_sections(server: SvelteMcp) {
 	server.tool(
@@ -18,16 +19,11 @@ export function list_sections(server: SvelteMcp) {
 				)
 				.join('\n');
 
-			const intro_text = 'List of available Svelte documentation sections and its inteneded uses:';
-
-			const outro_text =
-				'Use the title or path with the get-documentation tool to get more details about a specific section.';
-
 			return {
 				content: [
 					{
 						type: 'text',
-						text: `${intro_text}\n\n${formatted_sections}\n\n${outro_text}`,
+						text: `${SECTIONS_LIST_INTRO}\n\n${formatted_sections}\n\n${SECTIONS_LIST_OUTRO}`,
 					},
 				],
 			};
