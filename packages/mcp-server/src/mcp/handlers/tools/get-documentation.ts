@@ -1,5 +1,6 @@
 import type { SvelteMcp } from '../../index.js';
 import * as v from 'valibot';
+import { getSections } from '../../utils.js';
 
 export function get_documentation(server: SvelteMcp) {
 	server.tool(
@@ -17,7 +18,7 @@ export function get_documentation(server: SvelteMcp) {
 				),
 			}),
 		},
-		({ section }) => {
+		async ({ section }) => {
 			let sections: string[];
 
 			if (Array.isArray(section)) {
@@ -43,13 +44,37 @@ export function get_documentation(server: SvelteMcp) {
 				sections = [];
 			}
 
-			const sections_list = sections.length > 0 ? sections.join(', ') : 'no sections';
+			const availableSections = await getSections();
+			const results: string[] = [];
+
+			for (const requestedSection of sections) {
+				const matchedSection = availableSections.find(
+					s => s.title.toLowerCase() === requestedSection.toLowerCase() ||
+					     s.url === requestedSection
+				);
+
+				if (matchedSection) {
+					try {
+						const response = await fetch(matchedSection.url);
+						if (response.ok) {
+							const content = await response.text();
+							results.push(`## ${matchedSection.title}\n\n${content}`);
+						} else {
+							results.push(`## ${matchedSection.title}\n\nError: Could not fetch documentation (HTTP ${response.status})`);
+						}
+					} catch (error) {
+						results.push(`## ${matchedSection.title}\n\nError: Failed to fetch documentation - ${error}`);
+					}
+				} else {
+					results.push(`## ${requestedSection}\n\nError: Section not found. Available sections: ${availableSections.map(s => s.title).join(', ')}`);
+				}
+			}
 
 			return {
 				content: [
 					{
 						type: 'text',
-						text: `called for sections: ${sections_list}`,
+						text: results.join('\n\n---\n\n'),
 					},
 				],
 			};
