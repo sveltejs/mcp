@@ -1,21 +1,24 @@
-export async function fetchWithTimeout(url: string, timeoutMs: number = 10000): Promise<Response> {
+export async function fetch_with_timeout(
+	url: string,
+	timeout_ms: number = 10000,
+): Promise<Response> {
 	const controller = new AbortController();
-	const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+	const timeout_id = setTimeout(() => controller.abort(), timeout_ms);
 
 	try {
 		const response = await fetch(url, { signal: controller.signal });
-		clearTimeout(timeoutId);
+		clearTimeout(timeout_id);
 		return response;
 	} catch (error) {
-		clearTimeout(timeoutId);
+		clearTimeout(timeout_id);
 		if (error instanceof Error && error.name === 'AbortError') {
-			throw new Error(`Request timed out after ${timeoutMs}ms`);
+			throw new Error(`Request timed out after ${timeout_ms}ms`);
 		}
 		throw error;
 	}
 }
 
-export async function getSections() {
+export async function get_sections() {
 	return [
 		{
 			title: 'Overview',
