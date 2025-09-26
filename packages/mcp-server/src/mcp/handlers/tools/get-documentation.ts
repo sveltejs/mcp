@@ -46,7 +46,7 @@ export function get_documentation(server: SvelteMcp) {
 
 			const available_sections = await get_sections();
 
-			const results = await Promise.all(
+			const settled_results = await Promise.allSettled(
 				sections.map(async (requested_section) => {
 					const matched_section = available_sections.find(
 						(s) =>
@@ -80,6 +80,17 @@ export function get_documentation(server: SvelteMcp) {
 					}
 				}),
 			);
+
+			const results = settled_results.map((result) => {
+				if (result.status === 'fulfilled') {
+					return result.value;
+				} else {
+					return {
+						success: false,
+						content: `Error: Couldn't fetch - ${result.reason}`,
+					};
+				}
+			});
 
 			const has_any_success = results.some((result) => result.success);
 			let final_text = results.map((r) => r.content).join('\n\n---\n\n');
