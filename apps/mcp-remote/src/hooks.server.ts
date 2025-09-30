@@ -1,9 +1,10 @@
 import { http_transport } from '$lib/mcp/index.js';
-import { db } from '$lib/server/db/index.js';
+import { db, entities } from '$lib/server/db/index.js';
 
 export async function handle({ event, resolve }) {
 	const mcp_response = await http_transport.respond(event.request, {
 		db,
+		entities,
 	});
 	// we are deploying on vercel the SSE connection will timeout after 5 minutes...for
 	// the moment we are not sending back any notifications (logs, or list changed notifications)

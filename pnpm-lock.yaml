@@ -196,6 +196,9 @@ importers:
       '@typescript-eslint/types':
         specifier: ^8.44.0
         version: 8.44.1
+      remult:
+        specifier: 3.3.0-next.1
+        version: 3.3.0-next.1
 
   packages/mcp-stdio:
     dependencies:
