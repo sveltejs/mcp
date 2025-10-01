@@ -13,7 +13,8 @@
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
 		"test:watch": "npm run test:unit -- --watch",
-		"inspect": "pnpm mcp-inspector"
+		"inspect": "pnpm mcp-inspector",
+		"generate-summaries": "pnpm --filter @sveltejs/mcp-server run generate-summaries"
 	},
 	"keywords": [
 		"svelte",

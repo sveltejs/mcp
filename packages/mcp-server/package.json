@@ -10,7 +10,8 @@
 	"packageManager": "pnpm@10.15.1",
 	"type": "module",
 	"scripts": {
-		"test": "vitest"
+		"test": "vitest",
+		"generate-summaries": "tsx scripts/generate-summaries.ts"
 	},
 	"exports": {
 		".": "./src/index.ts"
@@ -19,6 +20,7 @@
 		"drizzle-orm": "^0.40.0"
 	},
 	"dependencies": {
+		"@anthropic-ai/sdk": "^0.65.0",
 		"@sveltejs/mcp-schema": "workspace:^",
 		"@tmcp/adapter-valibot": "^0.1.4",
 		"@typescript-eslint/parser": "^8.44.0",
@@ -36,6 +38,7 @@
 		"@sveltejs/kit": "^2.42.2",
 		"@types/eslint-scope": "^8.3.2",
 		"@types/estree": "^1.0.8",
-		"@typescript-eslint/types": "^8.44.0"
+		"@typescript-eslint/types": "^8.44.0",
+		"tsx": "^4.19.2"
 	}
 }
