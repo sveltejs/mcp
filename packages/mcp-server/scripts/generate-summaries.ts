@@ -39,14 +39,7 @@ interface Section {
 	url: string;
 }
 
-interface SummaryResult {
-	index: number;
-	path: string;
-	summary: string;
-	error?: string;
-}
-
-async function fetchSectionContent(url: string): Promise<string> {
+async function fetch_section_content(url: string): Promise<string> {
 	const response = await fetch(url, { signal: AbortSignal.timeout(30000) });
 	if (!response.ok) {
 		throw new Error(`Failed to fetch ${url}: ${response.status} ${response.statusText}`);
@@ -58,8 +51,8 @@ async function main() {
 	console.log('🚀 Starting summary generation...');
 
 	// Check for API key
-	const apiKey = process.env.ANTHROPIC_API_KEY;
-	if (!apiKey) {
+	const api_key = process.env.ANTHROPIC_API_KEY;
+	if (!api_key) {
 		console.error('❌ Error: ANTHROPIC_API_KEY environment variable is required');
 		console.error('   Please set it in packages/mcp-server/.env file or export it:');
 		console.error('   export ANTHROPIC_API_KEY=your_api_key_here');
@@ -73,7 +66,7 @@ async function main() {
 
 	// Fetch content for each section
 	console.log('📥 Downloading section content...');
-	const sectionsWithContent: Array<{
+	const sections_with_content: Array<{
 		section: Section;
 		content: string;
 		index: number;
@@ -83,8 +76,8 @@ async function main() {
 		const section = sections[i]!;
 		try {
 			console.log(`  Fetching ${i + 1}/${sections.length}: ${section.title}`);
-			const content = await fetchSectionContent(section.url);
-			sectionsWithContent.push({
+			const content = await fetch_section_content(section.url);
+			sections_with_content.push({
 				section,
 				content,
 				index: i,
@@ -95,20 +88,20 @@ async function main() {
 		}
 	}
 
-	console.log(`✅ Successfully downloaded ${sectionsWithContent.length} sections`);
+	console.log(`✅ Successfully downloaded ${sections_with_content.length} sections`);
 
-	if (sectionsWithContent.length === 0) {
+	if (sections_with_content.length === 0) {
 		console.error('❌ No sections were successfully downloaded');
 		process.exit(1);
 	}
 
 	// Initialize Anthropic client
 	console.log('🤖 Initializing Anthropic API...');
-	const anthropic = new AnthropicProvider('claude-sonnet-4-5', apiKey);
+	const anthropic = new AnthropicProvider('claude-sonnet-4-5', api_key);
 
 	// Prepare batch requests
 	console.log('📦 Preparing batch requests...');
-	const batchRequests: AnthropicBatchRequest[] = sectionsWithContent.map(({ content, index }) => ({
+	const batch_requests: AnthropicBatchRequest[] = sections_with_content.map(({ content, index }) => ({
 		custom_id: `section-${index}`,
 		params: {
 			model: anthropic.get_model_identifier(),
@@ -125,29 +118,29 @@ async function main() {
 
 	// Create and process batch
 	console.log('🚀 Creating batch job...');
-	const batchResponse = await anthropic.create_batch(batchRequests);
-	console.log(`✅ Batch created with ID: ${batchResponse.id}`);
+	const batch_response = await anthropic.create_batch(batch_requests);
+	console.log(`✅ Batch created with ID: ${batch_response.id}`);
 
 	// Poll for completion
 	console.log('⏳ Waiting for batch to complete...');
-	let batchStatus = await anthropic.get_batch_status(batchResponse.id);
+	let batch_status = await anthropic.get_batch_status(batch_response.id);
 
-	while (batchStatus.processing_status === 'in_progress') {
-		const { succeeded, processing, errored } = batchStatus.request_counts;
+	while (batch_status.processing_status === 'in_progress') {
+		const { succeeded, processing, errored } = batch_status.request_counts;
 		console.log(`  Progress: ${succeeded} succeeded, ${processing} processing, ${errored} errored`);
 		await new Promise((resolve) => setTimeout(resolve, 5000));
-		batchStatus = await anthropic.get_batch_status(batchResponse.id);
+		batch_status = await anthropic.get_batch_status(batch_response.id);
 	}
 
 	console.log('✅ Batch processing completed!');
 
 	// Get results
-	if (!batchStatus.results_url) {
+	if (!batch_status.results_url) {
 		throw new Error('Batch completed but no results URL available');
 	}
 
 	console.log('📥 Downloading results...');
-	const results = await anthropic.get_batch_results(batchStatus.results_url);
+	const results = await anthropic.get_batch_results(batch_status.results_url);
 
 	// Process results
 	console.log('📊 Processing results...');
@@ -156,37 +149,37 @@ async function main() {
 
 	for (const result of results) {
 		const index = parseInt(result.custom_id.split('-')[1] ?? '0');
-		const sectionData = sectionsWithContent.find((s) => s.index === index);
+		const section_data = sections_with_content.find((s) => s.index === index);
 
-		if (!sectionData) {
+		if (!section_data) {
 			console.warn(`⚠️  Could not find section for index ${index}`);
 			continue;
 		}
 
-		const { section } = sectionData;
+		const { section } = section_data;
 
 		if (result.result.type !== 'succeeded' || !result.result.message) {
-			const errorMsg = result.result.error?.message || 'Failed or no message';
-			console.error(`  ❌ ${section.title}: ${errorMsg}`);
-			errors.push({ section: section.title, error: errorMsg });
+			const error_msg = result.result.error?.message || 'Failed or no message';
+			console.error(`  ❌ ${section.title}: ${error_msg}`);
+			errors.push({ section: section.title, error: error_msg });
 			continue;
 		}
 
-		const outputContent = result.result.message.content[0]?.text;
-		if (outputContent) {
-			summaries[section.slug] = outputContent.trim();
+		const output_content = result.result.message.content[0]?.text;
+		if (output_content) {
+			summaries[section.slug] = output_content.trim();
 			console.log(`  ✅ ${section.title}`);
 		}
 	}
 
 	// Write output to JSON file
 	console.log('💾 Writing results to file...');
-	const outputPath = path.join(process.cwd(), 'packages/mcp-server/src/summary.json');
-	const outputDir = path.dirname(outputPath);
+	const output_path = path.join(process.cwd(), 'packages/mcp-server/src/summary.json');
+	const output_dir = path.dirname(output_path);
 
-	await mkdir(outputDir, { recursive: true });
+	await mkdir(output_dir, { recursive: true });
 	await writeFile(
-		outputPath,
+		output_path,
 		JSON.stringify(
 			{
 				generated_at: new Date().toISOString(),
@@ -208,7 +201,7 @@ async function main() {
 	console.log(`  Total sections: ${sections.length}`);
 	console.log(`  Successfully summarized: ${Object.keys(summaries).length}`);
 	console.log(`  Failed: ${errors.length}`);
-	console.log(`\n✅ Results written to: ${outputPath}`);
+	console.log(`\n✅ Results written to: ${output_path}`);
 
 	if (errors.length > 0) {
 		console.log('\n⚠️  Some sections failed to summarize:');
