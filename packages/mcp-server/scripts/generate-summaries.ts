@@ -1,8 +1,12 @@
 #!/usr/bin/env node
+import 'dotenv/config';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import { get_sections } from '../mcp/utils.js';
-import { AnthropicProvider, type AnthropicBatchRequest } from '../lib/anthropic.js';
+import {
+	AnthropicProvider,
+	type AnthropicBatchRequest,
+} from '../lib/anthropic.js';
 
 const SUMMARY_PROMPT = `
 You are tasked with creating very short summaries of Svelte 5 and SvelteKit documentation pages.
@@ -60,6 +64,8 @@ async function main() {
 	const apiKey = process.env.ANTHROPIC_API_KEY;
 	if (!apiKey) {
 		console.error('❌ Error: ANTHROPIC_API_KEY environment variable is required');
+		console.error('   Please set it in packages/mcp-server/.env file or export it:');
+		console.error('   export ANTHROPIC_API_KEY=your_api_key_here');
 		process.exit(1);
 	}
 
@@ -105,20 +111,22 @@ async function main() {
 
 	// Prepare batch requests
 	console.log('📦 Preparing batch requests...');
-	const batchRequests: AnthropicBatchRequest[] = sectionsWithContent.map(({ content, index }) => ({
-		custom_id: `section-${index}`,
-		params: {
-			model: anthropic.getModelIdentifier(),
-			max_tokens: 200,
-			messages: [
-				{
-					role: 'user',
-					content: SUMMARY_PROMPT + content,
-				},
-			],
-			temperature: 0,
-		},
-	}));
+	const batchRequests: AnthropicBatchRequest[] = sectionsWithContent.map(
+		({ content, index }) => ({
+			custom_id: `section-${index}`,
+			params: {
+				model: anthropic.getModelIdentifier(),
+				max_tokens: 200,
+				messages: [
+					{
+						role: 'user',
+						content: SUMMARY_PROMPT + content,
+					},
+				],
+				temperature: 0,
+			},
+		}),
+	);
 
 	// Create and process batch
 	console.log('🚀 Creating batch job...');
@@ -131,7 +139,9 @@ async function main() {
 
 	while (batchStatus.processing_status === 'in_progress') {
 		const { succeeded, processing, errored } = batchStatus.request_counts;
-		console.log(`  Progress: ${succeeded} succeeded, ${processing} processing, ${errored} errored`);
+		console.log(
+			`  Progress: ${succeeded} succeeded, ${processing} processing, ${errored} errored`,
+		);
 		await new Promise((resolve) => setTimeout(resolve, 5000));
 		batchStatus = await anthropic.getBatchStatus(batchResponse.id);
 	}
