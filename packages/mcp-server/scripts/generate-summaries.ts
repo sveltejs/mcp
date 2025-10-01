@@ -3,10 +3,7 @@ import 'dotenv/config';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import { get_sections } from '../src/mcp/utils.js';
-import {
-	AnthropicProvider,
-	type AnthropicBatchRequest,
-} from '../src/lib/anthropic.js';
+import { AnthropicProvider, type AnthropicBatchRequest } from '../src/lib/anthropic.js';
 
 const SUMMARY_PROMPT = `
 You are tasked with creating very short summaries of Svelte 5 and SvelteKit documentation pages.
@@ -107,26 +104,24 @@ async function main() {
 
 	// Initialize Anthropic client
 	console.log('🤖 Initializing Anthropic API...');
-	const anthropic = new AnthropicProvider('claude-3-5-sonnet-20241022', apiKey);
+	const anthropic = new AnthropicProvider('claude-sonnet-4-5', apiKey);
 
 	// Prepare batch requests
 	console.log('📦 Preparing batch requests...');
-	const batchRequests: AnthropicBatchRequest[] = sectionsWithContent.map(
-		({ content, index }) => ({
-			custom_id: `section-${index}`,
-			params: {
-				model: anthropic.get_model_identifier(),
-				max_tokens: 200,
-				messages: [
-					{
-						role: 'user',
-						content: SUMMARY_PROMPT + content,
-					},
-				],
-				temperature: 0,
-			},
-		}),
-	);
+	const batchRequests: AnthropicBatchRequest[] = sectionsWithContent.map(({ content, index }) => ({
+		custom_id: `section-${index}`,
+		params: {
+			model: anthropic.get_model_identifier(),
+			max_tokens: 200,
+			messages: [
+				{
+					role: 'user',
+					content: SUMMARY_PROMPT + content,
+				},
+			],
+			temperature: 0,
+		},
+	}));
 
 	// Create and process batch
 	console.log('🚀 Creating batch job...');
@@ -139,9 +134,7 @@ async function main() {
 
 	while (batchStatus.processing_status === 'in_progress') {
 		const { succeeded, processing, errored } = batchStatus.request_counts;
-		console.log(
-			`  Progress: ${succeeded} succeeded, ${processing} processing, ${errored} errored`,
-		);
+		console.log(`  Progress: ${succeeded} succeeded, ${processing} processing, ${errored} errored`);
 		await new Promise((resolve) => setTimeout(resolve, 5000));
 		batchStatus = await anthropic.get_batch_status(batchResponse.id);
 	}
