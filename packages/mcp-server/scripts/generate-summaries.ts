@@ -2,8 +2,12 @@
 import 'dotenv/config';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { get_sections } from '../src/mcp/utils.js';
 import { AnthropicProvider, type AnthropicBatchRequest } from '../src/lib/anthropic.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const SUMMARY_PROMPT = `
 You are tasked with creating very short summaries of Svelte 5 and SvelteKit documentation pages.
@@ -181,7 +185,7 @@ async function main() {
 
 	// Write output to JSON file
 	console.log('💾 Writing results to file...');
-	const output_path = path.join(process.cwd(), 'packages/mcp-server/src/summary.json');
+	const output_path = path.join(__dirname, '../src/summary.json');
 	const output_dir = path.dirname(output_path);
 
 	await mkdir(output_dir, { recursive: true });
