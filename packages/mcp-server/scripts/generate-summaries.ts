@@ -2,11 +2,11 @@
 import 'dotenv/config';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
-import { get_sections } from '../mcp/utils.js';
+import { get_sections } from '../src/mcp/utils.js';
 import {
 	AnthropicProvider,
 	type AnthropicBatchRequest,
-} from '../lib/anthropic.js';
+} from '../src/lib/anthropic.js';
 
 const SUMMARY_PROMPT = `
 You are tasked with creating very short summaries of Svelte 5 and SvelteKit documentation pages.
