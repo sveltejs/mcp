@@ -1,3 +1,7 @@
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
 export async function fetch_with_timeout(
 	url: string,
 	timeout_ms: number = 10000,
@@ -852,12 +856,29 @@ const sections = {
 	},
 };
 
-import summaries from '../../packages/mcp-server/src/summary.json' with { type: 'json' };
+const current_filename = fileURLToPath(import.meta.url);
+const current_dirname = dirname(current_filename);
+
+let summaries_cache: Record<string, string> | null = null;
+
+function get_summaries(): Record<string, string> {
+	if (!summaries_cache) {
+		try {
+			const summaries_path = join(current_dirname, '../../summary.json');
+			const summaries_data = JSON.parse(readFileSync(summaries_path, 'utf-8'));
+			summaries_cache = summaries_data.summaries as Record<string, string>;
+		} catch {
+			summaries_cache = {};
+		}
+	}
+	return summaries_cache;
+}
 
 export async function get_sections() {
+	const summaries = get_summaries();
 	return Object.entries(sections).map(([, section]) => ({
 		title: section.metadata.title,
-		use_cases: (summaries.summaries as Record<string, string>)[section.slug] || '',
+		use_cases: summaries[section.slug] || '',
 		slug: section.slug,
 		url: `https://svelte.dev/${section.slug}/llms.txt`,
 	}));
