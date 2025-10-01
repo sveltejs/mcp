@@ -66,21 +66,25 @@ export class AnthropicProvider {
 	private apiKey: string;
 	name = 'Anthropic';
 
-	constructor(modelId: string, apiKey: string) {
-		if (!apiKey) {
+	constructor(model_id: string, api_key: string) {
+		if (!api_key) {
 			throw new Error('ANTHROPIC_API_KEY is required');
 		}
-		this.apiKey = apiKey;
-		this.client = new Anthropic({ apiKey, timeout: 900000 });
-		this.modelId = modelId;
+		this.apiKey = api_key;
+		this.client = new Anthropic({ apiKey: api_key, timeout: 900000 });
+		this.modelId = model_id;
 		this.baseUrl = 'https://api.anthropic.com/v1';
 	}
 
-	getModelIdentifier(): string {
+	get_client(): Anthropic {
+		return this.client;
+	}
+
+	get_model_identifier(): string {
 		return this.modelId;
 	}
 
-	async createBatch(requests: AnthropicBatchRequest[]): Promise<AnthropicBatchResponse> {
+	async create_batch(requests: AnthropicBatchRequest[]): Promise<AnthropicBatchResponse> {
 		try {
 			const response = await fetch(`${this.baseUrl}/messages/batches`, {
 				method: 'POST',
@@ -93,9 +97,9 @@ export class AnthropicProvider {
 			});
 
 			if (!response.ok) {
-				const errorText = await response.text();
+				const error_text = await response.text();
 				throw new Error(
-					`Failed to create batch: ${response.status} ${response.statusText} - ${errorText}`,
+					`Failed to create batch: ${response.status} ${response.statusText} - ${error_text}`,
 				);
 			}
 
@@ -108,16 +112,16 @@ export class AnthropicProvider {
 		}
 	}
 
-	async getBatchStatus(
-		batchId: string,
-		maxRetries = 10,
-		retryDelay = 30000,
+	async get_batch_status(
+		batch_id: string,
+		max_retries = 10,
+		retry_delay = 30000,
 	): Promise<AnthropicBatchResponse> {
-		let retryCount = 0;
+		let retry_count = 0;
 
-		while (retryCount <= maxRetries) {
+		while (retry_count <= max_retries) {
 			try {
-				const response = await fetch(`${this.baseUrl}/messages/batches/${batchId}`, {
+				const response = await fetch(`${this.baseUrl}/messages/batches/${batch_id}`, {
 					method: 'GET',
 					headers: {
 						'x-api-key': this.apiKey,
@@ -126,45 +130,45 @@ export class AnthropicProvider {
 				});
 
 				if (!response.ok) {
-					const errorText = await response.text();
+					const error_text = await response.text();
 					throw new Error(
-						`Failed to get batch status: ${response.status} ${response.statusText} - ${errorText}`,
+						`Failed to get batch status: ${response.status} ${response.statusText} - ${error_text}`,
 					);
 				}
 
 				return await response.json();
 			} catch (error) {
-				retryCount++;
+				retry_count++;
 
-				if (retryCount > maxRetries) {
+				if (retry_count > max_retries) {
 					console.error(
-						`Error getting batch status for ${batchId} after ${maxRetries} retries:`,
+						`Error getting batch status for ${batch_id} after ${max_retries} retries:`,
 						error,
 					);
 					throw new Error(
-						`Failed to get batch status after ${maxRetries} retries: ${
+						`Failed to get batch status after ${max_retries} retries: ${
 							error instanceof Error ? error.message : String(error)
 						}`,
 					);
 				}
 
 				console.warn(
-					`Error getting batch status for ${batchId} (attempt ${retryCount}/${maxRetries}):`,
+					`Error getting batch status for ${batch_id} (attempt ${retry_count}/${max_retries}):`,
 					error,
 				);
-				console.log(`Retrying in ${retryDelay / 1000} seconds...`);
+				console.log(`Retrying in ${retry_delay / 1000} seconds...`);
 
-				await new Promise((resolve) => setTimeout(resolve, retryDelay));
+				await new Promise((resolve) => setTimeout(resolve, retry_delay));
 			}
 		}
 
 		// This should never be reached due to the throw in the catch block, but TypeScript needs a return
-		throw new Error(`Failed to get batch status for ${batchId} after ${maxRetries} retries`);
+		throw new Error(`Failed to get batch status for ${batch_id} after ${max_retries} retries`);
 	}
 
-	async getBatchResults(resultsUrl: string): Promise<AnthropicBatchResult[]> {
+	async get_batch_results(results_url: string): Promise<AnthropicBatchResult[]> {
 		try {
-			const response = await fetch(resultsUrl, {
+			const response = await fetch(results_url, {
 				method: 'GET',
 				headers: {
 					'x-api-key': this.apiKey,
@@ -173,9 +177,9 @@ export class AnthropicProvider {
 			});
 
 			if (!response.ok) {
-				const errorText = await response.text();
+				const error_text = await response.text();
 				throw new Error(
-					`Failed to get batch results: ${response.status} ${response.statusText} - ${errorText}`,
+					`Failed to get batch results: ${response.status} ${response.statusText} - ${error_text}`,
 				);
 			}
 

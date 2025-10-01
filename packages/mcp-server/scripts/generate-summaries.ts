@@ -115,7 +115,7 @@ async function main() {
 		({ content, index }) => ({
 			custom_id: `section-${index}`,
 			params: {
-				model: anthropic.getModelIdentifier(),
+				model: anthropic.get_model_identifier(),
 				max_tokens: 200,
 				messages: [
 					{
@@ -130,12 +130,12 @@ async function main() {
 
 	// Create and process batch
 	console.log('🚀 Creating batch job...');
-	const batchResponse = await anthropic.createBatch(batchRequests);
+	const batchResponse = await anthropic.create_batch(batchRequests);
 	console.log(`✅ Batch created with ID: ${batchResponse.id}`);
 
 	// Poll for completion
 	console.log('⏳ Waiting for batch to complete...');
-	let batchStatus = await anthropic.getBatchStatus(batchResponse.id);
+	let batchStatus = await anthropic.get_batch_status(batchResponse.id);
 
 	while (batchStatus.processing_status === 'in_progress') {
 		const { succeeded, processing, errored } = batchStatus.request_counts;
@@ -143,7 +143,7 @@ async function main() {
 			`  Progress: ${succeeded} succeeded, ${processing} processing, ${errored} errored`,
 		);
 		await new Promise((resolve) => setTimeout(resolve, 5000));
-		batchStatus = await anthropic.getBatchStatus(batchResponse.id);
+		batchStatus = await anthropic.get_batch_status(batchResponse.id);
 	}
 
 	console.log('✅ Batch processing completed!');
@@ -154,7 +154,7 @@ async function main() {
 	}
 
 	console.log('📥 Downloading results...');
-	const results = await anthropic.getBatchResults(batchStatus.results_url);
+	const results = await anthropic.get_batch_results(batchStatus.results_url);
 
 	// Process results
 	console.log('📊 Processing results...');
@@ -197,7 +197,7 @@ async function main() {
 		JSON.stringify(
 			{
 				generated_at: new Date().toISOString(),
-				model: anthropic.getModelIdentifier(),
+				model: anthropic.get_model_identifier(),
 				total_sections: sections.length,
 				successful_summaries: Object.keys(summaries).length,
 				failed_summaries: errors.length,
