@@ -61,8 +61,15 @@ async function main() {
 
 	// Get all sections
 	console.log('📚 Fetching documentation sections...');
-	const sections: Section[] = await get_sections();
+	let sections: Section[] = await get_sections();
 	console.log(`Found ${sections.length} sections`);
+
+	// Debug mode: limit to 2 sections
+	const debug_mode = process.env.DEBUG_MODE === '1';
+	if (debug_mode) {
+		console.log('🐛 DEBUG_MODE enabled - processing only 2 sections');
+		sections = sections.slice(0, 2);
+	}
 
 	// Fetch content for each section
 	console.log('📥 Downloading section content...');

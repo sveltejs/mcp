@@ -14,7 +14,8 @@
 		"test": "npm run test:unit -- --run",
 		"test:watch": "npm run test:unit -- --watch",
 		"inspect": "pnpm mcp-inspector",
-		"generate-summaries": "pnpm --filter @sveltejs/mcp-server run generate-summaries"
+		"generate-summaries": "pnpm --filter @sveltejs/mcp-server run generate-summaries",
+		"debug:generate-summaries": "pnpm --filter @sveltejs/mcp-server run debug:generate-summaries"
 	},
 	"keywords": [
 		"svelte",
