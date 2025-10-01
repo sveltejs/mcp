@@ -864,7 +864,7 @@ let summaries_cache: Record<string, string> | null = null;
 function get_summaries(): Record<string, string> {
 	if (!summaries_cache) {
 		try {
-			const summaries_path = join(current_dirname, '../../summary.json');
+			const summaries_path = join(current_dirname, '../summary.json');
 			const summaries_data = JSON.parse(readFileSync(summaries_path, 'utf-8'));
 			summaries_cache = summaries_data.summaries as Record<string, string>;
 		} catch {
