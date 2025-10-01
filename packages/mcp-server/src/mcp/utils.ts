@@ -852,10 +852,12 @@ const sections = {
 	},
 };
 
+import summaries from '../../packages/mcp-server/src/summary.json' with { type: 'json' };
+
 export async function get_sections() {
 	return Object.entries(sections).map(([, section]) => ({
 		title: section.metadata.title,
-		use_cases: '',
+		use_cases: (summaries.summaries as Record<string, string>)[section.slug] || '',
 		slug: section.slug,
 		url: `https://svelte.dev/${section.slug}/llms.txt`,
 	}));
