@@ -25,12 +25,21 @@ export async function get_sections() {
 	).then((res) => res.json());
 	const validated_sections = v.safeParse(documentation_sections_schema, sections);
 	if (!validated_sections.success) return [];
-	return Object.entries(validated_sections.output).map(([, section]) => ({
-		title: section.metadata.title,
-		use_cases: section.metadata.use_cases ?? summaries[section.slug] ?? '',
-		slug: section.slug,
-		url: `https://svelte.dev/${section.slug}/llms.txt`,
-	}));
+	return Object.entries(validated_sections.output).map(([, section]) => {
+		const original_slug = section.slug;
+		const cleaned_slug = original_slug.startsWith('docs/')
+			? original_slug.slice('docs/'.length)
+			: original_slug;
+
+		return {
+			title: section.metadata.title,
+			use_cases:
+				section.metadata.use_cases ?? summaries[original_slug] ?? summaries[cleaned_slug] ?? '',
+			slug: cleaned_slug,
+			// Use original slug in URL to ensure it still works
+			url: `https://svelte.dev/${original_slug}/llms.txt`,
+		};
+	});
 }
 
 export async function format_sections_list(): Promise<string> {
