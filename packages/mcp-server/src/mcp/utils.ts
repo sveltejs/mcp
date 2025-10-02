@@ -1,5 +1,6 @@
 import * as v from 'valibot';
 import { documentation_sections_schema } from '../mcp/schemas/index.js';
+import summaryData from '../use_cases.json' with { type: 'json' };
 
 export async function fetch_with_timeout(
 	url: string,
@@ -16,6 +17,8 @@ export async function fetch_with_timeout(
 	}
 }
 
+const summaries = (summaryData.summaries || {}) as Record<string, string>;
+
 export async function get_sections() {
 	const sections = await fetch_with_timeout(
 		'https://svelte.dev/docs/experimental/sections.json',
@@ -24,7 +27,7 @@ export async function get_sections() {
 	if (!validated_sections.success) return [];
 	return Object.entries(validated_sections.output).map(([, section]) => ({
 		title: section.metadata.title,
-		use_cases: section.metadata.use_cases ?? '',
+		use_cases: section.metadata.use_cases ?? summaries[section.slug] ?? '',
 		slug: section.slug,
 		url: `https://svelte.dev/${section.slug}/llms.txt`,
 	}));
