@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import summaryData from '../summary.json' with { type: 'json' };
+import summaryData from '../use_cases.json' with { type: 'json' };
 
 export async function fetch_with_timeout(
 	url: string,

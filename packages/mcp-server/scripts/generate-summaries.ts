@@ -210,7 +210,7 @@ async function main() {
 
 	// Write output to JSON file
 	console.log('💾 Writing results to file...');
-	const output_path = path.join(current_dirname, '../src/summary.json');
+	const output_path = path.join(current_dirname, '../src/use_cases.json');
 	const output_dir = path.dirname(output_path);
 
 	await mkdir(output_dir, { recursive: true });
