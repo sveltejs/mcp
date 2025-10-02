@@ -1,6 +1,6 @@
-import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import { dirname } from 'path';
+import summaryData from '../summary.json' with { type: 'json' };
 
 export async function fetch_with_timeout(
 	url: string,
@@ -856,26 +856,9 @@ const sections = {
 	},
 };
 
-const current_filename = fileURLToPath(import.meta.url);
-const current_dirname = dirname(current_filename);
-
-let summaries_cache: Record<string, string> | null = null;
-
-function get_summaries(): Record<string, string> {
-	if (!summaries_cache) {
-		try {
-			const summaries_path = join(current_dirname, '../summary.json');
-			const summaries_data = JSON.parse(readFileSync(summaries_path, 'utf-8'));
-			summaries_cache = summaries_data.summaries as Record<string, string>;
-		} catch {
-			summaries_cache = {};
-		}
-	}
-	return summaries_cache;
-}
+const summaries = (summaryData.summaries || {}) as Record<string, string>;
 
 export async function get_sections() {
-	const summaries = get_summaries();
 	return Object.entries(sections).map(([, section]) => ({
 		title: section.metadata.title,
 		use_cases: summaries[section.slug] || '',
