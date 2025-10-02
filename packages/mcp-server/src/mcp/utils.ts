@@ -1,3 +1,6 @@
+import * as v from 'valibot';
+import { documentation_sections_schema } from '../mcp/schemas/index.js';
+
 export async function fetch_with_timeout(
 	url: string,
 	timeout_ms: number = 10000,
@@ -14,10 +17,14 @@ export async function fetch_with_timeout(
 }
 
 export async function get_sections() {
-	const sections = await fetch_with_timeout('https://svelte.dev/docs/experimental/sections.json');
-	return Object.entries(sections).map(([, section]) => ({
+	const sections = await fetch_with_timeout(
+		'https://svelte.dev/docs/experimental/sections.json',
+	).then((res) => res.json());
+	const validated_sections = v.safeParse(documentation_sections_schema, sections);
+	if (!validated_sections.success) return [];
+	return Object.entries(validated_sections.output).map(([, section]) => ({
 		title: section.metadata.title,
-		use_cases: '',
+		use_cases: section.metadata.use_cases ?? 'read document for use cases',
 		slug: section.slug,
 		url: `https://svelte.dev/${section.slug}/llms.txt`,
 	}));
