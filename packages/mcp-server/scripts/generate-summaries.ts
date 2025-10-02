@@ -108,7 +108,7 @@ async function main() {
 	for (let i = 0; i < sections.length; i++) {
 		const section = sections[i]!;
 		try {
-			console.log(`  Fetching ${i + 1}/${sections.length}: ${section.title}`);
+			console.log(`Fetching ${i + 1}/${sections.length}: ${section.title}`);
 			const content = await fetch_section_content(section.url);
 			sections_with_content.push({
 				section,
@@ -117,7 +117,7 @@ async function main() {
 			});
 		} catch (error) {
 			const error_msg = error instanceof Error ? error.message : String(error);
-			console.error(`  ⚠️  Failed to fetch ${section.title}:`, error_msg);
+			console.error(`⚠️  Failed to fetch ${section.title}:`, error_msg);
 			download_errors.push({ section: section.title, error: error_msg });
 		}
 	}
@@ -135,20 +135,22 @@ async function main() {
 
 	// Prepare batch requests
 	console.log('📦 Preparing batch requests...');
-	const batch_requests: AnthropicBatchRequest[] = sections_with_content.map(({ content, index }) => ({
-		custom_id: `section-${index}`,
-		params: {
-			model: anthropic.get_model_identifier(),
-			max_tokens: 250,
-			messages: [
-				{
-					role: 'user',
-					content: USE_CASES_PROMPT + content,
-				},
-			],
-			temperature: 0,
-		},
-	}));
+	const batch_requests: AnthropicBatchRequest[] = sections_with_content.map(
+		({ content, index }) => ({
+			custom_id: `section-${index}`,
+			params: {
+				model: anthropic.get_model_identifier(),
+				max_tokens: 250,
+				messages: [
+					{
+						role: 'user',
+						content: USE_CASES_PROMPT + content,
+					},
+				],
+				temperature: 0,
+			},
+		}),
+	);
 
 	// Create and process batch
 	console.log('🚀 Creating batch job...');
@@ -224,11 +226,7 @@ async function main() {
 		download_errors: download_errors.length > 0 ? download_errors : undefined,
 	};
 
-	await writeFile(
-		output_path,
-		JSON.stringify(summary_data, null, 2),
-		'utf-8',
-	);
+	await writeFile(output_path, JSON.stringify(summary_data, null, 2), 'utf-8');
 
 	// Print summary
 	console.log('\n📊 Summary:');
