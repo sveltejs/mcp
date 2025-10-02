@@ -1,10 +1,23 @@
 import { Anthropic } from '@anthropic-ai/sdk';
+import type { Model } from '@anthropic-ai/sdk/resources/messages/messages.js';
+
+// Batch API interfaces
+export interface SummaryData {
+	generated_at: string;
+	model: string;
+	total_sections: number;
+	successful_summaries: number;
+	failed_summaries: number;
+	summaries: Record<string, string>;
+	errors?: Array<{ section: string; error: string }>;
+	download_errors?: Array<{ section: string; error: string }>;
+}
 
 // Batch API interfaces
 export interface AnthropicBatchRequest {
 	custom_id: string;
 	params: {
-		model: string;
+		model: Model;
 		max_tokens: number;
 		messages: {
 			role: 'user' | 'assistant';
@@ -61,12 +74,12 @@ export interface AnthropicBatchResult {
 
 export class AnthropicProvider {
 	private client: Anthropic;
-	private modelId: string;
+	private modelId: Model;
 	private baseUrl: string;
 	private apiKey: string;
 	name = 'Anthropic';
 
-	constructor(model_id: string, api_key: string) {
+	constructor(model_id: Model, api_key: string) {
 		if (!api_key) {
 			throw new Error('ANTHROPIC_API_KEY is required');
 		}
@@ -80,7 +93,7 @@ export class AnthropicProvider {
 		return this.client;
 	}
 
-	get_model_identifier(): string {
+	get_model_identifier(): Model {
 		return this.modelId;
 	}
 

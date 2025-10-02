@@ -4,7 +4,11 @@ import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { get_sections } from '../src/mcp/utils.js';
-import { AnthropicProvider, type AnthropicBatchRequest } from '../src/lib/anthropic.js';
+import {
+	AnthropicProvider,
+	type AnthropicBatchRequest,
+	type SummaryData,
+} from '../src/lib/anthropic.js';
 
 const current_filename = fileURLToPath(import.meta.url);
 const current_dirname = path.dirname(current_filename);
@@ -82,6 +86,7 @@ async function main() {
 		content: string;
 		index: number;
 	}> = [];
+	const download_errors: Array<{ section: string; error: string }> = [];
 
 	for (let i = 0; i < sections.length; i++) {
 		const section = sections[i]!;
@@ -94,8 +99,9 @@ async function main() {
 				index: i,
 			});
 		} catch (error) {
-			console.error(`  ⚠️  Failed to fetch ${section.title}:`, error);
-			// Continue with other sections
+			const error_msg = error instanceof Error ? error.message : String(error);
+			console.error(`  ⚠️  Failed to fetch ${section.title}:`, error_msg);
+			download_errors.push({ section: section.title, error: error_msg });
 		}
 	}
 
@@ -108,7 +114,7 @@ async function main() {
 
 	// Initialize Anthropic client
 	console.log('🤖 Initializing Anthropic API...');
-	const anthropic = new AnthropicProvider('claude-sonnet-4-5', api_key);
+	const anthropic = new AnthropicProvider('claude-sonnet-4-5-20250929', api_key);
 
 	// Prepare batch requests
 	console.log('📦 Preparing batch requests...');
@@ -189,30 +195,37 @@ async function main() {
 	const output_dir = path.dirname(output_path);
 
 	await mkdir(output_dir, { recursive: true });
+
+	const summary_data: SummaryData = {
+		generated_at: new Date().toISOString(),
+		model: anthropic.get_model_identifier(),
+		total_sections: sections.length,
+		successful_summaries: Object.keys(summaries).length,
+		failed_summaries: errors.length,
+		summaries,
+		errors: errors.length > 0 ? errors : undefined,
+		download_errors: download_errors.length > 0 ? download_errors : undefined,
+	};
+
 	await writeFile(
 		output_path,
-		JSON.stringify(
-			{
-				generated_at: new Date().toISOString(),
-				model: anthropic.get_model_identifier(),
-				total_sections: sections.length,
-				successful_summaries: Object.keys(summaries).length,
-				failed_summaries: errors.length,
-				summaries,
-				errors: errors.length > 0 ? errors : undefined,
-			},
-			null,
-			2,
-		),
+		JSON.stringify(summary_data, null, 2),
 		'utf-8',
 	);
 
 	// Print summary
 	console.log('\n📊 Summary:');
 	console.log(`  Total sections: ${sections.length}`);
+	console.log(`  Successfully downloaded: ${sections_with_content.length}`);
+	console.log(`  Download failures: ${download_errors.length}`);
 	console.log(`  Successfully summarized: ${Object.keys(summaries).length}`);
-	console.log(`  Failed: ${errors.length}`);
+	console.log(`  Summarization failures: ${errors.length}`);
 	console.log(`\n✅ Results written to: ${output_path}`);
+
+	if (download_errors.length > 0) {
+		console.log('\n⚠️  Some sections failed to download:');
+		download_errors.forEach((e) => console.log(`  - ${e.section}: ${e.error}`));
+	}
 
 	if (errors.length > 0) {
 		console.log('\n⚠️  Some sections failed to summarize:');
