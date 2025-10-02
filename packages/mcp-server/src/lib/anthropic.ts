@@ -71,7 +71,7 @@ export class AnthropicProvider {
 			throw new Error('ANTHROPIC_API_KEY is required');
 		}
 		this.apiKey = api_key;
-		this.client = new Anthropic({ apiKey: api_key, timeout: 900000 });
+		this.client = new Anthropic({ apiKey: api_key, timeout: 1800000 });
 		this.modelId = model_id;
 		this.baseUrl = 'https://api.anthropic.com/v1';
 	}
