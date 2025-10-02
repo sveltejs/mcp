@@ -1,6 +1,6 @@
 import type { SvelteMcp } from '../../index.js';
 import * as v from 'valibot';
-import { get_sections } from '../../utils.js';
+import { format_sections_list } from '../../utils.js';
 
 export function setup_svelte_task(server: SvelteMcp) {
 	server.prompt(
@@ -14,10 +14,7 @@ export function setup_svelte_task(server: SvelteMcp) {
 			}),
 		},
 		async ({ task }) => {
-			const sections = await get_sections();
-			const available_docs = sections
-				.map((s) => `* title: ${s.title}, use_cases: ${s.use_cases}, path: ${s.url}`)
-				.join('\n');
+			const available_docs = await format_sections_list();
 
 			return {
 				messages: [

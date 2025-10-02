@@ -866,3 +866,10 @@ export async function get_sections() {
 		url: `https://svelte.dev/${section.slug}/llms.txt`,
 	}));
 }
+
+export async function format_sections_list(): Promise<string> {
+	const sections = await get_sections();
+	return sections
+		.map((s) => `* title: ${s.title}, use_cases: ${s.use_cases}, path: ${s.url}`)
+		.join('\n');
+}
