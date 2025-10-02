@@ -1,13 +1,14 @@
 import type { SvelteMcp } from '../../index.js';
 import * as v from 'valibot';
+import { get_sections, fetch_with_timeout } from '../../utils.js';
+import { SECTIONS_LIST_INTRO, SECTIONS_LIST_OUTRO } from './prompts.js';
 
 export function get_documentation(server: SvelteMcp) {
 	server.tool(
 		{
 			name: 'get-documentation',
-			enabled: () => false,
 			description:
-				'Retrieves full documentation content for Svelte 5 or SvelteKit sections. Supports flexible search by title (e.g., "$state", "routing") or file path (e.g., "docs/svelte/state.md"). Can accept a single section name or an array of sections. Before running this, make sure to analyze the users query, as well as the output from list_sections (which should be called first). Then ask for ALL relevant sections the user might require. For example, if the user asks to build anything interactive, you will need to fetch all relevant runes, and so on.',
+				'Retrieves full documentation content for Svelte 5 or SvelteKit sections. Supports flexible search by title (e.g., "$state", "routing") or file path (e.g., "docs/svelte/state.md"). Can accept a single section name or an array of sections. Before running this, make sure to analyze the users query, as well as the output from list-sections (which should be called first). Then ask for ALL relevant sections the user might require. For example, if the user asks to build anything interactive, you will need to fetch all relevant runes, and so on.',
 			schema: v.object({
 				section: v.pipe(
 					v.union([v.string(), v.array(v.string())]),
@@ -17,7 +18,7 @@ export function get_documentation(server: SvelteMcp) {
 				),
 			}),
 		},
-		({ section }) => {
+		async ({ section }) => {
 			let sections: string[];
 
 			if (Array.isArray(section)) {
@@ -43,13 +44,73 @@ export function get_documentation(server: SvelteMcp) {
 				sections = [];
 			}
 
-			const sections_list = sections.length > 0 ? sections.join(', ') : 'no sections';
+			const available_sections = await get_sections();
+
+			const settled_results = await Promise.allSettled(
+				sections.map(async (requested_section) => {
+					const matched_section = available_sections.find(
+						(s) =>
+							s.title.toLowerCase() === requested_section.toLowerCase() ||
+							s.url === requested_section,
+					);
+
+					if (matched_section) {
+						try {
+							const response = await fetch_with_timeout(matched_section.url);
+							if (response.ok) {
+								const content = await response.text();
+								return { success: true, content: `## ${matched_section.title}\n\n${content}` };
+							} else {
+								return {
+									success: false,
+									content: `## ${matched_section.title}\n\nError: Could not fetch documentation (HTTP ${response.status})`,
+								};
+							}
+						} catch (error) {
+							return {
+								success: false,
+								content: `## ${matched_section.title}\n\nError: Failed to fetch documentation - ${error}`,
+							};
+						}
+					} else {
+						return {
+							success: false,
+							content: `## ${requested_section}\n\nError: Section not found.`,
+						};
+					}
+				}),
+			);
+
+			const results = settled_results.map((result) => {
+				if (result.status === 'fulfilled') {
+					return result.value;
+				} else {
+					return {
+						success: false,
+						content: `Error: Couldn't fetch - ${result.reason}`,
+					};
+				}
+			});
+
+			const has_any_success = results.some((result) => result.success);
+			let final_text = results.map((r) => r.content).join('\n\n---\n\n');
+
+			if (!has_any_success) {
+				const formatted_sections = available_sections
+					.map(
+						(section) =>
+							`* title: ${section.title}, use_cases: ${section.use_cases}, path: ${section.url}`,
+					)
+					.join('\n');
+
+				final_text += `\n\n---\n\n${SECTIONS_LIST_INTRO}\n\n${formatted_sections}\n\n${SECTIONS_LIST_OUTRO}`;
+			}
 
 			return {
 				content: [
 					{
 						type: 'text',
-						text: `called for sections: ${sections_list}`,
+						text: final_text,
 					},
 				],
 			};

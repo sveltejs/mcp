@@ -1,5 +1,6 @@
 import type { SvelteMcp } from '../../index.js';
 import * as v from 'valibot';
+import { get_sections } from '../../utils.js';
 
 export function setup_svelte_task(server: SvelteMcp) {
 	server.prompt(
@@ -13,8 +14,7 @@ export function setup_svelte_task(server: SvelteMcp) {
 			}),
 		},
 		async ({ task }) => {
-			// TODO: implement logic to fetch the available docs paths to return in the prompt
-			const available_docs: string[] = [];
+			const available_docs: string[] = (await get_sections()).map((s) => s.title);
 
 			return {
 				messages: [

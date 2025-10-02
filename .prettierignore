@@ -9,3 +9,6 @@ bun.lockb
 /static/
 /drizzle/
 /**/.svelte-kit/*
+
+# Claude Code
+.claude/
