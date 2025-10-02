@@ -14,8 +14,10 @@ export function setup_svelte_task(server: SvelteMcp) {
 			}),
 		},
 		async ({ task }) => {
-			// TODO: implement logic to fetch the available docs paths to return in the prompt
-			const available_docs: string[] = (await get_sections()).map((s) => s.title);
+			const sections = await get_sections();
+			const available_docs = sections
+				.map((s) => `* title: ${s.title}, use_cases: ${s.use_cases}, path: ${s.url}`)
+				.join('\n');
 
 			return {
 				messages: [
@@ -24,9 +26,9 @@ export function setup_svelte_task(server: SvelteMcp) {
 						content: {
 							type: 'text',
 							text: `You are a Svelte expert tasked to build components and utilities for Svelte developers. If you need documentation for anything related to Svelte you can invoke the tool \`get_documentation\` with one of the following paths:
-<available-docs-paths>						
-${JSON.stringify(available_docs, null, 2)}
-</available-docs-paths>
+<available-docs>
+${available_docs}
+</available-docs>
 
 Every time you write a Svelte component or a Svelte module you MUST invoke the \`svelte-autofixer\` tool providing the code. The tool will return a list of issues or suggestions. If there are any issues or suggestions you MUST fix them and call the tool again with the updated code. You MUST keep doing this until the tool returns no issues or suggestions. Only then you can return the code to the user.
 
