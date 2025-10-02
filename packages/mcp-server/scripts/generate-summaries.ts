@@ -13,30 +13,47 @@ import {
 const current_filename = fileURLToPath(import.meta.url);
 const current_dirname = path.dirname(current_filename);
 
-const SUMMARY_PROMPT = `
-You are tasked with creating very short summaries of Svelte 5 and SvelteKit documentation pages.
+const USE_CASES_PROMPT = `
+You are tasked with analyzing Svelte 5 and SvelteKit documentation pages to identify when they would be useful.
 
 Your task:
 1. Read the documentation page content provided
-2. Create a VERY SHORT summary (maximum 150 characters) that captures the main purpose/topic of this documentation page
-3. Focus on what the page teaches or explains, not how it teaches it
-4. Use clear, concise language suitable for categorizing documentation
+2. Identify the main use cases, scenarios, or queries where this documentation would be relevant
+3. Create a VERY SHORT, comma-separated list of use cases (maximum 200 characters total)
+4. Think about what a developer might be trying to build or accomplish when they need this documentation
 
-Examples of good summaries:
-- "Explains $state rune for reactive variables"
-- "Tutorial on creating Svelte components"
-- "Guide to routing in SvelteKit applications"
-- "Reference for event handling syntax"
+Guidelines:
+- Focus on WHEN this documentation would be needed, not WHAT it contains
+- Consider specific project types (e.g., "e-commerce site", "blog", "dashboard", "social media app")
+- Consider specific features (e.g., "authentication", "forms", "data fetching", "animations")
+- Consider specific components (e.g., "slider", "modal", "dropdown", "card")
+- Consider development stages (e.g., "project setup", "deployment", "testing", "migration")
+- Use "always" for fundamental concepts that apply to virtually all Svelte projects
+- Be concise but specific
+- Use lowercase
+- Separate multiple use cases with commas
+
+Examples of good use_cases:
+- "always, any svelte project, core reactivity"
+- "authentication, login systems, user management"
+- "e-commerce, product listings, shopping carts"
+- "forms, user input, data submission"
+- "deployment, production builds, hosting setup"
+- "animation, transitions, interactive ui"
+- "routing, navigation, multi-page apps"
+- "blog, content sites, markdown rendering"
 
 Requirements:
-- Maximum 150 characters (including spaces)
-- Focus on the main topic/purpose of the page
-- Use present tense
-- Be specific about what concept is being explained
+- Maximum 200 characters (including spaces and commas)
+- Lowercase only
+- Comma-separated list of use cases
+- Focus on WHEN/WHY someone would need this, not what it is
+- Be specific about project types, features, or components when applicable
+- Use "always" sparingly, only for truly universal concepts
 - Do not include quotes or special formatting in your response
-- Respond with ONLY the summary text, no additional text
+- Respond with ONLY the use cases text, no additional text
 
-Here is the documentation page content to summarize:
+Here is the documentation page content to analyze:
 
 `;
 
@@ -56,7 +73,7 @@ async function fetch_section_content(url: string): Promise<string> {
 }
 
 async function main() {
-	console.log('🚀 Starting summary generation...');
+	console.log('🚀 Starting use cases generation...');
 
 	// Check for API key
 	const api_key = process.env.ANTHROPIC_API_KEY;
@@ -122,11 +139,11 @@ async function main() {
 		custom_id: `section-${index}`,
 		params: {
 			model: anthropic.get_model_identifier(),
-			max_tokens: 200,
+			max_tokens: 250,
 			messages: [
 				{
 					role: 'user',
-					content: SUMMARY_PROMPT + content,
+					content: USE_CASES_PROMPT + content,
 				},
 			],
 			temperature: 0,
@@ -218,8 +235,8 @@ async function main() {
 	console.log(`  Total sections: ${sections.length}`);
 	console.log(`  Successfully downloaded: ${sections_with_content.length}`);
 	console.log(`  Download failures: ${download_errors.length}`);
-	console.log(`  Successfully summarized: ${Object.keys(summaries).length}`);
-	console.log(`  Summarization failures: ${errors.length}`);
+	console.log(`  Successfully analyzed: ${Object.keys(summaries).length}`);
+	console.log(`  Analysis failures: ${errors.length}`);
 	console.log(`\n✅ Results written to: ${output_path}`);
 
 	if (download_errors.length > 0) {
@@ -228,7 +245,7 @@ async function main() {
 	}
 
 	if (errors.length > 0) {
-		console.log('\n⚠️  Some sections failed to summarize:');
+		console.log('\n⚠️  Some sections failed to analyze:');
 		errors.forEach((e) => console.log(`  - ${e.section}: ${e.error}`));
 	}
 }

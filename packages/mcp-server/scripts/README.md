@@ -1,6 +1,6 @@
-# Generate Summaries Script
+# Generate Use Cases Script
 
-This script generates short summaries for all Svelte 5 and SvelteKit documentation sections using the Anthropic API.
+This script generates use case metadata for all Svelte 5 and SvelteKit documentation sections using the Anthropic API. The use cases describe when a documentation section would be useful for specific queries or project types.
 
 ## Setup
 
@@ -56,13 +56,31 @@ cd packages/mcp-server
 pnpm run generate-summaries
 ```
 
+### Debug Mode
+
+To test with only 2 sections:
+
+```bash
+DEBUG_MODE=1 pnpm generate-summaries
+```
+
 ## What it does
 
 1. ✅ Fetches all available documentation sections from Svelte.dev
 2. ✅ Downloads the content for each section from `https://svelte.dev/${section.slug}/llms.txt`
 3. ✅ Sends all sections to the Anthropic API using **batch processing** (efficient, not individual requests)
-4. ✅ Generates a short summary (max 150 characters) for each section using Claude 3.5 Sonnet
+4. ✅ Generates use case metadata (max 200 characters) for each section using Claude Sonnet 4.5
 5. ✅ Saves the results to `packages/mcp-server/src/summary.json`
+
+## Use Cases Examples
+
+The script generates metadata describing when documentation would be useful:
+
+- **Core concepts**: "always, any svelte project, core reactivity"
+- **Specific features**: "authentication, login systems, user management"
+- **Project types**: "e-commerce, product listings, shopping carts"
+- **Components**: "forms, user input, data submission"
+- **Development stages**: "deployment, production builds, hosting setup"
 
 ## Output Format
 
@@ -71,14 +89,14 @@ The script generates a JSON file with the following structure:
 ```json
 {
   "generated_at": "2025-10-02T12:00:00.000Z",
-  "model": "claude-3-5-sonnet-20241022",
+  "model": "claude-sonnet-4-5-20250929",
   "total_sections": 150,
   "successful_summaries": 148,
   "failed_summaries": 2,
   "summaries": {
-    "docs/svelte/$state": "Explains $state rune for reactive variables",
-    "docs/svelte/$derived": "Guide to $derived rune for computed values",
-    "docs/kit/routing": "Guide to routing in SvelteKit applications"
+    "docs/svelte/$state": "always, reactive state, variables, any svelte project",
+    "docs/svelte/$derived": "computed values, derived state, reactive calculations",
+    "docs/kit/routing": "navigation, multi-page apps, sveltekit projects"
   },
   "errors": [
     {
@@ -94,7 +112,7 @@ The script generates a JSON file with the following structure:
 The script provides detailed console output with progress indicators:
 
 ```
-🚀 Starting summary generation...
+🚀 Starting use cases generation...
 📚 Fetching documentation sections...
 Found 150 sections
 📥 Downloading section content...
@@ -119,17 +137,35 @@ Found 150 sections
 
 📊 Summary:
   Total sections: 150
-  Successfully summarized: 148
-  Failed: 2
+  Successfully downloaded: 150
+  Download failures: 0
+  Successfully analyzed: 148
+  Analysis failures: 2
 
 ✅ Results written to: packages/mcp-server/src/summary.json
 ```
 
 ## Notes
 
-- The script uses **Claude 3.5 Sonnet** (`claude-3-5-sonnet-20241022`) for generating summaries
+- The script uses **Claude Sonnet 4.5** (`claude-sonnet-4-5-20250929`) for generating use cases
 - **Batch processing** is used for efficiency - all sections are sent in a single batch request
 - The script will automatically retry failed API requests
 - Progress is displayed in real-time in the console
 - Batch processing typically takes 5-15 minutes depending on the number of sections
 - Failed sections are logged and saved to the output JSON for review
+- Use cases are limited to 200 characters and are comma-separated
+
+## How It Works
+
+The prompt instructs the LLM to analyze each documentation page and identify:
+
+1. **Project types** where this documentation would be relevant (e.g., "e-commerce", "blog", "dashboard")
+2. **Specific features** that would require this documentation (e.g., "authentication", "forms", "animations")
+3. **Components** that would benefit from this documentation (e.g., "slider", "modal", "dropdown")
+4. **Development stages** when this would be needed (e.g., "deployment", "testing", "migration")
+
+The output is designed to help LLMs understand which documentation sections to fetch based on user queries like:
+- "I need to build an e-commerce site"
+- "I need to build a slider component"
+- "I need to add authentication"
+- "I need to deploy my app"
