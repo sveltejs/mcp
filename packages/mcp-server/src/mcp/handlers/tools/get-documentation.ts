@@ -1,6 +1,6 @@
 import type { SvelteMcp } from '../../index.js';
 import * as v from 'valibot';
-import { get_sections, fetch_with_timeout } from '../../utils.js';
+import { get_sections, fetch_with_timeout, format_sections_list } from '../../utils.js';
 import { SECTIONS_LIST_INTRO, SECTIONS_LIST_OUTRO } from './prompts.js';
 
 export function get_documentation(server: SvelteMcp) {
@@ -97,12 +97,7 @@ export function get_documentation(server: SvelteMcp) {
 			let final_text = results.map((r) => r.content).join('\n\n---\n\n');
 
 			if (!has_any_success) {
-				const formatted_sections = available_sections
-					.map(
-						(section) =>
-							`* title: ${section.title}, use_cases: ${section.use_cases}, path: ${section.url}`,
-					)
-					.join('\n');
+				const formatted_sections = await format_sections_list();
 
 				final_text += `\n\n---\n\n${SECTIONS_LIST_INTRO}\n\n${formatted_sections}\n\n${SECTIONS_LIST_OUTRO}`;
 			}
