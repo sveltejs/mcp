@@ -24,7 +24,7 @@ export async function get_sections() {
 	if (!validated_sections.success) return [];
 	return Object.entries(validated_sections.output).map(([, section]) => ({
 		title: section.metadata.title,
-		use_cases: section.metadata.use_cases ?? 'read document for use cases',
+		use_cases: section.metadata.use_cases ?? '',
 		slug: section.slug,
 		url: `https://svelte.dev/${section.slug}/llms.txt`,
 	}));
