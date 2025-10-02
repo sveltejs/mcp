@@ -79,8 +79,8 @@ async function main() {
 	const api_key = process.env.ANTHROPIC_API_KEY;
 	if (!api_key) {
 		console.error('❌ Error: ANTHROPIC_API_KEY environment variable is required');
-		console.error('   Please set it in packages/mcp-server/.env file or export it:');
-		console.error('   export ANTHROPIC_API_KEY=your_api_key_here');
+		console.error('Please set it in packages/mcp-server/.env file or export it:');
+		console.error('export ANTHROPIC_API_KEY=your_api_key_here');
 		process.exit(1);
 	}
 
