@@ -14,7 +14,6 @@ export function setup_svelte_task(server: SvelteMcp) {
 			}),
 		},
 		async ({ task }) => {
-			// TODO: implement logic to fetch the available docs paths to return in the prompt
 			const available_docs: string[] = (await get_sections()).map((s) => s.title);
 
 			return {
