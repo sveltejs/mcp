@@ -2,7 +2,7 @@
 title: Remote setup
 ---
 
-The remote version of the MCP server is available on `https://mcp.svelte.dev/mcp`.
+The remote version of the MCP server is available at `https://mcp.svelte.dev/mcp`.
 
 Here's how to set it up in some common MCP clients:
 
