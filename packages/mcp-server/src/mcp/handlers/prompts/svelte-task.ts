@@ -1,6 +1,6 @@
 import type { SvelteMcp } from '../../index.js';
 import * as v from 'valibot';
-import { get_sections } from '../../utils.js';
+import { format_sections_list } from '../../utils.js';
 
 export function setup_svelte_task(server: SvelteMcp) {
 	server.prompt(
@@ -14,7 +14,7 @@ export function setup_svelte_task(server: SvelteMcp) {
 			}),
 		},
 		async ({ task }) => {
-			const available_docs: string[] = (await get_sections()).map((s) => s.title);
+			const available_docs = await format_sections_list();
 
 			return {
 				messages: [
@@ -22,10 +22,10 @@ export function setup_svelte_task(server: SvelteMcp) {
 						role: 'user',
 						content: {
 							type: 'text',
-							text: `You are a Svelte expert tasked to build components and utilities for Svelte developers. If you need documentation for anything related to Svelte you can invoke the tool \`get-documentation\` with one of the following paths:
-<available-docs-paths>						
-${JSON.stringify(available_docs, null, 2)}
-</available-docs-paths>
+							text: `You are a Svelte expert tasked to build components and utilities for Svelte developers. If you need documentation for anything related to Svelte you can invoke the tool \`get_documentation\` with one of the following paths:
+<available-docs>
+${available_docs}
+</available-docs>
 
 Every time you write a Svelte component or a Svelte module you MUST invoke the \`svelte-autofixer\` tool providing the code. The tool will return a list of issues or suggestions. If there are any issues or suggestions you MUST fix them and call the tool again with the updated code. You MUST keep doing this until the tool returns no issues or suggestions. Only then you can return the code to the user.
 

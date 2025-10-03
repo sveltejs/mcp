@@ -9,7 +9,9 @@
 	"license": "ISC",
 	"type": "module",
 	"scripts": {
-		"test": "vitest"
+		"test": "vitest",
+		"generate-summaries": "node scripts/generate-summaries.ts --experimental-strip-types",
+		"debug:generate-summaries": "DEBUG_MODE=1 node scripts/generate-summaries.ts --experimental-strip-types"
 	},
 	"exports": {
 		".": "./src/index.ts"
@@ -32,6 +34,8 @@
 		"zimmerframe": "^1.1.4"
 	},
 	"devDependencies": {
+		"@anthropic-ai/sdk": "^0.65.0",
+		"dotenv": "^17.2.3",
 		"@sveltejs/kit": "^2.42.2",
 		"@types/eslint-scope": "^8.3.2",
 		"@types/estree": "^1.0.8",
