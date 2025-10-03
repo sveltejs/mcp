@@ -20,8 +20,8 @@ You can choose your preferred `scope` (it must be `user`, `project` or `local`) 
 
 - Open Settings > Connectors
 - Click on Add Custom Connector
-- Insert the name you prefer most
-- Insert `https://mcp.svelte.dev/mcp` as the `Remote MCP server URL`
+- When prompted for a name, enter `svelte`
+- Under the Remote MCP server URL input, use `https://mcp.svelte.dev/mcp`
 - Click Add
 
 ## Codex CLI
@@ -34,8 +34,6 @@ experimental_use_rmcp_client = true
 url = "https://mcp.svelte.dev/mcp"
 ```
 
-To use HTTP servers in Codex you need to enable `experimental_use_rmcp_client` and the top level must be `mcp_server` but you can choose your preferred `name`.
-
 ## Gemini CLI
 
 To use the remote MCP server with Gemini CLI, simply run the following command:
@@ -44,7 +42,7 @@ To use the remote MCP server with Gemini CLI, simply run the following command:
 gemini mcp add -t http -s [scope] svelte https://mcp.svelte.dev/mcp
 ```
 
-You can choose your preferred `scope` (it must be `user`, `project` or `local`) and `name`.
+The `[scope]` must be `user`, `project` or `local`.
 
 ## OpenCode
 
@@ -70,8 +68,6 @@ opencode mcp add
 ◇  Enter MCP server URL
 │  https://mcp.svelte.dev/mcp
 ```
-
-You can choose your preferred `name`.
 
 ## VS Code
 
@@ -99,8 +95,6 @@ It will open a file with your MCP servers where you can add the following config
 	}
 }
 ```
-
-The top level must be `mcpServers` but you can choose your preferred `name`.
 
 ## Other clients
 
