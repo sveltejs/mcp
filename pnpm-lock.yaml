@@ -199,9 +199,6 @@ importers:
       '@typescript-eslint/types':
         specifier: ^8.44.0
         version: 8.44.1
-      tsx:
-        specifier: ^4.19.2
-        version: 4.20.6
 
   packages/mcp-stdio:
     dependencies:
@@ -7267,6 +7264,7 @@ snapshots:
       get-tsconfig: 4.10.1
     optionalDependencies:
       fsevents: 2.3.3
+    optional: true
 
   type-check@0.4.0:
     dependencies:
