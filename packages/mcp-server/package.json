@@ -11,8 +11,8 @@
 	"type": "module",
 	"scripts": {
 		"test": "vitest",
-		"generate-summaries": "tsx scripts/generate-summaries.ts",
-		"debug:generate-summaries": "DEBUG_MODE=1 tsx scripts/generate-summaries.ts"
+		"generate-summaries": "node scripts/generate-summaries.ts --experimental-strip-types",
+		"debug:generate-summaries": "DEBUG_MODE=1 node scripts/generate-summaries.ts --experimental-strip-types"
 	},
 	"exports": {
 		".": "./src/index.ts"

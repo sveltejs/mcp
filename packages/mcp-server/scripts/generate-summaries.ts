@@ -3,12 +3,12 @@ import 'dotenv/config';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { get_sections } from '../src/mcp/utils.js';
+import { get_sections } from '../src/mcp/utils.ts';
 import {
 	AnthropicProvider,
 	type AnthropicBatchRequest,
 	type SummaryData,
-} from '../src/lib/anthropic.js';
+} from '../src/lib/anthropic.ts';
 
 const current_filename = fileURLToPath(import.meta.url);
 const current_dirname = path.dirname(current_filename);
