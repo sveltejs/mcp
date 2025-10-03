@@ -11,7 +11,7 @@ Here's how to set it up in some common MCP clients:
 To include the remote MCP version in Claude Code, simply run the following command:
 
 ```bash
-claude mcp add -t http -s [scope] [name] https://mcp.svelte.dev/mcp
+claude mcp add -t http -s [scope] svelte https://mcp.svelte.dev/mcp
 ```
 
 You can choose your preferred `scope` (it must be `user`, `project` or `local`) and `name`.
@@ -26,11 +26,11 @@ You can choose your preferred `scope` (it must be `user`, `project` or `local`) 
 
 ## Codex CLI
 
-Add the following to your `config.toml` (defaults to `~/.codex/config.toml`... refer to [the configuration documentation](https://github.com/openai/codex/blob/69cb72f8422f2aa7222bea3a6ce48fd130fa76c4/docs/config.md) for more advanced setups):
+Add the following to your `config.toml` (which defaults to `~/.codex/config.toml`, but refer to [the configuration documentation](https://github.com/openai/codex/blob/main/docs/config.md) for more advanced setups):
 
 ```toml
 experimental_use_rmcp_client = true
-[mcp_servers.name]
+[mcp_servers.svelte]
 url = "https://mcp.svelte.dev/mcp"
 ```
 
@@ -41,7 +41,7 @@ To use HTTP servers in Codex you need to enable `experimental_use_rmcp_client` a
 To include the remote MCP version in Gemini CLI, simply run the following command:
 
 ```bash
-gemini mcp add -t http -s [scope] [name] https://mcp.svelte.dev/mcp
+gemini mcp add -t http -s [scope] svelte https://mcp.svelte.dev/mcp
 ```
 
 You can choose your preferred `scope` (it must be `user`, `project` or `local`) and `name`.
@@ -62,7 +62,7 @@ opencode mcp add
 ┌  Add MCP server
 │
 ◇  Enter MCP server name
-│  [name]
+│  svelte
 │
 ◇  Select MCP server type
 │  Remote
@@ -93,7 +93,7 @@ It will open a file with your MCP servers where you can add the following config
 ```json
 {
 	"mcpServers": {
-		"[name]": {
+		"svelte": {
 			"url": "https://mcp.svelte.dev/mcp"
 		}
 	}

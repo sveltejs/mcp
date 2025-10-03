@@ -2,7 +2,7 @@
 title: Local setup
 ---
 
-The STDIO (local) version of the MCP server is available as an `npm` package: `@sveltjs/mcp`. You can either install it globally and then reference it in your configuration or run it with `npx`.
+The local (or stdio) version of the MCP server is available via the [`@sveltejs/mcp`](https://www.npmjs.com/package/@sveltejs/mcp) npm package. You can either install it globally and then reference it in your configuration or run it with `npx`:
 
 ```bash
 npx -y @sveltejs/mcp
@@ -15,19 +15,19 @@ Here's how to set it up in some common MCP clients:
 To include the local MCP version in Claude Code, simply run the following command:
 
 ```bash
-claude mcp add -t stdio -s [scope] [name] npx -y @sveltejs/mcp
+claude mcp add -t stdio -s [scope] svelte npx -y @sveltejs/mcp
 ```
 
 You can choose your preferred `scope` (it must be `user`, `project` or `local`) and `name`.
 
 ## Claude Desktop
 
-Open the Developer section in settings, click on `Edit Config`. It will open the folder with a `claude_desktop_config.json` file in it. Edit the file to include the following configuration:
+In the Settings > Developer section, click on Edit Config. It will open the folder with a `claude_desktop_config.json` file in it. Edit the file to include the following configuration:
 
 ```json
 {
 	"mcpServers": {
-		"[name]": {
+		"svelte": {
 			"command": "npx",
 			"args": ["-y", "@sveltejs/mcp"]
 		}
@@ -39,10 +39,10 @@ The top level must be `mcpServers` but you can choose your preferred `name`.
 
 ## Codex CLI
 
-Add the following to your `config.toml` (defaults to `~/.codex/config.toml`... refer to [the configuration documentation](https://github.com/openai/codex/blob/69cb72f8422f2aa7222bea3a6ce48fd130fa76c4/docs/config.md) for more advanced setups):
+Add the following to your `config.toml` (which defaults to `~/.codex/config.toml`, but refer to [the configuration documentation](https://github.com/openai/codex/blob/main/docs/config.md) for more advanced setups):
 
 ```toml
-[mcp_servers.name]
+[mcp_servers.svelte]
 command = "npx"
 args = ["-y", "@sveltejs/mcp"]
 ```
@@ -54,12 +54,12 @@ The top level must be `mcp_server` but you can choose your preferred `name`.
 To include the local MCP version in Gemini CLI, simply run the following command:
 
 ```bash
-gemini mcp add -t stdio -s [scope] [name] npx -y @sveltejs/mcp
+gemini mcp add -t stdio -s [scope] svelte npx -y @sveltejs/mcp
 ```
 
 You can choose your preferred `scope` (it must be `user`, `project` or `local`) and `name`.
 
-## Opencode
+## OpenCode
 
 Run the command:
 
@@ -67,7 +67,7 @@ Run the command:
 opencode mcp add
 ```
 
-and follow the instructions, selecting Local when asked for "Select MCP server type":
+and follow the instructions, selecting 'Local' under the 'Select MCP server type' prompt:
 
 ```bash
 opencode mcp add
@@ -75,7 +75,7 @@ opencode mcp add
 ┌  Add MCP server
 │
 ◇  Enter MCP server name
-│  [name]
+│  svelte
 │
 ◇  Select MCP server type
 │  Local
@@ -86,9 +86,9 @@ opencode mcp add
 
 You can choose your preferred `name`.
 
-## VSCode
+## VS Code
 
-- Open the command Palette
+- Open the command palette
 - Select "MCP: Add Server..."
 - Select "Command (stdio)"
 - Insert `npx -y @sveltejs/mcp` in the input and press `Enter`
@@ -97,7 +97,7 @@ You can choose your preferred `name`.
 
 ## Cursor
 
-- Open the command Palette
+- Open the command palette
 - Select "View: Open MCP Settings"
 - Click on "Add custom MCP"
 
@@ -106,7 +106,7 @@ It will open a file with your MCP servers where you can add the following config
 ```json
 {
 	"mcpServers": {
-		"[name]": {
+		"svelte": {
 			"command": "npx",
 			"args": ["-y", "@sveltejs/mcp"]
 		}
