@@ -1,5 +1,5 @@
 import * as v from 'valibot';
-import { documentation_sections_schema } from '../mcp/schemas/index.js';
+import { documentation_sections_schema, section_schema } from '../mcp/schemas/index.js';
 import summary_data from '../use_cases.json' with { type: 'json' };
 
 export async function fetch_with_timeout(
@@ -25,7 +25,8 @@ export async function get_sections() {
 	).then((res) => res.json());
 	const validated_sections = v.safeParse(documentation_sections_schema, sections);
 	if (!validated_sections.success) return [];
-	return Object.entries(validated_sections.output).map(([, section]) => {
+
+	const mapped_sections = Object.entries(validated_sections.output).map(([, section]) => {
 		const original_slug = section.slug;
 		const cleaned_slug = original_slug.startsWith('docs/')
 			? original_slug.slice('docs/'.length)
@@ -40,6 +41,14 @@ export async function get_sections() {
 			url: `https://svelte.dev/${original_slug}/llms.txt`,
 		};
 	});
+
+	const validated_output = v.safeParse(v.array(section_schema), mapped_sections);
+	if (!validated_output.success) {
+		console.error('Section validation failed:', validated_output.issues);
+		return [];
+	}
+
+	return validated_output.output;
 }
 
 export async function format_sections_list(): Promise<string> {

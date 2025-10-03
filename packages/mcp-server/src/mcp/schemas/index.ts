@@ -10,3 +10,10 @@ export const documentation_sections_schema = v.record(
 		slug: v.string(),
 	}),
 );
+
+export const section_schema = v.object({
+	title: v.string(),
+	use_cases: v.string(),
+	slug: v.string(),
+	url: v.string(),
+});
