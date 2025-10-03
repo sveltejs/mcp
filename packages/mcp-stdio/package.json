@@ -26,7 +26,7 @@
 		"dev": "tsdown --watch",
 		"test": "vitest",
 		"check": "tsc --noEmit",
-		"check:publint": "publint"
+		"check:publint": "publint --strict"
 	},
 	"devDependencies": {
 		"@sveltejs/mcp-server": "workspace:^",
