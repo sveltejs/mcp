@@ -38,7 +38,7 @@ To use HTTP servers in Codex you need to enable `experimental_use_rmcp_client` a
 
 ## Gemini CLI
 
-To include the remote MCP version in Gemini CLI, simply run the following command:
+To use the remote MCP server with Gemini CLI, simply run the following command:
 
 ```bash
 gemini mcp add -t http -s [scope] svelte https://mcp.svelte.dev/mcp
