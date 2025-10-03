@@ -22,7 +22,7 @@ export function setup_svelte_task(server: SvelteMcp) {
 						role: 'user',
 						content: {
 							type: 'text',
-							text: `You are a Svelte expert tasked to build components and utilities for Svelte developers. If you need documentation for anything related to Svelte you can invoke the tool \`get_documentation\` with one of the following paths:
+							text: `You are a Svelte expert tasked to build components and utilities for Svelte developers. If you need documentation for anything related to Svelte you can invoke the tool \`get-documentation\` with one of the following paths:
 <available-docs-paths>						
 ${JSON.stringify(available_docs, null, 2)}
 </available-docs-paths>
