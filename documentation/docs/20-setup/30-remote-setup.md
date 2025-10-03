@@ -18,11 +18,11 @@ You can choose your preferred `scope` (it must be `user`, `project` or `local`) 
 
 ## Claude Desktop
 
-- Open `Settings > Connectors`
-- Click on `Add Custom Connector`
+- Open Settings > Connectors
+- Click on Add Custom Connector
 - Insert the name you prefer most
 - Insert `https://mcp.svelte.dev/mcp` as the `Remote MCP server URL`
-- Click `Add`
+- Click Add
 
 ## Codex CLI
 
@@ -46,7 +46,7 @@ gemini mcp add -t http -s [scope] svelte https://mcp.svelte.dev/mcp
 
 You can choose your preferred `scope` (it must be `user`, `project` or `local`) and `name`.
 
-## Opencode
+## OpenCode
 
 Run the command:
 
@@ -54,7 +54,7 @@ Run the command:
 opencode mcp add
 ```
 
-and follow the instructions, selecting Remote when asked for "Select MCP server type":
+and follow the instructions, selecting 'Remote' under the 'Select MCP server type' prompt:
 
 ```bash
 opencode mcp add
@@ -73,9 +73,9 @@ opencode mcp add
 
 You can choose your preferred `name`.
 
-## VSCode
+## VS Code
 
-- Open the command Palette
+- Open the command palette
 - Select "MCP: Add Server..."
 - Select "HTTP (HTTP or Server-Sent-Events)"
 - Insert `https://mcp.svelte.dev/mcp` in the input and press `Enter`
@@ -84,7 +84,7 @@ You can choose your preferred `name`.
 
 ## Cursor
 
-- Open the command Palette
+- Open the command palette
 - Select "View: Open MCP Settings"
 - Click on "Add custom MCP"
 
