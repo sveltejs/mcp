@@ -12,7 +12,6 @@
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
-	"packageManager": "pnpm@10.17.1",
 	"type": "module",
 	"dependencies": {
 		"drizzle-orm": "^0.40.1"
