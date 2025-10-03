@@ -17,7 +17,7 @@ export async function fetch_with_timeout(
 	}
 }
 
-const summaries = (summaryData.summaries || {}) as Record<string, string>;
+const summaries = (summary_data.summaries || {}) as Record<string, string>;
 
 export async function get_sections() {
 	const sections = await fetch_with_timeout(
