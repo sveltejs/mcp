@@ -1,1 +1,1 @@
-export * from './list-sections.js';
+export * from './doc-section.js';
