@@ -1,6 +1,6 @@
 import * as v from 'valibot';
 import { documentation_sections_schema } from '../mcp/schemas/index.js';
-import summaryData from '../use_cases.json' with { type: 'json' };
+import summary_data from '../use_cases.json' with { type: 'json' };
 
 export async function fetch_with_timeout(
 	url: string,
