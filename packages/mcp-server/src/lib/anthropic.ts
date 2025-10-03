@@ -1,76 +1,116 @@
 import { Anthropic } from '@anthropic-ai/sdk';
 import type { Model } from '@anthropic-ai/sdk/resources/messages/messages.js';
+import * as v from 'valibot';
 
-// Batch API interfaces
-export interface SummaryData {
-	generated_at: string;
-	model: string;
-	total_sections: number;
-	successful_summaries: number;
-	failed_summaries: number;
-	summaries: Record<string, string>;
-	errors?: Array<{ section: string; error: string }>;
-	download_errors?: Array<{ section: string; error: string }>;
-}
+// Valibot schemas for Batch API
+export const summary_data_schema = v.object({
+	generated_at: v.string(),
+	model: v.string(),
+	total_sections: v.number(),
+	successful_summaries: v.number(),
+	failed_summaries: v.number(),
+	summaries: v.record(v.string(), v.string()),
+	errors: v.optional(
+		v.array(
+			v.object({
+				section: v.string(),
+				error: v.string(),
+			}),
+		),
+	),
+	download_errors: v.optional(
+		v.array(
+			v.object({
+				section: v.string(),
+				error: v.string(),
+			}),
+		),
+	),
+});
 
-// Batch API interfaces
-export interface AnthropicBatchRequest {
-	custom_id: string;
-	params: {
-		model: Model;
-		max_tokens: number;
-		messages: {
-			role: 'user' | 'assistant';
-			content: string | { type: string; text: string }[];
-		}[];
-		[key: string]: unknown;
-	};
-}
+export const anthropic_batch_request_schema = v.object({
+	custom_id: v.string(),
+	params: v.object({
+		model: v.string(),
+		max_tokens: v.number(),
+		messages: v.array(
+			v.object({
+				role: v.union([v.literal('user'), v.literal('assistant')]),
+				content: v.union([
+					v.string(),
+					v.array(
+						v.object({
+							type: v.string(),
+							text: v.string(),
+						}),
+					),
+				]),
+			}),
+		),
+	}),
+});
 
-export interface AnthropicBatchResponse {
-	id: string;
-	type: string;
-	processing_status: 'in_progress' | 'ended';
-	request_counts: {
-		processing: number;
-		succeeded: number;
-		errored: number;
-		canceled: number;
-		expired: number;
-	};
-	ended_at: string | null;
-	created_at: string;
-	expires_at: string;
-	cancel_initiated_at: string | null;
-	results_url: string | null;
-}
+export const anthropic_batch_response_schema = v.object({
+	id: v.string(),
+	type: v.string(),
+	processing_status: v.union([v.literal('in_progress'), v.literal('ended')]),
+	request_counts: v.object({
+		processing: v.number(),
+		succeeded: v.number(),
+		errored: v.number(),
+		canceled: v.number(),
+		expired: v.number(),
+	}),
+	ended_at: v.nullable(v.string()),
+	created_at: v.string(),
+	expires_at: v.string(),
+	cancel_initiated_at: v.nullable(v.string()),
+	results_url: v.nullable(v.string()),
+});
 
-export interface AnthropicBatchResult {
-	custom_id: string;
-	result: {
-		type: 'succeeded' | 'errored' | 'canceled' | 'expired';
-		message?: {
-			id: string;
-			type: string;
-			role: string;
-			model: string;
-			content: {
-				type: string;
-				text: string;
-			}[];
-			stop_reason: string;
-			stop_sequence: string | null;
-			usage: {
-				input_tokens: number;
-				output_tokens: number;
-			};
-		};
-		error?: {
-			type: string;
-			message: string;
-		};
-	};
-}
+export const anthropic_batch_result_schema = v.object({
+	custom_id: v.string(),
+	result: v.object({
+		type: v.union([
+			v.literal('succeeded'),
+			v.literal('errored'),
+			v.literal('canceled'),
+			v.literal('expired'),
+		]),
+		message: v.optional(
+			v.object({
+				id: v.string(),
+				type: v.string(),
+				role: v.string(),
+				model: v.string(),
+				content: v.array(
+					v.object({
+						type: v.string(),
+						text: v.string(),
+					}),
+				),
+				stop_reason: v.string(),
+				stop_sequence: v.nullable(v.string()),
+				usage: v.object({
+					input_tokens: v.number(),
+					output_tokens: v.number(),
+				}),
+			}),
+		),
+		error: v.optional(
+			v.object({
+				type: v.string(),
+				message: v.string(),
+			}),
+		),
+	}),
+});
+
+// Export inferred types
+export type SummaryData = v.InferOutput<typeof summary_data_schema>;
+export type AnthropicBatchRequest = v.InferOutput<typeof anthropic_batch_request_schema>;
+export type AnthropicBatchResponse = v.InferOutput<typeof anthropic_batch_response_schema>;
+export type AnthropicBatchResult = v.InferOutput<typeof anthropic_batch_result_schema>;
 
 export class AnthropicProvider {
 	private client: Anthropic;
@@ -116,7 +156,16 @@ export class AnthropicProvider {
 				);
 			}
 
-			return await response.json();
+			const json_data = await response.json();
+			const validated_response = v.safeParse(anthropic_batch_response_schema, json_data);
+
+			if (!validated_response.success) {
+				throw new Error(
+					`Invalid batch response from Anthropic API: ${JSON.stringify(validated_response.issues)}`,
+				);
+			}
+
+			return validated_response.output;
 		} catch (error) {
 			console.error('Error creating batch with Anthropic:', error);
 			throw new Error(
@@ -149,7 +198,16 @@ export class AnthropicProvider {
 					);
 				}
 
-				return await response.json();
+				const json_data = await response.json();
+				const validated_response = v.safeParse(anthropic_batch_response_schema, json_data);
+
+				if (!validated_response.success) {
+					throw new Error(
+						`Invalid batch status response from Anthropic API: ${JSON.stringify(validated_response.issues)}`,
+					);
+				}
+
+				return validated_response.output;
 			} catch (error) {
 				retry_count++;
 
@@ -198,12 +256,21 @@ export class AnthropicProvider {
 
 			const text = await response.text();
 			// Parse JSONL format (one JSON object per line)
-			const results: AnthropicBatchResult[] = text
+			const parsed_results = text
 				.split('\n')
 				.filter((line) => line.trim())
 				.map((line) => JSON.parse(line));
 
-			return results;
+			// Validate all results
+			const validated_results = v.safeParse(v.array(anthropic_batch_result_schema), parsed_results);
+
+			if (!validated_results.success) {
+				throw new Error(
+					`Invalid batch results from Anthropic API: ${JSON.stringify(validated_results.issues)}`,
+				);
+			}
+
+			return validated_results.output;
 		} catch (error) {
 			console.error(`Error getting batch results:`, error);
 			throw new Error(

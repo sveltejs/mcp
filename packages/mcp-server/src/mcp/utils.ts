@@ -35,7 +35,10 @@ export async function get_sections() {
 		return {
 			title: section.metadata.title,
 			use_cases:
-				section.metadata.use_cases ?? summaries[original_slug] ?? summaries[cleaned_slug] ?? 'use title and path to estimate use case',
+				section.metadata.use_cases ??
+				summaries[original_slug] ??
+				summaries[cleaned_slug] ??
+				'use title and path to estimate use case',
 			slug: cleaned_slug,
 			// Use original slug in URL to ensure it still works
 			url: `https://svelte.dev/${original_slug}/llms.txt`,
