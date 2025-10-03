@@ -4,11 +4,8 @@ import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { get_sections } from '../src/mcp/utils.ts';
-import {
-	AnthropicProvider,
-	type AnthropicBatchRequest,
-	type SummaryData,
-} from '../src/lib/anthropic.ts';
+import { AnthropicProvider } from '../src/lib/anthropic.ts';
+import { type AnthropicBatchRequest, type SummaryData } from '../src/lib/schemas.ts';
 
 const current_filename = fileURLToPath(import.meta.url);
 const current_dirname = path.dirname(current_filename);
@@ -57,14 +54,7 @@ Here is the documentation page content to analyze:
 
 `;
 
-interface Section {
-	title: string;
-	use_cases: string;
-	slug: string;
-	url: string;
-}
-
-async function fetch_section_content(url: string): Promise<string> {
+async function fetch_section_content(url: string) {
 	const response = await fetch(url, { signal: AbortSignal.timeout(30000) });
 	if (!response.ok) {
 		throw new Error(`Failed to fetch ${url}: ${response.status} ${response.statusText}`);
@@ -86,7 +76,7 @@ async function main() {
 
 	// Get all sections
 	console.log('📚 Fetching documentation sections...');
-	let sections: Section[] = await get_sections();
+	let sections = await get_sections();
 	console.log(`Found ${sections.length} sections`);
 
 	// Debug mode: limit to 2 sections
@@ -99,7 +89,7 @@ async function main() {
 	// Fetch content for each section
 	console.log('📥 Downloading section content...');
 	const sections_with_content: Array<{
-		section: Section;
+		section: (typeof sections)[number];
 		content: string;
 		index: number;
 	}> = [];

@@ -1,5 +1,5 @@
 import * as v from 'valibot';
-import { documentation_sections_schema, section_schema } from '../mcp/schemas/index.ts';
+import { documentation_sections_schema } from '../lib/schemas.js';
 import summary_data from '../use_cases.json' with { type: 'json' };
 
 export async function fetch_with_timeout(
@@ -45,16 +45,10 @@ export async function get_sections() {
 		};
 	});
 
-	const validated_output = v.safeParse(v.array(section_schema), mapped_sections);
-	if (!validated_output.success) {
-		console.error('Section validation failed:', validated_output.issues);
-		return [];
-	}
-
-	return validated_output.output;
+	return mapped_sections;
 }
 
-export async function format_sections_list(): Promise<string> {
+export async function format_sections_list() {
 	const sections = await get_sections();
 	return sections
 		.map((s) => `* title: ${s.title}, use_cases: ${s.use_cases}, path: ${s.slug}`)
