@@ -7,6 +7,7 @@ export function get_documentation(server: SvelteMcp) {
 	server.tool(
 		{
 			name: 'get-documentation',
+			enabled: () => false,
 			description:
 				'Retrieves full documentation content for Svelte 5 or SvelteKit sections. Supports flexible search by title (e.g., "$state", "routing") or file path (e.g., "docs/svelte/state.md"). Can accept a single section name or an array of sections. Before running this, make sure to analyze the users query, as well as the output from list-sections (which should be called first). Then ask for ALL relevant sections the user might require. For example, if the user asks to build anything interactive, you will need to fetch all relevant runes, and so on.',
 			schema: v.object({

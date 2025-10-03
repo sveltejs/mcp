@@ -22,10 +22,11 @@
 		"access": "public"
 	},
 	"scripts": {
-		"build": "tsdown",
+		"build": "tsdown && publint",
 		"dev": "tsdown --watch",
 		"test": "vitest",
-		"check": "tsc --noEmit"
+		"check": "tsc --noEmit",
+		"check:publint": "publint --strict"
 	},
 	"devDependencies": {
 		"@sveltejs/mcp-server": "workspace:^",
