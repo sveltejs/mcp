@@ -1,0 +1,9 @@
+---
+title: Prompts
+---
+
+This is the list of available prompts provided by the MCP server. Prompts are selected by the user and are sent as a user message. They can be useful to write repetitive instructions for the LLM on how to properly use the MCP server.
+
+## svelte-task
+
+This prompt should be used whenever you are asking the model to work on a Svelte-related task. It will instruct the LLM which documentation sections are available, which tools to invoke, when to invoke them, and how to interpret the results.
