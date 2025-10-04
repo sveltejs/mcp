@@ -117,6 +117,36 @@ describe('add_autofixers_issues', () => {
 				);
 			});
 		});
+
+		it('should add a suggestion when calling a function inside an effect', () => {
+			const content = run_autofixers_on_code(`
+			<script>
+				import { fetch_data } from './data.js';
+				$effect(() => {
+					fetch_data();
+				});
+			</script>`);
+
+			expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+			expect(content.suggestions).toContain(
+				`You are calling the function \`fetch_data\` inside an $effect. Please check if the function is reassigning a stateful variable because that's considered malpractice and check if it could use  \`$derived\` instead. Ignore this suggestion if you are sure this function is not assigning any stateful variable or if you can't check if it does.`,
+			);
+		});
+
+		it('should add a suggestion when calling a function inside an effect (with non identifier callee)', () => {
+			const content = run_autofixers_on_code(`
+			<script>
+				import { fetch_data } from './data.js';
+				$effect(() => {
+					fetch_data.fetch();
+				});
+			</script>`);
+
+			expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+			expect(content.suggestions).toContain(
+				`You are calling a function inside an $effect. Please check if the function is reassigning a stateful variable because that's considered malpractice and check if it could use  \`$derived\` instead. Ignore this suggestion if you are sure this function is not assigning any stateful variable or if you can't check if it does.`,
+			);
+		});
 	});
 
 	with_possible_inits('($init)', ({ init }) => {
