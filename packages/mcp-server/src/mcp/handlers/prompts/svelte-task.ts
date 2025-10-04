@@ -6,7 +6,7 @@ export function setup_svelte_task(server: SvelteMcp) {
 	server.prompt(
 		{
 			name: 'svelte-task-prompt',
-			title: 'Svelte Task Prompt',
+			title: 'Svelte-Task-Prompt',
 			description:
 				'Use this Prompt to ask for any svelte related task. It will automatically instruct the LLM on how to best use the autofixer and how to query for documentation pages.',
 			schema: v.object({
