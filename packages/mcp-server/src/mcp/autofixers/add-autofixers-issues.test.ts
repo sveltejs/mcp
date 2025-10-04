@@ -61,7 +61,7 @@ describe('add_autofixers_issues', () => {
 				<script>
 					const count = ${init}(0);
 				</script>
-				
+
 				<button onclick={() => count = 43}>Increment</button>
 				`);
 
@@ -74,7 +74,7 @@ describe('add_autofixers_issues', () => {
 				const content = run_autofixers_on_code(`
 				<script>
 					const count = 0;
-					
+
 					$effect(() => {
 						count = 43;
 					});
@@ -89,7 +89,7 @@ describe('add_autofixers_issues', () => {
 				const content = run_autofixers_on_code(`
 				<script>
 					let count = ${init}(0);
-					
+
 					$effect(() => {
 						count++;
 					});
@@ -105,8 +105,24 @@ describe('add_autofixers_issues', () => {
 				const content = run_autofixers_on_code(`
 				<script>
 					let count = ${init}({ value: 0 });
-					
+
 					$effect(() => {
+						count.value = 42;
+					});
+				</script>
+				`);
+
+				expect(content.suggestions).toContain(
+					'The stateful variable "count" is assigned inside an $effect which is generally consider a malpractice. Consider using $derived if possible.',
+				);
+			});
+
+			it(`should add a suggestion for variables that are mutated within an effect.pre`, () => {
+				const content = run_autofixers_on_code(`
+				<script>
+					let count = ${init}({ value: 0 });
+
+					$effect.pre(() => {
 						count.value = 42;
 					});
 				</script>

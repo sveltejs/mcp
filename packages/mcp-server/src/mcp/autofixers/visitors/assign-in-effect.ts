@@ -11,19 +11,11 @@ function run_if_in_effect(
 ) {
 	const in_effect = path.findLast(
 		(node) =>
-			node.type === 'CallExpression' &&
-			node.callee.type === 'Identifier' &&
-			node.callee.name === '$effect',
+			node.type === 'CallExpression' && state.parsed.is_rune(node, ['$effect', '$effect.pre']),
 	);
 
-	if (
-		in_effect &&
-		in_effect.type === 'CallExpression' &&
-		(in_effect.callee.type === 'Identifier' || in_effect.callee.type === 'MemberExpression')
-	) {
-		if (state.parsed.is_rune(in_effect, ['$effect', '$effect.pre'])) {
-			to_run();
-		}
+	if (in_effect) {
+		to_run();
 	}
 }
 
