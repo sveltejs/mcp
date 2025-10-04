@@ -17,7 +17,7 @@
 		".": "./src/index.ts"
 	},
 	"peerDependencies": {
-		"drizzle-orm": "^0.40.0"
+		"drizzle-orm": "^0.44.0"
 	},
 	"dependencies": {
 		"@sveltejs/mcp-schema": "workspace:^",
