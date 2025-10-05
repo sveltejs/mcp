@@ -1,0 +1,30 @@
+{
+	"$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+	"name": "io.github.sveltejs/svelte",
+	"description": "The official Svelte MCP server providing docs and autofixing tools for Svelte development",
+	"repository": {
+		"id": "1054419133",
+		"url": "https://github.com/sveltejs/mcp",
+		"subfolder": "packages/mcp-stdio",
+		"source": "github"
+	},
+	"version": "0.1.0",
+	"websiteUrl": "https://svelte.dev/docs/mcp/overview",
+	"packages": [
+		{
+			"registryType": "npm",
+			"identifier": "@sveltejs/mcp",
+			"version": "0.1.0",
+			"runtimeHint": "npx",
+			"transport": {
+				"type": "stdio"
+			}
+		}
+	],
+	"remotes": [
+		{
+			"url": "https://mcp.svelte.dev/mcp",
+			"type": "streamable-http"
+		}
+	]
+}

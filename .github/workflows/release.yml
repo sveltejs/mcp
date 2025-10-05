@@ -56,3 +56,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
+
+      - name: Publish to MCP Registry
+        if: steps.changesets.outputs.published == 'true'
+        working-directory: packages/mcp-stdio
+        run: |
+          # Download MCP Publisher pinned to v1.2.3
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/download/v1.2.3/mcp-publisher_1.2.3_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+
+          # Login using GitHub OIDC
+          ./mcp-publisher login github-oidc
+
+          # Publish to MCP Registry
+          ./mcp-publisher publish
