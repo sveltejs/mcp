@@ -177,6 +177,9 @@ importers:
       tmcp:
         specifier: ^1.13.0
         version: 1.14.0(typescript@5.9.2)
+      ts-blank-space:
+        specifier: ^0.6.2
+        version: 0.6.2
       typescript-eslint:
         specifier: ^8.44.0
         version: 8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2)
@@ -3718,6 +3721,10 @@ packages:
     engines: {node: '>=18.12'}
     peerDependencies:
       typescript: '>=4.8.4'
+
+  ts-blank-space@0.6.2:
+    resolution: {integrity: sha512-hZjcHdHrveEKI67v8OzI90a1bizgoDkY7ekE4fH89qJhZgxvmjfBOv98aibCU7OpKbvV3R9p/qd3DrzZqT1cFQ==}
+    engines: {node: '>=18.0.0'}
 
   ts-node@10.9.2:
     resolution: {integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==}
@@ -7583,6 +7590,10 @@ snapshots:
   ts-algebra@2.0.0: {}
 
   ts-api-utils@2.1.0(typescript@5.9.2):
+    dependencies:
+      typescript: 5.9.2
+
+  ts-blank-space@0.6.2:
     dependencies:
       typescript: 5.9.2
 

@@ -12,7 +12,7 @@ function base_config(svelte_config: Config): ESLint.Options['baseConfig'] {
 	return [
 		...svelte.configs.recommended,
 		{
-			files: ['*.svelte'],
+			files: ['*.svelte', '*.svelte.ts', '*.svelte.js'],
 			rules: {
 				'no-self-assign': 'warn',
 				'svelte/infinite-reactive-loop': 'warn',

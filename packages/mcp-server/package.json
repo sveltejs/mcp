@@ -28,6 +28,7 @@
 		"svelte": "^5.39.2",
 		"svelte-eslint-parser": "^1.3.2",
 		"tmcp": "^1.13.0",
+		"ts-blank-space": "^0.6.2",
 		"typescript-eslint": "^8.44.0",
 		"valibot": "^1.1.0",
 		"vitest": "^3.2.4",
@@ -35,10 +36,10 @@
 	},
 	"devDependencies": {
 		"@anthropic-ai/sdk": "^0.65.0",
-		"dotenv": "^17.2.3",
 		"@sveltejs/kit": "^2.42.2",
 		"@types/eslint-scope": "^8.3.2",
 		"@types/estree": "^1.0.8",
-		"@typescript-eslint/types": "^8.44.0"
+		"@typescript-eslint/types": "^8.44.0",
+		"dotenv": "^17.2.3"
 	}
 }
