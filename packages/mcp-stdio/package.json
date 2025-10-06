@@ -1,6 +1,6 @@
 {
 	"name": "@sveltejs/mcp",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"type": "module",
 	"license": "MIT",
 	"homepage": "https://github.com/sveltejs/mcp#readme",
