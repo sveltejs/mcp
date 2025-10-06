@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.0.4
+
+### Patch Changes
+
+- fix: allow TS `.svelte.ts` modules ([#49](https://github.com/sveltejs/mcp/pull/49))
+
 ## 0.0.3
 
 ### Patch Changes
