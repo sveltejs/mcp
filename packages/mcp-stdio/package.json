@@ -27,7 +27,8 @@
 		"dev": "tsdown --watch",
 		"test": "vitest",
 		"check": "tsc --noEmit",
-		"check:publint": "publint --strict"
+		"check:publint": "publint --strict",
+		"update:version": "node scripts/update-version.ts"
 	},
 	"devDependencies": {
 		"@sveltejs/mcp-server": "workspace:^",
