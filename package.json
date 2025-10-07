@@ -19,7 +19,7 @@
 		"generate-summaries": "pnpm --filter @sveltejs/mcp-server run generate-summaries",
 		"debug:generate-summaries": "pnpm --filter @sveltejs/mcp-server run debug:generate-summaries",
 		"release": "pnpm --filter @sveltejs/mcp run build && changeset publish",
-		"changeset:version": "pnpm --filter @sveltejs/mcp run update:version && git add --all"
+		"changeset:version": "changeset version && pnpm --filter @sveltejs/mcp run update:version && git add --all"
 	},
 	"keywords": [
 		"svelte",
