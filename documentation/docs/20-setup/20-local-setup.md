@@ -120,10 +120,10 @@ It will open a popup with MCP server config where you can add the following conf
 
 ```json
 {
-  "svelte": {
-    "command": "npx",
-    "args": ["-y","@sveltejs/mcp"],
-  }
+	"svelte": {
+		"command": "npx",
+		"args": ["-y", "@sveltejs/mcp"]
+	}
 }
 ```
 
