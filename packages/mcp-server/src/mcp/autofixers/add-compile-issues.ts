@@ -1,4 +1,6 @@
-import { compile } from 'svelte/compiler';
+import { compile as compile_component, compileModule } from 'svelte/compiler';
+import { extname } from 'path';
+import ts from 'ts-blank-space';
 
 export function add_compile_issues(
 	content: { issues: string[]; suggestions: string[] },
@@ -6,6 +8,21 @@ export function add_compile_issues(
 	desired_svelte_version: number,
 	filename = 'Component.svelte',
 ) {
+	let compile = compile_component;
+	const extension = extname(filename);
+	if (extension !== '.svelte') {
+		compile = compileModule;
+		// compile module doesn't accept .ts files so we need to transpile them first with ts-blank-space
+		// a fast and lightweight typescript transpiler that can strips types replacing them with white spaces
+		// so the code positions are not affected
+		if (extension === '.ts') {
+			code = ts(code, (node) => {
+				content.issues.push(
+					`The provided file is a module but it contains invalid TypeScript code: ${node.getText()} at ${node.getStart()}`,
+				);
+			});
+		}
+	}
 	const compilation_result = compile(code, {
 		filename: filename || 'Component.svelte',
 		generate: false,

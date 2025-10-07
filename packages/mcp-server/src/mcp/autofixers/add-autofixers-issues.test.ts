@@ -133,6 +133,36 @@ describe('add_autofixers_issues', () => {
 				);
 			});
 		});
+
+		it('should add a suggestion when calling a function inside an effect', () => {
+			const content = run_autofixers_on_code(`
+			<script>
+				import { fetch_data } from './data.js';
+				$effect(() => {
+					fetch_data();
+				});
+			</script>`);
+
+			expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+			expect(content.suggestions).toContain(
+				`You are calling the function \`fetch_data\` inside an $effect. Please check if the function is reassigning a stateful variable because that's considered malpractice and check if it could use  \`$derived\` instead. Ignore this suggestion if you are sure this function is not assigning any stateful variable or if you can't check if it does.`,
+			);
+		});
+
+		it('should add a suggestion when calling a function inside an effect (with non identifier callee)', () => {
+			const content = run_autofixers_on_code(`
+			<script>
+				import { fetch_data } from './data.js';
+				$effect(() => {
+					fetch_data.fetch();
+				});
+			</script>`);
+
+			expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+			expect(content.suggestions).toContain(
+				`You are calling a function inside an $effect. Please check if the function is reassigning a stateful variable because that's considered malpractice and check if it could use  \`$derived\` instead. Ignore this suggestion if you are sure this function is not assigning any stateful variable or if you can't check if it does.`,
+			);
+		});
 	});
 
 	with_possible_inits('($init)', ({ init }) => {
@@ -482,6 +512,179 @@ describe('add_autofixers_issues', () => {
 			expect(content.suggestions).not.toContain(
 				`You are importing "get" from "svelte/store". Unless the user specifically asked for stores or it's required because some library/component requires a store as input consider using runes like \`$state\` or \`$derived\` instead, all runes are globally available.`,
 			);
+		});
+	});
+
+	describe('suggest_attachments', () => {
+		describe('bind:this', () => {
+			it('should add suggestions when using bind:this on an element', () => {
+				const content = run_autofixers_on_code(`
+			<script>
+				let a = $state();	
+			</script>
+
+			<a bind:this={a} />`);
+
+				expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+				expect(content.suggestions).toContain(
+					'The usage of `bind:this` can often be replaced with an easier to read `action` or even better an `attachment`. Consider using the latter if possible.',
+				);
+			});
+
+			it('should not add suggestions when using bind:this on a component', () => {
+				const content = run_autofixers_on_code(`
+			<script>
+				import Child from './Child.svelte';
+				let a = $state();	
+			</script>
+
+			<Child bind:this={a} />`);
+
+				expect(content.suggestions).not.toContain(
+					'The usage of `bind:this` can often be replaced with an easier to read `action` or even better an `attachment`. Consider using the latter if possible.',
+				);
+			});
+
+			it('should not add suggestions when using bind:this on a component nested in an element', () => {
+				const content = run_autofixers_on_code(`
+			<script>
+				import Child from './Child.svelte';
+				let a = $state();	
+			</script>
+
+			<div>
+				<Child bind:this={a} />
+			</div>`);
+
+				expect(content.suggestions).not.toContain(
+					'The usage of `bind:this` can often be replaced with an easier to read `action` or even better an `attachment`. Consider using the latter if possible.',
+				);
+			});
+
+			it('should add suggestions but not suggest attachments when using bind:this on an element and the desired svelte version is 4', () => {
+				const content = run_autofixers_on_code(
+					`
+			<script>
+				let a;	
+			</script>
+
+			<a bind:this={a} />`,
+					4,
+				);
+
+				expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+				expect(content.suggestions).toContain(
+					'The usage of `bind:this` can often be replaced with an easier to read `action`. Consider using the latter if possible.',
+				);
+			});
+		});
+
+		describe('use:', () => {
+			it('should add suggestions when using use: on an element and the action is declared as a function', () => {
+				const content = run_autofixers_on_code(
+					`<script>
+						function my_action(node) {
+							// do something with the node
+						}
+					</script>
+
+					<a use:my_action />`,
+				);
+
+				expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+				expect(content.suggestions).toContain(
+					'Consider using an `attachment` instead of an `action` for "my_action".',
+				);
+			});
+
+			it('should add suggestions when using use: on an element and the action is declared as a variable', () => {
+				const content = run_autofixers_on_code(
+					`<script>
+						const my_action = (node) => {
+							// do something with the node
+						}
+					</script>
+
+					<a use:my_action />`,
+				);
+
+				expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+				expect(content.suggestions).toContain(
+					'Consider using an `attachment` instead of an `action` for "my_action".',
+				);
+			});
+
+			it('should add suggestions when using use: on an element and the action is declared as an object', () => {
+				const content = run_autofixers_on_code(
+					`<script>
+						const my_action = {
+							action: (node) => {
+								// do something with the node
+							}
+						};
+					</script>
+
+					<a use:my_action.action />`,
+				);
+
+				expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+				expect(content.suggestions).toContain(
+					'Consider using an `attachment` instead of an `action` for "my_action".',
+				);
+			});
+
+			it('should not add suggestions when using use: on an element and the desired svelte version is 4', () => {
+				const content = run_autofixers_on_code(
+					`<script>
+						function my_action(node) {
+							// do something with the node
+						}
+					</script>
+
+					<a use:my_action />`,
+					4,
+				);
+
+				expect(content.suggestions).not.toContain(
+					'Consider using an `attachment` instead of an `action` for "my_action".',
+				);
+			});
+
+			it('should not add suggestions when using use: on an element and the action comes from an import', () => {
+				const content = run_autofixers_on_code(
+					`<script>
+						import { my_action } from './actions.js';
+					</script>
+
+					<a use:my_action />`,
+				);
+
+				expect(content.suggestions).not.toContain(
+					'Consider using an `attachment` instead of an `action` for "my_action".',
+				);
+			});
+
+			it('should not add suggestions when using use: on an element and the action comes from the props', () => {
+				const content = run_autofixers_on_code(
+					`<script>
+						const { my_action } = $props();
+					</script>
+
+					<a use:my_action />`,
+				);
+
+				expect(content.suggestions).not.toContain(
+					'Consider using an `attachment` instead of an `action` for "my_action".',
+				);
+			});
+
+			it('should not add suggestions when using use: on an element and the action comes from a global variable', () => {
+				const content = run_autofixers_on_code(`<a use:my_action />`);
+
+				expect(content.suggestions).not.toContain(
+					'Consider using an `attachment` instead of an `action` for "my_action".',
+				);
+			});
 		});
 	});
 });
