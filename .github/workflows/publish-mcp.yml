@@ -1,0 +1,27 @@
+name: Publish to MCP Registry
+
+on:
+  workflow_call:
+
+permissions:
+  id-token: write # OpenID Connect token needed for MCP registry authentication
+
+jobs:
+  publish-mcp:
+    name: Publish to MCP Registry
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
+
+      - name: Publish to MCP Registry
+        working-directory: packages/mcp-stdio
+        run: |
+          # Download MCP Publisher pinned to v1.2.3
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/download/v1.2.3/mcp-publisher_1.2.3_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+
+          # Login using GitHub OIDC
+          ./mcp-publisher login github-oidc
+
+          # Publish to MCP Registry
+          ./mcp-publisher publish
