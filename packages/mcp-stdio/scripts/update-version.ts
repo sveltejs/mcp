@@ -11,4 +11,4 @@ const server_json = JSON.parse(server_json_string);
 server_json.version = package_json.version;
 server_json.packages[0].version = package_json.version;
 
-await writeFile(server_json_path, JSON.stringify(server_json, null, '\t'), 'utf-8');
+await writeFile(server_json_path, JSON.stringify(server_json, null, '\t') + '\n', 'utf-8');
