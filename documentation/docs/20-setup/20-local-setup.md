@@ -110,7 +110,7 @@ It will open a file with your MCP servers where you can add the following config
 
 ## Zed
 
-- Open the command palette (CMD/Ctrl + Shift + P)
+- Open the command palette
 - Search and select "agent:open settings"
 - In settings panel look for `Model Context Protocol (MCP) Servers`
 - Click on "Add Server"
