@@ -1,4 +1,10 @@
-import type { AssignmentExpression, Identifier, Node, UpdateExpression } from 'estree';
+import type {
+	AssignmentExpression,
+	CallExpression,
+	Identifier,
+	Node,
+	UpdateExpression,
+} from 'estree';
 import type { Autofixer, AutofixerState } from './index.js';
 import { left_most_id } from '../ast/utils.js';
 import type { AST } from 'svelte-eslint-parser';
@@ -19,9 +25,9 @@ function run_if_in_effect(
 	}
 }
 
-function visitor(
+function assign_or_update_visitor(
 	node: UpdateExpression | AssignmentExpression,
-	{ state, path }: Context<Node | AST.SvelteNode, AutofixerState>,
+	{ state, path, next }: Context<Node | AST.SvelteNode, AutofixerState>,
 ) {
 	run_if_in_effect(path, state, () => {
 		function check_if_stateful_id(id: Identifier) {
@@ -50,9 +56,25 @@ function visitor(
 			}
 		}
 	});
+	next();
+}
+
+function call_expression_visitor(
+	node: CallExpression,
+	{ state, path, next }: Context<Node | AST.SvelteNode, AutofixerState>,
+) {
+	run_if_in_effect(path, state, () => {
+		const function_name =
+			node.callee.type === 'Identifier' ? `the function \`${node.callee.name}\`` : 'a function';
+		state.output.suggestions.push(
+			`You are calling ${function_name} inside an $effect. Please check if the function is reassigning a stateful variable because that's considered malpractice and check if it could use  \`$derived\` instead. Ignore this suggestion if you are sure this function is not assigning any stateful variable or if you can't check if it does.`,
+		);
+	});
+	next();
 }
 
 export const assign_in_effect: Autofixer = {
-	UpdateExpression: visitor,
-	AssignmentExpression: visitor,
+	UpdateExpression: assign_or_update_visitor,
+	AssignmentExpression: assign_or_update_visitor,
+	CallExpression: call_expression_visitor,
 };
