@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.4
+
+### Patch Changes
+
+- fix: pass secrets in action and update `mcpName` ([`044f098`](https://github.com/sveltejs/mcp/commit/044f0988b935fff39911a861a648dfb276f5831a))
+
 ## 0.1.3
 
 ### Patch Changes
