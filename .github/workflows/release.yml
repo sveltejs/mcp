@@ -64,4 +64,6 @@ jobs:
   publish-mcp:
     needs: release
     if: needs.release.outputs.published == 'true'
+    permissions:
+      id-token: write
     uses: ./.github/workflows/publish-mcp.yml
