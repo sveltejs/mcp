@@ -1,5 +1,17 @@
 # @sveltejs/mcp
 
+## 0.1.0
+
+### Minor Changes
+
+- feat: publish to registry ([#45](https://github.com/sveltejs/mcp/pull/45))
+
+### Patch Changes
+
+- feat: add autofixer to tell the LLM to check if some function called in effect is assigning state #26 ([`73d7625`](https://github.com/sveltejs/mcp/commit/73d7625b3ca6a812ba91883ea668d80ff1e7c703))
+
+- feat: add bind:this -> attachment and action -> attachment autofixer #20 ([`73d7625`](https://github.com/sveltejs/mcp/commit/73d7625b3ca6a812ba91883ea668d80ff1e7c703))
+
 ## 0.0.4
 
 ### Patch Changes
