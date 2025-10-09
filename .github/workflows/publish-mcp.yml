@@ -25,10 +25,11 @@ jobs:
           sha256sum --ignore-missing -c ./checksums/registry_1.2.3_checksums.txt
 
           # Extract the tarball
+          mkdir tmp
           tar -xzf $NAME --no-same-owner --no-same-permissions -C tmp
 
           # Install the MCP Publisher binary
-          install -m 0755  tmp/mcp-publisher
+          install -m 0755  tmp/mcp-publisher .
 
           # Login using GitHub OIDC
           ./mcp-publisher login github-oidc
