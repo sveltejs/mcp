@@ -50,7 +50,7 @@ args = ["-y", "@sveltejs/mcp"]
 To include the local MCP version in Gemini CLI, simply run the following command:
 
 ```bash
-gemini mcp add -t stdio -s [scope] svelte -- npx -y @sveltejs/mcp
+gemini mcp add -t stdio -s [scope] svelte npx -y @sveltejs/mcp
 ```
 
 The `[scope]` must be `user`, `project` or `local`.
