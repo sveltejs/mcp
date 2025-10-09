@@ -8,13 +8,13 @@
 		"subfolder": "packages/mcp-stdio",
 		"source": "github"
 	},
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"websiteUrl": "https://svelte.dev/docs/mcp/overview",
 	"packages": [
 		{
 			"registryType": "npm",
 			"identifier": "@sveltejs/mcp",
-			"version": "0.1.0",
+			"version": "0.1.1",
 			"runtimeHint": "npx",
 			"transport": {
 				"type": "stdio"

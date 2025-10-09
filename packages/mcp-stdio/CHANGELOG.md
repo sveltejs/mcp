@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.1
+
+### Patch Changes
+
+- feat: publish mcp to registry (maybe for real this time) ([`132943d`](https://github.com/sveltejs/mcp/commit/132943db3b04dbbd322d08926c0880c990a61f5f))
+
 ## 0.1.0
 
 ### Minor Changes
