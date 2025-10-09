@@ -1,6 +1,6 @@
 {
 	"name": "@sveltejs/mcp",
-	"version": "0.0.4",
+	"version": "0.1.0",
 	"type": "module",
 	"license": "MIT",
 	"mcpName": "io.github.sveltejs/svelte",
