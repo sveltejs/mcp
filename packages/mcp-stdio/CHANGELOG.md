@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.3
+
+### Patch Changes
+
+- fix: use DNS to publish MCP ([#59](https://github.com/sveltejs/mcp/pull/59))
+
 ## 0.1.2
 
 ### Patch Changes
