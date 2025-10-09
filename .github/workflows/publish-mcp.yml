@@ -3,9 +3,6 @@ name: Publish to MCP Registry
 on:
   workflow_call:
 
-permissions:
-  id-token: write # OpenID Connect token needed for MCP registry authentication
-
 jobs:
   publish-mcp:
     name: Publish to MCP Registry
@@ -16,6 +13,8 @@ jobs:
 
       - name: Publish to MCP Registry
         working-directory: packages/mcp-stdio
+        env:
+          MCP_KEY: ${{ secrets.MCP_KEY }}
         run: |
           NAME=mcp-publisher_1.2.3_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz
           # Download MCP Publisher pinned to v1.2.3 using latest https for security and save it to a file named mcp-publisher.tar.gz
@@ -31,8 +30,8 @@ jobs:
           # Install the MCP Publisher binary
           install -m 0755  tmp/mcp-publisher .
 
-          # Login using GitHub OIDC
-          ./mcp-publisher login github-oidc
+          # Login using DNS
+          ./mcp-publisher login dns --domain svelte.dev --private-key "${MCP_KEY}"
 
           # Publish to MCP Registry
           ./mcp-publisher publish
