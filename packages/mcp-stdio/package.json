@@ -3,6 +3,7 @@
 	"version": "0.0.4",
 	"type": "module",
 	"license": "MIT",
+	"mcpName": "io.github.sveltejs/svelte",
 	"homepage": "https://github.com/sveltejs/mcp#readme",
 	"bugs": {
 		"url": "https://github.com/sveltejs/mcp/issues"
@@ -26,7 +27,8 @@
 		"dev": "tsdown --watch",
 		"test": "vitest",
 		"check": "tsc --noEmit",
-		"check:publint": "publint --strict"
+		"check:publint": "publint --strict",
+		"update:version": "node scripts/update-version.ts"
 	},
 	"devDependencies": {
 		"@sveltejs/mcp-server": "workspace:^",
