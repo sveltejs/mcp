@@ -65,3 +65,5 @@ jobs:
     needs: release
     if: needs.release.outputs.published == 'true'
     uses: ./.github/workflows/publish-mcp.yml
+    secrets:
+      MCP_KEY: ${{ secrets.MCP_KEY }}

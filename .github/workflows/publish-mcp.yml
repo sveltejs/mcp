@@ -2,6 +2,9 @@ name: Publish to MCP Registry
 
 on:
   workflow_call:
+    secrets:
+      MCP_KEY:
+        required: true
 
 jobs:
   publish-mcp:
