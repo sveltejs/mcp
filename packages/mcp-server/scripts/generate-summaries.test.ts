@@ -252,29 +252,11 @@ describe('generate-summaries incremental processing', () => {
 			expect(has_dry_run).toBe(true);
 		});
 
-		it('should parse --sections flag with section names', () => {
-			const args = ['--sections', 'svelte/overview', 'svelte/$state'];
-			const sections_index = args.indexOf('--sections');
-
-			const sections: string[] = [];
-			if (sections_index !== -1) {
-				for (let i = sections_index + 1; i < args.length; i++) {
-					if (args[i]?.startsWith('--')) break;
-					sections.push(args[i]!);
-				}
-			}
-
-			expect(sections).toHaveLength(2);
-			expect(sections).toContain('svelte/overview');
-			expect(sections).toContain('svelte/$state');
-		});
-
 		it('should handle multiple flags together', () => {
-			const args = ['--force', '--dry-run', '--sections', 'svelte/overview'];
+			const args = ['--force', '--dry-run'];
 
 			expect(args.includes('--force')).toBe(true);
 			expect(args.includes('--dry-run')).toBe(true);
-			expect(args.includes('--sections')).toBe(true);
 		});
 	});
 
@@ -308,35 +290,6 @@ describe('generate-summaries incremental processing', () => {
 
 			expect(data.failed_summaries).toBe(1);
 			expect(data.errors).toHaveLength(1);
-		});
-	});
-
-	describe('specific section processing', () => {
-		it('should only process specified sections when --sections flag is used', () => {
-			const all_sections = [
-				{ slug: 'svelte/overview', title: 'Overview' },
-				{ slug: 'svelte/$state', title: '$state' },
-				{ slug: 'kit/introduction', title: 'Introduction' },
-			];
-
-			const specified_sections = ['svelte/$state'];
-			const to_process = all_sections.filter((s) => specified_sections.includes(s.slug));
-
-			expect(to_process).toHaveLength(1);
-			expect(to_process[0]?.slug).toBe('svelte/$state');
-		});
-
-		it('should process multiple specified sections', () => {
-			const all_sections = [
-				{ slug: 'svelte/overview', title: 'Overview' },
-				{ slug: 'svelte/$state', title: '$state' },
-				{ slug: 'kit/introduction', title: 'Introduction' },
-			];
-
-			const specified_sections = ['svelte/overview', 'kit/introduction'];
-			const to_process = all_sections.filter((s) => specified_sections.includes(s.slug));
-
-			expect(to_process).toHaveLength(2);
 		});
 	});
 

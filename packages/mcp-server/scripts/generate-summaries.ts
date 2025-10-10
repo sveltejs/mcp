@@ -16,7 +16,6 @@ import * as v from 'valibot';
 interface CliOptions {
 	force: boolean;
 	dryRun: boolean;
-	sections: string[];
 	debug: boolean;
 }
 
@@ -90,7 +89,6 @@ program
 	.version('1.0.0')
 	.option('-f, --force', 'Force regeneration of all summaries', false)
 	.option('-d, --dry-run', 'Show what would be changed without making API calls', false)
-	.option('-s, --sections <sections...>', 'Specific section slugs to process (space-separated)', [])
 	.option('--debug', 'Debug mode: process only 2 sections', false);
 
 async function fetch_section_content(url: string) {
@@ -126,7 +124,6 @@ function detect_changes(
 	current_sections: Array<{ slug: string; title: string; url: string }>,
 	existing_data: SummaryData | null,
 	force: boolean,
-	specific_sections: string[],
 ): {
 	to_process: Array<{ slug: string; title: string; url: string }>;
 	to_remove: string[];
@@ -134,15 +131,10 @@ function detect_changes(
 } {
 	if (!existing_data || force) {
 		// First run or force regeneration
-		const sections_to_process =
-			specific_sections.length > 0
-				? current_sections.filter((s) => specific_sections.includes(s.slug))
-				: current_sections;
-
 		return {
-			to_process: sections_to_process,
+			to_process: current_sections,
 			to_remove: [],
-			changes: sections_to_process.map((s) => ({
+			changes: current_sections.map((s) => ({
 				...s,
 				change_type: force ? 'updated' : 'new',
 			})),
@@ -179,14 +171,8 @@ function detect_changes(
 		}
 	}
 
-	// If specific sections requested, filter to only those
-	const to_process =
-		specific_sections.length > 0
-			? current_sections.filter((s) => specific_sections.includes(s.slug))
-			: new_sections;
-
 	return {
-		to_process,
+		to_process: new_sections,
 		to_remove: removed_slugs,
 		changes,
 	};
@@ -210,9 +196,6 @@ async function main() {
 	if (options.force) {
 		console.log('⚡ FORCE MODE - Regenerating all summaries\n');
 	}
-	if (options.sections.length > 0) {
-		console.log(`📌 Processing specific sections: ${options.sections.join(', ')}\n`);
-	}
 	if (debug) {
 		console.log('🐛 DEBUG MODE - Will process only 2 sections\n');
 	}
@@ -229,7 +212,6 @@ async function main() {
 		console.log('📝 No existing summaries found - will process all sections');
 	}
 
-	// Get all sections from API
 	console.log('📚 Fetching documentation sections...');
 	const all_sections = await get_sections();
 	console.log(`Found ${all_sections.length} sections from API`);
@@ -239,7 +221,6 @@ async function main() {
 		all_sections,
 		existing_data,
 		options.force,
-		options.sections,
 	);
 
 	// Display changes
@@ -270,7 +251,7 @@ async function main() {
 
 	// Debug mode: limit sections
 	let sections_to_process = to_process;
-	if (debug && !options.sections.length) {
+	if (debug) {
 		console.log('\n🐛 Processing only 2 sections for debugging');
 		sections_to_process = to_process.slice(0, 2);
 	}
