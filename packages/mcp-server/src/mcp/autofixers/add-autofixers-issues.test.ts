@@ -687,7 +687,7 @@ describe('add_autofixers_issues', () => {
 			});
 		});
 	});
-	describe.only('read_state_with_dollar', () => {
+	describe('read_state_with_dollar', () => {
 		with_possible_inits('($init)', ({ init }) => {
 			it(`should add an issue when reading a stateful variable initialized with ${init} like if it was a store`, () => {
 				const content = run_autofixers_on_code(`<script>
