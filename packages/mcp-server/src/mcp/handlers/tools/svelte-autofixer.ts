@@ -15,7 +15,7 @@ export function svelte_autofixer(server: SvelteMcp) {
 			schema: v.object({
 				code: v.string(),
 				desired_svelte_version: v.pipe(
-					v.union([v.literal(4), v.literal(5), v.literal('4'), v.literal('5')]),
+					v.union([v.string(), v.number()]),
 					v.description(
 						'The desired svelte version...if possible read this from the package.json of the user project, otherwise use some hint from the wording (if the user asks for runes it wants version 5). Default to 5 in case of doubt.',
 					),
@@ -39,7 +39,30 @@ export function svelte_autofixer(server: SvelteMcp) {
 				openWorldHint: false,
 			},
 		},
-		async ({ code, filename: filename_or_path, desired_svelte_version }) => {
+		async ({
+			code,
+			filename: filename_or_path,
+			desired_svelte_version: desired_svelte_version_unchecked,
+		}) => {
+			// we validate manually because some clients don't support union in the input schema (looking at you cursor)
+			const parsed_version = v.safeParse(
+				v.union([v.literal(4), v.literal(5), v.literal('4'), v.literal('5')]),
+				desired_svelte_version_unchecked,
+			);
+			if (parsed_version.success === false) {
+				return {
+					isError: true,
+					content: [
+						{
+							type: 'text',
+							text: `The desired_svelte_version MUST be either 4 or 5 but received "${desired_svelte_version_unchecked}"`,
+						},
+					],
+				};
+			}
+
+			const desired_svelte_version = parsed_version.output;
+
 			const content: {
 				issues: string[];
 				suggestions: string[];
