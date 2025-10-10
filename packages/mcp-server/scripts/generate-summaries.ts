@@ -30,6 +30,15 @@ interface SectionChange {
 const current_filename = fileURLToPath(import.meta.url);
 const current_dirname = path.dirname(current_filename);
 
+/**
+ * Reads a file and validates that the result is a string using valibot.
+ * This handles the TypeScript type issues with readFile and ensures we get a string.
+ */
+async function read_file_as_string(file_path: string, encoding: BufferEncoding = 'utf-8'): Promise<string> {
+	const content = await readFile(file_path, encoding);
+	return v.parse(v.string(), content);
+}
+
 const USE_CASES_PROMPT = `
 You are tasked with analyzing Svelte 5 and SvelteKit documentation pages to identify when they would be useful.
 
@@ -102,7 +111,7 @@ async function load_existing_summaries(output_path: string): Promise<SummaryData
 	}
 
 	try {
-		const content = (await readFile(output_path, 'utf-8')) as unknown as string;
+		const content = await read_file_as_string(output_path, 'utf-8');
 		const data = JSON.parse(content);
 		const validated = v.safeParse(summary_data_schema, data);
 
