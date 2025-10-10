@@ -82,7 +82,6 @@ Here is the documentation page content to analyze:
 
 `;
 
-// Setup CLI using Commander
 const program = new Command();
 
 program
