@@ -36,8 +36,18 @@ export function parse(code: string, file_path: string) {
 		}
 		return all_scopes;
 	}
+	// walking the ast will also walk all the tokens if we don't remove them so we return them separately
+	// we also remove the parent which as a circular reference to the ast itself (and it's not needed since we use zimmerframe to walk the ast)
+	const {
+		ast: { tokens, ...ast },
+	} = parsed;
+
+	// @ts-expect-error we also have to delete it from the object or the circular reference remains
+	delete parsed.ast.tokens;
+
 	return {
-		ast: parsed.ast,
+		ast,
+		tokens,
 		scope_manager: parsed.scopeManager as ScopeManager,
 		visitor_keys: parsed.visitorKeys,
 		get all_scopes() {

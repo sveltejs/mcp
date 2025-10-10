@@ -687,4 +687,56 @@ describe('add_autofixers_issues', () => {
 			});
 		});
 	});
+	describe('read_state_with_dollar', () => {
+		with_possible_inits('($init)', ({ init }) => {
+			it(`should add an issue when reading a stateful variable initialized with ${init} like if it was a store`, () => {
+				const content = run_autofixers_on_code(`<script>
+					let x = ${init}(()=> 43);
+					$x;
+				</script>
+				`);
+
+				expect(content.issues).toContain(
+					`You are reading the stateful variable "$x" with a "$" prefix. Stateful variables are not stores and should be read without the "$". Please read it as a normal variable "x"`,
+				);
+			});
+		});
+
+		it(`should not add an issue when reading an imported variable like if it was a store`, () => {
+			const content = run_autofixers_on_code(`<script>
+					import { x } from "./my-stores.ts";
+					$x;
+				</script>
+				`);
+
+			expect(content.issues).not.toContain(
+				`You are reading the stateful variable "$x" with a "$" prefix. Stateful variables are not stores and should be read without the "$". Please read it as a normal variable "x"`,
+			);
+		});
+
+		it(`should not add an issue when reading a non-stateful variable like if it was a store`, () => {
+			const content = run_autofixers_on_code(`<script>
+					import { writable } from "svelte/store";	
+					const x = writable(0);
+					$x;
+				</script>
+				`);
+
+			expect(content.issues).not.toContain(
+				`You are reading the stateful variable "$x" with a "$" prefix. Stateful variables are not stores and should be read without the "$". Please read it as a normal variable "x"`,
+			);
+		});
+
+		it(`should not add an issue when reading a prop like if it was a store`, () => {
+			const content = run_autofixers_on_code(`<script>
+					const { x } = $props();
+					$x;
+				</script>
+				`);
+
+			expect(content.issues).not.toContain(
+				`You are reading the stateful variable "$x" with a "$" prefix. Stateful variables are not stores and should be read without the "$". Please read it as a normal variable "x"`,
+			);
+		});
+	});
 });
