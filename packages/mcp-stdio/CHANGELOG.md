@@ -1,5 +1,15 @@
 # @sveltejs/mcp
 
+## 0.1.5
+
+### Patch Changes
+
+- fix: widen `desired_svelte_version` validation to accommodate some clients ([`3b301d7`](https://github.com/sveltejs/mcp/commit/3b301d7d9c2f49758023408f505bc4ca79caaff4))
+
+- fix: minor tweaks to the prompt to allow for automatic sync ([#63](https://github.com/sveltejs/mcp/pull/63))
+
+- feat: `read_state_with_dollar` autofixer ([#66](https://github.com/sveltejs/mcp/pull/66))
+
 ## 0.1.4
 
 ### Patch Changes
