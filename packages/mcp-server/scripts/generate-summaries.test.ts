@@ -45,7 +45,7 @@ describe('generate-summaries incremental processing', () => {
 			await writeFile(test_use_cases_path, JSON.stringify(initial_data, null, 2), 'utf-8');
 
 			const content = await readFile(test_use_cases_path, 'utf-8');
-			const data = JSON.parse(content);
+			const data = JSON.parse(content as unknown as string);
 
 			expect(data.summaries).toHaveProperty('svelte/overview');
 			expect(data.total_sections).toBe(1);
@@ -60,7 +60,7 @@ describe('generate-summaries incremental processing', () => {
 			await writeFile(test_use_cases_path, JSON.stringify(existing_data, null, 2), 'utf-8');
 
 			const content = await readFile(test_use_cases_path, 'utf-8');
-			const data = JSON.parse(content);
+			const data = JSON.parse(content as unknown as string);
 
 			expect(Object.keys(data.summaries)).toHaveLength(2);
 			expect(data.summaries).toHaveProperty('svelte/overview');
@@ -72,7 +72,7 @@ describe('generate-summaries incremental processing', () => {
 
 			// Should throw when trying to parse
 			const content = await readFile(test_use_cases_path, 'utf-8');
-			expect(() => JSON.parse(content)).toThrow();
+			expect(() => JSON.parse(content as unknown as string)).toThrow();
 		});
 	});
 
@@ -180,7 +180,7 @@ describe('generate-summaries incremental processing', () => {
 			};
 
 			const to_remove = ['svelte/old-api'];
-			const merged = { ...existing_summaries };
+			const merged: Record<string, string> = { ...existing_summaries };
 
 			for (const slug of to_remove) {
 				delete merged[slug];
@@ -298,7 +298,7 @@ describe('generate-summaries incremental processing', () => {
 
 	describe('force regeneration', () => {
 		it('should process all sections when --force is used', () => {
-			const existing_summaries = {
+			const existing_summaries: Record<string, string> = {
 				'svelte/overview': 'always, any svelte project',
 			};
 

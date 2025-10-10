@@ -13,6 +13,20 @@ import {
 } from '../src/lib/schemas.ts';
 import * as v from 'valibot';
 
+interface CliOptions {
+	force: boolean;
+	dryRun: boolean;
+	sections: string[];
+	debug: boolean;
+}
+
+interface SectionChange {
+	slug: string;
+	title: string;
+	url: string;
+	change_type: 'new' | 'updated' | 'removed';
+}
+
 const current_filename = fileURLToPath(import.meta.url);
 const current_dirname = path.dirname(current_filename);
 
@@ -72,13 +86,6 @@ program
 	.option('-s, --sections <sections...>', 'Specific section slugs to process (space-separated)', [])
 	.option('--debug', 'Debug mode: process only 2 sections', false);
 
-interface CliOptions {
-	force: boolean;
-	dryRun: boolean;
-	sections: string[];
-	debug: boolean;
-}
-
 async function fetch_section_content(url: string) {
 	const response = await fetch(url, { signal: AbortSignal.timeout(30000) });
 	if (!response.ok) {
@@ -109,13 +116,6 @@ async function load_existing_summaries(output_path: string): Promise<SummaryData
 		console.warn('⚠️  Failed to read existing use_cases.json:', error);
 		return null;
 	}
-}
-
-interface SectionChange {
-	slug: string;
-	title: string;
-	url: string;
-	change_type: 'new' | 'updated' | 'removed';
 }
 
 function detect_changes(
