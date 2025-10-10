@@ -95,7 +95,7 @@ async function load_existing_summaries(output_path: string): Promise<SummaryData
 	}
 
 	try {
-		const content = await readFile(output_path, 'utf-8');
+		const content = (await readFile(output_path, 'utf-8')) as string;
 		const data = JSON.parse(content);
 		const validated = v.safeParse(summary_data_schema, data);
 
