@@ -10,8 +10,9 @@
 	"type": "module",
 	"scripts": {
 		"test": "vitest",
-		"generate-summaries": "node scripts/generate-summaries.ts --experimental-strip-types",
-		"debug:generate-summaries": "DEBUG_MODE=1 node scripts/generate-summaries.ts --experimental-strip-types"
+		"generate-summaries": "node --experimental-strip-types scripts/generate-summaries.ts",
+		"generate-summaries:dry-run": "node --experimental-strip-types scripts/generate-summaries.ts --dry-run",
+		"debug:generate-summaries": "DEBUG_MODE=1 node --experimental-strip-types scripts/generate-summaries.ts"
 	},
 	"exports": {
 		".": "./src/index.ts"
