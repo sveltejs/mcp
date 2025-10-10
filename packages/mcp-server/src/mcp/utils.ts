@@ -1,5 +1,5 @@
 import * as v from 'valibot';
-import { documentation_sections_schema } from '../lib/schemas.js';
+import { documentation_sections_schema } from '../lib/schemas.ts';
 import summary_data from '../use_cases.json' with { type: 'json' };
 
 export async function fetch_with_timeout(

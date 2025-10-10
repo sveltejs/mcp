@@ -23,6 +23,7 @@
 		"@sveltejs/mcp-schema": "workspace:^",
 		"@tmcp/adapter-valibot": "^0.1.4",
 		"@typescript-eslint/parser": "^8.44.0",
+		"commander": "^13.1.0",
 		"eslint": "^9.36.0",
 		"eslint-plugin-svelte": "^3.12.3",
 		"svelte": "^5.39.2",
