@@ -67,12 +67,56 @@ describe('generate-summaries incremental processing', () => {
 			expect(data.summaries).toHaveProperty('svelte/$state');
 		});
 
-		it('should handle malformed use_cases.json gracefully', async () => {
+		it('should crash on malformed JSON', async () => {
+			// Import the load_existing_summaries function
+			const { load_existing_summaries } = await import('./generate-summaries.ts');
+
+			// Write invalid JSON
 			await writeFile(test_use_cases_path, '{ invalid json', 'utf-8');
 
-			// Should throw when trying to parse
-			const content = await readFile(test_use_cases_path, 'utf-8');
-			expect(() => JSON.parse(content as unknown as string)).toThrow();
+			// Should throw (JSON.parse will throw SyntaxError)
+			await expect(load_existing_summaries(test_use_cases_path)).rejects.toThrow();
+		});
+
+		it('should crash on invalid schema', async () => {
+			// Import the load_existing_summaries function
+			const { load_existing_summaries } = await import('./generate-summaries.ts');
+
+			// Write valid JSON but invalid schema
+			await writeFile(test_use_cases_path, JSON.stringify({ invalid: 'schema' }), 'utf-8');
+
+			// Should throw an error about schema validation
+			await expect(load_existing_summaries(test_use_cases_path)).rejects.toThrow(
+				/invalid schema/
+			);
+		});
+
+		it('should return null when file does not exist', async () => {
+			// Import the load_existing_summaries function
+			const { load_existing_summaries } = await import('./generate-summaries.ts');
+
+			// File doesn't exist
+			const nonexistent_path = path.join(test_output_dir, 'does-not-exist.json');
+
+			// Should return null
+			const result = await load_existing_summaries(nonexistent_path);
+			expect(result).toBeNull();
+		});
+
+		it('should load valid use_cases.json successfully', async () => {
+			// Import the load_existing_summaries function
+			const { load_existing_summaries } = await import('./generate-summaries.ts');
+
+			const valid_data = create_summary_data({
+				'svelte/overview': 'always, any svelte project',
+			});
+
+			await writeFile(test_use_cases_path, JSON.stringify(valid_data, null, 2), 'utf-8');
+
+			// Should successfully load and parse
+			const result = await load_existing_summaries(test_use_cases_path);
+			expect(result).not.toBeNull();
+			expect(result?.summaries).toHaveProperty('svelte/overview');
 		});
 	});
 

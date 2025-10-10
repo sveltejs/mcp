@@ -101,28 +101,25 @@ async function fetch_section_content(url: string) {
 	return await response.text();
 }
 
-async function load_existing_summaries(output_path: string): Promise<SummaryData | null> {
+export async function load_existing_summaries(output_path: string): Promise<SummaryData | null> {
 	try {
 		await access(output_path);
 	} catch {
 		return null;
 	}
 
-	try {
-		const content = await read_file_as_string(output_path, 'utf-8');
-		const data = JSON.parse(content);
-		const validated = v.safeParse(summary_data_schema, data);
+	const content = await read_file_as_string(output_path, 'utf-8');
+	const data = JSON.parse(content);
 
-		if (!validated.success) {
-			console.warn('⚠️  Existing use_cases.json is malformed, treating as empty');
-			return null;
-		}
-
-		return validated.output;
-	} catch (error) {
-		console.warn('⚠️  Failed to read existing use_cases.json:', error);
-		return null;
+	const validated = v.safeParse(summary_data_schema, data);
+	if (!validated.success) {
+		throw new Error(
+			`Existing use_cases.json has invalid schema. Please fix or delete the file at: ${output_path}\n` +
+				`Validation errors: ${JSON.stringify(validated.issues, null, 2)}`,
+		);
 	}
+
+	return validated.output;
 }
 
 function detect_changes(
