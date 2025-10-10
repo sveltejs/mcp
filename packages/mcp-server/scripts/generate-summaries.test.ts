@@ -25,12 +25,10 @@ function create_summary_data(
 
 describe('generate-summaries incremental processing', () => {
 	beforeEach(async () => {
-		// Create test output directory
 		await mkdir(test_output_dir, { recursive: true });
 	});
 
 	afterEach(async () => {
-		// Clean up test output directory
 		try {
 			await rm(test_output_dir, { recursive: true, force: true });
 		} catch {
