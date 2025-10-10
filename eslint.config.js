@@ -37,6 +37,13 @@ export default /** @type {import("eslint").Linter.Config} */ ([
 					leadingUnderscore: 'allow',
 				},
 			],
+			'@typescript-eslint/no-unused-vars': [
+				'error',
+				{
+					varsIgnorePattern: '^_',
+					ignoreRestSiblings: true,
+				},
+			],
 			'func-style': ['error', 'declaration', { allowTypeAnnotation: true }],
 			'import/no-unresolved': 'off', // this doesn't work well with typescript path mapping
 			'import/extensions': [
