@@ -25,7 +25,6 @@ export const suggest_attachments: Autofixer = {
 			if (id) {
 				const reference = state.parsed.find_reference_by_id(id);
 				const definition = reference?.resolved?.defs[0];
-				console.log(definition);
 				if (
 					definition &&
 					(definition.type === 'Variable' ||
