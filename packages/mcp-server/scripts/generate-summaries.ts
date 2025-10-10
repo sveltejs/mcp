@@ -87,17 +87,10 @@ async function fetch_section_content(url: string) {
 	return await response.text();
 }
 
-async function file_exists(filepath: string): Promise<boolean> {
-	try {
-		await access(filepath);
-		return true;
-	} catch {
-		return false;
-	}
-}
-
 async function load_existing_summaries(output_path: string): Promise<SummaryData | null> {
-	if (!(await file_exists(output_path))) {
+	try {
+		await access(output_path);
+	} catch {
 		return null;
 	}
 
