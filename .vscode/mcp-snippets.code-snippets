@@ -23,7 +23,7 @@
 		"scope": "javascript,typescript",
 		"prefix": "!autofixer",
 		"body": [
-			"import type { Autofixer } from '.';",
+			"import type { Autofixer } from './index.js';",
 			"export const ${1:autofixer_name}: Autofixer = {",
 			"\t$0",
 			"};",
