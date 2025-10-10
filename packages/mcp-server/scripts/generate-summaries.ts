@@ -30,11 +30,10 @@ interface SectionChange {
 const current_filename = fileURLToPath(import.meta.url);
 const current_dirname = path.dirname(current_filename);
 
-/**
- * Reads a file and validates that the result is a string using valibot.
- * This handles the TypeScript type issues with readFile and ensures we get a string.
- */
-async function read_file_as_string(file_path: string, encoding: BufferEncoding = 'utf-8'): Promise<string> {
+async function read_file_as_string(
+	file_path: string,
+	encoding: BufferEncoding = 'utf-8',
+): Promise<string> {
 	const content = await readFile(file_path, encoding);
 	return v.parse(v.string(), content);
 }
