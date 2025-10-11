@@ -315,7 +315,7 @@ async function main() {
 					custom_id: `section-${index}`,
 					params: {
 						model: anthropic.get_model_identifier(),
-						max_tokens: 250,
+						max_tokens: 8192,
 						messages: [
 							{
 								role: 'user',
