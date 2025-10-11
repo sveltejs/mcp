@@ -18,7 +18,7 @@ interface CliOptions {
 	force: boolean;
 	dryRun: boolean;
 	debug: boolean;
-	promptType: 'use-cases' | 'condensed';
+	promptType: 'use-cases' | 'distilled';
 }
 
 interface SectionChange {
@@ -87,7 +87,7 @@ Here is the documentation page content to analyze:
 
 `;
 
-const CONDENSED_PROMPT = `TODO`;
+const DISTILLED_PROMPT = `TODO`;
 
 const program = new Command();
 
@@ -100,7 +100,7 @@ program
 	.option('--debug', 'Debug mode: process only 2 sections', false)
 	.option(
 		'-p, --prompt-type <type>',
-		'Prompt type to use: "use-cases" or "condensed"',
+		'Prompt type to use: "use-cases" or "distilled"',
 		'use-cases',
 	);
 
@@ -217,11 +217,11 @@ async function main() {
 	console.log('🚀 Starting use cases generation...');
 
 	// Determine output file based on prompt type
-	const output_filename = options.promptType === 'condensed' ? 'condensed.json' : 'use_cases.json';
+	const output_filename = options.promptType === 'distilled' ? 'distilled.json' : 'use_cases.json';
 	const output_path = path.join(current_dirname, `../src/${output_filename}`);
 
 	// Select prompt based on prompt type
-	const selected_prompt = options.promptType === 'condensed' ? CONDENSED_PROMPT : USE_CASES_PROMPT;
+	const selected_prompt = options.promptType === 'distilled' ? DISTILLED_PROMPT : USE_CASES_PROMPT;
 
 	// Display mode information
 	console.log(`📝 PROMPT MODE: ${options.promptType.toUpperCase()} → ${output_filename}\n`);
