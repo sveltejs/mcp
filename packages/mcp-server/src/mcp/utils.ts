@@ -1,5 +1,5 @@
 import * as v from 'valibot';
-import { documentation_sections_schema } from '../lib/schemas.ts';
+import { documentation_sections_schema } from '../lib/schemas.js';
 import summary_data from '../use_cases.json' with { type: 'json' };
 import distilled_data from '../distilled.json' with { type: 'json' };
 
