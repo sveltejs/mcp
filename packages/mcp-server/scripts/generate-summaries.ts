@@ -24,7 +24,7 @@ interface SectionChange {
 	slug: string;
 	title: string;
 	url: string;
-	change_type: 'new' | 'updated' | 'removed';
+	change_type: 'new' | 'changed' | 'removed';
 }
 
 const current_filename = fileURLToPath(import.meta.url);
@@ -144,7 +144,7 @@ async function detect_changes(
 			to_remove: [],
 			changes: current_sections.map((s) => ({
 				...s,
-				change_type: force ? 'updated' : 'new',
+				change_type: force ? 'changed' : 'new',
 			})),
 			fetched_content,
 		};
@@ -158,7 +158,7 @@ async function detect_changes(
 	const sections_to_process: typeof current_sections = [];
 	const changes: SectionChange[] = [];
 
-	// Check for new and updated sections
+	// Check for new and changed sections
 	for (const section of current_sections) {
 		if (!existing_slugs.has(section.slug)) {
 			// New section
@@ -166,23 +166,21 @@ async function detect_changes(
 			changes.push({ ...section, change_type: 'new' });
 		} else {
 			// Existing section - check if content changed
-			const stored_hash = existing_content_hashes[section.slug];
-			if (stored_hash) {
-				try {
-					const content = await fetch_section_content(section.url);
-					fetched_content.set(section.slug, content);
-					const current_hash = compute_content_hash(content);
+			try {
+				const content = await fetch_section_content(section.url);
+				fetched_content.set(section.slug, content);
+				const current_hash = compute_content_hash(content);
+				const stored_hash = existing_content_hashes[section.slug] ?? '';
 
-					if (current_hash !== stored_hash) {
-						// Content has changed
-						sections_to_process.push(section);
-						changes.push({ ...section, change_type: 'updated' });
-					}
-				} catch (error) {
-					const error_msg = error instanceof Error ? error.message : String(error);
-					console.warn(`  ⚠️  Failed to fetch ${section.title} for update check: ${error_msg}`);
-					// If we can't fetch it, we can't check for updates, so skip it
+				if (current_hash !== stored_hash) {
+					// Content has changed
+					sections_to_process.push(section);
+					changes.push({ ...section, change_type: 'changed' });
 				}
+			} catch (error) {
+				const error_msg = error instanceof Error ? error.message : String(error);
+				console.warn(`  ⚠️  Failed to fetch ${section.title} for change check: ${error_msg}`);
+				// If we can't fetch it, we can't check for changes, so skip it
 			}
 		}
 	}
@@ -258,11 +256,11 @@ async function main() {
 	// Display changes
 	console.log('\n📊 Change Summary:');
 	const new_count = changes.filter((c) => c.change_type === 'new').length;
-	const updated_count = changes.filter((c) => c.change_type === 'updated').length;
+	const changed_count = changes.filter((c) => c.change_type === 'changed').length;
 	const removed_count = changes.filter((c) => c.change_type === 'removed').length;
 
 	console.log(`  ✨ New sections: ${new_count}`);
-	console.log(`  🔄 Updated sections: ${updated_count}`);
+	console.log(`  🔄 Changed sections: ${changed_count}`);
 	console.log(`  ❌ Removed sections: ${removed_count}`);
 	console.log(`  📝 To process: ${to_process.length}`);
 
@@ -270,7 +268,7 @@ async function main() {
 		console.log('\n📋 Detailed changes:');
 		for (const change of changes) {
 			const emoji =
-				change.change_type === 'new' ? '  ✨' : change.change_type === 'updated' ? '  🔄' : '  ❌';
+				change.change_type === 'new' ? '  ✨' : change.change_type === 'changed' ? '  🔄' : '  ❌';
 			console.log(`${emoji} [${change.change_type.toUpperCase()}] ${change.slug}`);
 		}
 	}
