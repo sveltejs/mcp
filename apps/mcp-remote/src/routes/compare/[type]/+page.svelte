@@ -79,7 +79,8 @@
 					<div class="comparison-column">
 						<h2>
 							Original Content
-							<span class="char-count">{selected_section.original_length.toLocaleString()} chars</span
+							<span class="char-count"
+								>{selected_section.original_length.toLocaleString()} chars</span
 							>
 						</h2>
 						<div class="content-box">
@@ -90,8 +91,9 @@
 						<h2>
 							{summary_title}
 							<span class="char-count"
-								>{selected_section.distilled_length.toLocaleString()} chars ({selected_section.space_savings.toFixed(1)}%
-								savings)</span
+								>{selected_section.distilled_length.toLocaleString()} chars ({selected_section.space_savings.toFixed(
+									1,
+								)}% savings)</span
 							>
 						</h2>
 						<div class="content-box">

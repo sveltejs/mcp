@@ -39,9 +39,7 @@ export const load: PageServerLoad = async ({ params }) => {
 			const original_length = content.length;
 			const distilled_length = summary.length;
 			const space_savings =
-				original_length > 0
-					? ((original_length - distilled_length) / original_length) * 100
-					: 0;
+				original_length > 0 ? ((original_length - distilled_length) / original_length) * 100 : 0;
 
 			return {
 				slug,
@@ -69,6 +67,9 @@ export const load: PageServerLoad = async ({ params }) => {
 			sections,
 		};
 	} catch (err) {
-		throw error(500, `Failed to load ${type} data: ${err instanceof Error ? err.message : 'Unknown error'}`);
+		throw error(
+			500,
+			`Failed to load ${type} data: ${err instanceof Error ? err.message : 'Unknown error'}`,
+		);
 	}
 };

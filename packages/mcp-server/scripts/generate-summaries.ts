@@ -39,8 +39,6 @@ async function read_file_as_string(
 	return v.parse(v.string(), content);
 }
 
-
-
 const program = new Command();
 
 program
