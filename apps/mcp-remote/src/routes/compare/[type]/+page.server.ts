@@ -28,7 +28,6 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	const data = (type === 'use_cases' ? useCasesData : distilledData) as SummaryData;
 
-	// Transform into array for easier rendering
 	const sections = Object.keys(data.summaries).map((slug) => {
 		const summary = data.summaries[slug] || '';
 		const content = data.content[slug] || '';
@@ -47,7 +46,6 @@ export const load: PageServerLoad = async ({ params }) => {
 		};
 	});
 
-	// Calculate total space savings
 	const total_original_length = sections.reduce((sum, s) => sum + s.original_length, 0);
 	const total_distilled_length = sections.reduce((sum, s) => sum + s.distilled_length, 0);
 	const total_space_savings =
@@ -55,7 +53,6 @@ export const load: PageServerLoad = async ({ params }) => {
 			? ((total_original_length - total_distilled_length) / total_original_length) * 100
 			: 0;
 
-	// Determine the title based on type
 	const title =
 		type === 'use_cases' ? 'Use Cases Comparison' : 'Distilled Documentation Comparison';
 
