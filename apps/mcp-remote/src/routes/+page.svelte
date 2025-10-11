@@ -2,17 +2,17 @@
 	const links = [
 		{
 			title: 'Documentation',
-			description: 'Official Svelte MCP documentation',
+			description: 'Get started with the official Svelte MCP',
 			url: 'https://svelte.dev/docs/mcp/overview',
 		},
 		{
-			title: 'Use Cases Comparison',
-			description: 'View and compare use case summaries with original documentation',
+			title: 'Use cases',
+			description: 'Compare LLM-generated use case summaries with original documentation',
 			url: '/compare/use_cases',
 		},
 		{
-			title: 'Distilled Documentation',
-			description: 'View and compare distilled/condensed documentation versions',
+			title: 'Distilled documentation',
+			description: 'Compare LLM-generated condensed documentation with original documentation',
 			url: '/compare/distilled',
 		},
 	];
