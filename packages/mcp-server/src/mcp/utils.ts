@@ -1,6 +1,7 @@
 import * as v from 'valibot';
 import { documentation_sections_schema } from '../lib/schemas.ts';
 import summary_data from '../use_cases.json' with { type: 'json' };
+import distilled_data from '../distilled.json' with { type: 'json' };
 
 export async function fetch_with_timeout(
 	url: string,
@@ -18,6 +19,11 @@ export async function fetch_with_timeout(
 }
 
 const summaries = (summary_data.summaries || {}) as Record<string, string>;
+const distilled_summaries = (distilled_data.summaries || {}) as Record<string, string>;
+
+export function get_distilled_content(slug: string): string | null {
+	return distilled_summaries[slug] ?? null;
+}
 
 export async function get_sections() {
 	const sections = await fetch_with_timeout(

@@ -1,6 +1,11 @@
 import type { SvelteMcp } from '../../index.js';
 import * as v from 'valibot';
-import { get_sections, fetch_with_timeout, format_sections_list } from '../../utils.js';
+import {
+	get_sections,
+	fetch_with_timeout,
+	format_sections_list,
+	get_distilled_content,
+} from '../../utils.js';
 import { SECTIONS_LIST_INTRO, SECTIONS_LIST_OUTRO } from './prompts.js';
 
 export function get_documentation(server: SvelteMcp) {
@@ -8,7 +13,7 @@ export function get_documentation(server: SvelteMcp) {
 		{
 			name: 'get-documentation',
 			description:
-				'Retrieves full documentation content for Svelte 5 or SvelteKit sections. Supports flexible search by title (e.g., "$state", "routing") or file path (e.g., "cli/overview"). Can accept a single section name or an array of sections. Before running this, make sure to analyze the users query, as well as the output from list-sections (which should be called first). Then ask for ALL relevant sections the user might require. For example, if the user asks to build anything interactive, you will need to fetch all relevant runes, and so on.',
+				'Retrieves documentation content for Svelte 5 or SvelteKit sections. Supports flexible search by title (e.g., "$state", "routing") or file path (e.g., "cli/overview"). Can accept a single section name or an array of sections. Before running this, make sure to analyze the users query, as well as the output from list-sections (which should be called first). Then ask for ALL relevant sections the user might require. For example, if the user asks to build anything interactive, you will need to fetch all relevant runes, and so on.',
 			schema: v.object({
 				section: v.pipe(
 					v.union([v.string(), v.array(v.string())]),
@@ -16,9 +21,18 @@ export function get_documentation(server: SvelteMcp) {
 						'The section name(s) to retrieve. Can search by title (e.g., "$state", "load functions") or file path (e.g., "cli/overview"). Supports single string and array of strings',
 					),
 				),
+				use_distilled: v.optional(
+					v.pipe(
+						v.boolean(),
+						v.description(
+							'If true (default), returns condensed distilled versions of the documentation to optimize context size. Set to false ONLY if the user asks to fetch full documentation.',
+						),
+					),
+					true,
+				),
 			}),
 		},
-		async ({ section }) => {
+		async ({ section, use_distilled = true }) => {
 			let sections: string[];
 
 			if (Array.isArray(section)) {
@@ -56,6 +70,18 @@ export function get_documentation(server: SvelteMcp) {
 					);
 
 					if (matched_section) {
+						if (use_distilled) {
+							const distilled = get_distilled_content(matched_section.slug);
+							if (distilled) {
+								return {
+									success: true,
+									content: `## ${matched_section.title}\n\n${distilled}`,
+								};
+							}
+							// If no distilled content, fall through to fetch full content
+						}
+
+						// Fetch full content from URL
 						try {
 							const response = await fetch_with_timeout(matched_section.url);
 							if (response.ok) {
