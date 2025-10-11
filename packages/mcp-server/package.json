@@ -18,7 +18,9 @@
 		"generate-distilled:debug": "DEBUG_MODE=1 vite-node scripts/generate-summaries.ts --prompt-type distilled"
 	},
 	"exports": {
-		".": "./src/index.ts"
+		".": "./src/index.ts",
+		"./distilled.json": "./src/distilled.json",
+		"./use-cases.json": "./src/use_cases.json"
 	},
 	"peerDependencies": {
 		"drizzle-orm": "^0.44.0"
