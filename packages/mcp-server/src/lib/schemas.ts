@@ -19,6 +19,7 @@ export const summary_data_schema = v.object({
 	successful_summaries: v.number(),
 	summaries: v.record(v.string(), v.string()),
 	content_hashes: v.record(v.string(), v.string()),
+	content: v.record(v.string(), v.string()),
 });
 
 export const anthropic_batch_request_schema = v.object({

@@ -422,6 +422,7 @@ async function main() {
 			successful_summaries: Object.keys(merged_summaries).length,
 			summaries: merged_summaries,
 			content_hashes: merged_content_hashes,
+			content: Object.fromEntries(section_content),
 		};
 
 		await writeFile(output_path, JSON.stringify(summary_data, null, 2), 'utf-8');
