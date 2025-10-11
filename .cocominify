@@ -1,1 +1,3 @@
 packages/mcp-server/src/use_cases.json
+packages/mcp-server/src/mcp/autofixers
+packages/mcp-server/src/distilled.json
