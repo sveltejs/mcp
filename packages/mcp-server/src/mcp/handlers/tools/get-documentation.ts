@@ -81,7 +81,6 @@ export function get_documentation(server: SvelteMcp) {
 							// If no distilled content, fall through to fetch full content
 						}
 
-						// Fetch full content from URL
 						try {
 							const response = await fetch_with_timeout(matched_section.url);
 							if (response.ok) {
