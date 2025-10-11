@@ -19,7 +19,9 @@
 	);
 
 	// Determine column titles based on type
-	let summary_title = $derived(data.type === 'use_cases' ? 'Use Cases Summary' : 'Distilled Version');
+	let summary_title = $derived(
+		data.type === 'use_cases' ? 'Use Cases Summary' : 'Distilled Version',
+	);
 	let is_distilled = $derived(data.type === 'distilled');
 
 	function select_section(slug: string) {
@@ -101,14 +103,6 @@
 </div>
 
 <style>
-	:global(body) {
-		margin: 0;
-		padding: 0;
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-			sans-serif;
-		background: #f5f5f5;
-	}
-
 	.container {
 		max-width: 100%;
 		height: 100vh;
