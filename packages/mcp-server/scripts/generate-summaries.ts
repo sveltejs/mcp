@@ -18,6 +18,7 @@ interface CliOptions {
 	force: boolean;
 	dryRun: boolean;
 	debug: boolean;
+	promptType: 'use-cases' | 'condensed';
 }
 
 interface SectionChange {
@@ -86,6 +87,8 @@ Here is the documentation page content to analyze:
 
 `;
 
+const CONDENSED_PROMPT = `TODO`;
+
 const program = new Command();
 
 program
@@ -94,7 +97,12 @@ program
 	.version('1.0.0')
 	.option('-f, --force', 'Force regeneration of all summaries', false)
 	.option('-d, --dry-run', 'Show what would be changed without making API calls', false)
-	.option('--debug', 'Debug mode: process only 2 sections', false);
+	.option('--debug', 'Debug mode: process only 2 sections', false)
+	.option(
+		'-p, --prompt-type <type>',
+		'Prompt type to use: "use-cases" or "condensed"',
+		'use-cases',
+	);
 
 async function fetch_section_content(url: string) {
 	const response = await fetch(url, { signal: AbortSignal.timeout(30000) });
@@ -208,9 +216,15 @@ async function main() {
 
 	console.log('🚀 Starting use cases generation...');
 
-	const output_path = path.join(current_dirname, '../src/use_cases.json');
+	// Determine output file based on prompt type
+	const output_filename = options.promptType === 'condensed' ? 'condensed.json' : 'use_cases.json';
+	const output_path = path.join(current_dirname, `../src/${output_filename}`);
+
+	// Select prompt based on prompt type
+	const selected_prompt = options.promptType === 'condensed' ? CONDENSED_PROMPT : USE_CASES_PROMPT;
 
 	// Display mode information
+	console.log(`📝 PROMPT MODE: ${options.promptType.toUpperCase()} → ${output_filename}\n`);
 	if (options.dryRun) {
 		console.log('🔍 DRY RUN MODE - No API calls will be made\n');
 	}
@@ -357,7 +371,7 @@ async function main() {
 						messages: [
 							{
 								role: 'user',
-								content: USE_CASES_PROMPT + content,
+								content: selected_prompt + content,
 							},
 						],
 						temperature: 0,
