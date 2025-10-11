@@ -61,5 +61,5 @@ export const load: PageServerLoad = async ({ params }) => {
 			successful_summaries: data.successful_summaries,
 		},
 		sections,
-	}
+	};
 };

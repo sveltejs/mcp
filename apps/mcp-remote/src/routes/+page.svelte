@@ -30,7 +30,7 @@
 	</p>
 
 	<div class="links">
-		{#each links as link}
+		{#each links as link (link.url)}
 			<a href={link.url} class="link-card">
 				<h2>{link.title}</h2>
 				<p>{link.description}</p>
