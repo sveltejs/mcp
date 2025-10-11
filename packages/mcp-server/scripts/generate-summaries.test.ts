@@ -12,6 +12,7 @@ const test_use_cases_path = path.join(test_output_dir, 'use_cases.json');
 function create_summary_data(
 	summaries: Record<string, string>,
 	total_sections: number = Object.keys(summaries).length,
+	content_hashes: Record<string, string> = {},
 ): SummaryData {
 	return {
 		generated_at: new Date().toISOString(),
@@ -20,6 +21,7 @@ function create_summary_data(
 		successful_summaries: Object.keys(summaries).length,
 		failed_summaries: 0,
 		summaries,
+		content_hashes,
 	};
 }
 
