@@ -12,16 +12,15 @@ const test_use_cases_path = path.join(test_output_dir, 'use_cases.json');
 function create_summary_data(
 	summaries: Record<string, string>,
 	total_sections: number = Object.keys(summaries).length,
-	content_hashes: Record<string, string> = {},
+	content: Record<string, string> = {},
 ): SummaryData {
 	return {
 		generated_at: new Date().toISOString(),
 		model: 'claude-sonnet-4-5-20250929',
 		total_sections,
 		successful_summaries: Object.keys(summaries).length,
-		failed_summaries: 0,
 		summaries,
-		content_hashes,
+		content,
 	};
 }
 
@@ -270,26 +269,7 @@ describe('generate-summaries incremental processing', () => {
 			expect(data).toHaveProperty('model');
 			expect(data).toHaveProperty('total_sections');
 			expect(data).toHaveProperty('successful_summaries');
-			expect(data).toHaveProperty('failed_summaries');
 			expect(data).toHaveProperty('summaries');
-		});
-
-		it('should track failed summaries', () => {
-			const data: SummaryData = {
-				generated_at: new Date().toISOString(),
-				model: 'claude-sonnet-4-5-20250929',
-				total_sections: 3,
-				successful_summaries: 2,
-				failed_summaries: 1,
-				summaries: {
-					'svelte/overview': 'always',
-					'svelte/$state': 'reactivity',
-				},
-				errors: [{ section: 'svelte/broken', error: 'Failed to fetch' }],
-			};
-
-			expect(data.failed_summaries).toBe(1);
-			expect(data.errors).toHaveLength(1);
 		});
 	});
 
