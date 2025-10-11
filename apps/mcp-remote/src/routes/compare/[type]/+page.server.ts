@@ -33,11 +33,25 @@ export const load: PageServerLoad = async ({ params }) => {
 		const data = JSON.parse(file_content) as SummaryData;
 
 		// Transform into array for easier rendering
-		const sections = Object.keys(data.summaries).map((slug) => ({
-			slug,
-			summary: data.summaries[slug] || '',
-			content: data.content[slug] || '',
-		}));
+		const sections = Object.keys(data.summaries).map((slug) => {
+			const summary = data.summaries[slug] || '';
+			const content = data.content[slug] || '';
+			const original_length = content.length;
+			const distilled_length = summary.length;
+			const space_savings =
+				original_length > 0
+					? ((original_length - distilled_length) / original_length) * 100
+					: 0;
+
+			return {
+				slug,
+				summary,
+				content,
+				original_length,
+				distilled_length,
+				space_savings,
+			};
+		});
 
 		// Determine the title based on type
 		const title =

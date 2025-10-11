@@ -77,13 +77,23 @@
 			{#if selected_section}
 				<div class="comparison-grid">
 					<div class="comparison-column">
-						<h2>Original Content</h2>
+						<h2>
+							Original Content
+							<span class="char-count">{selected_section.original_length.toLocaleString()} chars</span
+							>
+						</h2>
 						<div class="content-box">
 							<pre>{selected_section.content}</pre>
 						</div>
 					</div>
 					<div class="comparison-column">
-						<h2>{summary_title}</h2>
+						<h2>
+							{summary_title}
+							<span class="char-count"
+								>{selected_section.distilled_length.toLocaleString()} chars ({selected_section.space_savings.toFixed(1)}%
+								savings)</span
+							>
+						</h2>
 						<div class="content-box">
 							<pre>{selected_section.summary}</pre>
 						</div>
@@ -114,7 +124,7 @@
 
 	h1 {
 		margin: 0 0 0.5rem 0;
-		font-size: 1.75rem;
+		font-size: 1.875rem;
 		font-weight: 600;
 		color: #1a1a1a;
 	}
@@ -122,8 +132,9 @@
 	.metadata {
 		display: flex;
 		gap: 1.5rem;
-		font-size: 0.875rem;
+		font-size: 0.9375rem;
 		color: #666;
+		flex-wrap: wrap;
 	}
 
 	.main-content {
@@ -150,7 +161,7 @@
 		padding: 0.5rem 0.75rem;
 		border: 1px solid #e0e0e0;
 		border-radius: 4px;
-		font-size: 0.875rem;
+		font-size: 0.9375rem;
 		font-family: inherit;
 	}
 
@@ -189,14 +200,14 @@
 	}
 
 	.section-title {
-		font-size: 0.875rem;
+		font-size: 0.9375rem;
 		font-weight: 500;
 		color: #1a1a1a;
 		margin-bottom: 0.25rem;
 	}
 
 	.section-preview {
-		font-size: 0.75rem;
+		font-size: 0.8125rem;
 		color: #666;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -229,28 +240,30 @@
 	.comparison-column h2 {
 		margin: 0;
 		padding: 1rem;
-		font-size: 1rem;
+		font-size: 1.125rem;
 		font-weight: 600;
 		color: #1a1a1a;
 		border-bottom: 1px solid #e0e0e0;
 		background: #fafafa;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.char-count {
+		font-size: 0.8125rem;
+		font-weight: 400;
+		color: #666;
+		white-space: nowrap;
 	}
 
 	.content-box {
 		padding: 1rem;
 		overflow: auto;
 		flex: 1;
-		font-size: 0.875rem;
+		font-size: 0.9375rem;
 		line-height: 1.6;
-	}
-
-	.content-box p {
-		margin: 0;
-		color: #1a1a1a;
-	}
-
-	.markdown-content {
-		color: #1a1a1a;
 	}
 
 	.content-box pre {
@@ -258,7 +271,7 @@
 		white-space: pre-wrap;
 		word-wrap: break-word;
 		font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Courier New', monospace;
-		font-size: 0.8125rem;
+		font-size: 0.875rem;
 		color: #333;
 	}
 
@@ -268,7 +281,7 @@
 		justify-content: center;
 		height: 100%;
 		color: #666;
-		font-size: 0.875rem;
+		font-size: 0.9375rem;
 	}
 
 	@media (max-width: 768px) {
@@ -278,11 +291,21 @@
 
 		.sidebar {
 			width: 100%;
-			max-height: 40vh;
+			max-height: 25vh;
 		}
 
 		.main-content {
 			flex-direction: column;
+		}
+
+		.comparison-column h2 {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.5rem;
+		}
+
+		.char-count {
+			font-size: 0.75rem;
 		}
 	}
 </style>
