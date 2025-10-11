@@ -5,7 +5,7 @@ import {
 	anthropic_batch_response_schema,
 	anthropic_batch_result_schema,
 	type AnthropicBatchRequest,
-} from './schemas.js';
+} from './schemas.ts';
 
 export class AnthropicProvider {
 	private client: Anthropic;
