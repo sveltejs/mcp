@@ -77,19 +77,15 @@
 			{#if selected_section}
 				<div class="comparison-grid">
 					<div class="comparison-column">
-						<h2>{summary_title}</h2>
-						<div class="content-box">
-							{#if is_distilled}
-								<div class="markdown-content">{@html selected_section.summary}</div>
-							{:else}
-								<p>{selected_section.summary}</p>
-							{/if}
-						</div>
-					</div>
-					<div class="comparison-column">
 						<h2>Original Content</h2>
 						<div class="content-box">
 							<pre>{selected_section.content}</pre>
+						</div>
+					</div>
+					<div class="comparison-column">
+						<h2>{summary_title}</h2>
+						<div class="content-box">
+							<pre>{selected_section.summary}</pre>
 						</div>
 					</div>
 				</div>
