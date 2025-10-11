@@ -60,6 +60,19 @@ export function get_documentation(server: SvelteMcp) {
 
 			const available_sections = await get_sections();
 
+			// Sections that are never distilled, since they contain reference information where things might go missing in distillation
+			const ALWAYS_FULL_SECTIONS = [
+				'kit/@sveltejs-kit',
+				'svelte/v5-migration-guide',
+				'kit/remote-functions',
+				'kit/configuration',
+				'mcp/prompts',
+				'svelte/compiler-warnings',
+				'svelte/svelte-compiler',
+				'svelte/compiler-errors',
+				'svelte/svelte',
+			];
+
 			const settled_results = await Promise.allSettled(
 				sections.map(async (requested_section) => {
 					const matched_section = available_sections.find(
@@ -70,7 +83,14 @@ export function get_documentation(server: SvelteMcp) {
 					);
 
 					if (matched_section) {
-						if (use_distilled) {
+						// Force full documentation for specific sections
+						const should_use_distilled =
+							use_distilled && !ALWAYS_FULL_SECTIONS.includes(matched_section.slug);
+
+						console.log(
+							`Fetching documentation for section "${matched_section.title}" (${should_use_distilled ? 'distilled' : 'full'})`,
+						);
+						if (should_use_distilled) {
 							const distilled = get_distilled_content(matched_section.slug);
 							if (distilled) {
 								return {
