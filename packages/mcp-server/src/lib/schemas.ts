@@ -18,7 +18,6 @@ export const summary_data_schema = v.object({
 	total_sections: v.number(),
 	successful_summaries: v.number(),
 	summaries: v.record(v.string(), v.string()),
-	content_hashes: v.record(v.string(), v.string()),
 	content: v.record(v.string(), v.string()),
 });
 

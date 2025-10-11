@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import 'dotenv/config';
 import { writeFile, mkdir, readFile, access } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Command } from 'commander';
@@ -40,9 +39,7 @@ async function read_file_as_string(
 	return v.parse(v.string(), content);
 }
 
-function compute_content_hash(content: string): string {
-	return createHash('sha256').update(content).digest('hex');
-}
+
 
 const program = new Command();
 
@@ -91,7 +88,7 @@ export async function load_existing_summaries(output_path: string): Promise<Summ
 function detect_changes(
 	current_sections: Array<{ slug: string; title: string; url: string }>,
 	existing_data: SummaryData | null,
-	current_hashes: Map<string, string>,
+	current_content: Map<string, string>,
 	force: boolean,
 ): {
 	to_process: Array<{ slug: string; title: string; url: string }>;
@@ -111,7 +108,7 @@ function detect_changes(
 	}
 
 	const existing_summaries = existing_data.summaries;
-	const existing_content_hashes = existing_data.content_hashes;
+	const existing_content = existing_data.content;
 	const existing_slugs = new Set(Object.keys(existing_summaries));
 	const current_slugs = new Set(current_sections.map((s) => s.slug));
 
@@ -120,9 +117,9 @@ function detect_changes(
 
 	// Check for new and changed sections
 	for (const section of current_sections) {
-		const current_hash = current_hashes.get(section.slug);
-		if (!current_hash) {
-			throw new Error(`No content hash found for section: ${section.slug}`);
+		const content = current_content.get(section.slug);
+		if (!content) {
+			throw new Error(`No content found for section: ${section.slug}`);
 		}
 
 		if (!existing_slugs.has(section.slug)) {
@@ -131,9 +128,9 @@ function detect_changes(
 			changes.push({ ...section, change_type: 'new' });
 		} else {
 			// Existing section - check if content changed
-			const stored_hash = existing_content_hashes[section.slug] ?? '';
+			const stored_content = existing_content[section.slug] ?? '';
 
-			if (current_hash !== stored_hash) {
+			if (content !== stored_content) {
 				// Content has changed
 				sections_to_process.push(section);
 				changes.push({ ...section, change_type: 'changed' });
@@ -209,14 +206,12 @@ async function main() {
 	// Download content for ALL sections (needed to compute hashes)
 	console.log('\n📥 Downloading section content...');
 	const section_content = new Map<string, string>();
-	const section_hashes = new Map<string, string>();
 
 	for (let i = 0; i < all_sections.length; i++) {
 		const section = all_sections[i]!;
 		console.log(`  Fetching ${i + 1}/${all_sections.length}: ${section.title}`);
 		const content = await fetch_section_content(section.url);
 		section_content.set(section.slug, content);
-		section_hashes.set(section.slug, compute_content_hash(content));
 	}
 
 	console.log(`✅ Successfully downloaded ${section_content.size} sections`);
@@ -226,7 +221,7 @@ async function main() {
 	const { to_process, to_remove, changes } = detect_changes(
 		all_sections,
 		existing_data,
-		section_hashes,
+		section_content,
 		options.force,
 	);
 
@@ -398,9 +393,6 @@ async function main() {
 			? { ...existing_data.summaries }
 			: {};
 
-		// Use current hashes for ALL sections (convert Map to Record)
-		const merged_content_hashes: Record<string, string> = Object.fromEntries(section_hashes);
-
 		// Add/update new summaries
 		Object.assign(merged_summaries, new_summaries);
 
@@ -421,7 +413,6 @@ async function main() {
 			total_sections: all_sections.length,
 			successful_summaries: Object.keys(merged_summaries).length,
 			summaries: merged_summaries,
-			content_hashes: merged_content_hashes,
 			content: Object.fromEntries(section_content),
 		};
 
