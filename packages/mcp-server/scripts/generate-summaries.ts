@@ -125,18 +125,16 @@ export async function load_existing_summaries(output_path: string): Promise<Summ
 	return validated.output;
 }
 
-async function detect_changes(
+function detect_changes(
 	current_sections: Array<{ slug: string; title: string; url: string }>,
 	existing_data: SummaryData | null,
+	current_hashes: Map<string, string>,
 	force: boolean,
-): Promise<{
+): {
 	to_process: Array<{ slug: string; title: string; url: string }>;
 	to_remove: string[];
 	changes: SectionChange[];
-	fetched_content: Map<string, string>;
-}> {
-	const fetched_content = new Map<string, string>();
-
+} {
 	if (!existing_data || force) {
 		// First run or force regeneration
 		return {
@@ -146,7 +144,6 @@ async function detect_changes(
 				...s,
 				change_type: force ? 'changed' : 'new',
 			})),
-			fetched_content,
 		};
 	}
 
@@ -160,27 +157,24 @@ async function detect_changes(
 
 	// Check for new and changed sections
 	for (const section of current_sections) {
+		const current_hash = current_hashes.get(section.slug);
+		if (!current_hash) {
+			// Failed to download content for this section, skip it
+			continue;
+		}
+
 		if (!existing_slugs.has(section.slug)) {
 			// New section
 			sections_to_process.push(section);
 			changes.push({ ...section, change_type: 'new' });
 		} else {
 			// Existing section - check if content changed
-			try {
-				const content = await fetch_section_content(section.url);
-				fetched_content.set(section.slug, content);
-				const current_hash = compute_content_hash(content);
-				const stored_hash = existing_content_hashes[section.slug] ?? '';
+			const stored_hash = existing_content_hashes[section.slug] ?? '';
 
-				if (current_hash !== stored_hash) {
-					// Content has changed
-					sections_to_process.push(section);
-					changes.push({ ...section, change_type: 'changed' });
-				}
-			} catch (error) {
-				const error_msg = error instanceof Error ? error.message : String(error);
-				console.warn(`  ⚠️  Failed to fetch ${section.title} for change check: ${error_msg}`);
-				// If we can't fetch it, we can't check for changes, so skip it
+			if (current_hash !== stored_hash) {
+				// Content has changed
+				sections_to_process.push(section);
+				changes.push({ ...section, change_type: 'changed' });
 			}
 		}
 	}
@@ -203,7 +197,6 @@ async function detect_changes(
 		to_process: sections_to_process,
 		to_remove: removed_slugs,
 		changes,
-		fetched_content,
 	};
 }
 
@@ -245,11 +238,34 @@ async function main() {
 	const all_sections = await get_sections();
 	console.log(`Found ${all_sections.length} sections from API`);
 
+	// Download content for ALL sections (needed to compute hashes)
+	console.log('\n📥 Downloading section content...');
+	const section_content = new Map<string, string>();
+	const section_hashes = new Map<string, string>();
+	const download_errors: Array<{ section: string; error: string }> = [];
+
+	for (let i = 0; i < all_sections.length; i++) {
+		const section = all_sections[i]!;
+		try {
+			console.log(`  Fetching ${i + 1}/${all_sections.length}: ${section.title}`);
+			const content = await fetch_section_content(section.url);
+			section_content.set(section.slug, content);
+			section_hashes.set(section.slug, compute_content_hash(content));
+		} catch (error) {
+			const error_msg = error instanceof Error ? error.message : String(error);
+			console.error(`  ⚠️  Failed to fetch ${section.title}:`, error_msg);
+			download_errors.push({ section: section.title, error: error_msg });
+		}
+	}
+
+	console.log(`✅ Successfully downloaded ${section_content.size} sections`);
+
 	// Detect what needs to be processed
-	console.log('🔍 Checking for content changes...');
-	const { to_process, to_remove, changes, fetched_content } = await detect_changes(
+	console.log('\n🔍 Checking for content changes...');
+	const { to_process, to_remove, changes } = detect_changes(
 		all_sections,
 		existing_data,
+		section_hashes,
 		options.force,
 	);
 
@@ -306,47 +322,30 @@ async function main() {
 			process.exit(1);
 		}
 
-		// Fetch content for sections to process (reusing already-fetched content when available)
-		console.log('\n📥 Downloading section content...');
+		// Build sections_with_content from already-downloaded content
+		console.log('\n📦 Preparing sections for processing...');
 		const sections_with_content: Array<{
 			section: (typeof sections_to_process)[number];
 			content: string;
 			index: number;
 		}> = [];
-		const download_errors: Array<{ section: string; error: string }> = [];
 
 		for (let i = 0; i < sections_to_process.length; i++) {
 			const section = sections_to_process[i]!;
+			const content = section_content.get(section.slug);
 
-			// Check if we already fetched this content during change detection
-			const cached_content = fetched_content.get(section.slug);
-			if (cached_content) {
-				console.log(`  Using cached ${i + 1}/${sections_to_process.length}: ${section.title}`);
-				sections_with_content.push({
-					section,
-					content: cached_content,
-					index: i,
-				});
-				continue;
-			}
-
-			// Fetch content if not cached
-			try {
-				console.log(`  Fetching ${i + 1}/${sections_to_process.length}: ${section.title}`);
-				const content = await fetch_section_content(section.url);
+			if (content) {
 				sections_with_content.push({
 					section,
 					content,
 					index: i,
 				});
-			} catch (error) {
-				const error_msg = error instanceof Error ? error.message : String(error);
-				console.error(`  ⚠️  Failed to fetch ${section.title}:`, error_msg);
-				download_errors.push({ section: section.title, error: error_msg });
+			} else {
+				console.warn(`  ⚠️  No content available for ${section.title}`);
 			}
 		}
 
-		console.log(`✅ Successfully downloaded ${sections_with_content.length} sections`);
+		console.log(`✅ Prepared ${sections_with_content.length} sections for processing`);
 
 		if (sections_with_content.length === 0 && to_remove.length === 0) {
 			console.error('❌ No sections were successfully downloaded and nothing to remove');
@@ -355,7 +354,6 @@ async function main() {
 
 		// Process with Anthropic API if we have content
 		const new_summaries: Record<string, string> = {};
-		const new_content_hashes: Record<string, string> = {};
 
 		if (sections_with_content.length > 0) {
 			console.log('\n🤖 Initializing Anthropic API...');
@@ -421,7 +419,7 @@ async function main() {
 					continue;
 				}
 
-				const { section, content } = section_data;
+				const { section } = section_data;
 
 				if (result.result.type !== 'succeeded' || !result.result.message) {
 					const error_msg = result.result.error?.message || 'Failed or no message';
@@ -433,7 +431,6 @@ async function main() {
 				const output_content = result.result.message.content[0]?.text;
 				if (output_content) {
 					new_summaries[section.slug] = output_content.trim();
-					new_content_hashes[section.slug] = compute_content_hash(content);
 					console.log(`  ✅ ${section.title}`);
 				}
 			}
@@ -447,19 +444,15 @@ async function main() {
 			? { ...existing_data.summaries }
 			: {};
 
-		// Start with existing content hashes or empty object
-		const merged_content_hashes: Record<string, string> = existing_data
-			? { ...existing_data.content_hashes }
-			: {};
+		// Use current hashes for ALL sections (convert Map to Record)
+		const merged_content_hashes: Record<string, string> = Object.fromEntries(section_hashes);
 
-		// Add/update new summaries and hashes
+		// Add/update new summaries
 		Object.assign(merged_summaries, new_summaries);
-		Object.assign(merged_content_hashes, new_content_hashes);
 
-		// Remove deleted sections from both summaries and hashes
+		// Remove deleted sections from summaries (hashes already don't include removed sections)
 		for (const slug of to_remove) {
 			delete merged_summaries[slug];
-			delete merged_content_hashes[slug];
 			console.log(`  🗑️  Removed: ${slug}`);
 		}
 
