@@ -40,6 +40,10 @@
 			<span>Generated: {new Date(data.metadata.generated_at).toLocaleString()}</span>
 			<span>Model: {data.metadata.model}</span>
 			<span>Sections: {data.metadata.successful_summaries}/{data.metadata.total_sections}</span>
+			<span
+				>Space Savings: {data.metadata.total_distilled_length.toLocaleString()}/{data.metadata.total_original_length.toLocaleString()}
+				chars ({data.metadata.total_space_savings.toFixed(1)}% reduction)</span
+			>
 		</div>
 	</header>
 
