@@ -80,7 +80,7 @@ export async function load_existing_summaries(output_path: string): Promise<Summ
 	const validated = v.safeParse(summary_data_schema, data);
 	if (!validated.success) {
 		throw new Error(
-			`Existing use_cases.json has invalid schema. Please fix or delete the file at: ${output_path}\n` +
+			`Existing file has invalid schema. Please fix or delete the file at: ${output_path}\n` +
 				`Validation errors: ${JSON.stringify(validated.issues, null, 2)}`,
 		);
 	}
