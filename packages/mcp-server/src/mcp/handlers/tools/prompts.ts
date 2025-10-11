@@ -78,4 +78,5 @@ Keep the following Svelte 5 syntax rules in mind:
 IMPORTANT: All code examples MUST come from the documentation verbatim, do NOT create new code examples. Do NOT modify existing code examples.
 IMPORTANT: Because of changes in Svelte 5 syntax, do not include content from your existing knowledge, you may only use knowledge from the documentation to condense.
 
-Here is the documentation you must condense:`;
+Here is the documentation you must condense:
+`;
