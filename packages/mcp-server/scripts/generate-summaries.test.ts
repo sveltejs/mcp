@@ -86,9 +86,7 @@ describe('generate-summaries incremental processing', () => {
 			await writeFile(test_use_cases_path, JSON.stringify({ invalid: 'schema' }), 'utf-8');
 
 			// Should throw an error about schema validation
-			await expect(load_existing_summaries(test_use_cases_path)).rejects.toThrow(
-				/invalid schema/
-			);
+			await expect(load_existing_summaries(test_use_cases_path)).rejects.toThrow(/invalid schema/);
 		});
 
 		it('should return null when file does not exist', async () => {
