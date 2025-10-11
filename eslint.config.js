@@ -57,6 +57,7 @@ export default /** @type {import("eslint").Linter.Config} */ ([
 					svelte: 'always',
 				},
 			],
+			'svelte/no-navigation-without-resolve': 'off',
 		},
 	},
 	{
