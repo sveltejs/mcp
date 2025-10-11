@@ -12,7 +12,7 @@
 		"test": "vitest",
 		"generate-summaries": "node --experimental-strip-types scripts/generate-summaries.ts",
 		"generate-summaries:dry-run": "node --experimental-strip-types scripts/generate-summaries.ts --dry-run",
-		"debug:generate-summaries": "DEBUG_MODE=1 node --experimental-strip-types scripts/generate-summaries.ts"
+		"generate-summaries:debug": "DEBUG_MODE=1 node --experimental-strip-types scripts/generate-summaries.ts"
 	},
 	"exports": {
 		".": "./src/index.ts"
