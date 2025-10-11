@@ -47,6 +47,14 @@ export const load: PageServerLoad = async ({ params }) => {
 		};
 	});
 
+	// Calculate total space savings
+	const total_original_length = sections.reduce((sum, s) => sum + s.original_length, 0);
+	const total_distilled_length = sections.reduce((sum, s) => sum + s.distilled_length, 0);
+	const total_space_savings =
+		total_original_length > 0
+			? ((total_original_length - total_distilled_length) / total_original_length) * 100
+			: 0;
+
 	// Determine the title based on type
 	const title =
 		type === 'use_cases' ? 'Use Cases Comparison' : 'Distilled Documentation Comparison';
@@ -59,6 +67,9 @@ export const load: PageServerLoad = async ({ params }) => {
 			model: data.model,
 			total_sections: data.total_sections,
 			successful_summaries: data.successful_summaries,
+			total_original_length,
+			total_distilled_length,
+			total_space_savings,
 		},
 		sections,
 	};
