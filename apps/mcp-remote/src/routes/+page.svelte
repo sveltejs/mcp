@@ -6,9 +6,14 @@
 			url: 'https://svelte.dev/docs/mcp/overview',
 		},
 		{
-			title: 'Comparison Tools',
-			description: 'View before/after documentation processing',
-			url: '/compare',
+			title: 'Use Cases Comparison',
+			description: 'View and compare use case summaries with original documentation',
+			url: '/compare/use_cases',
+		},
+		{
+			title: 'Distilled Documentation',
+			description: 'View and compare distilled/condensed documentation versions',
+			url: '/compare/distilled',
 		},
 	];
 </script>
