@@ -18,7 +18,6 @@
 		selected_slug ? data.sections.find((s) => s.slug === selected_slug) : null,
 	);
 
-	// Determine column titles based on type
 	let summary_title = $derived(
 		data.type === 'use_cases' ? 'Use Cases Summary' : 'Distilled Version',
 	);

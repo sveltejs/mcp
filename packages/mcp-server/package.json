@@ -47,6 +47,7 @@
 		"@types/eslint-scope": "^8.3.2",
 		"@types/estree": "^1.0.8",
 		"@typescript-eslint/types": "^8.44.0",
-		"dotenv": "^17.2.3"
+		"dotenv": "^17.2.3",
+		"vite-node": "^3.2.4"
 	}
 }
