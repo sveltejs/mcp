@@ -18,18 +18,22 @@
 		selected_slug ? data.sections.find((s) => s.slug === selected_slug) : null,
 	);
 
+	// Determine column titles based on type
+	let summary_title = $derived(data.type === 'use_cases' ? 'Use Cases Summary' : 'Distilled Version');
+	let is_distilled = $derived(data.type === 'distilled');
+
 	function select_section(slug: string) {
 		selected_slug = selected_slug === slug ? null : slug;
 	}
 </script>
 
 <svelte:head>
-	<title>Distilled Documentation Comparison</title>
+	<title>{data.title}</title>
 </svelte:head>
 
 <div class="container">
 	<header>
-		<h1>Distilled Documentation Comparison</h1>
+		<h1>{data.title}</h1>
 		<div class="metadata">
 			<span>Generated: {new Date(data.metadata.generated_at).toLocaleString()}</span>
 			<span>Model: {data.metadata.model}</span>
@@ -57,7 +61,9 @@
 						>
 							<div class="section-title">{section.slug}</div>
 							<div class="section-preview">
-								{section.summary.slice(0, 100)}{section.summary.length > 100 ? '...' : ''}
+								{is_distilled
+									? section.summary.slice(0, 100) + (section.summary.length > 100 ? '...' : '')
+									: section.summary}
 							</div>
 						</button>
 					</li>
@@ -69,9 +75,13 @@
 			{#if selected_section}
 				<div class="comparison-grid">
 					<div class="comparison-column">
-						<h2>Distilled Version</h2>
+						<h2>{summary_title}</h2>
 						<div class="content-box">
-							<div class="markdown-content">{@html selected_section.summary}</div>
+							{#if is_distilled}
+								<div class="markdown-content">{@html selected_section.summary}</div>
+							{:else}
+								<p>{selected_section.summary}</p>
+							{/if}
 						</div>
 					</div>
 					<div class="comparison-column">
