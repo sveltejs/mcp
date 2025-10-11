@@ -148,13 +148,11 @@ function detect_changes(
 	const new_sections: typeof current_sections = [];
 	const changes: SectionChange[] = [];
 
-	// Find new and potentially updated sections
 	for (const section of current_sections) {
 		if (!existing_slugs.has(section.slug)) {
 			new_sections.push(section);
 			changes.push({ ...section, change_type: 'new' });
 		}
-		// You could add logic here to detect updated sections based on title changes, etc.
 	}
 
 	// Find removed sections
@@ -170,6 +168,8 @@ function detect_changes(
 			});
 		}
 	}
+
+	// TODO: Determine when a particular section was updated (e.g., by storing a hash of content)
 
 	return {
 		to_process: new_sections,
