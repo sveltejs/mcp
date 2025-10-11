@@ -159,8 +159,7 @@ function detect_changes(
 	for (const section of current_sections) {
 		const current_hash = current_hashes.get(section.slug);
 		if (!current_hash) {
-			// Failed to download content for this section, skip it
-			continue;
+			throw new Error(`No content hash found for section: ${section.slug}`);
 		}
 
 		if (!existing_slugs.has(section.slug)) {
@@ -242,20 +241,13 @@ async function main() {
 	console.log('\n📥 Downloading section content...');
 	const section_content = new Map<string, string>();
 	const section_hashes = new Map<string, string>();
-	const download_errors: Array<{ section: string; error: string }> = [];
 
 	for (let i = 0; i < all_sections.length; i++) {
 		const section = all_sections[i]!;
-		try {
-			console.log(`  Fetching ${i + 1}/${all_sections.length}: ${section.title}`);
-			const content = await fetch_section_content(section.url);
-			section_content.set(section.slug, content);
-			section_hashes.set(section.slug, compute_content_hash(content));
-		} catch (error) {
-			const error_msg = error instanceof Error ? error.message : String(error);
-			console.error(`  ⚠️  Failed to fetch ${section.title}:`, error_msg);
-			download_errors.push({ section: section.title, error: error_msg });
-		}
+		console.log(`  Fetching ${i + 1}/${all_sections.length}: ${section.title}`);
+		const content = await fetch_section_content(section.url);
+		section_content.set(section.slug, content);
+		section_hashes.set(section.slug, compute_content_hash(content));
 	}
 
 	console.log(`✅ Successfully downloaded ${section_content.size} sections`);
@@ -334,23 +326,18 @@ async function main() {
 			const section = sections_to_process[i]!;
 			const content = section_content.get(section.slug);
 
-			if (content) {
-				sections_with_content.push({
-					section,
-					content,
-					index: i,
-				});
-			} else {
-				console.warn(`  ⚠️  No content available for ${section.title}`);
+			if (!content) {
+				throw new Error(`No content available for ${section.title}`);
 			}
+
+			sections_with_content.push({
+				section,
+				content,
+				index: i,
+			});
 		}
 
 		console.log(`✅ Prepared ${sections_with_content.length} sections for processing`);
-
-		if (sections_with_content.length === 0 && to_remove.length === 0) {
-			console.error('❌ No sections were successfully downloaded and nothing to remove');
-			process.exit(1);
-		}
 
 		// Process with Anthropic API if we have content
 		const new_summaries: Record<string, string> = {};
@@ -408,31 +395,29 @@ async function main() {
 
 			// Process results
 			console.log('📊 Processing results...');
-			const errors: Array<{ section: string; error: string }> = [];
 
 			for (const result of results) {
 				const index = parseInt(result.custom_id.split('-')[1] ?? '0');
 				const section_data = sections_with_content.find((s) => s.index === index);
 
 				if (!section_data) {
-					console.warn(`  ⚠️  Could not find section for index ${index}`);
-					continue;
+					throw new Error(`Could not find section for index ${index}`);
 				}
 
 				const { section } = section_data;
 
 				if (result.result.type !== 'succeeded' || !result.result.message) {
 					const error_msg = result.result.error?.message || 'Failed or no message';
-					console.error(`  ❌ ${section.title}: ${error_msg}`);
-					errors.push({ section: section.title, error: error_msg });
-					continue;
+					throw new Error(`Failed to generate summary for ${section.title}: ${error_msg}`);
 				}
 
 				const output_content = result.result.message.content[0]?.text;
-				if (output_content) {
-					new_summaries[section.slug] = output_content.trim();
-					console.log(`  ✅ ${section.title}`);
+				if (!output_content) {
+					throw new Error(`No text content in result for ${section.title}`);
 				}
+
+				new_summaries[section.slug] = output_content.trim();
+				console.log(`  ✅ ${section.title}`);
 			}
 
 			// Merge with existing summaries
@@ -466,17 +451,8 @@ async function main() {
 			model: 'claude-sonnet-4-5-20250929',
 			total_sections: all_sections.length,
 			successful_summaries: Object.keys(merged_summaries).length,
-			failed_summaries:
-				sections_with_content.length > 0
-					? sections_with_content.length - Object.keys(new_summaries).length
-					: 0,
 			summaries: merged_summaries,
 			content_hashes: merged_content_hashes,
-			errors:
-				download_errors.length > 0 || sections_with_content.length > 0
-					? download_errors
-					: undefined,
-			download_errors: download_errors.length > 0 ? download_errors : undefined,
 		};
 
 		await writeFile(output_path, JSON.stringify(summary_data, null, 2), 'utf-8');
@@ -489,11 +465,6 @@ async function main() {
 		console.log(`  Sections removed: ${to_remove.length}`);
 		console.log(`  Total summaries in file: ${Object.keys(merged_summaries).length}`);
 		console.log(`\n✅ Results written to: ${output_path}`);
-
-		if (download_errors.length > 0) {
-			console.log('\n⚠️  Some sections failed to download:');
-			download_errors.forEach((e) => console.log(`  - ${e.section}: ${e.error}`));
-		}
 	}
 }
 
