@@ -12,7 +12,10 @@
 		"test": "vitest",
 		"generate-summaries": "node --experimental-strip-types scripts/generate-summaries.ts",
 		"generate-summaries:dry-run": "node --experimental-strip-types scripts/generate-summaries.ts --dry-run",
-		"generate-summaries:debug": "DEBUG_MODE=1 node --experimental-strip-types scripts/generate-summaries.ts"
+		"generate-summaries:debug": "DEBUG_MODE=1 node --experimental-strip-types scripts/generate-summaries.ts",
+		"generate-distilled": "node --experimental-strip-types scripts/generate-summaries.ts --prompt-type distilled",
+		"generate-distilled:dry-run": "node --experimental-strip-types scripts/generate-summaries.ts --prompt-type distilled --dry-run",
+		"generate-distilled:debug": "DEBUG_MODE=1 node --experimental-strip-types scripts/generate-summaries.ts --prompt-type distilled"
 	},
 	"exports": {
 		".": "./src/index.ts"
