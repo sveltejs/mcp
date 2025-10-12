@@ -5,7 +5,6 @@ import {
 	fetch_with_timeout,
 	format_sections_list,
 	get_distilled_content,
-	get_cached_content,
 } from '../../utils.js';
 import { SECTIONS_LIST_INTRO, SECTIONS_LIST_OUTRO } from './prompts.js';
 
@@ -99,10 +98,7 @@ export function get_documentation(server: SvelteMcp) {
 									content: `## ${matched_section.title}\n\n${distilled}`,
 								};
 							}
-
-							console.log(
-								`No distilled content found for section "${matched_section.title}", fetching full content instead`,
-							);
+							// If no distilled content, fall through to fetch full content
 						}
 
 						try {
@@ -110,24 +106,16 @@ export function get_documentation(server: SvelteMcp) {
 							if (response.ok) {
 								const content = await response.text();
 								return { success: true, content: `## ${matched_section.title}\n\n${content}` };
-							}
-							// If response is not ok, throw an error to trigger fallback
-							throw new Error(`HTTP ${response.status}`);
-						} catch (error) {
-							// Try fallback to cached content
-							const cached_content = get_cached_content(matched_section.slug);
-							if (cached_content) {
-								console.log(
-									`Using cached content fallback for section "${matched_section.title}" (fetch failed: ${error})`,
-								);
+							} else {
 								return {
-									success: true,
-									content: `## ${matched_section.title}\n\n${cached_content}`,
+									success: false,
+									content: `## ${matched_section.title}\n\nError: Could not fetch documentation (HTTP ${response.status})`,
 								};
 							}
+						} catch (error) {
 							return {
 								success: false,
-								content: `## ${matched_section.title}\n\nError: Failed to fetch documentation - ${error} and no cached content available`,
+								content: `## ${matched_section.title}\n\nError: Failed to fetch documentation - ${error}`,
 							};
 						}
 					} else {
