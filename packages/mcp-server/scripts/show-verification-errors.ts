@@ -7,22 +7,6 @@ import * as v from 'valibot';
 const current_filename = fileURLToPath(import.meta.url);
 const current_dirname = path.dirname(current_filename);
 
-interface VerificationResult {
-	slug: string;
-	status: 'ACCURATE' | 'NOT_ACCURATE';
-	reasoning: string;
-}
-
-interface VerificationOutput {
-	generated_at: string;
-	model: string;
-	total_sections: number;
-	verified_sections: number;
-	accurate_count: number;
-	not_accurate_count: number;
-	results: VerificationResult[];
-}
-
 const verification_output_schema = v.object({
 	generated_at: v.string(),
 	model: v.string(),
@@ -47,7 +31,7 @@ async function main() {
 	let content: string;
 	try {
 		content = await readFile(verification_path, 'utf-8');
-	} catch (error) {
+	} catch {
 		console.error('❌ Error: Could not find distilled-verification.json');
 		console.error('Please run `pnpm verify-distilled` first to generate the file.');
 		process.exit(1);
