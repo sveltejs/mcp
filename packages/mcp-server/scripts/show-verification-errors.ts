@@ -98,9 +98,7 @@ async function main() {
 	}
 
 	console.log('═'.repeat(80));
-	console.log(
-		`\nFound ${not_accurate.length} section(s) that need review or regeneration.`,
-	);
+	console.log(`\nFound ${not_accurate.length} section(s) that need review or regeneration.`);
 }
 
 main().catch((error) => {

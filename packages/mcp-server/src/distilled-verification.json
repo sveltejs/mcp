@@ -1,875 +1,875 @@
 {
-  "generated_at": "2025-10-12T21:58:44.809Z",
-  "model": "claude-sonnet-4-5-20250929",
-  "total_sections": 173,
-  "verified_sections": 173,
-  "accurate_count": 153,
-  "not_accurate_count": 20,
-  "results": [
-    {
-      "slug": "cli/overview",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures the essential information about the sv CLI tool, its usage with npx, and the behavior of using local vs. latest versions, with only the acknowledgements section reasonably omitted as non-critical."
-    },
-    {
-      "slug": "cli/faq",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the commands for each package manager, the troubleshooting context, and references to the specific GitHub issues, with only minor formatting changes."
-    },
-    {
-      "slug": "cli/sv-create",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information, options, and examples from the original documentation with appropriate condensation and no factual errors or critical omissions."
-    },
-    {
-      "slug": "cli/sv-add",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including usage, options, and add-ons list, with only minor acceptable simplifications in wording and removal of non-critical elements like links and TODO comments."
-    },
-    {
-      "slug": "cli/sv-check",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version contains a factual error in the machine-verbose format example where \"fn\" should be \"filename\" according to the original documentation."
-    },
-    {
-      "slug": "cli/sv-migrate",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version incorrectly labels the routes migration link as \"Discussion\" when the original specifies it as a \"pull request\" at discussions/5774."
-    },
-    {
-      "slug": "cli/devtools-json",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the plugin's purpose, security note, alternatives (both browser-based and code-based), usage command, and preserves the critical code example, with only minor formatting simplifications and removal of non-essential details."
-    },
-    {
-      "slug": "cli/drizzle",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including setup commands, features, database options, client options, and Docker configuration while maintaining factual accuracy through reasonable condensation."
-    },
-    {
-      "slug": "cli/eslint",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version preserves all essential information including the command, installed packages, configuration files, and conditional TypeScript/Prettier integration, with only minor wording simplifications that don't change the meaning."
-    },
-    {
-      "slug": "cli/lucia",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version preserves all essential information including the command, features, and options while using reasonable simplifications like \"+\" instead of \"and\" and condensed phrasing."
-    },
-    {
-      "slug": "cli/mdsvex",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the definition, usage command, and configuration outcome, with only minor formatting simplifications that preserve the core meaning."
-    },
-    {
-      "slug": "cli/paraglide",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including setup command, features, and options, with only minor formatting changes and reasonable simplifications that preserve the core content."
-    },
-    {
-      "slug": "cli/playwright",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version preserves all essential information with only minor formatting changes and reasonable simplifications that don't alter the meaning or omit critical details."
-    },
-    {
-      "slug": "cli/prettier",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the tool description, usage command, and the three key items added, with only minor formatting changes and reasonable simplifications."
-    },
-    {
-      "slug": "cli/storybook",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the command, purpose, and key features, with only minor formatting changes and reasonable condensation of the description."
-    },
-    {
-      "slug": "cli/sveltekit-adapter",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including usage, adapter options, and their purposes, with only minor formatting simplifications that don't alter the meaning."
-    },
-    {
-      "slug": "cli/tailwind",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version preserves all essential information including setup commands, installed components, and plugin options with correct syntax and links, using reasonable simplifications without introducing errors or omitting critical details."
-    },
-    {
-      "slug": "cli/vitest",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information from the original, condensing the \"What you get\" section into a single sentence while preserving all key points about packages, scripts, testing setup, and demo tests."
-    },
-    {
-      "slug": "kit/introduction",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures the essential information about SvelteKit and Svelte, preserves all key features and links, and contains no factual errors despite being significantly condensed."
-    },
-    {
-      "slug": "kit/creating-a-project",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including setup commands, core concepts about pages and routing, server/client rendering behavior, and editor recommendations, with only minor simplifications that don't alter meaning."
-    },
-    {
-      "slug": "kit/project-types",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information, deployment types, and technical details from the original with appropriate condensation and preserved links, though it omits some contextual explanations that are not critical for understanding."
-    },
-    {
-      "slug": "kit/project-structure",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version incorrectly names \"tracing.server.js\" as \"instrumentation.server.js\" in the directory structure, which is a factual error in the file name."
-    },
-    {
-      "slug": "kit/web-standards",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the special server-side fetch behavior, API interfaces, code examples, and key concepts, with only minor formatting simplifications that preserve accuracy."
-    },
-    {
-      "slug": "kit/routing",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all essential information including routing concepts, file types, code examples, and key behaviors, with appropriate condensation and no factual errors or critical omissions."
-    },
-    {
-      "slug": "kit/load",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including load function types, data flow, URL handling, fetch requests, cookies, headers, parent data, errors, redirects, streaming, parallel loading, rerunning logic, authentication implications, and getRequestEvent usage, with appropriate code examples preserved."
-    },
-    {
-      "slug": "kit/form-actions",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all key concepts including default/named actions, validation errors, redirects, progressive enhancement with use:enhance, and GET vs POST forms, with appropriate code examples and critical notes preserved."
-    },
-    {
-      "slug": "kit/page-options",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the five main page options (prerender, entries, ssr, csr, trailingSlash, config), their usage, code examples, key warnings, and important notes, with appropriate condensation but no factual errors or critical omissions."
-    },
-    {
-      "slug": "kit/state-management",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information, preserves critical warnings and code examples, maintains accurate technical details, and only condenses explanatory text while keeping all key concepts intact."
-    },
-    {
-      "slug": "kit/remote-functions",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all essential information, correctly preserves technical details, code examples, and important warnings/notes from the original documentation, with appropriate condensation that maintains meaning and accuracy."
-    },
-    {
-      "slug": "kit/building-your-app",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the two-stage build process, the building flag usage with correct code example, and the preview limitations, with only minor formatting simplifications."
-    },
-    {
-      "slug": "kit/adapters",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the purpose of adapters, official adapter list, configuration example, and platform-specific context, with only minor formatting simplifications that preserve the core content."
-    },
-    {
-      "slug": "kit/adapter-auto",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including supported platforms, best practices, and the limitation that adapter-auto takes no configuration options, with only minor formatting changes and the omission of non-critical details like the creation command and community contribution information."
-    },
-    {
-      "slug": "kit/adapter-node",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all essential information, configuration options, environment variables, and code examples from the original documentation with appropriate condensation and no factual errors or critical omissions."
-    },
-    {
-      "slug": "kit/adapter-static",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including installation, configuration options, GitHub Pages setup, and the workflow example, with appropriate condensation and no factual errors or critical omissions."
-    },
-    {
-      "slug": "kit/single-page-apps",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including SPA setup, performance warnings, configuration steps, prerendering options, and Apache configuration, with appropriate condensation but no factual errors or critical omissions."
-    },
-    {
-      "slug": "kit/adapter-cloudflare",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all essential information, code examples, configuration details, and key concepts from the original documentation with appropriate condensation and no factual errors or misleading statements."
-    },
-    {
-      "slug": "kit/adapter-cloudflare-workers",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the deprecation notice, installation steps, configuration options, runtime APIs, type definitions, local testing, and troubleshooting sections with accurate technical details and code examples."
-    },
-    {
-      "slug": "kit/adapter-netlify",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all essential information, configuration options, and critical warnings from the original, with appropriate condensation and no factual errors or misleading statements."
-    },
-    {
-      "slug": "kit/adapter-vercel",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including installation, configuration options, ISR setup, environment variables, skew protection, and troubleshooting, with appropriate condensation of examples while preserving technical accuracy and critical details."
-    },
-    {
-      "slug": "kit/writing-adapters",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the API structure, required/optional fields, adapt method tasks, and best practices, with appropriate condensation and no factual errors."
-    },
-    {
-      "slug": "kit/advanced-routing",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all key concepts including rest parameters, optional parameters, matchers, sorting rules, encoding, and advanced layouts with correct code examples and technical details preserved."
-    },
-    {
-      "slug": "kit/hooks",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately preserves all key technical information, code examples, API signatures, and critical warnings from the original documentation, with appropriate condensation of explanatory text while maintaining factual correctness."
-    },
-    {
-      "slug": "kit/errors",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including expected/unexpected errors, error handling, responses, type safety, and the critical gotcha about root layout errors, with appropriate code examples and no factual errors."
-    },
-    {
-      "slug": "kit/link-options",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all key information, attribute values, code examples, and important warnings from the original documentation, with appropriate condensation but no factual errors or critical omissions."
-    },
-    {
-      "slug": "kit/service-workers",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including setup, the $service-worker module, the complete code example, development considerations, and alternatives, with only minor formatting changes and reasonable condensation of explanatory text."
-    },
-    {
-      "slug": "kit/server-only-modules",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the two methods for creating server-only modules, the error behavior, dynamic import support, and the testing exception, with no factual errors or critical omissions."
-    },
-    {
-      "slug": "kit/snapshots",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the purpose, usage pattern, timing of capture/restore calls, serialization requirements, and performance warnings without introducing factual errors or omitting critical details."
-    },
-    {
-      "slug": "kit/shallow-routing",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including API usage, code examples, caveats, and key concepts, with appropriate condensation of explanatory text while maintaining technical accuracy."
-    },
-    {
-      "slug": "kit/observability",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including setup, traced components, code examples, and important warnings about experimental status and performance overhead, with only reasonable condensation of explanatory text."
-    },
-    {
-      "slug": "kit/packaging",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all essential information including package.json configuration, TypeScript handling, best practices, options, and caveats, with appropriate code examples and no factual errors or misleading statements."
-    },
-    {
-      "slug": "kit/auth",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the definitions, session vs token tradeoffs, integration points, and Lucia implementation details without any factual errors or critical omissions."
-    },
-    {
-      "slug": "kit/performance",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version contains a code example for font preloading in the `handle` hook that does not appear in the original documentation, which only mentions calling `resolve` with a `preload` filter but provides no specific code implementation."
-    },
-    {
-      "slug": "kit/icons",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the CSS icon approach via Iconify, framework plugin support, the warning about per-icon .svelte files causing Vite performance issues, and the relevant links, with only minor formatting simplifications."
-    },
-    {
-      "slug": "kit/images",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including setup, usage patterns, configuration details, and best practices, with appropriate condensation and no factual errors or critical omissions."
-    },
-    {
-      "slug": "kit/accessibility",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential technical information, including route announcements, focus management, lang attribute configuration, and code examples, with only minor formatting changes and reasonable simplifications of introductory text."
-    },
-    {
-      "slug": "kit/seo",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including SSR defaults, performance considerations, URL normalization, manual setup steps, and complete AMP implementation details with proper code examples, while appropriately condensing explanatory text."
-    },
-    {
-      "slug": "kit/faq",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all key information, code examples, and links from the original, with appropriate condensation and formatting changes that preserve the essential technical content and guidance."
-    },
-    {
-      "slug": "kit/integrations",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including vitePreprocess functionality, TypeScript support differences between Svelte 4/5, add-ons list, svelte-preprocess details, and Vite plugins, with appropriate condensation and no factual errors."
-    },
-    {
-      "slug": "kit/debugging",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including VSCode debugging methods, browser DevTools setup, editor alternatives, and the critical note about Chrome/Edge only working with client-side source maps, with appropriate condensation and formatting changes."
-    },
-    {
-      "slug": "kit/migrating-to-sveltekit-2",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all key breaking changes, code examples, and migration steps from the original documentation, with appropriate condensation and no factual errors or critical omissions."
-    },
-    {
-      "slug": "kit/migrating",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all key migration steps, API changes, and code examples from the original documentation with appropriate condensation and no factual errors or critical omissions."
-    },
-    {
-      "slug": "kit/additional-resources",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including FAQ links, support channels, official examples, and community resources, with only minor formatting changes and reasonable condensation of the search guidance."
-    },
-    {
-      "slug": "kit/glossary",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all key concepts, technical details, configuration options, and critical warnings from the original documentation without introducing factual errors or misleading statements."
-    },
-    {
-      "slug": "kit/@sveltejs-kit",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version omits critical information about the Invalid type for form validation, removes important details about fetch behavior in LoadEvent, and fails to document several key interfaces like ActionFailure structure, HttpError interface properties, and Redirect interface properties that developers need to understand error handling."
-    },
-    {
-      "slug": "kit/@sveltejs-kit-hooks",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the behavior of each option, the complete code example, expected output, and type signature with appropriate simplifications in formatting and structure."
-    },
-    {
-      "slug": "kit/@sveltejs-kit-node-polyfills",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures the essential information about the function's purpose, the APIs it polyfills, and provides a valid usage example that demonstrates the import and function call shown in the original."
-    },
-    {
-      "slug": "kit/@sveltejs-kit-node",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including function signatures, availability notes, and accurately describes the purpose of each utility function, with only minor formatting simplifications."
-    },
-    {
-      "slug": "kit/@sveltejs-kit-vite",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version preserves all essential information including the import statement, function description, and TypeScript signature, with only minor formatting changes."
-    },
-    {
-      "slug": "kit/$app-environment",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the import statement, the meaning of each boolean flag, and the version property, with only minor acceptable simplifications of wording."
-    },
-    {
-      "slug": "kit/$app-forms",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including function signatures, behaviors, and key concepts, with appropriate condensation of explanatory text while preserving critical technical details."
-    },
-    {
-      "slug": "kit/$app-navigation",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information, function signatures, and key behaviors from the original documentation, with appropriate condensation that preserves critical details and warnings."
-    },
-    {
-      "slug": "kit/$app-paths",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including function purposes, deprecation notices, code examples, and type signatures, with only minor formatting simplifications that preserve the core content."
-    },
-    {
-      "slug": "kit/$app-server",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version omits critical \"Available since\" version information for all functions, which is essential for developers to know compatibility requirements."
-    },
-    {
-      "slug": "kit/$app-state",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the three state objects, their properties, usage examples, and critical warnings about runes vs legacy reactivity, with appropriate condensation but no factual errors or misleading omissions."
-    },
-    {
-      "slug": "kit/$app-stores",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the deprecation notice, store behaviors, server/browser subscription constraints, and type signatures, with only minor formatting simplifications that preserve the core content."
-    },
-    {
-      "slug": "kit/$app-types",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The LayoutParams type definition incorrectly shows \"RouteParams\" instead of \"LayoutParams\" in the distilled version, which is a factual error copied from the original."
-    },
-    {
-      "slug": "kit/$env-dynamic-private",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the server-only nature, variable filtering rules, usage example, and environment-specific behavior without any factual errors or critical omissions."
-    },
-    {
-      "slug": "kit/$env-dynamic-public",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the public prefix requirement, the network payload warning, the recommendation to use the static alternative, and provides the same code example."
-    },
-    {
-      "slug": "kit/$env-static-private",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including static injection, server-only usage, filtering rules, code examples, and best practices without any factual errors or critical omissions."
-    },
-    {
-      "slug": "kit/$env-static-public",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the public prefix requirement, client-side safety, build-time replacement, and the code example, with only minor simplification of wording."
-    },
-    {
-      "slug": "kit/$lib",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures the essential information about the $lib import alias, its default location, configurability, and includes the same code examples demonstrating its usage."
-    },
-    {
-      "slug": "kit/$service-worker",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including types, descriptions, development behavior, and configuration references without any factual errors or critical omissions."
-    },
-    {
-      "slug": "kit/configuration",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential configuration options, their defaults, key behaviors, and code examples, with appropriate simplifications and no factual errors or critical omissions."
-    },
-    {
-      "slug": "kit/cli",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including Vite CLI commands, svelte-kit sync functionality, and its automatic execution behavior, with only minor formatting simplifications."
-    },
-    {
-      "slug": "kit/types",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including generated types, $lib aliases, app.d.ts interfaces, and critical setup requirements, with appropriate condensation of examples while preserving technical accuracy."
-    },
-    {
-      "slug": "mcp/overview",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version preserves all critical information including setup options, the complete usage prompt, and the svelte-task recommendation, with only minor formatting simplifications that don't alter meaning."
-    },
-    {
-      "slug": "mcp/local-setup",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential setup information, commands, and configurations for each client, with only minor formatting simplifications that preserve the core technical content."
-    },
-    {
-      "slug": "mcp/remote-setup",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including URLs, commands, configuration steps, and scope options for each client, with only minor formatting simplifications that preserve the core content."
-    },
-    {
-      "slug": "mcp/tools",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version is a comprehensive Svelte 5 and SvelteKit documentation guide, but the original document describes MCP server tools (list-sections, get-documentation, svelte-autofixer, playground-link) which are completely absent from the distilled version, making it unrelated content."
-    },
-    {
-      "slug": "mcp/resources",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version is a comprehensive Svelte 5 documentation guide, but it does not match the original content which describes MCP server resources for accessing Svelte documentation via URIs like `svelte://slug-of-the-docs.md`."
-    },
-    {
-      "slug": "mcp/prompts",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version omits critical information that the tool must return no issues before sharing code with the user, changes the mandatory workflow from \"MUST\" to less emphatic language, and significantly truncates the comprehensive documentation paths list which could mislead developers about available resources."
-    },
-    {
-      "slug": "svelte/overview",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version contains extensive content about Svelte 5 features (runes, snippets, new event syntax) that do not exist in the original documentation excerpt, which only introduces Svelte basics."
-    },
-    {
-      "slug": "svelte/getting-started",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the recommended SvelteKit setup commands, Vite alternative with key details about output and routing needs, tooling options, and help resources, with only reasonable condensation and formatting changes."
-    },
-    {
-      "slug": "svelte/svelte-files",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the three optional sections, script behaviors, module script functionality, style scoping, and includes the key code examples, with only minor formatting simplifications and reasonable condensation of explanatory text."
-    },
-    {
-      "slug": "svelte/svelte-js-files",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the ability to use runes, use cases, the limitation about exporting reassigned state, and that this is new to Svelte 5."
-    },
-    {
-      "slug": "svelte/what-are-runes",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version adds information about syntax rules (event modifiers, $derived.by, error boundaries) that does not exist in the original documentation, introducing content not present in the source material."
-    },
-    {
-      "slug": "svelte/$state",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including key concepts, code examples, gotchas, and limitations, with appropriate simplifications and formatting changes that preserve the original meaning."
-    },
-    {
-      "slug": "svelte/$derived",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including syntax, key rules, dependencies, overriding behavior, reactivity differences, destructuring, and update propagation, with appropriate code examples and no factual errors."
-    },
-    {
-      "slug": "svelte/$effect",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all key concepts, code examples, and warnings from the original documentation, with appropriate condensation and formatting that preserves the essential information for developers."
-    },
-    {
-      "slug": "svelte/$props",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including props usage, fallback values, renaming, rest props, updating behavior, mutation warnings, type safety examples, and $props.id() functionality without any factual errors or critical omissions."
-    },
-    {
-      "slug": "svelte/$bindable",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the bidirectional data flow concept, syntax usage, fallback values, and key warnings, with appropriate condensation and no factual errors."
-    },
-    {
-      "slug": "svelte/$inspect",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the dev-only nature, deep reactivity tracking, the `.with()` method signature, `$inspect.trace()` requirements, and preserves the key code examples and constraints."
-    },
-    {
-      "slug": "svelte/$host",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version preserves all essential information including the purpose of $host rune, its usage context with custom elements, and complete code examples demonstrating event dispatching."
-    },
-    {
-      "slug": "svelte/basic-markup",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including tags, attributes, props, events, event delegation, text expressions, and comments, with appropriate simplifications and no factual errors or critical omissions."
-    },
-    {
-      "slug": "svelte/if",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version preserves all key information including syntax, examples, and the important note about blocks wrapping elements or text, with only minor organizational formatting changes."
-    },
-    {
-      "slug": "svelte/each",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including syntax, functionality, keyed blocks, destructuring, itemless iteration, and else blocks with appropriate examples and explanations."
-    },
-    {
-      "slug": "svelte/key",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including syntax, core behavior (destroy/recreate on change), and both key use cases (component reinstantiation and transition replay) with accurate code examples."
-    },
-    {
-      "slug": "svelte/await",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including syntax variations, usage examples, SSR behavior, non-Promise handling, and the lazy loading pattern, with only formatting changes and reasonable condensation of explanatory text."
-    },
-    {
-      "slug": "svelte/snippet",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including syntax, scope rules, component passing methods, TypeScript typing, exporting capabilities, and the deprecation of slots, with appropriate code examples preserved."
-    },
-    {
-      "slug": "svelte/@render",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version preserves all key information including syntax, code examples, and concepts for rendering snippets, optional chaining, and fallback content, with only minor wording simplifications."
-    },
-    {
-      "slug": "svelte/@html",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version incorrectly shows `article :global` (with a space) instead of `article :global(*)` or the nested syntax shown in the original, which changes the CSS selector behavior."
-    },
-    {
-      "slug": "svelte/@attach",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including basic usage, attachment factories, inline attachments, component passing, reactivity control, and conversion utilities, with appropriate code examples and key concepts preserved."
-    },
-    {
-      "slug": "svelte/@const",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures the essential information about {@const} tag usage, its purpose, code example, and placement restrictions, with only minor formatting changes."
-    },
-    {
-      "slug": "svelte/@debug",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the functionality, syntax rules, valid/invalid examples, and the no-arguments behavior, with only minor formatting improvements."
-    },
-    {
-      "slug": "svelte/bind",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all key information including syntax, binding types, version-specific features, and important notes, with appropriate condensation of examples while preserving technical accuracy."
-    },
-    {
-      "slug": "svelte/use",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the note about attachments, basic usage, arguments, the key behavior that actions don't re-run on argument changes, and typing examples, with only minor formatting simplifications."
-    },
-    {
-      "slug": "svelte/transition",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including transition behavior, local vs global scope, parameters, custom functions with css/tick, the options parameter, and events, with appropriate simplifications and no factual errors."
-    },
-    {
-      "slug": "svelte/in-and-out",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the non-bidirectional nature, independent playback behavior, abort/restart behavior, and preserves the complete code example."
-    },
-    {
-      "slug": "svelte/animate",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including when animations trigger, usage syntax, custom function signatures, the distinction between css and tick methods, and preserves the complete code examples with appropriate warnings about performance."
-    },
-    {
-      "slug": "svelte/style",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including basic usage, expressions, shorthand form, multiple styles, important modifier, and precedence rules with accurate code examples."
-    },
-    {
-      "slug": "svelte/class",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the two ways to set classes, object/array syntax with clsx, version requirements, TypeScript support, and the recommendation to prefer class attribute over class: directive."
-    },
-    {
-      "slug": "svelte/await-expressions",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including setup, usage, synchronized updates, concurrency, loading states, error handling, SSR, and caveats, with appropriate simplifications and no factual errors or critical omissions."
-    },
-    {
-      "slug": "svelte/scoped-styles",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including scoped CSS behavior, specificity rules, and scoped keyframes, with appropriate simplifications that preserve the core concepts."
-    },
-    {
-      "slug": "svelte/global-styles",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version preserves all key information including syntax, examples, and the keyframes explanation, with only minor formatting changes and removal of a non-critical note about alternative selector syntax."
-    },
-    {
-      "slug": "svelte/custom-properties",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including syntax, desugaring behavior, SVG handling, usage with var(), inheritance from parents, and the CSS selector gotcha, with only minor formatting changes."
-    },
-    {
-      "slug": "svelte/nested-style-elements",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all key information including the one top-level style rule, nested style behavior, lack of scoping/processing for nested styles, and preserves the illustrative code example."
-    },
-    {
-      "slug": "svelte/svelte-boundary",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version incorrectly states that boundaries only catch errors \"at top level of $effect\" when the original states they catch errors \"while running effects\" without that restriction, and it omits the critical version requirement (5.3.0) and the 5.36 version note for the pending feature."
-    },
-    {
-      "slug": "svelte/svelte-window",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the purpose, usage restrictions, event handling, bindable properties with their readonly status, and the important scroll behavior caveat, with only minor simplifications in wording."
-    },
-    {
-      "slug": "svelte/svelte-document",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including syntax, usage constraints, example, and the complete list of readonly bindable properties without any factual errors or critical omissions."
-    },
-    {
-      "slug": "svelte/svelte-body",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the purpose, constraints, and provides the same example, with only minor formatting changes for brevity."
-    },
-    {
-      "slug": "svelte/svelte-head",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the element's purpose, SSR behavior, placement rules, and provides the same code example."
-    },
-    {
-      "slug": "svelte/svelte-element",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including syntax, key behaviors, limitations, and gotchas with appropriate code examples preserved from the original."
-    },
-    {
-      "slug": "svelte/svelte-options",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential options and their meanings, with appropriate simplification of descriptions while maintaining technical accuracy and including the key example."
-    },
-    {
-      "slug": "svelte/stores",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all key information including store basics, usage rules, when to use stores vs runes, all svelte/store methods with correct examples, and the store contract requirements without any factual errors or critical omissions."
-    },
-    {
-      "slug": "svelte/context",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including basic usage, reactive state patterns, the reassignment gotcha, type-safe patterns, and the SSR global state warning, with appropriate simplifications and formatting changes."
-    },
-    {
-      "slug": "svelte/lifecycle-hooks",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version contains a critical error in the migration example code - it shows both `beforeUpdate` and `$effect.pre` simultaneously with incorrect syntax (strikethrough formatting rendered as actual code), and the code logic is broken as it still checks `if (!updatingMessages) return;` while also referencing `messages;` which contradicts the explanation that `$effect.pre` only runs when messages changes."
-    },
-    {
-      "slug": "svelte/imperative-component-api",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including API signatures, key behavioral differences from Svelte 4, code examples, and critical details about effects and transitions, with only minor formatting changes for conciseness."
-    },
-    {
-      "slug": "svelte/testing",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version preserves all critical information, code examples, and setup instructions from the original while condensing explanatory text and maintaining technical accuracy."
-    },
-    {
-      "slug": "svelte/typescript",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version incorrectly states that `{ script: true }` is needed for non-type-only features when using vitePreprocess, but the original shows this is only needed for the general preprocessor setup section, while SvelteKit/Vite section shows vitePreprocess() without this option works by default."
-    },
-    {
-      "slug": "svelte/custom-elements",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all essential information including lifecycle behavior, component options, code examples, and caveats, with appropriate condensation and no factual errors or misleading statements."
-    },
-    {
-      "slug": "svelte/v4-migration-guide",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information, breaking changes, code examples, and migration guidance from the original documentation, with appropriate condensation and formatting that preserves the technical accuracy and critical details developers need."
-    },
-    {
-      "slug": "svelte/v5-migration-guide",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all key migration information including syntax changes, event handling, component instantiation, breaking changes, and migration tools, with appropriate code examples and proper preservation of critical technical details."
-    },
-    {
-      "slug": "svelte/faq",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information, maintains factual accuracy, preserves critical links and code examples, and appropriately condenses content without introducing errors or misleading statements."
-    },
-    {
-      "slug": "svelte/svelte",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including function signatures, key concepts, deprecation warnings, and code examples, with appropriate simplifications and reorganization for clarity."
-    },
-    {
-      "slug": "svelte/svelte-action",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the legacy status, type signatures, parameter handling, optional methods, and examples, with only minor formatting simplifications that preserve the core concepts."
-    },
-    {
-      "slug": "svelte/svelte-animate",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the flip function signature, its purpose, the FLIP acronym explanation, and complete type definitions for AnimationConfig and FlipParams."
-    },
-    {
-      "slug": "svelte/svelte-attachments",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including API signatures, usage examples, and key concepts, with only minor formatting simplifications that don't affect accuracy."
-    },
-    {
-      "slug": "svelte/svelte-compiler",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including function signatures, options with defaults, deprecation notices, version changes, and key type definitions, with appropriate simplifications that preserve meaning."
-    },
-    {
-      "slug": "svelte/svelte-easing",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the module path, function signatures, available easing functions, their variants, and the core API pattern, with reasonable simplification through grouping."
-    },
-    {
-      "slug": "svelte/svelte-events",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures the essential functionality, purpose, and all five function overloads, with a reasonable usage example added for clarity."
-    },
-    {
-      "slug": "svelte/svelte-legacy",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all key functions, their purposes, and type signatures while appropriately condensing descriptions and maintaining critical information about deprecation and migration context."
-    },
-    {
-      "slug": "svelte/svelte-motion",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including API signatures, key properties, methods, usage examples, and deprecation notices, with appropriate simplifications that preserve the core concepts."
-    },
-    {
-      "slug": "svelte/svelte-reactivity-window",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the reactive nature, usage examples, all exports, server-side behavior, and critical implementation details like browser differences and requestAnimationFrame updates."
-    },
-    {
-      "slug": "svelte/svelte-reactivity",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all key information, preserves critical warnings (SSR, deep reactivity), maintains code examples, and correctly represents the API signatures and behavior of each reactive utility."
-    },
-    {
-      "slug": "svelte/svelte-server",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version incorrectly simplifies the type signature by removing the conditional types that make props required or optional based on whether the component has required props, changing the function's actual API contract."
-    },
-    {
-      "slug": "svelte/svelte-store",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential API signatures, function purposes, and type definitions from the original, with reasonable reorganization and minor simplifications that preserve the core information."
-    },
-    {
-      "slug": "svelte/svelte-transition",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including function signatures, parameters, descriptions, and type definitions, with only reasonable simplifications in formatting and wording."
-    },
-    {
-      "slug": "svelte/compiler-errors",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version contains a critical factual error in the animation_invalid_placement description, stating it must be \"on the only child\" when the original says \"must be the only child\" (the element itself, not a directive placement), and omits numerous important error codes and details throughout."
-    },
-    {
-      "slug": "svelte/compiler-warnings",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all key warnings, their meanings, code examples, and solutions, with appropriate condensation while preserving critical technical details and migration guidance."
-    },
-    {
-      "slug": "svelte/runtime-errors",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential error messages, their meanings, code examples, and solutions, with appropriate condensation and formatting changes that preserve the core information."
-    },
-    {
-      "slug": "svelte/runtime-warnings",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all key warnings, their causes, code examples, and fixes, with appropriate condensation of explanatory text while preserving critical technical details and API usage."
-    },
-    {
-      "slug": "svelte/legacy-overview",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version adds information not present in the original, including specific syntax comparisons (event handling, reactivity), runes syntax rules, and error boundary details that do not appear in the original text."
-    },
-    {
-      "slug": "svelte/legacy-let",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures the key concepts of legacy mode reactivity, including automatic reactivity of top-level variables and the array methods gotcha requiring reassignment, while appropriately condensing the comparison to runes mode."
-    },
-    {
-      "slug": "svelte/legacy-reactive-assignments",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including syntax, behavior, gotchas with dependencies and topological ordering, and browser-only code handling, with appropriate simplifications and formatting changes."
-    },
-    {
-      "slug": "svelte/legacy-export-let",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including prop declaration syntax, default value behavior, the critical difference about undefined values not reverting, component exports, and prop renaming, with appropriate simplifications and no factual errors."
-    },
-    {
-      "slug": "svelte/legacy-$$props-and-$$restProps",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all key information including the distinction between runes and legacy mode, the definitions of $$props and $$restProps, the complete code example, and the performance warning."
-    },
-    {
-      "slug": "svelte/legacy-on",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version accurately captures all key information including event handler syntax, modifiers, forwarding, component events, and the deprecation notice, with appropriate simplifications and no factual errors."
-    },
-    {
-      "slug": "svelte/legacy-slots",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including basic slots, named slots, fallback content, and passing data to slots, with appropriate code examples and shorthand explanations preserved."
-    },
-    {
-      "slug": "svelte/legacy-$$slots",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures the key information about $$slots in legacy mode, preserves the essential code examples, and accurately explains the difference from runes mode, with only minor formatting simplifications."
-    },
-    {
-      "slug": "svelte/legacy-svelte-fragment",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures the essential functionality of `<svelte:fragment>`, preserves the complete code examples, and accurately conveys the Svelte 5+ deprecation note with appropriate simplification."
-    },
-    {
-      "slug": "svelte/legacy-svelte-component",
-      "status": "NOT_ACCURATE",
-      "reasoning": "The distilled version incorrectly states that `<MyComponent>` \"re-renders\" in runes mode when it actually \"re-renders\" means the component is destroyed and recreated, which is a critical distinction in the original documentation's explanation of the behavioral difference."
-    },
-    {
-      "slug": "svelte/legacy-svelte-self",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including the recursive functionality, the requirement to prevent infinite loops, the code example, and the obsolescence note with the self-import alternative."
-    },
-    {
-      "slug": "svelte/legacy-component-api",
-      "status": "ACCURATE",
-      "reasoning": "The distilled version correctly captures all essential information including API methods, options tables, code examples, and Svelte 5 migration notes, with appropriate condensation but no factual errors or critical omissions."
-    }
-  ]
+	"generated_at": "2025-10-12T21:58:44.809Z",
+	"model": "claude-sonnet-4-5-20250929",
+	"total_sections": 173,
+	"verified_sections": 173,
+	"accurate_count": 153,
+	"not_accurate_count": 20,
+	"results": [
+		{
+			"slug": "cli/overview",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures the essential information about the sv CLI tool, its usage with npx, and the behavior of using local vs. latest versions, with only the acknowledgements section reasonably omitted as non-critical."
+		},
+		{
+			"slug": "cli/faq",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the commands for each package manager, the troubleshooting context, and references to the specific GitHub issues, with only minor formatting changes."
+		},
+		{
+			"slug": "cli/sv-create",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information, options, and examples from the original documentation with appropriate condensation and no factual errors or critical omissions."
+		},
+		{
+			"slug": "cli/sv-add",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including usage, options, and add-ons list, with only minor acceptable simplifications in wording and removal of non-critical elements like links and TODO comments."
+		},
+		{
+			"slug": "cli/sv-check",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version contains a factual error in the machine-verbose format example where \"fn\" should be \"filename\" according to the original documentation."
+		},
+		{
+			"slug": "cli/sv-migrate",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version incorrectly labels the routes migration link as \"Discussion\" when the original specifies it as a \"pull request\" at discussions/5774."
+		},
+		{
+			"slug": "cli/devtools-json",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the plugin's purpose, security note, alternatives (both browser-based and code-based), usage command, and preserves the critical code example, with only minor formatting simplifications and removal of non-essential details."
+		},
+		{
+			"slug": "cli/drizzle",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including setup commands, features, database options, client options, and Docker configuration while maintaining factual accuracy through reasonable condensation."
+		},
+		{
+			"slug": "cli/eslint",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version preserves all essential information including the command, installed packages, configuration files, and conditional TypeScript/Prettier integration, with only minor wording simplifications that don't change the meaning."
+		},
+		{
+			"slug": "cli/lucia",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version preserves all essential information including the command, features, and options while using reasonable simplifications like \"+\" instead of \"and\" and condensed phrasing."
+		},
+		{
+			"slug": "cli/mdsvex",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the definition, usage command, and configuration outcome, with only minor formatting simplifications that preserve the core meaning."
+		},
+		{
+			"slug": "cli/paraglide",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including setup command, features, and options, with only minor formatting changes and reasonable simplifications that preserve the core content."
+		},
+		{
+			"slug": "cli/playwright",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version preserves all essential information with only minor formatting changes and reasonable simplifications that don't alter the meaning or omit critical details."
+		},
+		{
+			"slug": "cli/prettier",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the tool description, usage command, and the three key items added, with only minor formatting changes and reasonable simplifications."
+		},
+		{
+			"slug": "cli/storybook",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the command, purpose, and key features, with only minor formatting changes and reasonable condensation of the description."
+		},
+		{
+			"slug": "cli/sveltekit-adapter",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including usage, adapter options, and their purposes, with only minor formatting simplifications that don't alter the meaning."
+		},
+		{
+			"slug": "cli/tailwind",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version preserves all essential information including setup commands, installed components, and plugin options with correct syntax and links, using reasonable simplifications without introducing errors or omitting critical details."
+		},
+		{
+			"slug": "cli/vitest",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information from the original, condensing the \"What you get\" section into a single sentence while preserving all key points about packages, scripts, testing setup, and demo tests."
+		},
+		{
+			"slug": "kit/introduction",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures the essential information about SvelteKit and Svelte, preserves all key features and links, and contains no factual errors despite being significantly condensed."
+		},
+		{
+			"slug": "kit/creating-a-project",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including setup commands, core concepts about pages and routing, server/client rendering behavior, and editor recommendations, with only minor simplifications that don't alter meaning."
+		},
+		{
+			"slug": "kit/project-types",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information, deployment types, and technical details from the original with appropriate condensation and preserved links, though it omits some contextual explanations that are not critical for understanding."
+		},
+		{
+			"slug": "kit/project-structure",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version incorrectly names \"tracing.server.js\" as \"instrumentation.server.js\" in the directory structure, which is a factual error in the file name."
+		},
+		{
+			"slug": "kit/web-standards",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the special server-side fetch behavior, API interfaces, code examples, and key concepts, with only minor formatting simplifications that preserve accuracy."
+		},
+		{
+			"slug": "kit/routing",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all essential information including routing concepts, file types, code examples, and key behaviors, with appropriate condensation and no factual errors or critical omissions."
+		},
+		{
+			"slug": "kit/load",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including load function types, data flow, URL handling, fetch requests, cookies, headers, parent data, errors, redirects, streaming, parallel loading, rerunning logic, authentication implications, and getRequestEvent usage, with appropriate code examples preserved."
+		},
+		{
+			"slug": "kit/form-actions",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all key concepts including default/named actions, validation errors, redirects, progressive enhancement with use:enhance, and GET vs POST forms, with appropriate code examples and critical notes preserved."
+		},
+		{
+			"slug": "kit/page-options",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the five main page options (prerender, entries, ssr, csr, trailingSlash, config), their usage, code examples, key warnings, and important notes, with appropriate condensation but no factual errors or critical omissions."
+		},
+		{
+			"slug": "kit/state-management",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information, preserves critical warnings and code examples, maintains accurate technical details, and only condenses explanatory text while keeping all key concepts intact."
+		},
+		{
+			"slug": "kit/remote-functions",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all essential information, correctly preserves technical details, code examples, and important warnings/notes from the original documentation, with appropriate condensation that maintains meaning and accuracy."
+		},
+		{
+			"slug": "kit/building-your-app",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the two-stage build process, the building flag usage with correct code example, and the preview limitations, with only minor formatting simplifications."
+		},
+		{
+			"slug": "kit/adapters",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the purpose of adapters, official adapter list, configuration example, and platform-specific context, with only minor formatting simplifications that preserve the core content."
+		},
+		{
+			"slug": "kit/adapter-auto",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including supported platforms, best practices, and the limitation that adapter-auto takes no configuration options, with only minor formatting changes and the omission of non-critical details like the creation command and community contribution information."
+		},
+		{
+			"slug": "kit/adapter-node",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all essential information, configuration options, environment variables, and code examples from the original documentation with appropriate condensation and no factual errors or critical omissions."
+		},
+		{
+			"slug": "kit/adapter-static",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including installation, configuration options, GitHub Pages setup, and the workflow example, with appropriate condensation and no factual errors or critical omissions."
+		},
+		{
+			"slug": "kit/single-page-apps",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including SPA setup, performance warnings, configuration steps, prerendering options, and Apache configuration, with appropriate condensation but no factual errors or critical omissions."
+		},
+		{
+			"slug": "kit/adapter-cloudflare",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all essential information, code examples, configuration details, and key concepts from the original documentation with appropriate condensation and no factual errors or misleading statements."
+		},
+		{
+			"slug": "kit/adapter-cloudflare-workers",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the deprecation notice, installation steps, configuration options, runtime APIs, type definitions, local testing, and troubleshooting sections with accurate technical details and code examples."
+		},
+		{
+			"slug": "kit/adapter-netlify",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all essential information, configuration options, and critical warnings from the original, with appropriate condensation and no factual errors or misleading statements."
+		},
+		{
+			"slug": "kit/adapter-vercel",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including installation, configuration options, ISR setup, environment variables, skew protection, and troubleshooting, with appropriate condensation of examples while preserving technical accuracy and critical details."
+		},
+		{
+			"slug": "kit/writing-adapters",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the API structure, required/optional fields, adapt method tasks, and best practices, with appropriate condensation and no factual errors."
+		},
+		{
+			"slug": "kit/advanced-routing",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all key concepts including rest parameters, optional parameters, matchers, sorting rules, encoding, and advanced layouts with correct code examples and technical details preserved."
+		},
+		{
+			"slug": "kit/hooks",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately preserves all key technical information, code examples, API signatures, and critical warnings from the original documentation, with appropriate condensation of explanatory text while maintaining factual correctness."
+		},
+		{
+			"slug": "kit/errors",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including expected/unexpected errors, error handling, responses, type safety, and the critical gotcha about root layout errors, with appropriate code examples and no factual errors."
+		},
+		{
+			"slug": "kit/link-options",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all key information, attribute values, code examples, and important warnings from the original documentation, with appropriate condensation but no factual errors or critical omissions."
+		},
+		{
+			"slug": "kit/service-workers",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including setup, the $service-worker module, the complete code example, development considerations, and alternatives, with only minor formatting changes and reasonable condensation of explanatory text."
+		},
+		{
+			"slug": "kit/server-only-modules",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the two methods for creating server-only modules, the error behavior, dynamic import support, and the testing exception, with no factual errors or critical omissions."
+		},
+		{
+			"slug": "kit/snapshots",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the purpose, usage pattern, timing of capture/restore calls, serialization requirements, and performance warnings without introducing factual errors or omitting critical details."
+		},
+		{
+			"slug": "kit/shallow-routing",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including API usage, code examples, caveats, and key concepts, with appropriate condensation of explanatory text while maintaining technical accuracy."
+		},
+		{
+			"slug": "kit/observability",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including setup, traced components, code examples, and important warnings about experimental status and performance overhead, with only reasonable condensation of explanatory text."
+		},
+		{
+			"slug": "kit/packaging",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all essential information including package.json configuration, TypeScript handling, best practices, options, and caveats, with appropriate code examples and no factual errors or misleading statements."
+		},
+		{
+			"slug": "kit/auth",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the definitions, session vs token tradeoffs, integration points, and Lucia implementation details without any factual errors or critical omissions."
+		},
+		{
+			"slug": "kit/performance",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version contains a code example for font preloading in the `handle` hook that does not appear in the original documentation, which only mentions calling `resolve` with a `preload` filter but provides no specific code implementation."
+		},
+		{
+			"slug": "kit/icons",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the CSS icon approach via Iconify, framework plugin support, the warning about per-icon .svelte files causing Vite performance issues, and the relevant links, with only minor formatting simplifications."
+		},
+		{
+			"slug": "kit/images",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including setup, usage patterns, configuration details, and best practices, with appropriate condensation and no factual errors or critical omissions."
+		},
+		{
+			"slug": "kit/accessibility",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential technical information, including route announcements, focus management, lang attribute configuration, and code examples, with only minor formatting changes and reasonable simplifications of introductory text."
+		},
+		{
+			"slug": "kit/seo",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including SSR defaults, performance considerations, URL normalization, manual setup steps, and complete AMP implementation details with proper code examples, while appropriately condensing explanatory text."
+		},
+		{
+			"slug": "kit/faq",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all key information, code examples, and links from the original, with appropriate condensation and formatting changes that preserve the essential technical content and guidance."
+		},
+		{
+			"slug": "kit/integrations",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including vitePreprocess functionality, TypeScript support differences between Svelte 4/5, add-ons list, svelte-preprocess details, and Vite plugins, with appropriate condensation and no factual errors."
+		},
+		{
+			"slug": "kit/debugging",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including VSCode debugging methods, browser DevTools setup, editor alternatives, and the critical note about Chrome/Edge only working with client-side source maps, with appropriate condensation and formatting changes."
+		},
+		{
+			"slug": "kit/migrating-to-sveltekit-2",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all key breaking changes, code examples, and migration steps from the original documentation, with appropriate condensation and no factual errors or critical omissions."
+		},
+		{
+			"slug": "kit/migrating",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all key migration steps, API changes, and code examples from the original documentation with appropriate condensation and no factual errors or critical omissions."
+		},
+		{
+			"slug": "kit/additional-resources",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including FAQ links, support channels, official examples, and community resources, with only minor formatting changes and reasonable condensation of the search guidance."
+		},
+		{
+			"slug": "kit/glossary",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all key concepts, technical details, configuration options, and critical warnings from the original documentation without introducing factual errors or misleading statements."
+		},
+		{
+			"slug": "kit/@sveltejs-kit",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version omits critical information about the Invalid type for form validation, removes important details about fetch behavior in LoadEvent, and fails to document several key interfaces like ActionFailure structure, HttpError interface properties, and Redirect interface properties that developers need to understand error handling."
+		},
+		{
+			"slug": "kit/@sveltejs-kit-hooks",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the behavior of each option, the complete code example, expected output, and type signature with appropriate simplifications in formatting and structure."
+		},
+		{
+			"slug": "kit/@sveltejs-kit-node-polyfills",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures the essential information about the function's purpose, the APIs it polyfills, and provides a valid usage example that demonstrates the import and function call shown in the original."
+		},
+		{
+			"slug": "kit/@sveltejs-kit-node",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including function signatures, availability notes, and accurately describes the purpose of each utility function, with only minor formatting simplifications."
+		},
+		{
+			"slug": "kit/@sveltejs-kit-vite",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version preserves all essential information including the import statement, function description, and TypeScript signature, with only minor formatting changes."
+		},
+		{
+			"slug": "kit/$app-environment",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the import statement, the meaning of each boolean flag, and the version property, with only minor acceptable simplifications of wording."
+		},
+		{
+			"slug": "kit/$app-forms",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including function signatures, behaviors, and key concepts, with appropriate condensation of explanatory text while preserving critical technical details."
+		},
+		{
+			"slug": "kit/$app-navigation",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information, function signatures, and key behaviors from the original documentation, with appropriate condensation that preserves critical details and warnings."
+		},
+		{
+			"slug": "kit/$app-paths",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including function purposes, deprecation notices, code examples, and type signatures, with only minor formatting simplifications that preserve the core content."
+		},
+		{
+			"slug": "kit/$app-server",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version omits critical \"Available since\" version information for all functions, which is essential for developers to know compatibility requirements."
+		},
+		{
+			"slug": "kit/$app-state",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the three state objects, their properties, usage examples, and critical warnings about runes vs legacy reactivity, with appropriate condensation but no factual errors or misleading omissions."
+		},
+		{
+			"slug": "kit/$app-stores",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the deprecation notice, store behaviors, server/browser subscription constraints, and type signatures, with only minor formatting simplifications that preserve the core content."
+		},
+		{
+			"slug": "kit/$app-types",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The LayoutParams type definition incorrectly shows \"RouteParams\" instead of \"LayoutParams\" in the distilled version, which is a factual error copied from the original."
+		},
+		{
+			"slug": "kit/$env-dynamic-private",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the server-only nature, variable filtering rules, usage example, and environment-specific behavior without any factual errors or critical omissions."
+		},
+		{
+			"slug": "kit/$env-dynamic-public",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the public prefix requirement, the network payload warning, the recommendation to use the static alternative, and provides the same code example."
+		},
+		{
+			"slug": "kit/$env-static-private",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including static injection, server-only usage, filtering rules, code examples, and best practices without any factual errors or critical omissions."
+		},
+		{
+			"slug": "kit/$env-static-public",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the public prefix requirement, client-side safety, build-time replacement, and the code example, with only minor simplification of wording."
+		},
+		{
+			"slug": "kit/$lib",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures the essential information about the $lib import alias, its default location, configurability, and includes the same code examples demonstrating its usage."
+		},
+		{
+			"slug": "kit/$service-worker",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including types, descriptions, development behavior, and configuration references without any factual errors or critical omissions."
+		},
+		{
+			"slug": "kit/configuration",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential configuration options, their defaults, key behaviors, and code examples, with appropriate simplifications and no factual errors or critical omissions."
+		},
+		{
+			"slug": "kit/cli",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including Vite CLI commands, svelte-kit sync functionality, and its automatic execution behavior, with only minor formatting simplifications."
+		},
+		{
+			"slug": "kit/types",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including generated types, $lib aliases, app.d.ts interfaces, and critical setup requirements, with appropriate condensation of examples while preserving technical accuracy."
+		},
+		{
+			"slug": "mcp/overview",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version preserves all critical information including setup options, the complete usage prompt, and the svelte-task recommendation, with only minor formatting simplifications that don't alter meaning."
+		},
+		{
+			"slug": "mcp/local-setup",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential setup information, commands, and configurations for each client, with only minor formatting simplifications that preserve the core technical content."
+		},
+		{
+			"slug": "mcp/remote-setup",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including URLs, commands, configuration steps, and scope options for each client, with only minor formatting simplifications that preserve the core content."
+		},
+		{
+			"slug": "mcp/tools",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version is a comprehensive Svelte 5 and SvelteKit documentation guide, but the original document describes MCP server tools (list-sections, get-documentation, svelte-autofixer, playground-link) which are completely absent from the distilled version, making it unrelated content."
+		},
+		{
+			"slug": "mcp/resources",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version is a comprehensive Svelte 5 documentation guide, but it does not match the original content which describes MCP server resources for accessing Svelte documentation via URIs like `svelte://slug-of-the-docs.md`."
+		},
+		{
+			"slug": "mcp/prompts",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version omits critical information that the tool must return no issues before sharing code with the user, changes the mandatory workflow from \"MUST\" to less emphatic language, and significantly truncates the comprehensive documentation paths list which could mislead developers about available resources."
+		},
+		{
+			"slug": "svelte/overview",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version contains extensive content about Svelte 5 features (runes, snippets, new event syntax) that do not exist in the original documentation excerpt, which only introduces Svelte basics."
+		},
+		{
+			"slug": "svelte/getting-started",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the recommended SvelteKit setup commands, Vite alternative with key details about output and routing needs, tooling options, and help resources, with only reasonable condensation and formatting changes."
+		},
+		{
+			"slug": "svelte/svelte-files",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the three optional sections, script behaviors, module script functionality, style scoping, and includes the key code examples, with only minor formatting simplifications and reasonable condensation of explanatory text."
+		},
+		{
+			"slug": "svelte/svelte-js-files",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the ability to use runes, use cases, the limitation about exporting reassigned state, and that this is new to Svelte 5."
+		},
+		{
+			"slug": "svelte/what-are-runes",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version adds information about syntax rules (event modifiers, $derived.by, error boundaries) that does not exist in the original documentation, introducing content not present in the source material."
+		},
+		{
+			"slug": "svelte/$state",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including key concepts, code examples, gotchas, and limitations, with appropriate simplifications and formatting changes that preserve the original meaning."
+		},
+		{
+			"slug": "svelte/$derived",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including syntax, key rules, dependencies, overriding behavior, reactivity differences, destructuring, and update propagation, with appropriate code examples and no factual errors."
+		},
+		{
+			"slug": "svelte/$effect",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all key concepts, code examples, and warnings from the original documentation, with appropriate condensation and formatting that preserves the essential information for developers."
+		},
+		{
+			"slug": "svelte/$props",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including props usage, fallback values, renaming, rest props, updating behavior, mutation warnings, type safety examples, and $props.id() functionality without any factual errors or critical omissions."
+		},
+		{
+			"slug": "svelte/$bindable",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the bidirectional data flow concept, syntax usage, fallback values, and key warnings, with appropriate condensation and no factual errors."
+		},
+		{
+			"slug": "svelte/$inspect",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the dev-only nature, deep reactivity tracking, the `.with()` method signature, `$inspect.trace()` requirements, and preserves the key code examples and constraints."
+		},
+		{
+			"slug": "svelte/$host",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version preserves all essential information including the purpose of $host rune, its usage context with custom elements, and complete code examples demonstrating event dispatching."
+		},
+		{
+			"slug": "svelte/basic-markup",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including tags, attributes, props, events, event delegation, text expressions, and comments, with appropriate simplifications and no factual errors or critical omissions."
+		},
+		{
+			"slug": "svelte/if",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version preserves all key information including syntax, examples, and the important note about blocks wrapping elements or text, with only minor organizational formatting changes."
+		},
+		{
+			"slug": "svelte/each",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including syntax, functionality, keyed blocks, destructuring, itemless iteration, and else blocks with appropriate examples and explanations."
+		},
+		{
+			"slug": "svelte/key",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including syntax, core behavior (destroy/recreate on change), and both key use cases (component reinstantiation and transition replay) with accurate code examples."
+		},
+		{
+			"slug": "svelte/await",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including syntax variations, usage examples, SSR behavior, non-Promise handling, and the lazy loading pattern, with only formatting changes and reasonable condensation of explanatory text."
+		},
+		{
+			"slug": "svelte/snippet",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including syntax, scope rules, component passing methods, TypeScript typing, exporting capabilities, and the deprecation of slots, with appropriate code examples preserved."
+		},
+		{
+			"slug": "svelte/@render",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version preserves all key information including syntax, code examples, and concepts for rendering snippets, optional chaining, and fallback content, with only minor wording simplifications."
+		},
+		{
+			"slug": "svelte/@html",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version incorrectly shows `article :global` (with a space) instead of `article :global(*)` or the nested syntax shown in the original, which changes the CSS selector behavior."
+		},
+		{
+			"slug": "svelte/@attach",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including basic usage, attachment factories, inline attachments, component passing, reactivity control, and conversion utilities, with appropriate code examples and key concepts preserved."
+		},
+		{
+			"slug": "svelte/@const",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures the essential information about {@const} tag usage, its purpose, code example, and placement restrictions, with only minor formatting changes."
+		},
+		{
+			"slug": "svelte/@debug",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the functionality, syntax rules, valid/invalid examples, and the no-arguments behavior, with only minor formatting improvements."
+		},
+		{
+			"slug": "svelte/bind",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all key information including syntax, binding types, version-specific features, and important notes, with appropriate condensation of examples while preserving technical accuracy."
+		},
+		{
+			"slug": "svelte/use",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the note about attachments, basic usage, arguments, the key behavior that actions don't re-run on argument changes, and typing examples, with only minor formatting simplifications."
+		},
+		{
+			"slug": "svelte/transition",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including transition behavior, local vs global scope, parameters, custom functions with css/tick, the options parameter, and events, with appropriate simplifications and no factual errors."
+		},
+		{
+			"slug": "svelte/in-and-out",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the non-bidirectional nature, independent playback behavior, abort/restart behavior, and preserves the complete code example."
+		},
+		{
+			"slug": "svelte/animate",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including when animations trigger, usage syntax, custom function signatures, the distinction between css and tick methods, and preserves the complete code examples with appropriate warnings about performance."
+		},
+		{
+			"slug": "svelte/style",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including basic usage, expressions, shorthand form, multiple styles, important modifier, and precedence rules with accurate code examples."
+		},
+		{
+			"slug": "svelte/class",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the two ways to set classes, object/array syntax with clsx, version requirements, TypeScript support, and the recommendation to prefer class attribute over class: directive."
+		},
+		{
+			"slug": "svelte/await-expressions",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including setup, usage, synchronized updates, concurrency, loading states, error handling, SSR, and caveats, with appropriate simplifications and no factual errors or critical omissions."
+		},
+		{
+			"slug": "svelte/scoped-styles",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including scoped CSS behavior, specificity rules, and scoped keyframes, with appropriate simplifications that preserve the core concepts."
+		},
+		{
+			"slug": "svelte/global-styles",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version preserves all key information including syntax, examples, and the keyframes explanation, with only minor formatting changes and removal of a non-critical note about alternative selector syntax."
+		},
+		{
+			"slug": "svelte/custom-properties",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including syntax, desugaring behavior, SVG handling, usage with var(), inheritance from parents, and the CSS selector gotcha, with only minor formatting changes."
+		},
+		{
+			"slug": "svelte/nested-style-elements",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all key information including the one top-level style rule, nested style behavior, lack of scoping/processing for nested styles, and preserves the illustrative code example."
+		},
+		{
+			"slug": "svelte/svelte-boundary",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version incorrectly states that boundaries only catch errors \"at top level of $effect\" when the original states they catch errors \"while running effects\" without that restriction, and it omits the critical version requirement (5.3.0) and the 5.36 version note for the pending feature."
+		},
+		{
+			"slug": "svelte/svelte-window",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the purpose, usage restrictions, event handling, bindable properties with their readonly status, and the important scroll behavior caveat, with only minor simplifications in wording."
+		},
+		{
+			"slug": "svelte/svelte-document",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including syntax, usage constraints, example, and the complete list of readonly bindable properties without any factual errors or critical omissions."
+		},
+		{
+			"slug": "svelte/svelte-body",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the purpose, constraints, and provides the same example, with only minor formatting changes for brevity."
+		},
+		{
+			"slug": "svelte/svelte-head",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the element's purpose, SSR behavior, placement rules, and provides the same code example."
+		},
+		{
+			"slug": "svelte/svelte-element",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including syntax, key behaviors, limitations, and gotchas with appropriate code examples preserved from the original."
+		},
+		{
+			"slug": "svelte/svelte-options",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential options and their meanings, with appropriate simplification of descriptions while maintaining technical accuracy and including the key example."
+		},
+		{
+			"slug": "svelte/stores",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all key information including store basics, usage rules, when to use stores vs runes, all svelte/store methods with correct examples, and the store contract requirements without any factual errors or critical omissions."
+		},
+		{
+			"slug": "svelte/context",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including basic usage, reactive state patterns, the reassignment gotcha, type-safe patterns, and the SSR global state warning, with appropriate simplifications and formatting changes."
+		},
+		{
+			"slug": "svelte/lifecycle-hooks",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version contains a critical error in the migration example code - it shows both `beforeUpdate` and `$effect.pre` simultaneously with incorrect syntax (strikethrough formatting rendered as actual code), and the code logic is broken as it still checks `if (!updatingMessages) return;` while also referencing `messages;` which contradicts the explanation that `$effect.pre` only runs when messages changes."
+		},
+		{
+			"slug": "svelte/imperative-component-api",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including API signatures, key behavioral differences from Svelte 4, code examples, and critical details about effects and transitions, with only minor formatting changes for conciseness."
+		},
+		{
+			"slug": "svelte/testing",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version preserves all critical information, code examples, and setup instructions from the original while condensing explanatory text and maintaining technical accuracy."
+		},
+		{
+			"slug": "svelte/typescript",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version incorrectly states that `{ script: true }` is needed for non-type-only features when using vitePreprocess, but the original shows this is only needed for the general preprocessor setup section, while SvelteKit/Vite section shows vitePreprocess() without this option works by default."
+		},
+		{
+			"slug": "svelte/custom-elements",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all essential information including lifecycle behavior, component options, code examples, and caveats, with appropriate condensation and no factual errors or misleading statements."
+		},
+		{
+			"slug": "svelte/v4-migration-guide",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information, breaking changes, code examples, and migration guidance from the original documentation, with appropriate condensation and formatting that preserves the technical accuracy and critical details developers need."
+		},
+		{
+			"slug": "svelte/v5-migration-guide",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all key migration information including syntax changes, event handling, component instantiation, breaking changes, and migration tools, with appropriate code examples and proper preservation of critical technical details."
+		},
+		{
+			"slug": "svelte/faq",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information, maintains factual accuracy, preserves critical links and code examples, and appropriately condenses content without introducing errors or misleading statements."
+		},
+		{
+			"slug": "svelte/svelte",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including function signatures, key concepts, deprecation warnings, and code examples, with appropriate simplifications and reorganization for clarity."
+		},
+		{
+			"slug": "svelte/svelte-action",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the legacy status, type signatures, parameter handling, optional methods, and examples, with only minor formatting simplifications that preserve the core concepts."
+		},
+		{
+			"slug": "svelte/svelte-animate",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the flip function signature, its purpose, the FLIP acronym explanation, and complete type definitions for AnimationConfig and FlipParams."
+		},
+		{
+			"slug": "svelte/svelte-attachments",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including API signatures, usage examples, and key concepts, with only minor formatting simplifications that don't affect accuracy."
+		},
+		{
+			"slug": "svelte/svelte-compiler",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including function signatures, options with defaults, deprecation notices, version changes, and key type definitions, with appropriate simplifications that preserve meaning."
+		},
+		{
+			"slug": "svelte/svelte-easing",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the module path, function signatures, available easing functions, their variants, and the core API pattern, with reasonable simplification through grouping."
+		},
+		{
+			"slug": "svelte/svelte-events",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures the essential functionality, purpose, and all five function overloads, with a reasonable usage example added for clarity."
+		},
+		{
+			"slug": "svelte/svelte-legacy",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all key functions, their purposes, and type signatures while appropriately condensing descriptions and maintaining critical information about deprecation and migration context."
+		},
+		{
+			"slug": "svelte/svelte-motion",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including API signatures, key properties, methods, usage examples, and deprecation notices, with appropriate simplifications that preserve the core concepts."
+		},
+		{
+			"slug": "svelte/svelte-reactivity-window",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the reactive nature, usage examples, all exports, server-side behavior, and critical implementation details like browser differences and requestAnimationFrame updates."
+		},
+		{
+			"slug": "svelte/svelte-reactivity",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all key information, preserves critical warnings (SSR, deep reactivity), maintains code examples, and correctly represents the API signatures and behavior of each reactive utility."
+		},
+		{
+			"slug": "svelte/svelte-server",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version incorrectly simplifies the type signature by removing the conditional types that make props required or optional based on whether the component has required props, changing the function's actual API contract."
+		},
+		{
+			"slug": "svelte/svelte-store",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential API signatures, function purposes, and type definitions from the original, with reasonable reorganization and minor simplifications that preserve the core information."
+		},
+		{
+			"slug": "svelte/svelte-transition",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including function signatures, parameters, descriptions, and type definitions, with only reasonable simplifications in formatting and wording."
+		},
+		{
+			"slug": "svelte/compiler-errors",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version contains a critical factual error in the animation_invalid_placement description, stating it must be \"on the only child\" when the original says \"must be the only child\" (the element itself, not a directive placement), and omits numerous important error codes and details throughout."
+		},
+		{
+			"slug": "svelte/compiler-warnings",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all key warnings, their meanings, code examples, and solutions, with appropriate condensation while preserving critical technical details and migration guidance."
+		},
+		{
+			"slug": "svelte/runtime-errors",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential error messages, their meanings, code examples, and solutions, with appropriate condensation and formatting changes that preserve the core information."
+		},
+		{
+			"slug": "svelte/runtime-warnings",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all key warnings, their causes, code examples, and fixes, with appropriate condensation of explanatory text while preserving critical technical details and API usage."
+		},
+		{
+			"slug": "svelte/legacy-overview",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version adds information not present in the original, including specific syntax comparisons (event handling, reactivity), runes syntax rules, and error boundary details that do not appear in the original text."
+		},
+		{
+			"slug": "svelte/legacy-let",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures the key concepts of legacy mode reactivity, including automatic reactivity of top-level variables and the array methods gotcha requiring reassignment, while appropriately condensing the comparison to runes mode."
+		},
+		{
+			"slug": "svelte/legacy-reactive-assignments",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including syntax, behavior, gotchas with dependencies and topological ordering, and browser-only code handling, with appropriate simplifications and formatting changes."
+		},
+		{
+			"slug": "svelte/legacy-export-let",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including prop declaration syntax, default value behavior, the critical difference about undefined values not reverting, component exports, and prop renaming, with appropriate simplifications and no factual errors."
+		},
+		{
+			"slug": "svelte/legacy-$$props-and-$$restProps",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all key information including the distinction between runes and legacy mode, the definitions of $$props and $$restProps, the complete code example, and the performance warning."
+		},
+		{
+			"slug": "svelte/legacy-on",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version accurately captures all key information including event handler syntax, modifiers, forwarding, component events, and the deprecation notice, with appropriate simplifications and no factual errors."
+		},
+		{
+			"slug": "svelte/legacy-slots",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including basic slots, named slots, fallback content, and passing data to slots, with appropriate code examples and shorthand explanations preserved."
+		},
+		{
+			"slug": "svelte/legacy-$$slots",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures the key information about $$slots in legacy mode, preserves the essential code examples, and accurately explains the difference from runes mode, with only minor formatting simplifications."
+		},
+		{
+			"slug": "svelte/legacy-svelte-fragment",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures the essential functionality of `<svelte:fragment>`, preserves the complete code examples, and accurately conveys the Svelte 5+ deprecation note with appropriate simplification."
+		},
+		{
+			"slug": "svelte/legacy-svelte-component",
+			"status": "NOT_ACCURATE",
+			"reasoning": "The distilled version incorrectly states that `<MyComponent>` \"re-renders\" in runes mode when it actually \"re-renders\" means the component is destroyed and recreated, which is a critical distinction in the original documentation's explanation of the behavioral difference."
+		},
+		{
+			"slug": "svelte/legacy-svelte-self",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including the recursive functionality, the requirement to prevent infinite loops, the code example, and the obsolescence note with the self-import alternative."
+		},
+		{
+			"slug": "svelte/legacy-component-api",
+			"status": "ACCURATE",
+			"reasoning": "The distilled version correctly captures all essential information including API methods, options tables, code examples, and Svelte 5 migration notes, with appropriate condensation but no factual errors or critical omissions."
+		}
+	]
 }

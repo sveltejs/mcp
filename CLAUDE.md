@@ -60,6 +60,7 @@ Verify the accuracy of distilled summaries against original documentation:
 - `pnpm show-verification-errors` - Display all sections that failed verification
 
 The verification workflow:
+
 1. Run `pnpm verify-distilled` to verify all distilled summaries
    - Loads `distilled.json` containing summaries and original content
    - Uses the Anthropic Batch API to send each summary and original content to Claude

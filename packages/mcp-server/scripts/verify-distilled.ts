@@ -158,9 +158,7 @@ async function main() {
 
 	while (batch_status.processing_status === 'in_progress') {
 		const { succeeded, processing, errored } = batch_status.request_counts;
-		console.log(
-			`  Progress: ${succeeded} succeeded, ${processing} processing, ${errored} errored`,
-		);
+		console.log(`  Progress: ${succeeded} succeeded, ${processing} processing, ${errored} errored`);
 		await new Promise((resolve) => setTimeout(resolve, 5000));
 		batch_status = await anthropic.get_batch_status(batch_response.id);
 	}
