@@ -22,6 +22,9 @@
 		"generate-distilled": "pnpm --filter @sveltejs/mcp-server run generate-distilled",
 		"generate-distilled:dry-run": "pnpm --filter @sveltejs/mcp-server run generate-distilled:dry-run",
 		"generate-distilled:debug": "pnpm --filter @sveltejs/mcp-server run generate-distilled:debug",
+		"verify-distilled": "pnpm --filter @sveltejs/mcp-server run verify-distilled",
+		"verify-distilled:dry-run": "pnpm --filter @sveltejs/mcp-server run verify-distilled:dry-run",
+		"verify-distilled:debug": "pnpm --filter @sveltejs/mcp-server run verify-distilled:debug",
 		"generate-prompt-docs": "node --import node-resolve-ts/register scripts/update-docs-prompts.ts",
 		"release": "pnpm --filter @sveltejs/mcp run build && changeset publish",
 		"changeset:version": "changeset version && pnpm --filter @sveltejs/mcp run update:version && git add --all"

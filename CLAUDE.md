@@ -34,6 +34,41 @@ pnpm dev
 - `pnpm db:migrate` - Run migrations
 - `pnpm db:studio` - Open Drizzle Studio
 
+### Documentation Generation Commands
+
+#### Generate Use Case Summaries
+
+Generate short descriptions of when each documentation section would be useful:
+
+- `pnpm generate-summaries` - Generate use case summaries for all sections
+- `pnpm generate-summaries:dry-run` - Preview what would be generated without making API calls
+- `pnpm generate-summaries:debug` - Process only 2 sections for debugging
+
+#### Generate Distilled Documentation
+
+Generate condensed versions of the documentation to reduce context size:
+
+- `pnpm generate-distilled` - Generate distilled versions for all sections
+- `pnpm generate-distilled:dry-run` - Preview what would be generated without making API calls
+- `pnpm generate-distilled:debug` - Process only 2 sections for debugging
+
+#### Verify Distilled Documentation
+
+Verify the accuracy of distilled summaries against original documentation:
+
+- `pnpm verify-distilled` - Verify all distilled summaries for accuracy
+- `pnpm verify-distilled:dry-run` - Preview what would be verified without making API calls
+- `pnpm verify-distilled:debug` - Verify only 2 sections for debugging
+
+The verification script:
+1. Loads `distilled.json` containing summaries and original content
+2. Uses the Anthropic Batch API to send each summary and original content to Claude
+3. Claude evaluates whether the summary is accurate or contains errors/omissions
+4. Generates `distilled-verification.json` with results (ACCURATE/NOT_ACCURATE) and reasoning
+5. Outputs statistics about accuracy rates
+
+**Note:** All documentation generation and verification commands require `ANTHROPIC_API_KEY` to be set in `packages/mcp-server/.env`
+
 ## Architecture
 
 ### MCP Server Implementation
@@ -85,6 +120,7 @@ Required environment variables:
 
 - `DATABASE_URL`: SQLite database path (default: `file:test.db`)
 - `VOYAGE_API_KEY`: API key for embeddings support (optional)
+- `ANTHROPIC_API_KEY`: API key for documentation generation and verification (required for doc scripts)
 
 When connected to the svelte-llm MCP server, you have access to comprehensive Svelte 5 and SvelteKit documentation. Here's how to use the available tools effectively:
 

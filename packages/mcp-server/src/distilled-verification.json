@@ -1,0 +1,875 @@
+{
+  "generated_at": "2025-10-12T21:43:43.128Z",
+  "model": "claude-sonnet-4-5-20250929",
+  "total_sections": 173,
+  "verified_sections": 173,
+  "accurate_count": 0,
+  "not_accurate_count": 173,
+  "results": [
+    {
+      "slug": "cli/overview",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version captures essential information: "
+    },
+    {
+      "slug": "cli/faq",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all essential"
+    },
+    {
+      "slug": "cli/sv-create",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all essential"
+    },
+    {
+      "slug": "cli/sv-add",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all essential"
+    },
+    {
+      "slug": "cli/sv-check",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"Machine-verbose format has incorrect field nam"
+    },
+    {
+      "slug": "cli/sv-migrate",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"All key information preserved: command usage, migr"
+    },
+    {
+      "slug": "cli/devtools-json",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information: p"
+    },
+    {
+      "slug": "cli/drizzle",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "cli/eslint",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information: E"
+    },
+    {
+      "slug": "cli/lucia",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information: c"
+    },
+    {
+      "slug": "cli/mdsvex",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information: d"
+    },
+    {
+      "slug": "cli/paraglide",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information, f"
+    },
+    {
+      "slug": "cli/playwright",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"All key information preserved: command, link, and "
+    },
+    {
+      "slug": "cli/prettier",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information: d"
+    },
+    {
+      "slug": "cli/storybook",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures key info: set"
+    },
+    {
+      "slug": "cli/sveltekit-adapter",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information, l"
+    },
+    {
+      "slug": "cli/tailwind",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information: s"
+    },
+    {
+      "slug": "cli/vitest",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"The distilled version correctly captures all key i"
+    },
+    {
+      "slug": "kit/introduction",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures key concepts:"
+    },
+    {
+      "slug": "kit/creating-a-project",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"Missing critical step: need to install depende"
+    },
+    {
+      "slug": "kit/project-types",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "kit/project-structure",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"File name error: original has 'tracing.server."
+    },
+    {
+      "slug": "kit/web-standards",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key APIs,"
+    },
+    {
+      "slug": "kit/routing",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "kit/load",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "kit/form-actions",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "kit/page-options",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "kit/state-management",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all critical informati"
+    },
+    {
+      "slug": "kit/remote-functions",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "kit/building-your-app",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/adapters",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/adapter-auto",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/adapter-node",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/adapter-static",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all essential"
+    },
+    {
+      "slug": "kit/single-page-apps",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all essential"
+    },
+    {
+      "slug": "kit/adapter-cloudflare",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information, c"
+    },
+    {
+      "slug": "kit/adapter-cloudflare-workers",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all essential"
+    },
+    {
+      "slug": "kit/adapter-netlify",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/adapter-vercel",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/writing-adapters",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all essential"
+    },
+    {
+      "slug": "kit/advanced-routing",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "kit/hooks",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version accurately captures all key info"
+    },
+    {
+      "slug": "kit/errors",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "kit/link-options",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/service-workers",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information, c"
+    },
+    {
+      "slug": "kit/server-only-modules",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "kit/snapshots",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/shallow-routing",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "kit/observability",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version captures all essential informati"
+    },
+    {
+      "slug": "kit/packaging",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/auth",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "kit/performance",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"Code example for font preloading is fabricated"
+    },
+    {
+      "slug": "kit/icons",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures key points: I"
+    },
+    {
+      "slug": "kit/images",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/accessibility",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key techn"
+    },
+    {
+      "slug": "kit/seo",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key technical deta"
+    },
+    {
+      "slug": "kit/faq",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information, c"
+    },
+    {
+      "slug": "kit/integrations",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/debugging",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information, s"
+    },
+    {
+      "slug": "kit/migrating-to-sveltekit-2",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key break"
+    },
+    {
+      "slug": "kit/migrating",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key migra"
+    },
+    {
+      "slug": "kit/additional-resources",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key resou"
+    },
+    {
+      "slug": "kit/glossary",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "kit/@sveltejs-kit",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"Missing critical Invalid type documentation an"
+    },
+    {
+      "slug": "kit/@sveltejs-kit-hooks",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"All key information preserved: behavior rules, com"
+    },
+    {
+      "slug": "kit/@sveltejs-kit-node-polyfills",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures the function'"
+    },
+    {
+      "slug": "kit/@sveltejs-kit-node",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/@sveltejs-kit-vite",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information: i"
+    },
+    {
+      "slug": "kit/$app-environment",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"All key information preserved: browser detection, "
+    },
+    {
+      "slug": "kit/$app-forms",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/$app-navigation",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/$app-paths",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/$app-server",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"Missing version availability notes (e.g., 'Ava"
+    },
+    {
+      "slug": "kit/$app-state",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/$app-stores",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/$app-types",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"LayoutParams type definition incorrectly shows"
+    },
+    {
+      "slug": "kit/$env-dynamic-private",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"All key information preserved: server-only access,"
+    },
+    {
+      "slug": "kit/$env-dynamic-public",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures key points: r"
+    },
+    {
+      "slug": "kit/$env-static-private",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/$env-static-public",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures key points: p"
+    },
+    {
+      "slug": "kit/$lib",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves key facts: $lib alias "
+    },
+    {
+      "slug": "kit/$service-worker",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/configuration",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key confi"
+    },
+    {
+      "slug": "kit/cli",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "kit/types",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "mcp/overview",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information, t"
+    },
+    {
+      "slug": "mcp/local-setup",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"All key information preserved: package name, insta"
+    },
+    {
+      "slug": "mcp/remote-setup",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all essential setup st"
+    },
+    {
+      "slug": "mcp/tools",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"The distilled version is completely different "
+    },
+    {
+      "slug": "mcp/resources",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"The distilled version is a full Svelte 5 docum"
+    },
+    {
+      "slug": "mcp/prompts",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"Missing critical workflow requirement: code mu"
+    },
+    {
+      "slug": "svelte/overview",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"Distilled version adds extensive Svelte 5 cont"
+    },
+    {
+      "slug": "svelte/getting-started",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version captures all key information: Sv"
+    },
+    {
+      "slug": "svelte/svelte-files",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/svelte-js-files",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/what-are-runes",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"Distilled version adds information not present"
+    },
+    {
+      "slug": "svelte/$state",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "svelte/$derived",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "svelte/$effect",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "svelte/$props",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "svelte/$bindable",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures key concepts:"
+    },
+    {
+      "slug": "svelte/$inspect",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key facts, code ex"
+    },
+    {
+      "slug": "svelte/$host",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all essential informat"
+    },
+    {
+      "slug": "svelte/basic-markup",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all essential"
+    },
+    {
+      "slug": "svelte/if",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information: s"
+    },
+    {
+      "slug": "svelte/each",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "svelte/key",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures syntax, behav"
+    },
+    {
+      "slug": "svelte/await",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/snippet",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "svelte/@render",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information, c"
+    },
+    {
+      "slug": "svelte/@html",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/@attach",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "svelte/@const",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures the purpose, "
+    },
+    {
+      "slug": "svelte/@debug",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/bind",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "svelte/use",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information: b"
+    },
+    {
+      "slug": "svelte/transition",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "svelte/in-and-out",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures key concepts:"
+    },
+    {
+      "slug": "svelte/animate",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/style",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"All key information preserved: basic usage, expres"
+    },
+    {
+      "slug": "svelte/class",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/await-expressions",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/scoped-styles",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "svelte/global-styles",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information, c"
+    },
+    {
+      "slug": "svelte/custom-properties",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/nested-style-elements",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key point"
+    },
+    {
+      "slug": "svelte/svelte-boundary",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"Incorrectly states errors caught 'at top level"
+    },
+    {
+      "slug": "svelte/svelte-window",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures key informati"
+    },
+    {
+      "slug": "svelte/svelte-document",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/svelte-body",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/svelte-head",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/svelte-element",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"All key information preserved: dynamic rendering, "
+    },
+    {
+      "slug": "svelte/svelte-options",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all essential"
+    },
+    {
+      "slug": "svelte/stores",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "svelte/context",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "svelte/lifecycle-hooks",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"The migration example code is incorrect - it s"
+    },
+    {
+      "slug": "svelte/imperative-component-api",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/testing",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information, c"
+    },
+    {
+      "slug": "svelte/typescript",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/custom-elements",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/v4-migration-guide",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key migra"
+    },
+    {
+      "slug": "svelte/v5-migration-guide",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version accurately captures all key migr"
+    },
+    {
+      "slug": "svelte/faq",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/svelte",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key APIs,"
+    },
+    {
+      "slug": "svelte/svelte-action",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/svelte-animate",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/svelte-attachments",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/svelte-compiler",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key funct"
+    },
+    {
+      "slug": "svelte/svelte-easing",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all easing fu"
+    },
+    {
+      "slug": "svelte/svelte-events",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures key functiona"
+    },
+    {
+      "slug": "svelte/svelte-legacy",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key funct"
+    },
+    {
+      "slug": "svelte/svelte-motion",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/svelte-reactivity-window",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/svelte-reactivity",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information, e"
+    },
+    {
+      "slug": "svelte/svelte-server",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"Type signature simplified incorrectly - origin"
+    },
+    {
+      "slug": "svelte/svelte-store",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key APIs,"
+    },
+    {
+      "slug": "svelte/svelte-transition",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all transitio"
+    },
+    {
+      "slug": "svelte/compiler-errors",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures key error mes"
+    },
+    {
+      "slug": "svelte/compiler-warnings",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key warni"
+    },
+    {
+      "slug": "svelte/runtime-errors",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key error"
+    },
+    {
+      "slug": "svelte/runtime-warnings",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key warni"
+    },
+    {
+      "slug": "svelte/legacy-overview",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"Distilled version adds information not present"
+    },
+    {
+      "slug": "svelte/legacy-let",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures key concepts:"
+    },
+    {
+      "slug": "svelte/legacy-reactive-assignments",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key concepts, gotc"
+    },
+    {
+      "slug": "svelte/legacy-export-let",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/legacy-$$props-and-$$restProps",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/legacy-on",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/legacy-slots",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key conce"
+    },
+    {
+      "slug": "svelte/legacy-$$slots",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves all key information: r"
+    },
+    {
+      "slug": "svelte/legacy-svelte-fragment",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version preserves key concepts, code exa"
+    },
+    {
+      "slug": "svelte/legacy-svelte-component",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"NOT_ACCURATE\",\n  \"reasoning\": \"Distilled version incorrectly states '<MyCompo"
+    },
+    {
+      "slug": "svelte/legacy-svelte-self",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    },
+    {
+      "slug": "svelte/legacy-component-api",
+      "status": "NOT_ACCURATE",
+      "reasoning": "Failed to parse verification response: ```json\n{\n  \"status\": \"ACCURATE\",\n  \"reasoning\": \"Distilled version correctly captures all key infor"
+    }
+  ]
+}
