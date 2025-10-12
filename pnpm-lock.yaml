@@ -165,9 +165,6 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.44.0
         version: 8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2)
-      commander:
-        specifier: ^13.1.0
-        version: 13.1.0
       drizzle-orm:
         specifier: ^0.44.0
         version: 0.44.6(@libsql/client@0.15.15)(gel@2.1.1)
@@ -217,6 +214,9 @@ importers:
       '@typescript-eslint/types':
         specifier: ^8.44.0
         version: 8.44.1
+      commander:
+        specifier: ^13.1.0
+        version: 13.1.0
       dotenv:
         specifier: ^17.2.3
         version: 17.2.3
