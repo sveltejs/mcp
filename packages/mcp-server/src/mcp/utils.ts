@@ -20,9 +20,14 @@ export async function fetch_with_timeout(
 
 const summaries = (summary_data.summaries || {}) as Record<string, string>;
 const distilled_summaries = (distilled_data.summaries || {}) as Record<string, string>;
+const full_data = (distilled_data.content || {}) as Record<string, string>;
 
 export function get_distilled_content(slug: string): string | null {
 	return distilled_summaries[slug] ?? null;
+}
+
+export function get_cached_content(slug: string): string | null {
+	return full_data[slug] ?? null;
 }
 
 export async function get_sections() {
