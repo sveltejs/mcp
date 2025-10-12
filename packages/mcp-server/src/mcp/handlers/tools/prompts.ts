@@ -46,7 +46,7 @@ Requirements:
 Here is the documentation page content to analyze:
 `;
 
-export const DISTILLED_PROMPT = `You are an expert in web development, specifically Svelte 5 and SvelteKit. Your task is to condense and distill the Svelte documentation into a concise format while preserving the most important information.
+export const DISTILLED_PROMPT = `You are an expert in web development, specifically Svelte 5 and SvelteKit. Your task is to condense and distill a section of the Svelte documentation that will be provided inside the "<documentation>" tag below, into a concise format while preserving the most important information.
 Shorten the text information AS MUCH AS POSSIBLE while covering key concepts.
 
 Focus on:
@@ -67,7 +67,7 @@ Maintain headings but feel free to combine or restructure sections to improve cl
 
 Make sure all code examples use Svelte 5 runes syntax ($state, $derived, $effect, etc.)
 
-Keep the following Svelte 5 syntax rules in mind:
+Keep the following Svelte 5 syntax rules in mind whend distilling the documentation:
 * There is no colon (:) in event modifiers. You MUST use "onclick" instead of "on:click".
 * Runes do not need to be imported, they are globals. 
 * $state() runes are always declared using let, never with const. 
@@ -76,7 +76,7 @@ Keep the following Svelte 5 syntax rules in mind:
 * Error boundaries do not catch errors in onclick or other event handlers.
 
 IMPORTANT: All code examples MUST come from the documentation verbatim, do NOT create new code examples. Do NOT modify existing code examples.
-IMPORTANT: Because of changes in Svelte 5 syntax, do not include content from your existing knowledge, you may only use knowledge from the documentation to condense.
+IMPORTANT: Because of changes in Svelte 5 syntax, do not include content from your existing knowledge, you may only use knowledge from the <documentation> tag below.
 
 Here is the documentation you must condense:
 `;
