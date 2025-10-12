@@ -3,16 +3,10 @@ import 'dotenv/config';
 import { writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { Command } from 'commander';
 import { AnthropicProvider } from '../src/lib/anthropic.ts';
 import type { AnthropicBatchRequest } from '../src/lib/schemas.ts';
 import distilled_data from '../src/distilled.json' with { type: 'json' };
 import * as v from 'valibot';
-
-interface CliOptions {
-	dryRun: boolean;
-	debug: boolean;
-}
 
 interface VerificationResult {
 	slug: string;
@@ -48,17 +42,6 @@ const verification_output_schema = v.object({
 		}),
 	),
 });
-
-const program = new Command();
-
-program
-	.name('verify-distilled')
-	.description(
-		'Verify the accuracy of distilled summaries by comparing them to original documentation',
-	)
-	.version('1.0.0')
-	.option('-d, --dry-run', 'Show what would be verified without making API calls', false)
-	.option('--debug', 'Debug mode: process only 2 sections', false);
 
 const VERIFICATION_PROMPT = `You are tasked with verifying the accuracy of a distilled/condensed version of documentation against the original content.
 
@@ -115,19 +98,7 @@ function parse_verification_response(text: string): {
 }
 
 async function main() {
-	program.parse();
-	const options = program.opts<CliOptions>();
-
-	const debug = options.debug || process.env.DEBUG_MODE === '1';
-
 	console.log('🔍 Starting distilled verification...\n');
-
-	if (options.dryRun) {
-		console.log('🔍 DRY RUN MODE - No API calls will be made\n');
-	}
-	if (debug) {
-		console.log('🐛 DEBUG MODE - Will process only 2 sections\n');
-	}
 
 	const output_path = path.join(current_dirname, '../src/distilled-verification.json');
 
@@ -135,24 +106,8 @@ async function main() {
 	console.log('📂 Loading distilled.json...');
 	const { summaries, content } = distilled_data;
 
-	const sections_to_verify = Object.keys(summaries);
-	console.log(`Found ${sections_to_verify.length} sections to verify`);
-
-	// Debug mode: limit to 2 sections
-	let sections = sections_to_verify;
-	if (debug) {
-		console.log('\n🐛 Processing only 2 sections for debugging');
-		sections = sections_to_verify.slice(0, 2);
-	}
-
-	console.log(`\n📋 Will verify ${sections.length} sections`);
-
-	// Dry run mode: exit before API calls
-	if (options.dryRun) {
-		console.log('\n🔍 DRY RUN complete - no changes were made');
-		console.log(`Would have verified ${sections.length} sections`);
-		return;
-	}
+	const sections = Object.keys(summaries);
+	console.log(`Found ${sections.length} sections to verify\n`);
 
 	// Check for API key
 	const api_key = process.env.ANTHROPIC_API_KEY;
@@ -164,7 +119,7 @@ async function main() {
 	}
 
 	// Initialize Anthropic API
-	console.log('\n🤖 Initializing Anthropic API...');
+	console.log('🤖 Initializing Anthropic API...');
 	const anthropic = new AnthropicProvider('claude-sonnet-4-5-20250929', api_key);
 
 	// Prepare batch requests
@@ -177,7 +132,7 @@ async function main() {
 			custom_id: `verify-${index}`,
 			params: {
 				model: anthropic.get_model_identifier(),
-				max_tokens: 4096, // Increased to allow full responses
+				max_tokens: 4096,
 				messages: [
 					{
 						role: 'user',
@@ -290,7 +245,7 @@ async function main() {
 	const output_data: VerificationOutput = {
 		generated_at: new Date().toISOString(),
 		model: 'claude-sonnet-4-5-20250929',
-		total_sections: sections_to_verify.length,
+		total_sections: sections.length,
 		verified_sections: sections.length,
 		accurate_count,
 		not_accurate_count,
@@ -307,7 +262,7 @@ async function main() {
 
 	// Print summary
 	console.log('\n📊 Verification Summary:');
-	console.log(`  Total sections: ${sections_to_verify.length}`);
+	console.log(`  Total sections: ${sections.length}`);
 	console.log(`  Verified sections: ${sections.length}`);
 	console.log(
 		`  ✅ Accurate: ${accurate_count} (${((accurate_count / sections.length) * 100).toFixed(1)}%)`,
@@ -317,16 +272,17 @@ async function main() {
 	);
 
 	if (not_accurate_count > 0) {
-		console.log('\n⚠️  Sections with issues:');
+		console.log('\n⚠️  Sections with issues (first 10):');
 		verification_results
 			.filter((r) => r.status === 'NOT_ACCURATE')
-			.slice(0, 10) // Show first 10
+			.slice(0, 10)
 			.forEach((r) => {
 				console.log(`  - ${r.slug}: ${r.reasoning}`);
 			});
 		if (not_accurate_count > 10) {
 			console.log(`  ... and ${not_accurate_count - 10} more`);
 		}
+		console.log('\n💡 Run `pnpm show-verification-errors` to see all issues');
 	}
 
 	console.log(`\n✅ Results written to: ${output_path}`);

@@ -57,15 +57,18 @@ Generate condensed versions of the documentation to reduce context size:
 Verify the accuracy of distilled summaries against original documentation:
 
 - `pnpm verify-distilled` - Verify all distilled summaries for accuracy
-- `pnpm verify-distilled:dry-run` - Preview what would be verified without making API calls
-- `pnpm verify-distilled:debug` - Verify only 2 sections for debugging
+- `pnpm show-verification-errors` - Display all sections that failed verification
 
-The verification script:
-1. Loads `distilled.json` containing summaries and original content
-2. Uses the Anthropic Batch API to send each summary and original content to Claude
-3. Claude evaluates whether the summary is accurate or contains errors/omissions
-4. Generates `distilled-verification.json` with results (ACCURATE/NOT_ACCURATE) and reasoning
-5. Outputs statistics about accuracy rates
+The verification workflow:
+1. Run `pnpm verify-distilled` to verify all distilled summaries
+   - Loads `distilled.json` containing summaries and original content
+   - Uses the Anthropic Batch API to send each summary and original content to Claude
+   - Claude evaluates whether the summary is accurate or contains errors/omissions
+   - Generates `distilled-verification.json` with results (ACCURATE/NOT_ACCURATE) and reasoning
+   - Outputs statistics about accuracy rates
+2. Run `pnpm show-verification-errors` to see detailed list of all sections that are NOT_ACCURATE
+   - Displays each problematic section with its reasoning
+   - Shows summary statistics
 
 **Note:** All documentation generation and verification commands require `ANTHROPIC_API_KEY` to be set in `packages/mcp-server/.env`
 
