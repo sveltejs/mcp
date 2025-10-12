@@ -220,9 +220,6 @@ importers:
       dotenv:
         specifier: ^17.2.3
         version: 17.2.3
-      vite-node:
-        specifier: ^3.2.4
-        version: 3.2.4(@types/node@24.5.2)(jiti@2.6.0)(tsx@4.20.6)
 
   packages/mcp-stdio:
     dependencies:

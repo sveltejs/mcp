@@ -10,12 +10,12 @@
 	"type": "module",
 	"scripts": {
 		"test": "vitest",
-		"generate-summaries": "vite-node scripts/generate-summaries.ts",
-		"generate-summaries:dry-run": "vite-node scripts/generate-summaries.ts --dry-run",
-		"generate-summaries:debug": "DEBUG_MODE=1 vite-node scripts/generate-summaries.ts",
-		"generate-distilled": "vite-node scripts/generate-summaries.ts --prompt-type distilled",
-		"generate-distilled:dry-run": "vite-node scripts/generate-summaries.ts --prompt-type distilled --dry-run",
-		"generate-distilled:debug": "DEBUG_MODE=1 vite-node scripts/generate-summaries.ts --prompt-type distilled"
+		"generate-summaries": "node --import node-resolve-ts/register scripts/generate-summaries.ts",
+		"generate-summaries:dry-run": "node --import node-resolve-ts/register scripts/generate-summaries.ts --dry-run",
+		"generate-summaries:debug": "DEBUG_MODE=1 node --import node-resolve-ts/register scripts/generate-summaries.ts",
+		"generate-distilled": "node --import node-resolve-ts/register scripts/generate-summaries.ts --prompt-type distilled",
+		"generate-distilled:dry-run": "node --import node-resolve-ts/register scripts/generate-summaries.ts --prompt-type distilled --dry-run",
+		"generate-distilled:debug": "DEBUG_MODE=1 node --import node-resolve-ts/register scripts/generate-summaries.ts --prompt-type distilled"
 	},
 	"exports": {
 		".": "./src/index.ts",
@@ -47,7 +47,6 @@
 		"@types/eslint-scope": "^8.3.2",
 		"@types/estree": "^1.0.8",
 		"@typescript-eslint/types": "^8.44.0",
-		"dotenv": "^17.2.3",
-		"vite-node": "^3.2.4"
+		"dotenv": "^17.2.3"
 	}
 }
