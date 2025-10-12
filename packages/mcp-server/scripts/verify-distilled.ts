@@ -76,13 +76,43 @@ Guidelines for determining accuracy:
 - NOT_ACCURATE: Missing critical information that would mislead developers
 - NOT_ACCURATE: Incorrect code examples or API usage
 
-You must respond in the following JSON format ONLY:
-{
-  "status": "ACCURATE" or "NOT_ACCURATE",
-  "reasoning": "Brief explanation of your decision (max 200 characters)"
-}
+You must respond in exactly this format:
 
-Do not include any other text in your response, only the JSON object.`;
+STATUS: [ACCURATE or NOT_ACCURATE]
+REASONING: [Brief explanation of your decision in one sentence]
+
+Do not include any other text, formatting, or markdown in your response.`;
+
+function parse_verification_response(text: string): {
+	status: 'ACCURATE' | 'NOT_ACCURATE';
+	reasoning: string;
+} | null {
+	// Try to extract STATUS and REASONING using regex
+	const status_match = text.match(/STATUS:\s*(ACCURATE|NOT_ACCURATE)/i);
+	const reasoning_match = text.match(/REASONING:\s*(.+?)(?:\n|$)/i);
+
+	if (status_match && reasoning_match) {
+		return {
+			status: status_match[1]!.toUpperCase() as 'ACCURATE' | 'NOT_ACCURATE',
+			reasoning: reasoning_match[1]!.trim(),
+		};
+	}
+
+	// Fallback: try to find just "ACCURATE" or "NOT_ACCURATE" anywhere in the response
+	const accurate_match = text.match(/\b(NOT_ACCURATE|ACCURATE)\b/i);
+	if (accurate_match) {
+		// Extract some context as reasoning
+		const lines = text.split('\n').filter((line) => line.trim());
+		const reasoning = lines.slice(0, 3).join(' ').slice(0, 200);
+
+		return {
+			status: accurate_match[1]!.toUpperCase() as 'ACCURATE' | 'NOT_ACCURATE',
+			reasoning: reasoning || 'Could not extract detailed reasoning',
+		};
+	}
+
+	return null;
+}
 
 async function main() {
 	program.parse();
@@ -115,10 +145,7 @@ async function main() {
 		sections = sections_to_verify.slice(0, 2);
 	}
 
-	console.log(`\n📋 Will verify ${sections.length} sections:`);
-	for (const slug of sections) {
-		console.log(`  - ${slug}`);
-	}
+	console.log(`\n📋 Will verify ${sections.length} sections`);
 
 	// Dry run mode: exit before API calls
 	if (options.dryRun) {
@@ -150,7 +177,7 @@ async function main() {
 			custom_id: `verify-${index}`,
 			params: {
 				model: anthropic.get_model_identifier(),
-				max_tokens: 1024,
+				max_tokens: 4096, // Increased to allow full responses
 				messages: [
 					{
 						role: 'user',
@@ -227,29 +254,28 @@ async function main() {
 			continue;
 		}
 
-		try {
-			// Parse the JSON response
-			const parsed = JSON.parse(output_content.trim());
-			const status = parsed.status as 'ACCURATE' | 'NOT_ACCURATE';
-			const reasoning = parsed.reasoning as string;
+		// Parse using regex instead of strict JSON parsing
+		const parsed = parse_verification_response(output_content);
 
-			verification_results.push({
-				slug,
-				status,
-				reasoning,
-			});
-
-			const emoji = status === 'ACCURATE' ? '✅' : '❌';
-			console.log(`  ${emoji} ${slug}: ${status}`);
-		} catch (error) {
-			console.error(`  ❌ Failed to parse response for ${slug}:`, error);
-			console.error(`  Raw response: ${output_content}`);
+		if (!parsed) {
+			console.error(`  ❌ Failed to parse response for ${slug}`);
+			console.error(`  Raw response: ${output_content.slice(0, 200)}...`);
 			verification_results.push({
 				slug,
 				status: 'NOT_ACCURATE',
 				reasoning: `Failed to parse verification response: ${output_content.slice(0, 100)}`,
 			});
+			continue;
 		}
+
+		verification_results.push({
+			slug,
+			status: parsed.status,
+			reasoning: parsed.reasoning,
+		});
+
+		const emoji = parsed.status === 'ACCURATE' ? '✅' : '❌';
+		console.log(`  ${emoji} ${slug}: ${parsed.status}`);
 	}
 
 	// Calculate statistics
@@ -274,9 +300,7 @@ async function main() {
 	// Validate output before writing
 	const validated = v.safeParse(verification_output_schema, output_data);
 	if (!validated.success) {
-		throw new Error(
-			`Output validation failed: ${JSON.stringify(validated.issues, null, 2)}`,
-		);
+		throw new Error(`Output validation failed: ${JSON.stringify(validated.issues, null, 2)}`);
 	}
 
 	await writeFile(output_path, JSON.stringify(output_data, null, 2), 'utf-8');
@@ -285,7 +309,9 @@ async function main() {
 	console.log('\n📊 Verification Summary:');
 	console.log(`  Total sections: ${sections_to_verify.length}`);
 	console.log(`  Verified sections: ${sections.length}`);
-	console.log(`  ✅ Accurate: ${accurate_count} (${((accurate_count / sections.length) * 100).toFixed(1)}%)`);
+	console.log(
+		`  ✅ Accurate: ${accurate_count} (${((accurate_count / sections.length) * 100).toFixed(1)}%)`,
+	);
 	console.log(
 		`  ❌ Not Accurate: ${not_accurate_count} (${((not_accurate_count / sections.length) * 100).toFixed(1)}%)`,
 	);
@@ -294,9 +320,13 @@ async function main() {
 		console.log('\n⚠️  Sections with issues:');
 		verification_results
 			.filter((r) => r.status === 'NOT_ACCURATE')
+			.slice(0, 10) // Show first 10
 			.forEach((r) => {
 				console.log(`  - ${r.slug}: ${r.reasoning}`);
 			});
+		if (not_accurate_count > 10) {
+			console.log(`  ... and ${not_accurate_count - 10} more`);
+		}
 	}
 
 	console.log(`\n✅ Results written to: ${output_path}`);
