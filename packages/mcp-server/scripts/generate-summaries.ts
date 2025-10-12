@@ -319,7 +319,9 @@ async function main() {
 						messages: [
 							{
 								role: 'user',
-								content: selected_prompt + content,
+								content:
+									`<instructions>${selected_prompt}</instructions>` +
+									`<documentation>${content}</documentation>`,
 							},
 						],
 						temperature: 0,
