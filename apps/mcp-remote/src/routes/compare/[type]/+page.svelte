@@ -5,14 +5,25 @@
 
 	let selected_slug = $state<string | null>(null);
 	let search_query = $state('');
+	let sort_order = $state<'default' | 'largest' | 'smallest'>('default');
 
-	let filtered_sections = $derived(
-		data.sections.filter(
+	let filtered_sections = $derived.by(() => {
+		// First, filter sections
+		const filtered = data.sections.filter(
 			(section) =>
 				section.slug.toLowerCase().includes(search_query.toLowerCase()) ||
 				section.summary.toLowerCase().includes(search_query.toLowerCase()),
-		),
-	);
+		);
+
+		// Then, sort based on selected sort order
+		if (sort_order === 'largest') {
+			return [...filtered].sort((a, b) => b.space_savings - a.space_savings);
+		} else if (sort_order === 'smallest') {
+			return [...filtered].sort((a, b) => a.space_savings - b.space_savings);
+		}
+
+		return filtered;
+	});
 
 	let selected_section = $derived(
 		selected_slug ? data.sections.find((s) => s.slug === selected_slug) : null,
@@ -48,6 +59,32 @@
 
 	<div class="main-content">
 		<aside class="sidebar">
+			<div class="sort-controls">
+				<span class="sort-label">Sort by:</span>
+				<div class="sort-buttons">
+					<button
+						class="sort-button"
+						class:active={sort_order === 'default'}
+						onclick={() => (sort_order = 'default')}
+					>
+						Default
+					</button>
+					<button
+						class="sort-button"
+						class:active={sort_order === 'largest'}
+						onclick={() => (sort_order = 'largest')}
+					>
+						Largest Reduction
+					</button>
+					<button
+						class="sort-button"
+						class:active={sort_order === 'smallest'}
+						onclick={() => (sort_order = 'smallest')}
+					>
+						Smallest Reduction
+					</button>
+				</div>
+			</div>
 			<div class="search-box">
 				<input
 					type="search"
@@ -64,7 +101,12 @@
 							class:active={selected_slug === section.slug}
 							onclick={() => select_section(section.slug)}
 						>
-							<div class="section-title">{section.slug}</div>
+							<div class="section-header">
+								<div class="section-title">{section.slug}</div>
+								<div class="section-savings" class:negative={section.space_savings < 0}>
+									{section.space_savings.toFixed(1)}%
+								</div>
+							</div>
 							<div class="section-preview">
 								{is_distilled
 									? section.summary.slice(0, 100) + (section.summary.length > 100 ? '...' : '')
@@ -156,6 +198,49 @@
 		flex-direction: column;
 	}
 
+	.sort-controls {
+		padding: 1rem;
+		border-bottom: 1px solid #e0e0e0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.sort-label {
+		font-size: 0.8125rem;
+		font-weight: 500;
+		color: #666;
+	}
+
+	.sort-buttons {
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	.sort-button {
+		padding: 0.375rem 0.75rem;
+		border: 1px solid #e0e0e0;
+		border-radius: 4px;
+		background: white;
+		font-size: 0.8125rem;
+		font-family: inherit;
+		cursor: pointer;
+		transition: all 0.15s;
+		color: #666;
+	}
+
+	.sort-button:hover {
+		background: #f9fafb;
+		border-color: #d0d0d0;
+	}
+
+	.sort-button.active {
+		background: #3b82f6;
+		border-color: #3b82f6;
+		color: white;
+	}
+
 	.search-box {
 		padding: 1rem;
 		border-bottom: 1px solid #e0e0e0;
@@ -204,11 +289,37 @@
 		border-left: 3px solid #3b82f6;
 	}
 
+	.section-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 0.5rem;
+		margin-bottom: 0.25rem;
+	}
+
 	.section-title {
 		font-size: 0.9375rem;
 		font-weight: 500;
 		color: #1a1a1a;
-		margin-bottom: 0.25rem;
+		flex: 1;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.section-savings {
+		font-size: 0.75rem;
+		font-weight: 600;
+		color: #10b981;
+		padding: 0.125rem 0.375rem;
+		background: #d1fae5;
+		border-radius: 3px;
+		white-space: nowrap;
+	}
+
+	.section-savings.negative {
+		color: #ef4444;
+		background: #fee2e2;
 	}
 
 	.section-preview {
