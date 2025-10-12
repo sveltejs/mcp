@@ -107,6 +107,7 @@ The core MCP server is implemented using the `tmcp` library with:
 #### get-documentation
 
 Retrieves documentation content for Svelte 5 or SvelteKit sections. Supports:
+
 - Single or multiple section names
 - Search by title (e.g., "$state") or file path (e.g., "cli/overview")
 - Optional distilled versions to optimize context size (default: true)
@@ -115,6 +116,7 @@ Retrieves documentation content for Svelte 5 or SvelteKit sections. Supports:
 #### list-sections
 
 Lists all available Svelte 5 and SvelteKit documentation sections with:
+
 - Section titles and file paths
 - "use_cases" metadata describing when each section is useful
 - Helps LLMs determine which documentation to fetch
@@ -122,6 +124,7 @@ Lists all available Svelte 5 and SvelteKit documentation sections with:
 #### svelte-autofixer
 
 Analyzes Svelte component or module code and returns suggestions/fixes:
+
 - Runs compilation checks
 - Runs ESLint checks
 - Runs custom autofixer visitors
@@ -131,6 +134,7 @@ Analyzes Svelte component or module code and returns suggestions/fixes:
 #### playground-link
 
 Generates a Svelte Playground link from code snippets:
+
 - Accepts multiple files (must include `App.svelte` as entry point)
 - Optional Tailwind CSS support
 - Compresses and encodes files into URL hash
@@ -140,12 +144,14 @@ Generates a Svelte Playground link from code snippets:
 #### svelte-task
 
 A prompt template that instructs LLMs on how to:
+
 - Query available documentation sections
 - Use the autofixer iteratively until no issues remain
 - Generate playground links when appropriate
 - Follows best practices for Svelte development
 
 Prompts are defined with:
+
 - `generate_for_docs()` - Function to generate prompt text for documentation
 - `docs_description` - Human-readable description
 - Prompt handler - Server registration logic with schema and completions
@@ -157,6 +163,7 @@ Prompts are defined with:
 URI template: `svelte://{/slug*}.md`
 
 Lists and fetches individual documentation sections:
+
 - Lists all sections with metadata (title, use_cases, URI)
 - Provides completions for slug parameter
 - Fetches content from svelte.dev/docs/
@@ -197,7 +204,7 @@ Each visitor checks for specific issues:
 ### Database Layer (`packages/mcp-schema/`)
 
 - **ORM**: Drizzle with LibSQL/Turso backend
-- **Schema** (`src/schema.js`): 
+- **Schema** (`src/schema.js`):
   - `content` - Original documentation with embeddings
   - `content_distilled` - Distilled/condensed documentation with embeddings
   - `distillations` - Stored distilled documentation versions
@@ -209,7 +216,7 @@ Each visitor checks for specific issues:
 Remote HTTP MCP server with documentation comparison interface:
 
 - **Hooks** (`src/hooks.server.ts`): Integrates MCP HTTP transport with SvelteKit requests
-- **Routes**: 
+- **Routes**:
   - `/` - Landing page
   - `/compare/use_cases` - Compare use case summaries with original docs
   - `/compare/distilled` - Compare distilled docs with original docs
@@ -218,6 +225,7 @@ Remote HTTP MCP server with documentation comparison interface:
 ### CLI Package (`packages/mcp-stdio/`)
 
 Standalone npm package (`@sveltejs/mcp`) that:
+
 - Runs the MCP server via stdio transport
 - Built with tsdown for optimal bundling
 - Externalizes `eslint` dependency (required at runtime)
@@ -288,9 +296,11 @@ Required for documentation generation scripts:
 ### Svelte Runes (`packages/mcp-server/src/constants.ts`)
 
 Base runes:
+
 - `$state`, `$effect`, `$derived`, `$inspect`, `$props`, `$bindable`, `$host`
 
 Nested runes:
+
 - `$state.raw`, `$state.snapshot`, `$effect.pre`, `$effect.tracking`, `$effect.pending`, `$effect.root`, `$derived.by`, `$inspect.trace`, `$props.id`
 
 ## Code Style & Standards
