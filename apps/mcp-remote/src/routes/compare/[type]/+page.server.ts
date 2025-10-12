@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import distilledData from '@sveltejs/mcp-server/distilled.json';
-import useCasesData from '@sveltejs/mcp-server/use-cases.json';
+import distilled_data from '@sveltejs/mcp-server/distilled.json';
+import use_cases_data from '@sveltejs/mcp-server/use-cases.json';
 
 interface SummaryData {
 	generated_at: string;
@@ -26,7 +26,7 @@ export const load: PageServerLoad = async ({ params }) => {
 		throw error(404, 'Comparison type not found');
 	}
 
-	const data = (type === 'use_cases' ? useCasesData : distilledData) as SummaryData;
+	const data = (type === 'use_cases' ? use_cases_data : distilled_data) as SummaryData;
 
 	const sections = Object.keys(data.summaries).map((slug) => {
 		const summary = data.summaries[slug] || '';
