@@ -13,6 +13,7 @@ import {
 } from '../src/lib/schemas.ts';
 import * as v from 'valibot';
 import { DISTILLED_PROMPT, USE_CASES_PROMPT } from '../src/mcp/handlers/tools/prompts.ts';
+import { export_summaries_to_markdown } from './lib/export-markdown.ts';
 
 interface CliOptions {
 	force: boolean;
@@ -264,6 +265,14 @@ async function main() {
 		return;
 	}
 
+	// Process with Anthropic API if we have sections to process
+	const new_summaries: Record<string, string> = {};
+	let sections_with_content: Array<{
+		section: (typeof sections_to_process)[number];
+		content: string;
+		index: number;
+	}> = [];
+
 	if (sections_to_process.length === 0) {
 		console.log('\n📦 Only removing old sections, no API calls needed');
 	} else {
@@ -278,11 +287,6 @@ async function main() {
 
 		// Build sections_with_content from already-downloaded content
 		console.log('\n📦 Preparing sections for processing...');
-		const sections_with_content: Array<{
-			section: (typeof sections_to_process)[number];
-			content: string;
-			index: number;
-		}> = [];
 
 		for (let i = 0; i < sections_to_process.length; i++) {
 			const section = sections_to_process[i]!;
@@ -301,132 +305,138 @@ async function main() {
 
 		console.log(`✅ Prepared ${sections_with_content.length} sections for processing`);
 
-		// Process with Anthropic API if we have content
-		const new_summaries: Record<string, string> = {};
+		console.log('\n🤖 Initializing Anthropic API...');
+		const anthropic = new AnthropicProvider('claude-sonnet-4-5-20250929', api_key);
 
-		if (sections_with_content.length > 0) {
-			console.log('\n🤖 Initializing Anthropic API...');
-			const anthropic = new AnthropicProvider('claude-sonnet-4-5-20250929', api_key);
+		// Prepare batch requests
+		console.log('📦 Preparing batch requests...');
+		const batch_requests: AnthropicBatchRequest[] = sections_with_content.map(
+			({ content, index }) => ({
+				custom_id: `section-${index}`,
+				params: {
+					model: anthropic.get_model_identifier(),
+					max_tokens: 8192,
+					messages: [
+						{
+							role: 'user',
+							content:
+								`<instructions>${selected_prompt}</instructions>` +
+								`<documentation>${content}</documentation>`,
+						},
+					],
+					temperature: 0,
+				},
+			}),
+		);
 
-			// Prepare batch requests
-			console.log('📦 Preparing batch requests...');
-			const batch_requests: AnthropicBatchRequest[] = sections_with_content.map(
-				({ content, index }) => ({
-					custom_id: `section-${index}`,
-					params: {
-						model: anthropic.get_model_identifier(),
-						max_tokens: 8192,
-						messages: [
-							{
-								role: 'user',
-								content:
-									`<instructions>${selected_prompt}</instructions>` +
-									`<documentation>${content}</documentation>`,
-							},
-						],
-						temperature: 0,
-					},
-				}),
+		// Create and process batch
+		console.log('🚀 Creating batch job...');
+		const batch_response = await anthropic.create_batch(batch_requests);
+		console.log(`✅ Batch created with ID: ${batch_response.id}`);
+
+		// Poll for completion
+		console.log('⏳ Waiting for batch to complete...');
+		let batch_status = await anthropic.get_batch_status(batch_response.id);
+
+		while (batch_status.processing_status === 'in_progress') {
+			const { succeeded, processing, errored } = batch_status.request_counts;
+			console.log(
+				`  Progress: ${succeeded} succeeded, ${processing} processing, ${errored} errored`,
 			);
-
-			// Create and process batch
-			console.log('🚀 Creating batch job...');
-			const batch_response = await anthropic.create_batch(batch_requests);
-			console.log(`✅ Batch created with ID: ${batch_response.id}`);
-
-			// Poll for completion
-			console.log('⏳ Waiting for batch to complete...');
-			let batch_status = await anthropic.get_batch_status(batch_response.id);
-
-			while (batch_status.processing_status === 'in_progress') {
-				const { succeeded, processing, errored } = batch_status.request_counts;
-				console.log(
-					`  Progress: ${succeeded} succeeded, ${processing} processing, ${errored} errored`,
-				);
-				await new Promise((resolve) => setTimeout(resolve, 5000));
-				batch_status = await anthropic.get_batch_status(batch_response.id);
-			}
-
-			console.log('✅ Batch processing completed!');
-
-			// Get results
-			if (!batch_status.results_url) {
-				throw new Error('Batch completed but no results URL available');
-			}
-
-			console.log('📥 Downloading results...');
-			const results = await anthropic.get_batch_results(batch_status.results_url);
-
-			// Process results
-			console.log('📊 Processing results...');
-
-			for (const result of results) {
-				const index = parseInt(result.custom_id.split('-')[1] ?? '0');
-				const section_data = sections_with_content.find((s) => s.index === index);
-
-				if (!section_data) {
-					throw new Error(`Could not find section for index ${index}`);
-				}
-
-				const { section } = section_data;
-
-				if (result.result.type !== 'succeeded' || !result.result.message) {
-					const error_msg = result.result.error?.message || 'Failed or no message';
-					throw new Error(`Failed to generate summary for ${section.title}: ${error_msg}`);
-				}
-
-				const output_content = result.result.message.content[0]?.text;
-				if (!output_content) {
-					throw new Error(`No text content in result for ${section.title}`);
-				}
-
-				new_summaries[section.slug] = output_content.trim();
-				console.log(`  ✅ ${section.title}`);
-			}
-
-			// Merge with existing summaries
-			console.log('\n📦 Merging results...');
+			await new Promise((resolve) => setTimeout(resolve, 5000));
+			batch_status = await anthropic.get_batch_status(batch_response.id);
 		}
 
-		// Start with existing summaries or empty object
-		const merged_summaries: Record<string, string> = existing_data
-			? { ...existing_data.summaries }
-			: {};
+		console.log('✅ Batch processing completed!');
 
-		// Add/update new summaries
-		Object.assign(merged_summaries, new_summaries);
-
-		// Remove deleted sections from summaries (hashes already don't include removed sections)
-		for (const slug of to_remove) {
-			delete merged_summaries[slug];
-			console.log(`  🗑️  Removed: ${slug}`);
+		// Get results
+		if (!batch_status.results_url) {
+			throw new Error('Batch completed but no results URL available');
 		}
 
-		// Write output
-		console.log('\n💾 Writing results to file...');
-		const output_dir = path.dirname(output_path);
-		await mkdir(output_dir, { recursive: true });
+		console.log('📥 Downloading results...');
+		const results = await anthropic.get_batch_results(batch_status.results_url);
 
-		const summary_data: SummaryData = {
-			generated_at: new Date().toISOString(),
-			model: 'claude-sonnet-4-5-20250929',
-			total_sections: all_sections.length,
-			successful_summaries: Object.keys(merged_summaries).length,
-			summaries: merged_summaries,
-			content: Object.fromEntries(section_content),
-		};
+		// Process results
+		console.log('📊 Processing results...');
 
-		await writeFile(output_path, JSON.stringify(summary_data, null, 2), 'utf-8');
+		for (const result of results) {
+			const index = parseInt(result.custom_id.split('-')[1] ?? '0');
+			const section_data = sections_with_content.find((s) => s.index === index);
 
-		// Print summary
-		console.log('\n📊 Final Summary:');
-		console.log(`  Total sections in API: ${all_sections.length}`);
-		console.log(`  Sections processed: ${sections_with_content.length}`);
-		console.log(`  New summaries generated: ${Object.keys(new_summaries).length}`);
-		console.log(`  Sections removed: ${to_remove.length}`);
-		console.log(`  Total summaries in file: ${Object.keys(merged_summaries).length}`);
-		console.log(`\n✅ Results written to: ${output_path}`);
+			if (!section_data) {
+				throw new Error(`Could not find section for index ${index}`);
+			}
+
+			const { section } = section_data;
+
+			if (result.result.type !== 'succeeded' || !result.result.message) {
+				const error_msg = result.result.error?.message || 'Failed or no message';
+				throw new Error(`Failed to generate summary for ${section.title}: ${error_msg}`);
+			}
+
+			const output_content = result.result.message.content[0]?.text;
+			if (!output_content) {
+				throw new Error(`No text content in result for ${section.title}`);
+			}
+
+			new_summaries[section.slug] = output_content.trim();
+			console.log(`  ✅ ${section.title}`);
+		}
+
+		// Merge with existing summaries
+		console.log('\n📦 Merging results...');
 	}
+
+	// Start with existing summaries or empty object
+	const merged_summaries: Record<string, string> = existing_data
+		? { ...existing_data.summaries }
+		: {};
+
+	// Add/update new summaries
+	Object.assign(merged_summaries, new_summaries);
+
+	// Remove deleted sections from summaries
+	for (const slug of to_remove) {
+		delete merged_summaries[slug];
+		console.log(`  🗑️  Removed: ${slug}`);
+	}
+
+	// Write output
+	console.log('\n💾 Writing results to file...');
+	const output_dir = path.dirname(output_path);
+	await mkdir(output_dir, { recursive: true });
+
+	const summary_data: SummaryData = {
+		generated_at: new Date().toISOString(),
+		model: 'claude-sonnet-4-5-20250929',
+		total_sections: all_sections.length,
+		successful_summaries: Object.keys(merged_summaries).length,
+		summaries: merged_summaries,
+		content: Object.fromEntries(section_content),
+	};
+
+	await writeFile(output_path, JSON.stringify(summary_data, null, 2), 'utf-8');
+
+	// Export summaries to markdown files
+	console.log('\n📁 Exporting summaries to markdown files...');
+	const markdown_type = options.promptType === 'distilled' ? 'distilled' : 'use_cases';
+	const markdown_files_created = await export_summaries_to_markdown(
+		merged_summaries,
+		markdown_type,
+		path.join(current_dirname, '../summaries'),
+	);
+
+	// Print summary
+	console.log('\n📊 Final Summary:');
+	console.log(`  Total sections in API: ${all_sections.length}`);
+	console.log(`  Sections processed: ${sections_with_content.length}`);
+	console.log(`  New summaries generated: ${Object.keys(new_summaries).length}`);
+	console.log(`  Sections removed: ${to_remove.length}`);
+	console.log(`  Total summaries in file: ${Object.keys(merged_summaries).length}`);
+	console.log(`  Markdown files created: ${markdown_files_created}`);
+	console.log(`\n✅ Results written to: ${output_path}`);
+	console.log(`✅ Markdown files written to: ${path.join(current_dirname, `../summaries/${markdown_type}/`)}`);
 }
 
 main().catch((error) => {
