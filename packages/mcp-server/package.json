@@ -18,9 +18,7 @@
 		"generate-distilled:debug": "DEBUG_MODE=1 node --import node-resolve-ts/register scripts/generate-summaries.ts --prompt-type distilled",
 		"verify-distilled": "node --import node-resolve-ts/register scripts/verify-distilled.ts",
 		"show-verification-errors": "node --import node-resolve-ts/register scripts/show-verification-errors.ts",
-		"export-summaries": "node --import node-resolve-ts/register scripts/export-summaries.ts",
-		"export-summaries:use-cases": "node --import node-resolve-ts/register scripts/export-summaries.ts --type use_cases",
-		"export-summaries:distilled": "node --import node-resolve-ts/register scripts/export-summaries.ts --type distilled"
+		"export-summaries": "node --import node-resolve-ts/register scripts/export-summaries.ts"
 	},
 	"exports": {
 		".": "./src/index.ts",
