@@ -19,7 +19,6 @@
 		"verify-distilled": "node --import node-resolve-ts/register scripts/verify-distilled.ts",
 		"show-verification-errors": "node --import node-resolve-ts/register scripts/show-verification-errors.ts",
 		"export-summaries": "node --import node-resolve-ts/register scripts/export-summaries.ts",
-		"export-summaries:dry-run": "node --import node-resolve-ts/register scripts/export-summaries.ts --dry-run",
 		"export-summaries:use-cases": "node --import node-resolve-ts/register scripts/export-summaries.ts --type use_cases",
 		"export-summaries:distilled": "node --import node-resolve-ts/register scripts/export-summaries.ts --type distilled"
 	},

@@ -1,15 +1,14 @@
 #!/usr/bin/env node
 import 'dotenv/config';
-import { writeFile, mkdir, rm } from 'node:fs/promises';
+import { writeFile, mkdir, rm, readFile, access } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Command } from 'commander';
-import { load_existing_summaries } from './generate-summaries.ts';
+import * as v from 'valibot';
+import { summary_data_schema, type SummaryData } from '../src/lib/schemas.ts';
 
 interface CliOptions {
 	type: 'use_cases' | 'distilled' | 'both';
-	dryRun: boolean;
-	clean: boolean;
 }
 
 const current_filename = fileURLToPath(import.meta.url);
@@ -25,14 +24,38 @@ program
 		'-t, --type <type>',
 		'Type to export: "use_cases", "distilled", or "both"',
 		'both',
-	)
-	.option('-d, --dry-run', 'Show what would be created without writing files', false)
-	.option('-c, --clean', 'Remove existing summaries directory before exporting', false);
+	);
 
-async function export_summaries_for_type(
-	type: 'use_cases' | 'distilled',
-	dry_run: boolean,
-): Promise<void> {
+async function read_file_as_string(
+	file_path: string,
+	encoding: BufferEncoding = 'utf-8',
+): Promise<string> {
+	const content = await readFile(file_path, encoding);
+	return v.parse(v.string(), content);
+}
+
+async function load_summaries_json(output_path: string): Promise<SummaryData | null> {
+	try {
+		await access(output_path);
+	} catch {
+		return null;
+	}
+
+	const content = await read_file_as_string(output_path, 'utf-8');
+	const data = JSON.parse(content);
+
+	const validated = v.safeParse(summary_data_schema, data);
+	if (!validated.success) {
+		throw new Error(
+			`File has invalid schema: ${output_path}\n` +
+				`Validation errors: ${JSON.stringify(validated.issues, null, 2)}`,
+		);
+	}
+
+	return validated.output;
+}
+
+async function export_summaries_for_type(type: 'use_cases' | 'distilled'): Promise<void> {
 	const json_filename = type === 'distilled' ? 'distilled.json' : 'use_cases.json';
 	const input_path = path.join(current_dirname, `../src/${json_filename}`);
 	const output_base_dir = path.join(current_dirname, `../summaries/${type}`);
@@ -43,7 +66,7 @@ async function export_summaries_for_type(
 
 	// Load the JSON file
 	console.log(`  📂 Loading ${json_filename}...`);
-	const data = await load_existing_summaries(input_path);
+	const data = await load_summaries_json(input_path);
 
 	if (!data) {
 		console.error(`  ❌ Error: Could not load ${json_filename}`);
@@ -54,18 +77,6 @@ async function export_summaries_for_type(
 	const summary_count = Object.keys(summaries).length;
 
 	console.log(`  ✅ Found ${summary_count} summaries`);
-
-	if (dry_run) {
-		console.log(`  🔍 DRY RUN - Would create ${summary_count} files:`);
-		for (const [slug, content] of Object.entries(summaries)) {
-			const file_path = path.join(output_base_dir, `${slug}.md`);
-			const content_preview =
-				content.length > 60 ? content.substring(0, 60) + '...' : content;
-			console.log(`    📄 ${file_path}`);
-			console.log(`       ${content_preview.replace(/\n/g, ' ')}`);
-		}
-		return;
-	}
 
 	// Create base output directory
 	await mkdir(output_base_dir, { recursive: true });
@@ -104,38 +115,29 @@ async function main() {
 		process.exit(1);
 	}
 
-	if (options.dryRun) {
-		console.log('🔍 DRY RUN MODE - No files will be written\n');
-	}
-
-	// Clean existing summaries directory if requested
-	if (options.clean && !options.dryRun) {
-		const summaries_dir = path.join(current_dirname, '../summaries');
-		console.log('🧹 Cleaning existing summaries directory...');
-		try {
-			await rm(summaries_dir, { recursive: true, force: true });
-			console.log('✅ Cleaned summaries directory\n');
-		} catch (error) {
-			console.log('ℹ️  No existing summaries directory to clean\n');
-		}
+	// Always clean existing summaries directory
+	const summaries_dir = path.join(current_dirname, '../summaries');
+	console.log('🧹 Cleaning existing summaries directory...');
+	try {
+		await rm(summaries_dir, { recursive: true, force: true });
+		console.log('✅ Cleaned summaries directory\n');
+	} catch (error) {
+		console.log('ℹ️  No existing summaries directory to clean\n');
 	}
 
 	// Export based on type option
 	if (options.type === 'both') {
-		await export_summaries_for_type('use_cases', options.dryRun);
-		await export_summaries_for_type('distilled', options.dryRun);
+		await export_summaries_for_type('use_cases');
+		await export_summaries_for_type('distilled');
 	} else {
-		await export_summaries_for_type(options.type, options.dryRun);
+		await export_summaries_for_type(options.type);
 	}
 
 	console.log('\n✅ Export complete!');
-
-	if (!options.dryRun) {
-		console.log(
-			'\n📊 Summary files have been written to:',
-			path.join(current_dirname, '../summaries/'),
-		);
-	}
+	console.log(
+		'\n📊 Summary files have been written to:',
+		path.join(current_dirname, '../summaries/'),
+	);
 }
 
 main().catch((error) => {
