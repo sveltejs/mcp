@@ -25,7 +25,6 @@
 		"verify-distilled": "pnpm --filter @sveltejs/mcp-server run verify-distilled",
 		"show-verification-errors": "pnpm --filter @sveltejs/mcp-server run show-verification-errors",
 		"export-summaries": "pnpm --filter @sveltejs/mcp-server run export-summaries",
-		"export-summaries:dry-run": "pnpm --filter @sveltejs/mcp-server run export-summaries:dry-run",
 		"export-summaries:use-cases": "pnpm --filter @sveltejs/mcp-server run export-summaries:use-cases",
 		"export-summaries:distilled": "pnpm --filter @sveltejs/mcp-server run export-summaries:distilled",
 		"generate-prompt-docs": "node --import node-resolve-ts/register scripts/update-docs-prompts.ts",
