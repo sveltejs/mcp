@@ -412,6 +412,19 @@ describe('add_autofixers_issues', () => {
 				});
 			},
 		);
+
+		describe.each(dollarless_runes)('importing $rune from external lib', ({ rune }) => {
+			it(`should not add suggestions when importing from packages that are not svelte`, () => {
+				const content = run_autofixers_on_code(`
+				<script>
+					import { ${rune} } from 'svelte-something-something';
+				</script>`);
+
+				expect(content.suggestions).not.toContain(
+					`You are importing "${rune}" from "svelte-something-something". This is not necessary, all runes are globally available. Please remove this import and use "$${rune}" directly.`,
+				);
+			});
+		});
 	});
 
 	describe('derived_with_function', () => {

@@ -6,7 +6,7 @@ const dollarless_runes = base_runes.map((r) => r.replace('$', ''));
 export const imported_runes: Autofixer = {
 	ImportDeclaration(node, { state, next }) {
 		const source = (node.source.value || node.source.raw?.slice(1, -1))?.toString();
-		if (source && source.startsWith('svelte')) {
+		if (source && (source === 'svelte' || source.startsWith('svelte/'))) {
 			for (const specifier of node.specifiers) {
 				const id =
 					specifier.type === 'ImportDefaultSpecifier'
