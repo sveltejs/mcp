@@ -21,11 +21,7 @@ program
 	.name('export-summaries')
 	.description('Export summaries from JSON files to individual markdown files')
 	.version('1.0.0')
-	.option(
-		'-t, --type <type>',
-		'Type to export: "use_cases", "distilled", or "both"',
-		'both',
-	);
+	.option('-t, --type <type>', 'Type to export: "use_cases", "distilled", or "both"', 'both');
 
 async function read_file_as_string(
 	file_path: string,

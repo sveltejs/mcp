@@ -436,7 +436,9 @@ async function main() {
 	console.log(`  Total summaries in file: ${Object.keys(merged_summaries).length}`);
 	console.log(`  Markdown files created: ${markdown_files_created}`);
 	console.log(`\n✅ Results written to: ${output_path}`);
-	console.log(`✅ Markdown files written to: ${path.join(current_dirname, `../summaries/${markdown_type}/`)}`);
+	console.log(
+		`✅ Markdown files written to: ${path.join(current_dirname, `../summaries/${markdown_type}/`)}`,
+	);
 }
 
 main().catch((error) => {
