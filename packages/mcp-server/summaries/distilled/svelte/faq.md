@@ -6,15 +6,16 @@
 
 ## Support
 - **Stack Overflow**: Code-level questions, tagged [Svelte](https://stackoverflow.com/questions/tagged/svelte+or+svelte-3)
-- **Discussion**: [Discord](/chat), [Reddit](https://www.reddit.com/r/sveltejs/)
+- **Community**: [Discord](/chat), [Reddit](https://www.reddit.com/r/sveltejs/)
 - **Resources**: [Svelte Society books/videos](https://sveltesociety.dev/resources)
 
 ## Tooling
-- **VS Code**: [Official extension](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode)
-- **Formatting**: [prettier-plugin-svelte](https://www.npmjs.com/package/prettier-plugin-svelte)
 
-## Component Documentation
-Use JSDoc comments for hover documentation:
+**VS Code**: [Official extension](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode)
+
+**Formatting**: [prettier-plugin-svelte](https://www.npmjs.com/package/prettier-plugin-svelte)
+
+**Documentation**: Use JSDoc comments for components:
 
 ````svelte
 <script>
@@ -41,13 +42,14 @@ It will show up on hover.
 </main>
 ````
 
-**Note**: `@component` is required in HTML comments.
+Note: `@component` is required in HTML comments.
 
 ## Testing
+
 Three test types:
 
-1. **Unit Tests**: Business logic in isolation. Use [Vitest](https://vitest.dev/) or similar.
-2. **Component Tests**: Mount/interaction testing. Use Vitest + jsdom, [Playwright](https://playwright.dev/docs/test-components), or [Cypress](https://www.cypress.io/).
+1. **Unit Tests**: Business logic in isolation. Use [Vitest](https://vitest.dev/) or other test runners.
+2. **Component Tests**: Mount/interact with components. Use Vitest + jsdom, [Playwright](https://playwright.dev/docs/test-components), or [Cypress](https://www.cypress.io/).
 3. **E2E Tests**: Full application testing. Use [Playwright](https://playwright.dev/) or alternatives.
 
 Resources:
@@ -56,24 +58,31 @@ Resources:
 - [Svelte Testing Library](https://testing-library.com/docs/svelte-testing-library/example/)
 
 ## Routing
-- **Official**: [SvelteKit](/docs/kit) - filesystem router with SSR and HMR
-- **Alternatives**: See [packages page](/packages#routing)
+**Official**: [SvelteKit](/docs/kit) - filesystem router with SSR and HMR
+
+**Alternatives**: See [packages page](/packages#routing)
 
 ## Mobile Apps
-- Convert [SvelteKit SPA](https://kit.svelte.dev/docs/single-page-apps) to mobile with [Tauri](https://v2.tauri.app/start/frontend/sveltekit/) or [Capacitor](https://capacitorjs.com/solution/svelte)
-- **Note**: Svelte Native not supported in Svelte 5
+- Use [SvelteKit SPA](https://kit.svelte.dev/docs/single-page-apps) with [Tauri](https://v2.tauri.app/start/frontend/sveltekit/) or [Capacitor](https://capacitorjs.com/solution/svelte)
+- Custom renderer support for Svelte 5 [in progress](https://github.com/sveltejs/svelte/issues/15470)
+- Svelte Native not currently supported in Svelte 5
 
 ## UI Components
-- Multiple [UI libraries](/packages#component-libraries) and standalone components on [packages page](/packages)
+See [component libraries](/packages#component-libraries) and [packages page](/packages)
 
-## Style Scoping
-Svelte removes unused styles to prevent scoping issues. For dynamic/child component styles, use `:global(...)`:
+## Styling Gotchas
+**Unused styles are removed by design.** Svelte scopes styles by adding unique classes. If the compiler can't identify elements at compile time:
 
-```css
-.foo :global(.bar) { ... }
-```
-
-This styles `.bar` elements within component's `.foo` elements.
+- Use `:global(...)` for global styles
+- Use partial global selectors: `.foo :global(.bar) { ... }` styles `.bar` elements within component's `.foo` elements
 
 ## HMR
-Use [SvelteKit](/docs/kit) (built on [Vite](https://vitejs.dev/) and [svelte-hmr](https://github.com/sveltejs/svelte-hmr)). Community plugins: [rollup](https://github.com/rixo/rollup-plugin-svelte-hot), [webpack](https://github.com/sveltejs/svelte-loader).
+Use [SvelteKit](/docs/kit) (built on [Vite](https://vitejs.dev/) and [svelte-hmr](https://github.com/sveltejs/svelte-hmr))
+
+Community plugins: [rollup](https://github.com/rixo/rollup-plugin-svelte-hot), [webpack](https://github.com/sveltejs/svelte-loader)
+
+## Scaling
+See [this issue](https://github.com/sveltejs/svelte/issues/2546)
+
+## Svelte v2
+[Documentation available](https://v2.svelte.dev/guide) but no new features

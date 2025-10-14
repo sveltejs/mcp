@@ -1,1 +1,1 @@
-getting started, learning svelte, beginner setup, project setup, vs code setup, code formatting, testing setup, routing decisions, component documentation, finding help
+getting started, learning svelte, beginner setup, project setup, tooling configuration, vs code setup, formatting, testing setup, routing decisions, mobile app development, troubleshooting

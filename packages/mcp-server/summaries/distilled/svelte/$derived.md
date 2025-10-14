@@ -47,7 +47,7 @@ For complex derivations requiring multiple statements:
 
 ## Dependencies
 
-Anything read synchronously inside `$derived` is a dependency. Use `untrack` to exempt state from being a dependency.
+Anything read synchronously inside `$derived` is a dependency. Use [`untrack`](svelte#untrack) to exempt state from being a dependency.
 
 ## Overriding Derived Values
 
@@ -78,20 +78,11 @@ Can temporarily reassign derived values (unless `const`) for optimistic UI:
 
 ## Deriveds and Reactivity
 
-Unlike `$state`, `$derived` values aren't converted to deep proxies. Mutating a derived object affects the original:
-
-```svelte
-let items = $state([...]);
-
-let index = $state(0);
-let selected = $derived(items[index]);
-```
-
-Mutating `selected` affects `items` array.
+Unlike `$state`, `$derived` values aren't converted to deeply reactive proxies. Mutating a derived object still affects the underlying reactive source.
 
 ## Destructuring
 
-Destructured variables are all reactive:
+Destructured variables from `$derived` are all reactive:
 
 ```js
 let { a, b, c } = $derived(stuff());
@@ -110,7 +101,7 @@ let c = $derived(_stuff.c);
 
 **Push-pull reactivity:** Dependencies are notified immediately (push), but derived values only re-evaluate when read (pull).
 
-If derived value is referentially identical to previous, downstream updates skip:
+If a derived's new value is referentially identical to its previous value, downstream updates are skipped:
 
 ```svelte
 <script>
@@ -123,4 +114,4 @@ If derived value is referentially identical to previous, downstream updates skip
 </button>
 ```
 
-Button only updates when `large` changes, not `count`.
+Button text only updates when `large` changes, not `count`.

@@ -6,21 +6,19 @@
 
 **Added in 5.3.0**
 
-Isolates parts of your app to:
+Boundaries isolate parts of your app to:
 - Show UI while `await` expressions resolve
 - Catch rendering/effect errors and show fallback UI
 
-When boundary handles an error, existing content is removed.
+**Key limitation:** Only catches errors during rendering and at top level of `$effect` inside the boundary. Does NOT catch errors in event handlers or async callbacks.
 
-**Important:** Only catches errors during rendering and top-level `$effect`. Does NOT catch errors in event handlers, `setTimeout`, or async work.
+When a boundary handles an error, existing content is removed.
 
 ## Properties
 
 ### `pending`
 
-**Added in 5.36**
-
-Shows snippet until all `await` expressions resolve. Only shown on initial load, not subsequent updates (use `$effect.pending()` for those).
+Shows while `await` expressions first resolve:
 
 ```svelte
 <svelte:boundary>
@@ -32,9 +30,11 @@ Shows snippet until all `await` expressions resolve. Only shown on initial load,
 </svelte:boundary>
 ```
 
+Only shows on initial load. For subsequent updates, use `$effect.pending()`.
+
 ### `failed`
 
-Renders when error thrown. Receives `error` and `reset` function:
+Renders when error occurs. Receives `error` and `reset` function:
 
 ```svelte
 <svelte:boundary>
@@ -46,11 +46,11 @@ Renders when error thrown. Receives `error` and `reset` function:
 </svelte:boundary>
 ```
 
-Can pass explicitly: `<svelte:boundary {failed}>` or implicitly by declaring inside boundary.
+Can be passed explicitly as property or declared inline.
 
 ### `onerror`
 
-Function called with `error` and `reset` args. Useful for error tracking or managing state outside boundary:
+Function called with `error` and `reset` arguments. Useful for error tracking or managing error state externally:
 
 ```svelte
 <script>

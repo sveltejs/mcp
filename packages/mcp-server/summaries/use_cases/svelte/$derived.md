@@ -1,1 +1,1 @@
-always, computed values, reactive calculations, derived data, data transformations, filtering lists, sorting data, aggregating values
+always, computed values, reactive calculations, dependent state, data transformations, filtering lists, totals, counters
