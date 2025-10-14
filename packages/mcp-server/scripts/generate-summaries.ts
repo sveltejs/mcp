@@ -267,7 +267,7 @@ async function main() {
 
 	// Process with Anthropic API if we have sections to process
 	const new_summaries: Record<string, string> = {};
-	let sections_with_content: Array<{
+	const sections_with_content: Array<{
 		section: (typeof sections_to_process)[number];
 		content: string;
 		index: number;

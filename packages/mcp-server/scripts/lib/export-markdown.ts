@@ -23,7 +23,7 @@ export async function export_summaries_to_markdown(
 	console.log(`  🧹 Cleaning ${type} directory...`);
 	try {
 		await rm(output_base_dir, { recursive: true, force: true });
-	} catch (error) {
+	} catch {
 		// Directory might not exist, that's okay
 	}
 
