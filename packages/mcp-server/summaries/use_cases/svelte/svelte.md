@@ -1,0 +1,1 @@
+migration from svelte 4 to 5, upgrading legacy code, component lifecycle hooks, context api, mounting components, event dispatchers, typescript component types

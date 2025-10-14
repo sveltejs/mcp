@@ -1,0 +1,1 @@
+loops with calculations, derived values in each blocks, complex list rendering, avoiding repeated expressions

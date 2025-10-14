@@ -1,0 +1,1 @@
+mcp server integration, ai-assisted svelte development, llm tooling, automated code generation, svelte documentation access, code quality automation

@@ -1,0 +1,1 @@
+forms, user input, two-way data binding, interactive ui, media players, file uploads, checkboxes, radio buttons, select dropdowns, contenteditable, element dimensions, component refs

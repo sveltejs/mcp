@@ -1,0 +1,1 @@
+upgrading svelte 3 to 4, version migration, updating dependencies, breaking changes, legacy project maintenance

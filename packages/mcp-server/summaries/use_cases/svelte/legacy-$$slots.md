@@ -1,0 +1,1 @@
+legacy mode, conditional slot rendering, checking if slot content provided, component slot detection

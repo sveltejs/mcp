@@ -1,0 +1,1 @@
+avoiding prop drilling, shared state across components, theme providers, user authentication context, configuration sharing, deeply nested components

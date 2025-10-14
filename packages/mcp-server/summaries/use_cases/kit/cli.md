@@ -1,0 +1,1 @@
+project setup, typescript configuration, generated types, initial project creation, npm lifecycle scripts

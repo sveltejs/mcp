@@ -1,0 +1,1 @@
+testing, quality assurance, unit tests, integration tests, component tests, e2e tests, vitest setup, playwright setup, test automation

@@ -1,0 +1,1 @@
+custom adapter development, building adapters, deploying to unsupported platforms, adapter creation, platform-specific deployment

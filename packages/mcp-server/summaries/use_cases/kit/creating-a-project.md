@@ -1,0 +1,1 @@
+project setup, starting new sveltekit app, initial development environment, first-time sveltekit users, scaffolding projects

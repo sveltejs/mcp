@@ -1,0 +1,1 @@
+data fetching, server-side logic, database queries, forms, user input, authentication, crud operations, api endpoints, type-safe client-server communication

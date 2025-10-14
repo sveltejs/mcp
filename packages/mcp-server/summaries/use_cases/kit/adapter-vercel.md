@@ -1,0 +1,1 @@
+deployment, vercel hosting, production builds, serverless functions, edge functions, isr, image optimization, environment variables

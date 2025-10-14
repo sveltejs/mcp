@@ -1,0 +1,1 @@
+legacy mode, event handling, user interactions, buttons, forms, click handlers, component communication, event forwarding, event modifiers

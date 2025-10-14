@@ -1,0 +1,1 @@
+migration from legacy mode, understanding old svelte reactivity, maintaining legacy code, upgrading to runes, array reactivity issues

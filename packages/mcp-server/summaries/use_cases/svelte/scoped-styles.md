@@ -1,0 +1,1 @@
+always, any svelte project, component styling, scoped css, animations, keyframes, styling isolation, component-specific styles

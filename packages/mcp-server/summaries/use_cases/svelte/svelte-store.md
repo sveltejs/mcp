@@ -1,0 +1,1 @@
+state management, shared data, reactive stores, cross-component communication, global state, computed values, data synchronization, legacy svelte projects

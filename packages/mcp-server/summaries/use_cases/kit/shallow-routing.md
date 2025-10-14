@@ -1,0 +1,1 @@
+modals, dialogs, image galleries, lightboxes, overlays, history-driven ui, mobile-friendly navigation, photo viewers, detail views

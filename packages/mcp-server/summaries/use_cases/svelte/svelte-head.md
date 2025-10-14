@@ -1,0 +1,1 @@
+seo optimization, dynamic page titles, meta tags, social media sharing, multi-page apps, blog posts, product pages, analytics setup

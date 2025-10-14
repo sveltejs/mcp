@@ -1,0 +1,1 @@
+always, computed values, reactive calculations, derived data, data transformations, filtering lists, sorting data, aggregating values

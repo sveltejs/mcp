@@ -1,0 +1,1 @@
+ai-assisted development, llm code generation, chatbot integration, ai tooling setup, automated code analysis, quick prototyping

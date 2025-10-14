@@ -1,0 +1,1 @@
+rendering configuration, performance optimization, deployment strategy, seo requirements, static sites, spa setup, ssr/csr decisions, edge deployment, pwa development, prerendering content

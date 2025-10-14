@@ -1,0 +1,1 @@
+animations, transitions, component reinitialization, forcing component remount, value-based ui updates, resetting component state

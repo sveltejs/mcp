@@ -1,0 +1,1 @@
+shared reactive state, reusable reactive logic, state management across components, global stores, custom reactive utilities

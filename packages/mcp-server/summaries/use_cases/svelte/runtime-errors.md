@@ -1,0 +1,1 @@
+debugging errors, error handling, troubleshooting runtime issues, migration to svelte 5, component binding, effects and reactivity
