@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 import 'dotenv/config';
-import { writeFile, mkdir, rm, readFile, access } from 'node:fs/promises';
+import { readFile, access } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Command } from 'commander';
 import * as v from 'valibot';
 import { summary_data_schema, type SummaryData } from '../src/lib/schemas.ts';
+import { export_summaries_to_markdown } from './lib/export-markdown.ts';
 
 interface CliOptions {
 	type: 'use_cases' | 'distilled' | 'both';
@@ -58,11 +59,9 @@ async function load_summaries_json(output_path: string): Promise<SummaryData | n
 async function export_summaries_for_type(type: 'use_cases' | 'distilled'): Promise<void> {
 	const json_filename = type === 'distilled' ? 'distilled.json' : 'use_cases.json';
 	const input_path = path.join(current_dirname, `../src/${json_filename}`);
-	const output_base_dir = path.join(current_dirname, `../summaries/${type}`);
 
 	console.log(`\n📁 Processing ${type.toUpperCase()}...`);
 	console.log(`  Input: ${json_filename}`);
-	console.log(`  Output directory: summaries/${type}/`);
 
 	// Load the JSON file
 	console.log(`  📂 Loading ${json_filename}...`);
@@ -74,33 +73,10 @@ async function export_summaries_for_type(type: 'use_cases' | 'distilled'): Promi
 	}
 
 	const summaries = data.summaries;
-	const summary_count = Object.keys(summaries).length;
+	console.log(`  ✅ Found ${Object.keys(summaries).length} summaries`);
 
-	console.log(`  ✅ Found ${summary_count} summaries`);
-
-	// Create base output directory
-	await mkdir(output_base_dir, { recursive: true });
-
-	let created_count = 0;
-
-	// Write each summary to a markdown file
-	for (const [slug, content] of Object.entries(summaries)) {
-		const file_path = path.join(output_base_dir, `${slug}.md`);
-		const file_dir = path.dirname(file_path);
-
-		// Create nested directories if needed
-		await mkdir(file_dir, { recursive: true });
-
-		// Write the markdown file
-		await writeFile(file_path, content, 'utf-8');
-		created_count++;
-
-		if (created_count % 10 === 0) {
-			console.log(`  📝 Created ${created_count}/${summary_count} files...`);
-		}
-	}
-
-	console.log(`  ✅ Successfully created ${created_count} markdown files`);
+	// Use shared export function
+	await export_summaries_to_markdown(summaries, type, path.join(current_dirname, '../summaries'));
 }
 
 async function main() {
@@ -113,16 +89,6 @@ async function main() {
 	if (!['use_cases', 'distilled', 'both'].includes(options.type)) {
 		console.error('❌ Error: --type must be "use_cases", "distilled", or "both"');
 		process.exit(1);
-	}
-
-	// Always clean existing summaries directory
-	const summaries_dir = path.join(current_dirname, '../summaries');
-	console.log('🧹 Cleaning existing summaries directory...');
-	try {
-		await rm(summaries_dir, { recursive: true, force: true });
-		console.log('✅ Cleaned summaries directory\n');
-	} catch (error) {
-		console.log('ℹ️  No existing summaries directory to clean\n');
 	}
 
 	// Export based on type option
