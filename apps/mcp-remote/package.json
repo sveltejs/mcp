@@ -65,6 +65,6 @@
 		"@sveltejs/mcp-schema": "workspace:^",
 		"@sveltejs/mcp-server": "workspace:^",
 		"@tmcp/transport-http": "^0.6.3",
-		"tmcp": "^1.14.0"
+		"tmcp": "^1.15.0"
 	}
 }
