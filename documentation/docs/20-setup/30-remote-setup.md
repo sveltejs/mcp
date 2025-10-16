@@ -100,8 +100,9 @@ It will open a file with your MCP servers where you can add the following config
 
 - Open your repository in GitHub
 - Go to Settings
-- Open CoPilot > Coding agent
+- Open Copilot > Coding agent
 - Edit the MCP configuration
+
 ```json
 {
    "mcpServers" {
@@ -112,6 +113,7 @@ It will open a file with your MCP servers where you can add the following config
       }
    } 
 }
+```
 
 - Click *Save MCP configuration*
 
