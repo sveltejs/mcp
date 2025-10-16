@@ -15,6 +15,10 @@ export const server = new McpServer(
 				src: 'https://github.com/sveltejs/branding/blob/2af7bc72f1bf5152dab89bee1ee2093b1be0824d/svelte-logo-square.svg',
 				mimeType: 'image/svg+xml',
 			},
+			{
+				src: 'https://github.com/sveltejs/branding/blob/2af7bc72f1bf5152dab89bee1ee2093b1be0824d/svelte-logo-square.png',
+				mimeType: 'image/png',
+			},
 		],
 	},
 	{
