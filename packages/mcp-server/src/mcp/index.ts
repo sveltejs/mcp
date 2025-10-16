@@ -9,6 +9,17 @@ export const server = new McpServer(
 		name: 'Svelte MCP',
 		version: '0.0.1',
 		description: 'The official Svelte MCP server implementation',
+		websiteUrl: 'https://mcp.svelte.dev',
+		icons: [
+			{
+				src: 'https://mcp.svelte.dev/logo.svg',
+				mimeType: 'image/svg+xml',
+			},
+			{
+				src: 'https://mcp.svelte.dev/logo.png',
+				mimeType: 'image/png',
+			},
+		],
 	},
 	{
 		adapter: new ValibotJsonSchemaAdapter(),
