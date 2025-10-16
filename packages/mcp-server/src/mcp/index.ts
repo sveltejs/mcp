@@ -12,11 +12,11 @@ export const server = new McpServer(
 		websiteUrl: 'https://mcp.svelte.dev',
 		icons: [
 			{
-				src: 'https://github.com/sveltejs/branding/blob/2af7bc72f1bf5152dab89bee1ee2093b1be0824d/svelte-logo-square.svg',
+				src: 'https://mcp.svelte.dev/logo.svg',
 				mimeType: 'image/svg+xml',
 			},
 			{
-				src: 'https://github.com/sveltejs/branding/blob/2af7bc72f1bf5152dab89bee1ee2093b1be0824d/svelte-logo-square.png',
+				src: 'https://mcp.svelte.dev/logo.png',
 				mimeType: 'image/png',
 			},
 		],
