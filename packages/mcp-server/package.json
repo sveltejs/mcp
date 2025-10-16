@@ -35,7 +35,7 @@
 		"zimmerframe": "^1.1.4"
 	},
 	"devDependencies": {
-		"@anthropic-ai/sdk": "^0.65.0",
+		"@anthropic-ai/sdk": "^0.66.0",
 		"@sveltejs/kit": "^2.42.2",
 		"@types/eslint-scope": "^8.3.2",
 		"@types/estree": "^1.0.8",
