@@ -1,6 +1,7 @@
 import type { SvelteMcp } from '../../index.js';
 import * as v from 'valibot';
 import { format_sections_list } from '../../utils.js';
+import { icons } from '../../icons/index.js';
 
 /**
  *  Function that actually generates the prompt string. You can use this in the MCP server handler to generate the prompt, it can accept arguments
@@ -64,6 +65,7 @@ export function setup_svelte_task(server: SvelteMcp) {
 					};
 				},
 			},
+			icons,
 		},
 		async ({ task }) => {
 			const available_docs = await format_sections_list();

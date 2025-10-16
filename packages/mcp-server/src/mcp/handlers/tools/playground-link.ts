@@ -1,5 +1,6 @@
 import type { SvelteMcp } from '../../index.js';
 import * as v from 'valibot';
+import { icons } from '../../icons/index.js';
 
 async function compress_and_encode_text(input: string) {
 	const reader = new Blob([input]).stream().pipeThrough(new CompressionStream('gzip')).getReader();
@@ -54,6 +55,7 @@ export function playground_link(server: SvelteMcp) {
 			outputSchema: v.object({
 				url: v.string(),
 			}),
+			icons,
 		},
 		async ({ files, name, tailwind }) => {
 			const playground_base = new URL('https://svelte.dev/playground');

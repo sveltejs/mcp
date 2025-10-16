@@ -4,6 +4,7 @@ import * as v from 'valibot';
 import { add_compile_issues } from '../../autofixers/add-compile-issues.js';
 import { add_eslint_issues } from '../../autofixers/add-eslint-issues.js';
 import { add_autofixers_issues } from '../../autofixers/add-autofixers-issues.js';
+import { icons } from '../../icons/index.js';
 
 export function svelte_autofixer(server: SvelteMcp) {
 	server.tool(
@@ -38,6 +39,7 @@ export function svelte_autofixer(server: SvelteMcp) {
 				readOnlyHint: true,
 				openWorldHint: false,
 			},
+			icons,
 		},
 		async ({
 			code,

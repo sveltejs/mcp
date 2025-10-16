@@ -12,6 +12,7 @@
 		"body": [
 			"import type { SvelteMcp } from '../../index.js';",
 			"import * as v from 'valibot';",
+			"import { icons } from '../../icons/index.js';",
 			"",
 			"export function ${1:function_name}(server: SvelteMcp) {",
 			"\t$0",
@@ -35,6 +36,7 @@
 		"prefix": "!prompt",
 		"body": [
 			"import type { SvelteMcp } from '../../index.js';",
+			"import { icons } from '../../icons/index.js';",
 			"",
 			"/**",
 			" *  Function that actually generates the prompt string. You can use this in the MCP server handler to generate the prompt, it can accept arguments",
@@ -69,6 +71,7 @@
 			"\t\t\ttitle: '${2:title}',",
 			"\t\t\tdescription:",
 			"\t\t\t\t'${3:llm_description}',",
+			"\t\t\ticons,",
 			"\t\t},",
 			"\t\tasync () => {",
 			"\t\t\treturn {",

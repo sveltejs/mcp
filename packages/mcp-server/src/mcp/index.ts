@@ -3,6 +3,7 @@ import { McpServer } from 'tmcp';
 import { setup_prompts, setup_resources, setup_tools } from './handlers/index.js';
 import type { LibSQLDatabase } from 'drizzle-orm/libsql';
 import type { Schema } from '@sveltejs/mcp-schema';
+import { icons } from './icons/index.js';
 
 export const server = new McpServer(
 	{
@@ -10,16 +11,7 @@ export const server = new McpServer(
 		version: '0.0.1',
 		description: 'The official Svelte MCP server implementation',
 		websiteUrl: 'https://mcp.svelte.dev',
-		icons: [
-			{
-				src: 'https://mcp.svelte.dev/logo.svg',
-				mimeType: 'image/svg+xml',
-			},
-			{
-				src: 'https://mcp.svelte.dev/logo.png',
-				mimeType: 'image/png',
-			},
-		],
+		icons,
 	},
 	{
 		adapter: new ValibotJsonSchemaAdapter(),

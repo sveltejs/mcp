@@ -1,5 +1,6 @@
 import type { SvelteMcp } from '../../index.js';
 import { get_sections, fetch_with_timeout } from '../../utils.js';
+import { icons } from '../../icons/index.js';
 
 export async function list_sections(server: SvelteMcp) {
 	const sections = await get_sections();
@@ -42,6 +43,7 @@ export async function list_sections(server: SvelteMcp) {
 				},
 			},
 			uri: 'svelte://{/slug*}.md',
+			icons,
 		},
 		async (uri, { slug }) => {
 			const section = sections.find((section) => {

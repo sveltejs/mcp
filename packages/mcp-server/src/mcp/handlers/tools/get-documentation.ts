@@ -2,6 +2,7 @@ import type { SvelteMcp } from '../../index.js';
 import * as v from 'valibot';
 import { get_sections, fetch_with_timeout, format_sections_list } from '../../utils.js';
 import { SECTIONS_LIST_INTRO, SECTIONS_LIST_OUTRO } from './prompts.js';
+import { icons } from '../../icons/index.js';
 
 export function get_documentation(server: SvelteMcp) {
 	server.tool(
@@ -17,6 +18,7 @@ export function get_documentation(server: SvelteMcp) {
 					),
 				),
 			}),
+			icons,
 		},
 		async ({ section }) => {
 			let sections: string[];
