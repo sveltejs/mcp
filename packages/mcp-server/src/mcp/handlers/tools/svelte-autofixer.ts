@@ -90,6 +90,10 @@ export function svelte_autofixer(server: SvelteMcp) {
 					content.suggestions.push(
 						"The code can't be compiled because a Javascript parse error. In case you are using runes like this `$state variable_name = 3;` or `$derived variable_name = 3 * count` that's not how runes are used. You need to use them as function calls without importing them: `const variable_name = $state(3)` and `const variable_name = $derived(3 * count)`.",
 					);
+				} else if (error.message.includes('css_expected_identifier')) {
+					content.suggestions.push(
+						"The code can't be compiled because a valid CSS identifier is expected. This sometimes means you are trying to use a variable in CSS like this: `color: {my_color}` but Svelte doesn't support that. You can use inline CSS variables for that `<div style:--color={my_color}></div>` and then use the variable as usual in CSS with `color: var(--color)`.",
+					);
 				}
 			}
 
