@@ -1,5 +1,15 @@
 # @sveltejs/mcp
 
+## 0.1.6
+
+### Patch Changes
+
+- fix: prevent `imported_runes` suggestion from being added for libs that are not svelte ([`87af64f`](https://github.com/sveltejs/mcp/commit/87af64f4bc6d07b75640eb987a33655654363997))
+
+- feat: add svelte icon and website url for mcp server ([#75](https://github.com/sveltejs/mcp/pull/75))
+
+- fix: use `data:` uri for local icon & add icons to tools + resources + prompts ([`cf62286`](https://github.com/sveltejs/mcp/commit/cf622869129382a97ad059bb1389f115907adc8e))
+
 ## 0.1.5
 
 ### Patch Changes
