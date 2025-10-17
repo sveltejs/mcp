@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.7
+
+### Patch Changes
+
+- fix: use correct server schema version ([`579be87`](https://github.com/sveltejs/mcp/commit/579be877fa9f87f7f173450ca5bc918824d68282))
+
 ## 0.1.6
 
 ### Patch Changes
