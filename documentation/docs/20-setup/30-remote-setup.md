@@ -111,11 +111,11 @@ It will open a file with your MCP servers where you can add the following config
          "url": "https://mcp.svelte.dev/mcp",
          "tools": ["*"]
       }
-   } 
+   }
 }
 ```
 
-- Click *Save MCP configuration*
+- Click _Save MCP configuration_
 
 ## Other clients
 
