@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.8
+
+### Patch Changes
+
+- fix: upgrade registry publisher cli ([`5fa2baa`](https://github.com/sveltejs/mcp/commit/5fa2baa27009f01e0e4e91cee7984b81a81c1c29))
+
 ## 0.1.7
 
 ### Patch Changes
