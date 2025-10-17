@@ -1,0 +1,1 @@
+project setup, understanding file structure, organizing code, starting new project, learning sveltekit basics

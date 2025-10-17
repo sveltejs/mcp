@@ -1,0 +1,1 @@
+image optimization, responsive images, hero images, product photos, galleries, performance tuning, asset management, cdn integration, cms content

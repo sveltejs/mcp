@@ -1,0 +1,1 @@
+responsive design, viewport tracking, scroll effects, window resize handling, online/offline detection, zoom level tracking

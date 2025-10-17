@@ -1,0 +1,1 @@
+code formatting, project setup, code style consistency, team collaboration, linting configuration

@@ -1,0 +1,1 @@
+migrating from svelte 3/4 to svelte 5, maintaining legacy components, understanding deprecated features, gradual upgrade process

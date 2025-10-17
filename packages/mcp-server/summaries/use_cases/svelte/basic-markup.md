@@ -1,0 +1,1 @@
+always, any svelte project, basic markup, html templating, component syntax, attributes, props, events, text rendering

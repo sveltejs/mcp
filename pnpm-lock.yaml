@@ -56,6 +56,9 @@ importers:
       typescript-eslint:
         specifier: ^8.44.1
         version: 8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2)
+      vite-node:
+        specifier: ^3.2.4
+        version: 3.2.4(@types/node@24.5.2)(jiti@2.6.0)(tsx@4.20.6)
       vitest:
         specifier: ^3.2.3
         version: 3.2.4(@types/node@24.5.2)(jiti@2.6.0)(tsx@4.20.6)
@@ -211,6 +214,9 @@ importers:
       '@typescript-eslint/types':
         specifier: ^8.44.0
         version: 8.44.1
+      commander:
+        specifier: ^13.1.0
+        version: 13.1.0
       dotenv:
         specifier: ^17.2.3
         version: 17.2.3

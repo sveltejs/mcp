@@ -7,7 +7,10 @@ export async function handle({ event, resolve }) {
 		const accept = event.request.headers.get('accept');
 		if (accept) {
 			const accepts = accept.split(',');
-			if (!accepts.includes('text/event-stream')) {
+			if (
+				!accepts.includes('text/event-stream') &&
+				(event.url.pathname.startsWith('/mcp') || event.url.pathname === '/')
+			) {
 				// the request it's a browser request, not an MCP client request
 				// it means someone probably opened it from the docs...we should redirect to the docs
 				redirect(302, 'https://svelte.dev/docs/mcp/overview');

@@ -1,0 +1,1 @@
+always, any svelte project, getting started, learning svelte, introduction, project setup, understanding framework basics

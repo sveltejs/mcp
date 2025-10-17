@@ -1,0 +1,1 @@
+error handling, custom error pages, 404 pages, api error responses, error tracking, production logging, type-safe errors, handleerror hook

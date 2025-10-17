@@ -1,0 +1,1 @@
+deployment, project setup, choosing adapters, ssr vs csr, static sites, spas, serverless, mobile apps, desktop apps, pwa, browser extensions

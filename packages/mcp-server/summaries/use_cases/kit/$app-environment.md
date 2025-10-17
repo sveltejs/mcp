@@ -1,0 +1,1 @@
+always, conditional logic, client-side code, server-side code, build-time logic, prerendering, development vs production, environment detection

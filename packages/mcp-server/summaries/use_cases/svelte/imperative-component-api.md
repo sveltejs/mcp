@@ -1,0 +1,1 @@
+project setup, client-side rendering, server-side rendering, ssr, hydration, testing, component initialization, app entry point, always

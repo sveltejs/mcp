@@ -1,0 +1,1 @@
+ai-assisted development, using claude/cursor/vscode with mcp, integrating svelte documentation into ide, ai coding tools setup

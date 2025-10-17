@@ -1,0 +1,1 @@
+offline support, pwa, caching strategies, performance optimization, precaching assets, network resilience, progressive web apps

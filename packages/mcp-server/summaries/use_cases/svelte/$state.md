@@ -1,0 +1,1 @@
+always, any svelte project, core reactivity, state management, counters, forms, todo apps, interactive ui, data updates, class-based components

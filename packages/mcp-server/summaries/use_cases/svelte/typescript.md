@@ -1,0 +1,1 @@
+typescript setup, type safety, component props typing, generic components, wrapper components, dom type augmentation, project configuration

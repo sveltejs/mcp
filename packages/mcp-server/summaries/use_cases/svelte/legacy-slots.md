@@ -1,0 +1,1 @@
+legacy mode, migrating from svelte 4, component composition, reusable components, modals, layouts, passing content to components

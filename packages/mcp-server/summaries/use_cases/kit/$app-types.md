@@ -1,0 +1,1 @@
+routing, navigation, type safety, route parameters, dynamic routes, link generation, pathname validation

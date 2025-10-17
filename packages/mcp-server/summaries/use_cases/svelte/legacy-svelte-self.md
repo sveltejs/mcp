@@ -1,0 +1,1 @@
+recursive components, tree structures, nested menus, file explorers, comment threads, hierarchical data

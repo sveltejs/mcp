@@ -1,0 +1,1 @@
+code quality checks, ci/cd pipelines, error detection, typescript projects, accessibility auditing, unused css cleanup, pre-commit hooks, project validation

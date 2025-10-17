@@ -1,0 +1,1 @@
+data fetching, api calls, database queries, dynamic routes, page initialization, loading states, authentication checks, ssr data

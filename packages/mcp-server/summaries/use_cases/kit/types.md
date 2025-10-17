@@ -1,0 +1,1 @@
+typescript, type safety, route parameters, api endpoints, load functions, form actions, generated types, jsconfig setup

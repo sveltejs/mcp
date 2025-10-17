@@ -1,0 +1,1 @@
+shared state, cross-component data, reactive values, async data streams, manual control over updates, rxjs integration, extracting logic

@@ -1,0 +1,1 @@
+server-side rendering, ssr, static site generation, seo optimization, initial page load, prerendering

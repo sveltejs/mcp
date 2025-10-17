@@ -1,0 +1,1 @@
+mouse tracking, cursor effects, global body events, drag and drop, actions on body element, document-level interactions

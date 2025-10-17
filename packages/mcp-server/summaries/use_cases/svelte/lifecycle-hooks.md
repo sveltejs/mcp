@@ -1,0 +1,1 @@
+component lifecycle, initialization, cleanup, dom manipulation, timers, intervals, subscriptions, chat apps, autoscroll, migration from svelte 4

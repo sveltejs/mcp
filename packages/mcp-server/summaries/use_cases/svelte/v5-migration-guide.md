@@ -1,0 +1,1 @@
+migration to svelte 5, upgrading from svelte 4, runes adoption, syntax modernization, breaking changes

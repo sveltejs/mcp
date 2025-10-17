@@ -1,0 +1,1 @@
+static site generation, ssg, prerendering, deployment, github pages, spa mode, blogs, documentation sites, marketing sites

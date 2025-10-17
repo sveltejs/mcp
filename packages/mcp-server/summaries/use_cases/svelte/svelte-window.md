@@ -1,0 +1,1 @@
+keyboard shortcuts, scroll tracking, window resize handling, online/offline detection, viewport dimensions, global event listeners

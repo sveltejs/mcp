@@ -1,0 +1,1 @@
+canvas drawing, third-party library integration, dom manipulation, network requests, side effects, intervals, timers, cleanup logic, analytics tracking

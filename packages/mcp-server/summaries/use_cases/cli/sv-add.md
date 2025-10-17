@@ -1,0 +1,1 @@
+project setup, adding tools, integrating libraries, linting, testing, styling, authentication, database setup, i18n, deployment adapters

@@ -1,0 +1,1 @@
+navigation, multi-page apps, link optimization, performance tuning, preloading, search forms, external links, scroll behavior, focus management

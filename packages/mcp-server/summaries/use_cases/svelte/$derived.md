@@ -1,0 +1,1 @@
+always, computed values, reactive calculations, dependent state, data transformations, filtering lists, totals, counters

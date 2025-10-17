@@ -1,0 +1,1 @@
+project setup, component organization, importing shared components, reusable ui elements, code structure

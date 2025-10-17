@@ -1,0 +1,1 @@
+static assets, images, fonts, public files, base path configuration, subdirectory deployment, cdn setup, asset urls, links, navigation

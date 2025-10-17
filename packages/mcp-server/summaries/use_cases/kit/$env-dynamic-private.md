@@ -1,0 +1,1 @@
+environment variables, server-side config, api keys, secrets management, deployment configuration, adapter setup

@@ -1,0 +1,1 @@
+project setup, initializing new sveltekit app, starting fresh project, creating library package

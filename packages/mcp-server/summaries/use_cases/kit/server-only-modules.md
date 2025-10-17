@@ -1,0 +1,1 @@
+api keys, environment variables, sensitive data protection, backend security, preventing data leaks, server-side code isolation

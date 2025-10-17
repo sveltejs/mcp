@@ -1,0 +1,1 @@
+async data fetching, loading states, server-side rendering, awaiting promises in components, form validation, api calls, data-dependent ui

@@ -1,0 +1,1 @@
+always, any svelte project, component creation, project setup, learning svelte basics

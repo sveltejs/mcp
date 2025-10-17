@@ -1,0 +1,1 @@
+web components, custom elements, component library, design system, framework-agnostic components, embedding svelte in non-svelte apps, shadow dom

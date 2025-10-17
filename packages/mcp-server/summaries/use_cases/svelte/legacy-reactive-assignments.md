@@ -1,0 +1,1 @@
+legacy mode, migration from svelte 4, reactive statements, computed values, side effects, maintaining older svelte projects

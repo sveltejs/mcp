@@ -1,0 +1,1 @@
+environment variables, client-side config, runtime configuration, public env vars, deployment-specific settings, multi-environment apps
