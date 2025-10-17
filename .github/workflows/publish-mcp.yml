@@ -5,6 +5,7 @@ on:
     secrets:
       MCP_KEY:
         required: true
+  workflow_dispatch:
 
 jobs:
   publish-mcp:
@@ -19,7 +20,7 @@ jobs:
         env:
           MCP_KEY: ${{ secrets.MCP_KEY }}
         run: |
-          NAME=mcp-publisher_1.3.3_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz
+          NAME=mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz
           # Download MCP Publisher pinned to v1.3.3 using latest https for security and save it to a file named mcp-publisher.tar.gz
           curl --proto '=https' --proto-redir '=https' --tlsv1.2 -fL "https://github.com/modelcontextprotocol/registry/releases/download/v1.3.3/$NAME" -O
 
