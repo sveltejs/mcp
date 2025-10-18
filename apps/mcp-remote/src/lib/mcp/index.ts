@@ -3,4 +3,5 @@ import { HttpTransport } from '@tmcp/transport-http';
 
 export const http_transport = new HttpTransport(server, {
 	cors: true,
+	path: '/mcp',
 });

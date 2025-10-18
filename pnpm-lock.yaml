@@ -31,7 +31,7 @@ importers:
         version: 10.1.8(eslint@9.36.0(jiti@2.6.0))
       eslint-plugin-import:
         specifier: ^2.32.0
-        version: 2.32.0(eslint@9.36.0(jiti@2.6.0))
+        version: 2.32.0(@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2))(eslint@9.36.0(jiti@2.6.0))
       eslint-plugin-svelte:
         specifier: ^3.12.3
         version: 3.12.4(eslint@9.36.0(jiti@2.6.0))(svelte@5.39.6)(ts-node@10.9.2(@types/node@24.5.2)(typescript@5.9.2))
@@ -69,11 +69,11 @@ importers:
         specifier: workspace:^
         version: link:../../packages/mcp-server
       '@tmcp/transport-http':
-        specifier: ^0.6.3
-        version: 0.6.3(tmcp@1.15.0(typescript@5.9.2))
+        specifier: ^0.7.0
+        version: 0.7.0(tmcp@1.15.1(typescript@5.9.2))
       tmcp:
-        specifier: ^1.15.0
-        version: 1.15.0(typescript@5.9.2)
+        specifier: ^1.15.1
+        version: 1.15.1(typescript@5.9.2)
     devDependencies:
       '@eslint/compat':
         specifier: ^1.3.2
@@ -1551,10 +1551,10 @@ packages:
   '@tmcp/session-manager@0.1.2':
     resolution: {integrity: sha512-hNkEeMt7/CdD8JdjPXMlIv5OMPTp5LnBqeo1Tb/AXcm31DpgwlNbf4voJ3CeWxWAZPPZ/MgHZ682TtgGhsvXiw==}
 
-  '@tmcp/transport-http@0.6.3':
-    resolution: {integrity: sha512-GBU1elN9eqRYR6aU+hvFBX+Ivq5ouspREQBtQo1Av2JOfhxozbViXvZZyeyNAx+v6iprTkblI6Qm0ai/IdHQ8g==}
+  '@tmcp/transport-http@0.7.0':
+    resolution: {integrity: sha512-JvLvi2ZM3xaBIZyxy6ssGtzlhL/5JvOkjWWymxkLi84vMK44pM5zCQVN1KXAfQqHbbDlYNR/BW39cd/eP3hylA==}
     peerDependencies:
-      tmcp: ^1.14.0
+      tmcp: ^1.15.1
 
   '@tmcp/transport-stdio@0.3.1':
     resolution: {integrity: sha512-r+eiHa2URw5+lBMRI0t4D84LfcWHam3DsTog/lPZSALIjlYxlFUfAaJ8dgh5gdQnmXiFJfE9hzmN0gIrB6+Lzw==}
@@ -3700,6 +3700,9 @@ packages:
   tmcp@1.15.0:
     resolution: {integrity: sha512-ell+gBSC7T5P7ogrROYsoohfLSAu0aXmKzWH8eZqkMX4K0iGc+BYJJC4kb60uJcK7PRZWBOktNGuOq1BLNFA6Q==}
 
+  tmcp@1.15.1:
+    resolution: {integrity: sha512-Mn2FZIcN6Vj/pJYda/Zv1t5Iv0vJIQDi+BRpcpBn9gNwID5bNtgMFOj+1LH3rkOJOTz9R78dIXSsJxDN5Vy90g==}
+
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
@@ -5287,10 +5290,11 @@ snapshots:
 
   '@tmcp/session-manager@0.1.2': {}
 
-  '@tmcp/transport-http@0.6.3(tmcp@1.15.0(typescript@5.9.2))':
+  '@tmcp/transport-http@0.7.0(tmcp@1.15.1(typescript@5.9.2))':
     dependencies:
       '@tmcp/session-manager': 0.1.2
-      tmcp: 1.15.0(typescript@5.9.2)
+      esm-env: 1.2.2
+      tmcp: 1.15.1(typescript@5.9.2)
 
   '@tmcp/transport-stdio@0.3.1(tmcp@1.15.0(typescript@5.9.2))':
     dependencies:
@@ -6105,16 +6109,17 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.1(eslint-import-resolver-node@0.3.9)(eslint@9.36.0(jiti@2.6.0)):
+  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint@9.36.0(jiti@2.6.0)):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
+      '@typescript-eslint/parser': 8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2)
       eslint: 9.36.0(jiti@2.6.0)
       eslint-import-resolver-node: 0.3.9
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.32.0(eslint@9.36.0(jiti@2.6.0)):
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2))(eslint@9.36.0(jiti@2.6.0)):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
@@ -6125,7 +6130,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 9.36.0(jiti@2.6.0)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(eslint-import-resolver-node@0.3.9)(eslint@9.36.0(jiti@2.6.0))
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint@9.36.0(jiti@2.6.0))
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3
@@ -6136,6 +6141,8 @@ snapshots:
       semver: 6.3.1
       string.prototype.trimend: 1.0.9
       tsconfig-paths: 3.15.0
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2)
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
@@ -7572,6 +7579,16 @@ snapshots:
   tinyspy@4.0.4: {}
 
   tmcp@1.15.0(typescript@5.9.2):
+    dependencies:
+      '@standard-schema/spec': 1.0.0
+      json-rpc-2.0: 1.7.1
+      sqids: 0.3.0
+      uri-template-matcher: 1.1.1
+      valibot: 1.1.0(typescript@5.9.2)
+    transitivePeerDependencies:
+      - typescript
+
+  tmcp@1.15.1(typescript@5.9.2):
     dependencies:
       '@standard-schema/spec': 1.0.0
       json-rpc-2.0: 1.7.1

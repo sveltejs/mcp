@@ -64,7 +64,7 @@
 	"dependencies": {
 		"@sveltejs/mcp-schema": "workspace:^",
 		"@sveltejs/mcp-server": "workspace:^",
-		"@tmcp/transport-http": "^0.6.3",
-		"tmcp": "^1.15.0"
+		"@tmcp/transport-http": "^0.7.0",
+		"tmcp": "^1.15.1"
 	}
 }
