@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.9
+
+### Patch Changes
+
+- feat: suggest against js variables in css ([#78](https://github.com/sveltejs/mcp/pull/78))
+
 ## 0.1.8
 
 ### Patch Changes
