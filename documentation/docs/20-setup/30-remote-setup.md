@@ -106,11 +106,11 @@ It will open a file with your MCP servers where you can add the following config
 ```json
 {
    "mcpServers": {
-	  "svelte": {
-		 "type": "http",
-		 "url": "https://mcp.svelte.dev/mcp",
-		 "tools": ["*"]
-	  }
+      "svelte": {
+         "type": "http",
+         "url": "https://mcp.svelte.dev/mcp",
+         "tools": ["*"]
+      }
    }
 }
 ```
