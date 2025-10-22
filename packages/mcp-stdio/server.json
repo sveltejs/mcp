@@ -10,6 +10,16 @@
 	},
 	"version": "0.1.9",
 	"websiteUrl": "https://svelte.dev/docs/mcp/overview",
+	"icons": [
+		{
+			"src": "https://mcp.svelte.dev/logo.svg",
+			"mimeType": "image/svg+xml"
+		},
+		{
+			"src": "https://mcp.svelte.dev/logo.png",
+			"mimeType": "image/png"
+		}
+	],
 	"packages": [
 		{
 			"registryType": "npm",
