@@ -1,5 +1,13 @@
 # @sveltejs/mcp
 
+## 0.1.9
+
+### Patch Changes
+
+- feat: return `mcp-ui` resource from `playground-link` ([#84](https://github.com/sveltejs/mcp/pull/84))
+
+- feat: suggest against js variables in css ([#78](https://github.com/sveltejs/mcp/pull/78))
+
 ## 0.1.8
 
 ### Patch Changes
