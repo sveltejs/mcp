@@ -1,6 +1,7 @@
 import type { SvelteMcp } from '../../index.js';
 import * as v from 'valibot';
 import { icons } from '../../icons/index.js';
+import { createUIResource } from '@mcp-ui/server';
 
 async function compress_and_encode_text(input: string) {
 	const reader = new Blob([input]).stream().pipeThrough(new CompressionStream('gzip')).getReader();
@@ -100,12 +101,23 @@ export function playground_link(server: SvelteMcp) {
 				url: playground_base.toString(),
 			};
 
+			// use the embed path to have a cleaner UI for mcp-ui
+			playground_base.pathname = '/playground/embed';
+
 			return {
 				content: [
 					{
 						type: 'text',
 						text: JSON.stringify(content),
 					},
+					createUIResource({
+						uri: 'ui://svelte/playground-link',
+						content: {
+							type: 'externalUrl',
+							iframeUrl: playground_base.toString(),
+						},
+						encoding: 'text',
+					}),
 				],
 				structuredContent: content,
 			};
