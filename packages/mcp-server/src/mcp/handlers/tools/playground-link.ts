@@ -101,6 +101,9 @@ export function playground_link(server: SvelteMcp) {
 				url: playground_base.toString(),
 			};
 
+			// use the embed path to have a cleaner UI for mcp-ui
+			playground_base.pathname = '/playground/embed';
+
 			return {
 				content: [
 					{
@@ -111,7 +114,7 @@ export function playground_link(server: SvelteMcp) {
 						uri: 'ui://svelte/playground-link',
 						content: {
 							type: 'externalUrl',
-							iframeUrl: content.url,
+							iframeUrl: playground_base.toString(),
 						},
 						encoding: 'text',
 					}),
