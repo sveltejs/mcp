@@ -116,6 +116,9 @@ export function playground_link(server: SvelteMcp) {
 							type: 'externalUrl',
 							iframeUrl: playground_base.toString(),
 						},
+						uiMetadata: {
+							'preferred-frame-size': ['100%', '1200px'],
+						},
 						encoding: 'text',
 					}),
 				],

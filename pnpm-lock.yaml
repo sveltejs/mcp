@@ -31,7 +31,7 @@ importers:
         version: 10.1.8(eslint@9.36.0(jiti@2.6.0))
       eslint-plugin-import:
         specifier: ^2.32.0
-        version: 2.32.0(eslint@9.36.0(jiti@2.6.0))
+        version: 2.32.0(@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2))(eslint@9.36.0(jiti@2.6.0))
       eslint-plugin-svelte:
         specifier: ^3.12.3
         version: 3.12.4(eslint@9.36.0(jiti@2.6.0))(svelte@5.39.6)(ts-node@10.9.2(@types/node@24.5.2)(typescript@5.9.2))
@@ -70,10 +70,10 @@ importers:
         version: link:../../packages/mcp-server
       '@tmcp/transport-http':
         specifier: ^0.7.0
-        version: 0.7.0(tmcp@1.15.1(typescript@5.9.2))
+        version: 0.7.0(tmcp@1.15.3(typescript@5.9.2))
       tmcp:
-        specifier: ^1.15.1
-        version: 1.15.1(typescript@5.9.2)
+        specifier: ^1.15.3
+        version: 1.15.3(typescript@5.9.2)
     devDependencies:
       '@eslint/compat':
         specifier: ^1.3.2
@@ -161,7 +161,7 @@ importers:
         version: link:../mcp-schema
       '@tmcp/adapter-valibot':
         specifier: ^0.1.4
-        version: 0.1.4(tmcp@1.15.0(typescript@5.9.2))(valibot@1.1.0(typescript@5.9.2))
+        version: 0.1.4(tmcp@1.15.3(typescript@5.9.2))(valibot@1.1.0(typescript@5.9.2))
       '@typescript-eslint/parser':
         specifier: ^8.44.0
         version: 8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2)
@@ -181,8 +181,8 @@ importers:
         specifier: ^1.3.2
         version: 1.3.3(svelte@5.39.6)
       tmcp:
-        specifier: ^1.15.0
-        version: 1.15.0(typescript@5.9.2)
+        specifier: ^1.15.3
+        version: 1.15.3(typescript@5.9.2)
       ts-blank-space:
         specifier: ^0.6.2
         version: 0.6.2
@@ -224,15 +224,15 @@ importers:
         specifier: ^9.36.0
         version: 9.36.0(jiti@2.6.0)
       tmcp:
-        specifier: ^1.15.0
-        version: 1.15.0(typescript@5.9.2)
+        specifier: ^1.15.3
+        version: 1.15.3(typescript@5.9.2)
     devDependencies:
       '@sveltejs/mcp-server':
         specifier: workspace:^
         version: link:../mcp-server
       '@tmcp/transport-stdio':
         specifier: ^0.3.1
-        version: 0.3.1(tmcp@1.15.0(typescript@5.9.2))
+        version: 0.3.1(tmcp@1.15.3(typescript@5.9.2))
       '@types/node':
         specifier: ^22.15.17
         version: 22.18.6
@@ -3703,11 +3703,8 @@ packages:
     resolution: {integrity: sha512-azl+t0z7pw/z958Gy9svOTuzqIk6xq+NSheJzn5MMWtWTFywIacg2wUlzKFGtt3cthx0r2SxMK0yzJOR0IES7Q==}
     engines: {node: '>=14.0.0'}
 
-  tmcp@1.15.0:
-    resolution: {integrity: sha512-ell+gBSC7T5P7ogrROYsoohfLSAu0aXmKzWH8eZqkMX4K0iGc+BYJJC4kb60uJcK7PRZWBOktNGuOq1BLNFA6Q==}
-
-  tmcp@1.15.1:
-    resolution: {integrity: sha512-Mn2FZIcN6Vj/pJYda/Zv1t5Iv0vJIQDi+BRpcpBn9gNwID5bNtgMFOj+1LH3rkOJOTz9R78dIXSsJxDN5Vy90g==}
+  tmcp@1.15.3:
+    resolution: {integrity: sha512-woRK1qeUei0+3juJ3OS/LBFhKwg26YPGtQqJV8HwXqYP1sOHaOeLC/6jyZuBfmfXqZf1qUg8Dk3I/Wwm+WKZ1Q==}
 
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
@@ -5293,24 +5290,24 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@tmcp/adapter-valibot@0.1.4(tmcp@1.15.0(typescript@5.9.2))(valibot@1.1.0(typescript@5.9.2))':
+  '@tmcp/adapter-valibot@0.1.4(tmcp@1.15.3(typescript@5.9.2))(valibot@1.1.0(typescript@5.9.2))':
     dependencies:
       '@standard-schema/spec': 1.0.0
       '@valibot/to-json-schema': 1.3.0(valibot@1.1.0(typescript@5.9.2))
-      tmcp: 1.15.0(typescript@5.9.2)
+      tmcp: 1.15.3(typescript@5.9.2)
       valibot: 1.1.0(typescript@5.9.2)
 
   '@tmcp/session-manager@0.1.2': {}
 
-  '@tmcp/transport-http@0.7.0(tmcp@1.15.1(typescript@5.9.2))':
+  '@tmcp/transport-http@0.7.0(tmcp@1.15.3(typescript@5.9.2))':
     dependencies:
       '@tmcp/session-manager': 0.1.2
       esm-env: 1.2.2
-      tmcp: 1.15.1(typescript@5.9.2)
+      tmcp: 1.15.3(typescript@5.9.2)
 
-  '@tmcp/transport-stdio@0.3.1(tmcp@1.15.0(typescript@5.9.2))':
+  '@tmcp/transport-stdio@0.3.1(tmcp@1.15.3(typescript@5.9.2))':
     dependencies:
-      tmcp: 1.15.0(typescript@5.9.2)
+      tmcp: 1.15.3(typescript@5.9.2)
 
   '@tsconfig/node10@1.0.11': {}
 
@@ -6121,16 +6118,17 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.1(eslint-import-resolver-node@0.3.9)(eslint@9.36.0(jiti@2.6.0)):
+  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint@9.36.0(jiti@2.6.0)):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
+      '@typescript-eslint/parser': 8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2)
       eslint: 9.36.0(jiti@2.6.0)
       eslint-import-resolver-node: 0.3.9
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.32.0(eslint@9.36.0(jiti@2.6.0)):
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2))(eslint@9.36.0(jiti@2.6.0)):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
@@ -6141,7 +6139,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 9.36.0(jiti@2.6.0)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(eslint-import-resolver-node@0.3.9)(eslint@9.36.0(jiti@2.6.0))
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint@9.36.0(jiti@2.6.0))
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3
@@ -6152,6 +6150,8 @@ snapshots:
       semver: 6.3.1
       string.prototype.trimend: 1.0.9
       tsconfig-paths: 3.15.0
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2)
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
@@ -7586,17 +7586,7 @@ snapshots:
 
   tinyspy@4.0.4: {}
 
-  tmcp@1.15.0(typescript@5.9.2):
-    dependencies:
-      '@standard-schema/spec': 1.0.0
-      json-rpc-2.0: 1.7.1
-      sqids: 0.3.0
-      uri-template-matcher: 1.1.1
-      valibot: 1.1.0(typescript@5.9.2)
-    transitivePeerDependencies:
-      - typescript
-
-  tmcp@1.15.1(typescript@5.9.2):
+  tmcp@1.15.3(typescript@5.9.2):
     dependencies:
       '@standard-schema/spec': 1.0.0
       json-rpc-2.0: 1.7.1
