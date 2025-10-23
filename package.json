@@ -17,8 +17,15 @@
 		"test:watch": "npm run test:unit -- --watch",
 		"inspect": "pnpm mcp-inspector",
 		"generate-summaries": "pnpm --filter @sveltejs/mcp-server run generate-summaries",
+		"generate-summaries:dry-run": "pnpm --filter @sveltejs/mcp-server run generate-summaries:dry-run",
+		"generate-summaries:debug": "pnpm --filter @sveltejs/mcp-server run generate-summaries:debug",
+		"generate-distilled": "pnpm --filter @sveltejs/mcp-server run generate-distilled",
+		"generate-distilled:dry-run": "pnpm --filter @sveltejs/mcp-server run generate-distilled:dry-run",
+		"generate-distilled:debug": "pnpm --filter @sveltejs/mcp-server run generate-distilled:debug",
+		"verify-distilled": "pnpm --filter @sveltejs/mcp-server run verify-distilled",
+		"show-verification-errors": "pnpm --filter @sveltejs/mcp-server run show-verification-errors",
+		"export-summaries": "pnpm --filter @sveltejs/mcp-server run export-summaries",
 		"generate-prompt-docs": "node --import node-resolve-ts/register scripts/update-docs-prompts.ts",
-		"debug:generate-summaries": "pnpm --filter @sveltejs/mcp-server run debug:generate-summaries",
 		"release": "pnpm --filter @sveltejs/mcp run build && changeset publish",
 		"changeset:version": "changeset version && pnpm --filter @sveltejs/mcp run update:version && git add --all"
 	},
@@ -46,6 +53,7 @@
 		"publint": "^0.3.13",
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.44.1",
+		"vite-node": "^3.2.4",
 		"vitest": "^3.2.3"
 	},
 	"pnpm": {

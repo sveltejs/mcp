@@ -1,0 +1,1 @@
+legacy mode, migration from svelte 4, maintaining older projects, component props without runes, exporting component methods, renaming reserved word props

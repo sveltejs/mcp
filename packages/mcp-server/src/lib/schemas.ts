@@ -17,24 +17,8 @@ export const summary_data_schema = v.object({
 	model: v.string(),
 	total_sections: v.number(),
 	successful_summaries: v.number(),
-	failed_summaries: v.number(),
 	summaries: v.record(v.string(), v.string()),
-	errors: v.optional(
-		v.array(
-			v.object({
-				section: v.string(),
-				error: v.string(),
-			}),
-		),
-	),
-	download_errors: v.optional(
-		v.array(
-			v.object({
-				section: v.string(),
-				error: v.string(),
-			}),
-		),
-	),
+	content: v.record(v.string(), v.string()),
 });
 
 export const anthropic_batch_request_schema = v.object({

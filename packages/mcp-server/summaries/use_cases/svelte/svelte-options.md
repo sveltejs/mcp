@@ -1,0 +1,1 @@
+component configuration, custom elements, web components, runes mode toggle, legacy mode, svg components, mathml components, css injection, compiler options

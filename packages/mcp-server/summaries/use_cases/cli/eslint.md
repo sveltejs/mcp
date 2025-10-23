@@ -1,0 +1,1 @@
+code quality, linting, error detection, project setup, code standards, team collaboration, typescript projects

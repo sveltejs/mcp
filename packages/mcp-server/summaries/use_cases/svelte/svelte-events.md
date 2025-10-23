@@ -1,0 +1,1 @@
+window events, document events, global event listeners, event delegation, media queries, programmatic event handling, cleanup functions

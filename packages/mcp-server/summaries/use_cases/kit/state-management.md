@@ -1,0 +1,1 @@
+server-side rendering, ssr apps, multi-user applications, state management, authentication, data persistence, load functions, context api, navigation state, component lifecycle

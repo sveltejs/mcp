@@ -1,0 +1,1 @@
+project setup, starting new svelte project, initial installation, choosing framework, development environment, editor configuration

@@ -1,0 +1,1 @@
+project setup, initializing new svelte projects, troubleshooting cli installation, package manager configuration

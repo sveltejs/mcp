@@ -1,0 +1,1 @@
+always, any svelte project, passing data to components, component communication, reusable components, forms, ui libraries

@@ -1,0 +1,1 @@
+ai-assisted development, mcp integration, claude setup, cursor setup, vscode setup, ai coding tools, development environment configuration

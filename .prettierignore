@@ -12,3 +12,6 @@ bun.lockb
 
 # Claude Code
 .claude/
+
+# MCP Server Markdown Files
+packages/mcp-server/**/*.md

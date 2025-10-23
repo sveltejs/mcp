@@ -1,0 +1,1 @@
+document events, visibility tracking, fullscreen detection, pointer lock, focus management, actions on document

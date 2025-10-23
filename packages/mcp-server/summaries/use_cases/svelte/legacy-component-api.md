@@ -1,0 +1,1 @@
+migration from svelte 3/4 to 5, legacy component api, maintaining old projects, understanding deprecated patterns

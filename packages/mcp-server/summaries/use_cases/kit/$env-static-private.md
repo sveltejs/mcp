@@ -1,0 +1,1 @@
+server-side config, api keys, secrets management, environment-specific settings, build optimization, backend configuration

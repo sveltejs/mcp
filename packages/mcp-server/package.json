@@ -10,11 +10,20 @@
 	"type": "module",
 	"scripts": {
 		"test": "vitest",
-		"generate-summaries": "node scripts/generate-summaries.ts --experimental-strip-types",
-		"debug:generate-summaries": "DEBUG_MODE=1 node scripts/generate-summaries.ts --experimental-strip-types"
+		"generate-summaries": "node --import node-resolve-ts/register scripts/generate-summaries.ts && prettier --write --log-level silent 'src/**/*.{js,ts,json}'",
+		"generate-summaries:dry-run": "node --import node-resolve-ts/register scripts/generate-summaries.ts --dry-run && prettier --write --log-level silent 'src/**/*.{js,ts,json}'",
+		"generate-summaries:debug": "DEBUG_MODE=1 node --import node-resolve-ts/register scripts/generate-summaries.ts && prettier --write --log-level silent 'src/**/*.{js,ts,json}'",
+		"generate-distilled": "node --import node-resolve-ts/register scripts/generate-summaries.ts --prompt-type distilled && prettier --write --log-level silent 'src/**/*.{js,ts,json}'",
+		"generate-distilled:dry-run": "node --import node-resolve-ts/register scripts/generate-summaries.ts --prompt-type distilled --dry-run && prettier --write --log-level silent 'src/**/*.{js,ts,json}'",
+		"generate-distilled:debug": "DEBUG_MODE=1 node --import node-resolve-ts/register scripts/generate-summaries.ts --prompt-type distilled && prettier --write --log-level silent 'src/**/*.{js,ts,json}'",
+		"verify-distilled": "node --import node-resolve-ts/register scripts/verify-distilled.ts",
+		"show-verification-errors": "node --import node-resolve-ts/register scripts/show-verification-errors.ts",
+		"export-summaries": "node --import node-resolve-ts/register scripts/export-summaries.ts && prettier --write --log-level silent 'src/**/*.{js,ts,json}'"
 	},
 	"exports": {
-		".": "./src/index.ts"
+		".": "./src/index.ts",
+		"./distilled.json": "./src/distilled.json",
+		"./use-cases.json": "./src/use_cases.json"
 	},
 	"peerDependencies": {
 		"drizzle-orm": "^0.44.0"
@@ -41,6 +50,7 @@
 		"@types/eslint-scope": "^8.3.2",
 		"@types/estree": "^1.0.8",
 		"@typescript-eslint/types": "^8.44.0",
+		"commander": "^13.1.0",
 		"dotenv": "^17.2.3"
 	}
 }

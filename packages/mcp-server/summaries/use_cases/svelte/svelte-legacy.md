@@ -1,0 +1,1 @@
+migration from svelte 4 to svelte 5, upgrading legacy code, event modifiers, class components, temporary compatibility

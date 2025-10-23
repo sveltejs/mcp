@@ -1,0 +1,1 @@
+project setup, creating new svelte apps, cli tooling, scaffolding projects, maintaining svelte applications

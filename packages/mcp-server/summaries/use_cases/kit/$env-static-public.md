@@ -1,0 +1,1 @@
+environment variables, public config, client-side data, api endpoints, build-time configuration, public constants

@@ -1,0 +1,1 @@
+always, any sveltekit project, data fetching, forms, api routes, server-side rendering, authentication, file uploads, streaming data, url handling, query parameters

@@ -1,0 +1,1 @@
+project setup, vite configuration, initial sveltekit setup, build tooling

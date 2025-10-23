@@ -1,0 +1,1 @@
+browser testing, e2e testing, integration testing, test automation, quality assurance, ci/cd pipelines

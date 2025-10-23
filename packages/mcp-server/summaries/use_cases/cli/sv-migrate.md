@@ -1,0 +1,1 @@
+upgrading svelte versions, migrating to svelte 5, sveltekit version upgrades, codebase modernization, runes migration, legacy project updates

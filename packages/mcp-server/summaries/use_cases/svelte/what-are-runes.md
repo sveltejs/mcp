@@ -1,0 +1,1 @@
+always, any svelte 5 project, understanding core syntax, learning svelte 5, migration from svelte 4
