@@ -3,6 +3,9 @@ import { db } from '$lib/server/db/index.js';
 import { redirect } from '@sveltejs/kit';
 
 export async function handle({ event, resolve }) {
+	if (event.request.method === 'POST') {
+		console.log(await event.request.clone().text());
+	}
 	if (event.request.method === 'GET') {
 		const accept = event.request.headers.get('accept');
 		if (accept) {
@@ -25,11 +28,14 @@ export async function handle({ event, resolve }) {
 	// 200 or the MCP client will complain)
 	if (mcp_response && event.request.method === 'GET') {
 		try {
-			await mcp_response.body?.cancel();
-		} catch {
-			// ignore
+			return mcp_response;
+		} finally {
+			try {
+				await mcp_response.body?.cancel();
+			} catch {
+				// ignore
+			}
 		}
-		return new Response('', { status: 200 });
 	}
 	return mcp_response ?? resolve(event);
 }
