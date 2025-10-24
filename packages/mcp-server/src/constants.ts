@@ -11,6 +11,7 @@ export const base_runes = [
 export const nested_runes = [
 	'$state.raw',
 	'$state.snapshot',
+	'$state.eager',
 	'$effect.pre',
 	'$effect.tracking',
 	'$effect.pending',
