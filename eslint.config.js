@@ -56,6 +56,9 @@ export default /** @type {import("eslint").Linter.Config} */ ([
 					ts: 'always',
 					svelte: 'always',
 				},
+				{
+					'$app/*': 'never',
+				},
 			],
 		},
 	},

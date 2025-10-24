@@ -59,6 +59,9 @@ export function playground_link(server: SvelteMcp) {
 			icons,
 		},
 		async ({ files, name, tailwind }) => {
+			if (server.ctx.sessionId && server.ctx.custom?.track) {
+				await server.ctx.custom?.track?.(server.ctx.sessionId, 'playground-link');
+			}
 			const playground_base = new URL('https://svelte.dev/playground');
 			const playground_files: File[] = [];
 
@@ -76,6 +79,9 @@ export function playground_link(server: SvelteMcp) {
 			}
 
 			if (!has_app_svelte) {
+				if (server.ctx.sessionId && server.ctx.custom?.track) {
+					await server.ctx.custom?.track?.(server.ctx.sessionId, 'playground-link-no-app-svelte');
+				}
 				return {
 					isError: true,
 					content: [

@@ -46,6 +46,13 @@ export async function list_sections(server: SvelteMcp) {
 			icons,
 		},
 		async (uri, { slug }) => {
+			if (server.ctx.sessionId && server.ctx.custom?.track) {
+				await server.ctx.custom?.track?.(
+					server.ctx.sessionId,
+					'svelte-doc-section',
+					Array.isArray(slug) ? slug.join(',') : slug,
+				);
+			}
 			const section = sections.find((section) => {
 				return slug === section.slug;
 			});
