@@ -12,3 +12,4 @@ bun.lockb
 
 # Claude Code
 .claude/
+.changeset/
