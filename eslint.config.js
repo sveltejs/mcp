@@ -13,7 +13,7 @@ const gitignore_path = fileURLToPath(new URL('./.gitignore', import.meta.url));
 export default /** @type {import("eslint").Linter.Config} */ ([
 	includeIgnoreFile(gitignore_path),
 	{
-		ignores: ['.claude/**/*'],
+		ignores: ['.claude/**/*', '.changeset/*'],
 	},
 	js.configs.recommended,
 	...ts.configs.recommended,
