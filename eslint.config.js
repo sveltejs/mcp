@@ -48,16 +48,17 @@ export default /** @type {import("eslint").Linter.Config} */ ([
 			'import/no-unresolved': 'off', // this doesn't work well with typescript path mapping
 			'import/extensions': [
 				'error',
-				'ignorePackages',
 				{
-					js: 'always',
-					mjs: 'always',
-					cjs: 'always',
-					ts: 'always',
-					svelte: 'always',
-				},
-				{
-					'$app/*': 'never',
+					ignorePackages: true,
+					pattern: {
+						js: 'always',
+						mjs: 'always',
+						cjs: 'always',
+						ts: 'always',
+						svelte: 'always',
+						svg: 'always',
+						json: 'always',
+					},
 				},
 			],
 		},
