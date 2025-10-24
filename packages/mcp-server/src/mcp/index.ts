@@ -24,7 +24,10 @@ export const server = new McpServer(
 		instructions:
 			'This is the official Svelte MCP server. It MUST be used whenever svelte development is involved. It can provide official documentation, code examples and correct your code. After you correct the component call this tool again to confirm all the issues are fixed.',
 	},
-).withContext<{ db: LibSQLDatabase<Schema> }>();
+).withContext<{
+	db: LibSQLDatabase<Schema>;
+	track?: (sessionId: string, event: string, slug?: string) => Promise<void>;
+}>();
 
 export type SvelteMcp = typeof server;
 

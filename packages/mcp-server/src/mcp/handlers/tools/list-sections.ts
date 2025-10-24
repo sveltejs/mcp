@@ -12,6 +12,9 @@ export function list_sections(server: SvelteMcp) {
 			icons,
 		},
 		async () => {
+			if (server.ctx.sessionId && server.ctx.custom?.track) {
+				await server.ctx.custom?.track?.(server.ctx.sessionId, 'list-sections');
+			}
 			const formatted_sections = await format_sections_list();
 
 			return {

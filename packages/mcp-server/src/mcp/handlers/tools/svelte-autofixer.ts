@@ -46,12 +46,18 @@ export function svelte_autofixer(server: SvelteMcp) {
 			filename: filename_or_path,
 			desired_svelte_version: desired_svelte_version_unchecked,
 		}) => {
+			if (server.ctx.sessionId && server.ctx.custom?.track) {
+				await server.ctx.custom?.track?.(server.ctx.sessionId, 'svelte-autofixer');
+			}
 			// we validate manually because some clients don't support union in the input schema (looking at you cursor)
 			const parsed_version = v.safeParse(
 				v.union([v.literal(4), v.literal(5), v.literal('4'), v.literal('5')]),
 				desired_svelte_version_unchecked,
 			);
 			if (parsed_version.success === false) {
+				if (server.ctx.sessionId && server.ctx.custom?.track) {
+					await server.ctx.custom?.track?.(server.ctx.sessionId, 'svelte-autofixer-wrong-version');
+				}
 				return {
 					isError: true,
 					content: [

@@ -1,6 +1,8 @@
+import { dev } from '$app/environment';
 import { http_transport } from '$lib/mcp/index.js';
 import { db } from '$lib/server/db/index.js';
 import { redirect } from '@sveltejs/kit';
+import { track } from '@vercel/analytics/server';
 
 export async function handle({ event, resolve }) {
 	if (event.request.method === 'POST') {
@@ -19,6 +21,12 @@ export async function handle({ event, resolve }) {
 	}
 	const mcp_response = await http_transport.respond(event.request, {
 		db,
+		// only add analytics in production
+		track: dev
+			? undefined
+			: async (session_id, event, slug) => {
+					await track(event, { session_id, ...(slug ? { slug } : {}) });
+				},
 	});
 	// we are deploying on vercel the SSE connection will timeout after 5 minutes...for
 	// the moment we are not sending back any notifications (logs, or list changed notifications)
