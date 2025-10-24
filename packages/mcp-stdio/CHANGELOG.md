@@ -1,5 +1,15 @@
 # @sveltejs/mcp
 
+## 0.1.10
+
+### Patch Changes
+
+- fix: add icons to `server.json` ([`02c951b`](https://github.com/sveltejs/mcp/commit/02c951baa86ac8103ffc158a202c06cfe6b15c01))
+
+- fix: add `preferred-frame-size` to UI resource ([`3fabcc0`](https://github.com/sveltejs/mcp/commit/3fabcc0f9bfee916c0deb9c2ffa931ed2168af2d))
+
+- feat: support: `$state.eager` ([#90](https://github.com/sveltejs/mcp/pull/90))
+
 ## 0.1.9
 
 ### Patch Changes
