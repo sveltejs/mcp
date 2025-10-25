@@ -21,6 +21,12 @@ export function svelte_autofixer(server: SvelteMcp) {
 						'The desired svelte version...if possible read this from the package.json of the user project, otherwise use some hint from the wording (if the user asks for runes it wants version 5). Default to 5 in case of doubt.',
 					),
 				),
+				async: v.pipe(
+					v.optional(v.boolean()),
+					v.description(
+						'If true the code is an async component/module and might use await in the markup or top-level awaits in the script tag. If possible check the svelte.config.js/svelte.config.ts to check if the option is enabled otherwise asks the user if they prefer using it or not. You can only use this option if the version is 5.',
+					),
+				),
 				filename: v.pipe(
 					v.optional(v.string()),
 					v.description(
@@ -45,6 +51,7 @@ export function svelte_autofixer(server: SvelteMcp) {
 			code,
 			filename: filename_or_path,
 			desired_svelte_version: desired_svelte_version_unchecked,
+			async,
 		}) => {
 			if (server.ctx.sessionId && server.ctx.custom?.track) {
 				await server.ctx.custom?.track?.(server.ctx.sessionId, 'svelte-autofixer');
@@ -71,6 +78,18 @@ export function svelte_autofixer(server: SvelteMcp) {
 
 			const desired_svelte_version = parsed_version.output;
 
+			if (async && +desired_svelte_version < 5) {
+				return {
+					isError: true,
+					content: [
+						{
+							type: 'text',
+							text: `The async option can only be used with Svelte version 5 or higher.`,
+						},
+					],
+				};
+			}
+
 			const content: {
 				issues: string[];
 				suggestions: string[];
@@ -82,11 +101,11 @@ export function svelte_autofixer(server: SvelteMcp) {
 
 				const filename = filename_or_path ? basename(filename_or_path) : 'Component.svelte';
 
-				add_compile_issues(content, code, +desired_svelte_version, filename);
+				add_compile_issues(content, code, +desired_svelte_version, filename, async);
 
-				add_autofixers_issues(content, code, +desired_svelte_version, filename);
+				add_autofixers_issues(content, code, +desired_svelte_version, filename, async);
 
-				await add_eslint_issues(content, code, +desired_svelte_version, filename);
+				await add_eslint_issues(content, code, +desired_svelte_version, filename, async);
 			} catch (e: unknown) {
 				const error = e as Error & { start?: { line: number; column: number } };
 				content.issues.push(

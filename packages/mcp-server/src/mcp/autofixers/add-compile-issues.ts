@@ -7,6 +7,7 @@ export function add_compile_issues(
 	code: string,
 	desired_svelte_version: number,
 	filename = 'Component.svelte',
+	async = false,
 ) {
 	let compile = compile_component;
 	const extension = extname(filename);
@@ -27,6 +28,7 @@ export function add_compile_issues(
 		filename: filename || 'Component.svelte',
 		generate: false,
 		runes: desired_svelte_version >= 5,
+		experimental: { async },
 	});
 
 	for (const warning of compilation_result.warnings) {
