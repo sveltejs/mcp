@@ -7,6 +7,7 @@ export type AutofixerState = {
 	output: { issues: string[]; suggestions: string[] };
 	parsed: ParseResult;
 	desired_svelte_version: number;
+	async?: boolean;
 };
 
 export type Autofixer = Visitors<Node | AST.SvelteNode, AutofixerState>;

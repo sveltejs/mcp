@@ -8,7 +8,12 @@ function request<const T>(request: T) {
 	return request;
 }
 
-async function autofixer_tool_call(code: string, is_error = false, desired_svelte_version = 5) {
+async function autofixer_tool_call(
+	code: string,
+	is_error = false,
+	desired_svelte_version = 5,
+	async = false,
+) {
 	const result = await server.receive({
 		jsonrpc: '2.0',
 		id: 2,
@@ -19,6 +24,7 @@ async function autofixer_tool_call(code: string, is_error = false, desired_svelt
 				code,
 				desired_svelte_version,
 				filename: 'App.svelte',
+				async,
 			},
 		},
 	});
@@ -63,6 +69,61 @@ describe('svelte-autofixer tool', () => {
 		expect(content.suggestions).toContain(
 			"The code can't be compiled because a Javascript parse error. In case you are using runes like this `$state variable_name = 3;` or `$derived variable_name = 3 * count` that's not how runes are used. You need to use them as function calls without importing them: `const variable_name = $state(3)` and `const variable_name = $derived(3 * count)`.",
 		);
+	});
+
+	it('should error out if async is true with a version less than 5', async () => {
+		const content = await autofixer_tool_call(
+			`<script>
+			$state count = 0;
+		</script>`,
+			true,
+			4,
+			true,
+		);
+		expect(content.isError).toBeTruthy();
+		expect(content.content[0]).toBeDefined();
+		expect(content.content[0].text).toBe(
+			'The async option can only be used with Svelte version 5 or higher.',
+		);
+	});
+
+	it('should not add suggestion/issues if async is true and await is used in the template/derived', async () => {
+		const content = await autofixer_tool_call(
+			`<script>
+			import { slow_double } from './utils.js';
+			let count = $state(0);
+			let double = $derived(await slow_double(count));
+		</script>
+		
+		{double}
+		{await slow_double(count)}`,
+			false,
+			5,
+			true,
+		);
+		expect(content.issues).toHaveLength(0);
+		expect(content.suggestions).toHaveLength(0);
+		expect(content.require_another_tool_call_after_fixing).toBeFalsy();
+	});
+
+	it('should add suggestion/issues if async is false and await is used in the template/derived', async () => {
+		const content = await autofixer_tool_call(
+			`<script>
+			import { slow_double } from './utils.js';
+			let count = $state(0);
+			let double = $derived(await slow_double(count));
+		</script>
+		
+		{double}
+		{await slow_double(count)}`,
+			false,
+			5,
+		);
+		expect(content.issues.length).toBeGreaterThanOrEqual(1);
+		expect(content.issues).toEqual(
+			expect.arrayContaining([expect.stringContaining('experimental_async')]),
+		);
+		expect(content.require_another_tool_call_after_fixing).toBeTruthy();
 	});
 
 	it('should add suggestions for css invalid identifier', async () => {

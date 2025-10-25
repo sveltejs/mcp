@@ -8,6 +8,7 @@ export function add_autofixers_issues(
 	code: string,
 	desired_svelte_version: number,
 	filename = 'Component.svelte',
+	async = false,
 ) {
 	const parsed = parse(code, filename);
 
@@ -15,7 +16,7 @@ export function add_autofixers_issues(
 	for (const autofixer of Object.values(autofixers)) {
 		walk(
 			parsed.ast as unknown as Node,
-			{ output: content, parsed, desired_svelte_version },
+			{ output: content, parsed, desired_svelte_version, async },
 			autofixer,
 		);
 	}
