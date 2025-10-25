@@ -1,5 +1,13 @@
 # @sveltejs/mcp
 
+## 0.1.11
+
+### Patch Changes
+
+- fix: add `async` parameter to `svelte-autofixer` ([#94](https://github.com/sveltejs/mcp/pull/94))
+
+- fix: install latest eslint svelte packages to support `$state.eager` ([`f6ce89f`](https://github.com/sveltejs/mcp/commit/f6ce89ff34faabc3d746a350ea347298ecfed2ec))
+
 ## 0.1.10
 
 ### Patch Changes
