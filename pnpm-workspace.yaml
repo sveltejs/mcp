@@ -3,3 +3,10 @@ packages:
   - './apps/*'
 
 useNodeVersion: 22.19.0
+
+catalogs:
+  mcp:
+    tmcp: '^1.16.0'
+    '@tmcp/transport-http': '^0.8.0'
+    '@tmcp/transport-stdio': '^0.4.0'
+    '@tmcp/adapter-valibot': '^0.1.4'
