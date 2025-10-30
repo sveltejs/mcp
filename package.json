@@ -38,17 +38,14 @@
 		"eslint": "catalog:lint",
 		"eslint-config-prettier": "catalog:lint",
 		"eslint-plugin-import": "catalog:lint",
-		"eslint-plugin-pnpm": "catalog:lint",
 		"eslint-plugin-svelte": "catalog:lint",
 		"globals": "catalog:lint",
-		"jsonc-eslint-parser": "catalog:lint",
 		"node-resolve-ts": "catalog:",
 		"prettier": "catalog:lint",
 		"prettier-plugin-svelte": "catalog:lint",
 		"publint": "catalog:",
 		"typescript": "catalog:",
 		"typescript-eslint": "catalog:lint",
-		"vitest": "catalog:",
-		"yaml-eslint-parser": "catalog:lint"
+		"vitest": "catalog:"
 	}
 }
