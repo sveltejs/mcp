@@ -30,22 +30,22 @@
 	],
 	"private": true,
 	"devDependencies": {
-		"@changesets/cli": "catalog:",
+		"@changesets/cli": "catalog:tooling",
 		"@eslint/compat": "catalog:lint",
 		"@eslint/js": "catalog:lint",
-		"@modelcontextprotocol/inspector": "catalog:",
-		"@svitejs/changesets-changelog-github-compact": "catalog:",
+		"@modelcontextprotocol/inspector": "catalog:ai",
+		"@svitejs/changesets-changelog-github-compact": "catalog:tooling",
 		"eslint": "catalog:lint",
 		"eslint-config-prettier": "catalog:lint",
 		"eslint-plugin-import": "catalog:lint",
 		"eslint-plugin-svelte": "catalog:lint",
 		"globals": "catalog:lint",
-		"node-resolve-ts": "catalog:",
+		"node-resolve-ts": "catalog:tooling",
 		"prettier": "catalog:lint",
 		"prettier-plugin-svelte": "catalog:lint",
-		"publint": "catalog:",
-		"typescript": "catalog:",
+		"publint": "catalog:tooling",
+		"typescript": "catalog:tooling",
 		"typescript-eslint": "catalog:lint",
-		"vitest": "catalog:"
+		"vitest": "catalog:tooling"
 	}
 }

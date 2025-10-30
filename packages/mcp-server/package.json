@@ -20,27 +20,27 @@
 		"drizzle-orm": "^0.44.0"
 	},
 	"dependencies": {
-		"@mcp-ui/server": "catalog:",
+		"@mcp-ui/server": "catalog:ai",
 		"@sveltejs/mcp-schema": "workspace:^",
-		"@tmcp/adapter-valibot": "catalog:mcp",
+		"@tmcp/adapter-valibot": "catalog:tmcp",
 		"@typescript-eslint/parser": "catalog:lint",
 		"eslint": "catalog:lint",
 		"eslint-plugin-svelte": "catalog:lint",
-		"svelte": "catalog:",
+		"svelte": "catalog:svelte",
 		"svelte-eslint-parser": "catalog:lint",
-		"tmcp": "catalog:mcp",
-		"ts-blank-space": "catalog:",
+		"tmcp": "catalog:tmcp",
+		"ts-blank-space": "catalog:tooling",
 		"typescript-eslint": "catalog:lint",
-		"valibot": "catalog:",
-		"vitest": "catalog:",
-		"zimmerframe": "catalog:"
+		"valibot": "catalog:tooling",
+		"vitest": "catalog:tooling",
+		"zimmerframe": "catalog:tooling"
 	},
 	"devDependencies": {
-		"@anthropic-ai/sdk": "catalog:",
-		"@sveltejs/kit": "catalog:",
+		"@anthropic-ai/sdk": "catalog:ai",
+		"@sveltejs/kit": "catalog:svelte",
 		"@types/eslint-scope": "catalog:lint",
-		"@types/estree": "catalog:",
+		"@types/estree": "catalog:tooling",
 		"@typescript-eslint/types": "catalog:lint",
-		"dotenv": "catalog:"
+		"dotenv": "catalog:tooling"
 	}
 }
