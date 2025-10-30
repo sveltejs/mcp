@@ -26,12 +26,29 @@ export default /** @type {import("eslint").Linter.Config} */ ([
 	...svelte.configs.prettier,
 	{
 		languageOptions: {
+			parser: ts.parser,
 			globals: { ...globals.browser, ...globals.node },
 		},
+
 		rules: {
 			// typescript-eslint strongly recommend that you do not use the no-undef lint rule on TypeScript projects.
 			// see: https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
 			'no-undef': 'off',
+			'@typescript-eslint/naming-convention': [
+				'error',
+				{
+					selector: ['variableLike'],
+					format: ['snake_case', 'UPPER_CASE'],
+					leadingUnderscore: 'allow',
+				},
+			],
+			'@typescript-eslint/no-unused-vars': [
+				'error',
+				{
+					varsIgnorePattern: '^_',
+					ignoreRestSiblings: true,
+				},
+			],
 			'func-style': ['error', 'declaration', { allowTypeAnnotation: true }],
 			'import/no-unresolved': 'off', // this doesn't work well with typescript path mapping
 			'import/extensions': [
@@ -90,17 +107,6 @@ export default /** @type {import("eslint").Linter.Config} */ ([
 			'pnpm/yaml-no-unused-catalog-item': 'error',
 			'pnpm/yaml-no-duplicate-catalog-item': ['error', { checkDuplicates: 'exact-version' }],
 			'pnpm/yaml-valid-packages': 'error',
-		},
-	},
-	// --- TypeScript specific overrides below ---
-	{
-		files: ['**/*.ts'],
-		languageOptions: {
-			parser: ts.parser,
-			parserOptions: {
-				project: ['./tsconfig.json'],
-				sourceType: 'module',
-			},
 		},
 	},
 ]);
