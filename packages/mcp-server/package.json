@@ -20,27 +20,27 @@
 		"drizzle-orm": "^0.44.0"
 	},
 	"dependencies": {
-		"@mcp-ui/server": "^5.12.0",
+		"@mcp-ui/server": "catalog:",
 		"@sveltejs/mcp-schema": "workspace:^",
 		"@tmcp/adapter-valibot": "catalog:mcp",
-		"@typescript-eslint/parser": "^8.44.0",
-		"eslint": "^9.36.0",
-		"eslint-plugin-svelte": "^3.12.5",
-		"svelte": "^5.39.2",
-		"svelte-eslint-parser": "^1.4.0",
+		"@typescript-eslint/parser": "catalog:",
+		"eslint": "catalog:",
+		"eslint-plugin-svelte": "catalog:",
+		"svelte": "catalog:",
+		"svelte-eslint-parser": "catalog:",
 		"tmcp": "catalog:mcp",
-		"ts-blank-space": "^0.6.2",
-		"typescript-eslint": "^8.44.0",
-		"valibot": "^1.1.0",
-		"vitest": "^4.0.0",
-		"zimmerframe": "^1.1.4"
+		"ts-blank-space": "catalog:",
+		"typescript-eslint": "catalog:",
+		"valibot": "catalog:",
+		"vitest": "catalog:",
+		"zimmerframe": "catalog:"
 	},
 	"devDependencies": {
-		"@anthropic-ai/sdk": "^0.68.0",
-		"@sveltejs/kit": "^2.42.2",
-		"@types/eslint-scope": "^8.3.2",
-		"@types/estree": "^1.0.8",
-		"@typescript-eslint/types": "^8.44.0",
-		"dotenv": "^17.2.3"
+		"@anthropic-ai/sdk": "catalog:",
+		"@sveltejs/kit": "catalog:",
+		"@types/eslint-scope": "catalog:",
+		"@types/estree": "catalog:",
+		"@typescript-eslint/types": "catalog:",
+		"dotenv": "catalog:"
 	}
 }
