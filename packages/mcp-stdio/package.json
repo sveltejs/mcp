@@ -40,7 +40,7 @@
 		"vitest": "catalog:"
 	},
 	"dependencies": {
-		"eslint": "catalog:",
+		"eslint": "catalog:lint",
 		"tmcp": "catalog:mcp"
 	}
 }

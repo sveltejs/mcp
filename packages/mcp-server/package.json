@@ -23,14 +23,14 @@
 		"@mcp-ui/server": "catalog:",
 		"@sveltejs/mcp-schema": "workspace:^",
 		"@tmcp/adapter-valibot": "catalog:mcp",
-		"@typescript-eslint/parser": "catalog:",
-		"eslint": "catalog:",
-		"eslint-plugin-svelte": "catalog:",
+		"@typescript-eslint/parser": "catalog:lint",
+		"eslint": "catalog:lint",
+		"eslint-plugin-svelte": "catalog:lint",
 		"svelte": "catalog:",
-		"svelte-eslint-parser": "catalog:",
+		"svelte-eslint-parser": "catalog:lint",
 		"tmcp": "catalog:mcp",
 		"ts-blank-space": "catalog:",
-		"typescript-eslint": "catalog:",
+		"typescript-eslint": "catalog:lint",
 		"valibot": "catalog:",
 		"vitest": "catalog:",
 		"zimmerframe": "catalog:"
@@ -38,9 +38,9 @@
 	"devDependencies": {
 		"@anthropic-ai/sdk": "catalog:",
 		"@sveltejs/kit": "catalog:",
-		"@types/eslint-scope": "catalog:",
+		"@types/eslint-scope": "catalog:lint",
 		"@types/estree": "catalog:",
-		"@typescript-eslint/types": "catalog:",
+		"@typescript-eslint/types": "catalog:lint",
 		"dotenv": "catalog:"
 	}
 }
