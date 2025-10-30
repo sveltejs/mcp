@@ -4,6 +4,21 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  mcp:
+    '@tmcp/adapter-valibot':
+      specifier: ^0.1.4
+      version: 0.1.4
+    '@tmcp/transport-http':
+      specifier: ^0.8.0
+      version: 0.8.0
+    '@tmcp/transport-stdio':
+      specifier: ^0.4.0
+      version: 0.4.0
+    tmcp:
+      specifier: ^1.16.0
+      version: 1.16.0
+
 importers:
 
   .:
@@ -69,14 +84,14 @@ importers:
         specifier: workspace:^
         version: link:../../packages/mcp-server
       '@tmcp/transport-http':
-        specifier: ^0.7.1
-        version: 0.7.1(tmcp@1.15.3(typescript@5.9.2))
+        specifier: catalog:mcp
+        version: 0.8.0(tmcp@1.16.0(typescript@5.9.2))
       '@vercel/analytics':
         specifier: ^1.5.0
         version: 1.5.0(@sveltejs/kit@2.43.5(@sveltejs/vite-plugin-svelte@6.2.1(svelte@5.39.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(tsx@4.20.6)))(svelte@5.39.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(tsx@4.20.6)))(react@18.3.1)(svelte@5.39.6)
       tmcp:
-        specifier: ^1.15.3
-        version: 1.15.3(typescript@5.9.2)
+        specifier: catalog:mcp
+        version: 1.16.0(typescript@5.9.2)
     devDependencies:
       '@eslint/compat':
         specifier: ^1.3.2
@@ -163,8 +178,8 @@ importers:
         specifier: workspace:^
         version: link:../mcp-schema
       '@tmcp/adapter-valibot':
-        specifier: ^0.1.4
-        version: 0.1.4(tmcp@1.15.3(typescript@5.9.2))(valibot@1.1.0(typescript@5.9.2))
+        specifier: catalog:mcp
+        version: 0.1.4(tmcp@1.16.0(typescript@5.9.2))(valibot@1.1.0(typescript@5.9.2))
       '@typescript-eslint/parser':
         specifier: ^8.44.0
         version: 8.44.1(eslint@9.36.0(jiti@2.6.0))(typescript@5.9.2)
@@ -184,8 +199,8 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0(svelte@5.39.6)
       tmcp:
-        specifier: ^1.15.3
-        version: 1.15.3(typescript@5.9.2)
+        specifier: catalog:mcp
+        version: 1.16.0(typescript@5.9.2)
       ts-blank-space:
         specifier: ^0.6.2
         version: 0.6.2
@@ -227,15 +242,15 @@ importers:
         specifier: ^9.36.0
         version: 9.36.0(jiti@2.6.0)
       tmcp:
-        specifier: ^1.15.3
-        version: 1.15.3(typescript@5.9.2)
+        specifier: catalog:mcp
+        version: 1.16.0(typescript@5.9.2)
     devDependencies:
       '@sveltejs/mcp-server':
         specifier: workspace:^
         version: link:../mcp-server
       '@tmcp/transport-stdio':
-        specifier: ^0.3.1
-        version: 0.3.1(tmcp@1.15.3(typescript@5.9.2))
+        specifier: catalog:mcp
+        version: 0.4.0(tmcp@1.16.0(typescript@5.9.2))
       '@types/node':
         specifier: ^22.15.17
         version: 22.18.6
@@ -1557,18 +1572,24 @@ packages:
       tmcp: ^1.10.2
       valibot: ^1.1.0
 
-  '@tmcp/session-manager@0.1.2':
-    resolution: {integrity: sha512-hNkEeMt7/CdD8JdjPXMlIv5OMPTp5LnBqeo1Tb/AXcm31DpgwlNbf4voJ3CeWxWAZPPZ/MgHZ682TtgGhsvXiw==}
-
-  '@tmcp/transport-http@0.7.1':
-    resolution: {integrity: sha512-Run9uMuARbCwAJQDWYvANXCsRAyJL/hUFfuD5eftU7mjarIjtwWQAXJ4NS7hKPsVf2g2GCF/XNNU+DGpdo3vYQ==}
+  '@tmcp/session-manager@0.2.0':
+    resolution: {integrity: sha512-/MjEFFvnvrV3DbnwEAXMBKhIFmm7z81EgazBtPhKP9i5pe37/iDkYHOa+SD6aaqT3V7gACQ1nmqoJH3MdrC7gQ==}
     peerDependencies:
-      tmcp: ^1.15.3
+      tmcp: ^1.16.0
 
-  '@tmcp/transport-stdio@0.3.1':
-    resolution: {integrity: sha512-r+eiHa2URw5+lBMRI0t4D84LfcWHam3DsTog/lPZSALIjlYxlFUfAaJ8dgh5gdQnmXiFJfE9hzmN0gIrB6+Lzw==}
+  '@tmcp/transport-http@0.8.0':
+    resolution: {integrity: sha512-XkIFDIDr8zzQhJiwI+6He0pIGmEg0SAwHdsv914UtL0zqKuUfFvFLLARkryB95Rhp1ib4nVWAgLcV1FtdWGzIw==}
     peerDependencies:
-      tmcp: ^1.14.0
+      '@tmcp/auth': ^0.3.3
+      tmcp: ^1.16.0
+    peerDependenciesMeta:
+      '@tmcp/auth':
+        optional: true
+
+  '@tmcp/transport-stdio@0.4.0':
+    resolution: {integrity: sha512-GPfYj8Yn7OqLv7yDzOzonZ2E9SyPphgmmiByBfhNYKBb5Mzp5aSVUJ3cjuiOOz4ZvpM9FzwMmxOt8wNURZxjmQ==}
+    peerDependencies:
+      tmcp: ^1.16.0
 
   '@tsconfig/node10@1.0.11':
     resolution: {integrity: sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==}
@@ -3718,8 +3739,8 @@ packages:
     resolution: {integrity: sha512-PSkbLUoxOFRzJYjjxHJt9xro7D+iilgMX/C9lawzVuYiIdcihh9DXmVibBe8lmcFrRi/VzlPjBxbN7rH24q8/Q==}
     engines: {node: '>=14.0.0'}
 
-  tmcp@1.15.3:
-    resolution: {integrity: sha512-woRK1qeUei0+3juJ3OS/LBFhKwg26YPGtQqJV8HwXqYP1sOHaOeLC/6jyZuBfmfXqZf1qUg8Dk3I/Wwm+WKZ1Q==}
+  tmcp@1.16.0:
+    resolution: {integrity: sha512-E2ypyH00XoNaliR+gilZAtWGQBkgfrCT2bjEcJsnlVwZfsHYOTMp9Q8K9G5JtDB/UaCP2TJyjp+UG5BumUc/4Q==}
 
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
@@ -5306,24 +5327,26 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@tmcp/adapter-valibot@0.1.4(tmcp@1.15.3(typescript@5.9.2))(valibot@1.1.0(typescript@5.9.2))':
+  '@tmcp/adapter-valibot@0.1.4(tmcp@1.16.0(typescript@5.9.2))(valibot@1.1.0(typescript@5.9.2))':
     dependencies:
       '@standard-schema/spec': 1.0.0
       '@valibot/to-json-schema': 1.3.0(valibot@1.1.0(typescript@5.9.2))
-      tmcp: 1.15.3(typescript@5.9.2)
+      tmcp: 1.16.0(typescript@5.9.2)
       valibot: 1.1.0(typescript@5.9.2)
 
-  '@tmcp/session-manager@0.1.2': {}
-
-  '@tmcp/transport-http@0.7.1(tmcp@1.15.3(typescript@5.9.2))':
+  '@tmcp/session-manager@0.2.0(tmcp@1.16.0(typescript@5.9.2))':
     dependencies:
-      '@tmcp/session-manager': 0.1.2
+      tmcp: 1.16.0(typescript@5.9.2)
+
+  '@tmcp/transport-http@0.8.0(tmcp@1.16.0(typescript@5.9.2))':
+    dependencies:
+      '@tmcp/session-manager': 0.2.0(tmcp@1.16.0(typescript@5.9.2))
       esm-env: 1.2.2
-      tmcp: 1.15.3(typescript@5.9.2)
+      tmcp: 1.16.0(typescript@5.9.2)
 
-  '@tmcp/transport-stdio@0.3.1(tmcp@1.15.3(typescript@5.9.2))':
+  '@tmcp/transport-stdio@0.4.0(tmcp@1.16.0(typescript@5.9.2))':
     dependencies:
-      tmcp: 1.15.3(typescript@5.9.2)
+      tmcp: 1.16.0(typescript@5.9.2)
 
   '@tsconfig/node10@1.0.11': {}
 
@@ -7605,7 +7628,7 @@ snapshots:
 
   tinyrainbow@3.0.3: {}
 
-  tmcp@1.15.3(typescript@5.9.2):
+  tmcp@1.16.0(typescript@5.9.2):
     dependencies:
       '@standard-schema/spec': 1.0.0
       json-rpc-2.0: 1.7.1

@@ -64,8 +64,8 @@
 	"dependencies": {
 		"@sveltejs/mcp-schema": "workspace:^",
 		"@sveltejs/mcp-server": "workspace:^",
-		"@tmcp/transport-http": "^0.7.1",
+		"@tmcp/transport-http": "catalog:mcp",
 		"@vercel/analytics": "^1.5.0",
-		"tmcp": "^1.15.3"
+		"tmcp": "catalog:mcp"
 	}
 }

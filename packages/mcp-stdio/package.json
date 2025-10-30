@@ -32,7 +32,7 @@
 	},
 	"devDependencies": {
 		"@sveltejs/mcp-server": "workspace:^",
-		"@tmcp/transport-stdio": "^0.3.1",
+		"@tmcp/transport-stdio": "catalog:mcp",
 		"@types/node": "^22.15.17",
 		"publint": "^0.3.13",
 		"tsdown": "^0.15.0",
@@ -41,6 +41,6 @@
 	},
 	"dependencies": {
 		"eslint": "^9.36.0",
-		"tmcp": "^1.15.3"
+		"tmcp": "catalog:mcp"
 	}
 }
