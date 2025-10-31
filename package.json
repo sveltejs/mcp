@@ -12,6 +12,8 @@
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
 		"lint:fix": "prettier --write . && eslint . --fix",
+		"lint:inspect": "pnpm dlx @eslint/config-inspector",
+		"node:inspect": "pnpm dlx node-modules-inspector",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
 		"test:watch": "npm run test:unit -- --watch",
@@ -30,27 +32,24 @@
 	],
 	"private": true,
 	"devDependencies": {
-		"@changesets/cli": "^2.29.7",
-		"@eslint/compat": "^1.3.2",
-		"@eslint/js": "^9.36.0",
-		"@modelcontextprotocol/inspector": "^0.17.0",
-		"@svitejs/changesets-changelog-github-compact": "^1.2.0",
-		"eslint": "^9.36.0",
-		"eslint-config-prettier": "^10.0.1",
-		"eslint-plugin-import": "^2.32.0",
-		"eslint-plugin-svelte": "^3.12.3",
-		"globals": "^16.0.0",
-		"node-resolve-ts": "^1.0.2",
-		"prettier": "^3.4.2",
-		"prettier-plugin-svelte": "^3.3.3",
-		"publint": "^0.3.13",
-		"typescript": "^5.0.0",
-		"typescript-eslint": "^8.44.1",
-		"vitest": "^4.0.0"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"esbuild"
-		]
+		"@changesets/cli": "catalog:tooling",
+		"@eslint/compat": "catalog:lint",
+		"@eslint/js": "catalog:lint",
+		"@modelcontextprotocol/inspector": "catalog:ai",
+		"@sveltejs/adapter-vercel": "catalog:svelte",
+		"@svitejs/changesets-changelog-github-compact": "catalog:tooling",
+		"eslint": "catalog:lint",
+		"eslint-config-prettier": "catalog:lint",
+		"eslint-plugin-import": "catalog:lint",
+		"eslint-plugin-pnpm": "catalog:lint",
+		"eslint-plugin-svelte": "catalog:lint",
+		"globals": "catalog:lint",
+		"node-resolve-ts": "catalog:tooling",
+		"prettier": "catalog:lint",
+		"prettier-plugin-svelte": "catalog:lint",
+		"publint": "catalog:tooling",
+		"typescript": "catalog:tooling",
+		"typescript-eslint": "catalog:lint",
+		"vitest": "catalog:tooling"
 	}
 }

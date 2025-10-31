@@ -32,15 +32,15 @@
 	},
 	"devDependencies": {
 		"@sveltejs/mcp-server": "workspace:^",
-		"@tmcp/transport-stdio": "catalog:mcp",
-		"@types/node": "^22.15.17",
-		"publint": "^0.3.13",
-		"tsdown": "^0.15.0",
-		"typescript": "^5.8.3",
-		"vitest": "^4.0.0"
+		"@tmcp/transport-stdio": "catalog:tmcp",
+		"@types/node": "catalog:tooling",
+		"publint": "catalog:tooling",
+		"tsdown": "catalog:tooling",
+		"typescript": "catalog:tooling",
+		"vitest": "catalog:tooling"
 	},
 	"dependencies": {
-		"eslint": "^9.36.0",
-		"tmcp": "catalog:mcp"
+		"eslint": "catalog:lint",
+		"tmcp": "catalog:tmcp"
 	}
 }
