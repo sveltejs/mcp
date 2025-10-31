@@ -13,6 +13,7 @@
 		"lint": "prettier --check . && eslint .",
 		"lint:fix": "prettier --write . && eslint . --fix",
 		"lint:inspect": "pnpm dlx @eslint/config-inspector",
+		"node:inspect": "pnpx node-modules-inspector",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
 		"test:watch": "npm run test:unit -- --watch",
