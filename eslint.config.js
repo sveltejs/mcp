@@ -7,13 +7,20 @@ import { fileURLToPath } from 'node:url';
 import ts from 'typescript-eslint';
 import svelteConfig from './apps/mcp-remote/svelte.config.js';
 import eslint_plugin_import from 'eslint-plugin-import';
+import { configs as pnpm } from 'eslint-plugin-pnpm';
 
 const gitignore_path = fileURLToPath(new URL('./.gitignore', import.meta.url));
 
 export default /** @type {import("eslint").Linter.Config} */ ([
 	includeIgnoreFile(gitignore_path),
 	{
-		ignores: ['.claude/**/*', '.changeset/*'],
+		ignores: [
+			'.claude/**/*',
+			'.changeset/*',
+			'.github/**/*.yml',
+			'.github/**/*.yaml',
+			'**/pnpm-lock.yaml',
+		],
 	},
 	js.configs.recommended,
 	...ts.configs.recommended,
@@ -74,4 +81,16 @@ export default /** @type {import("eslint").Linter.Config} */ ([
 			},
 		},
 	},
+	{
+		name: 'pnpm/exclude-some-rules',
+		files: ['**/*.json', '**/*.yaml', '**/*.yml', 'pnpm-workspace.yaml'],
+		rules: {
+			'@typescript-eslint/naming-convention': 'off',
+			'@typescript-eslint/no-unused-vars': 'off',
+			'@typescript-eslint/no-unused-expressions': 'off',
+			'func-style': 'off',
+		},
+	},
+	...pnpm.json,
+	...pnpm.yaml,
 ]);
