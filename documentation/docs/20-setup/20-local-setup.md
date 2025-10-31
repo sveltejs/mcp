@@ -110,6 +110,12 @@ It will open a file with your MCP servers where you can add the following config
 
 ## Zed
 
+Install the [Svelte MCP Server extension](https://zed.dev/extensions/svelte-mcp).
+
+<details>
+
+<summary>Configure Manually</summary>
+
 - Open the command palette
 - Search and select "agent:open settings"
 - In settings panel look for `Model Context Protocol (MCP) Servers`
@@ -126,6 +132,8 @@ It will open a popup with MCP server config where you can add the following conf
 	}
 }
 ```
+
+</details>
 
 ## Other clients
 
