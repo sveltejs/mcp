@@ -5,9 +5,6 @@ import { redirect } from '@sveltejs/kit';
 import { track } from '@vercel/analytics/server';
 
 export async function handle({ event, resolve }) {
-	if (event.request.method === 'POST') {
-		console.log(await event.request.clone().text());
-	}
 	if (event.request.method === 'GET') {
 		const accept = event.request.headers.get('accept');
 		if (accept) {
