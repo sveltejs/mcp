@@ -26,7 +26,7 @@ export const server = new McpServer(
 	},
 ).withContext<{
 	db: LibSQLDatabase<Schema>;
-	track?: (sessionId: string, event: string, slug?: string) => Promise<void>;
+	track?: (sessionId: string, event: string, extra?: string) => Promise<void>;
 }>();
 
 export type SvelteMcp = typeof server;
@@ -34,3 +34,8 @@ export type SvelteMcp = typeof server;
 setup_tools(server);
 setup_resources(server);
 setup_prompts(server);
+
+server.on('initialize', async ({ clientInfo: client_info }) => {
+	if (!server.ctx.custom?.track || !server.ctx.sessionId) return;
+	server.ctx.custom.track(server.ctx.sessionId, 'initialize', client_info.name);
+});

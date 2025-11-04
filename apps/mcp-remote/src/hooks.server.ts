@@ -21,8 +21,8 @@ export async function handle({ event, resolve }) {
 		// only add analytics in production
 		track: dev
 			? undefined
-			: async (session_id, event, slug) => {
-					await track(event, { session_id, ...(slug ? { slug } : {}) });
+			: async (session_id, event, extra) => {
+					await track(event, { session_id, ...(extra ? { extra } : {}) });
 				},
 	});
 	// we are deploying on vercel the SSE connection will timeout after 5 minutes...for
