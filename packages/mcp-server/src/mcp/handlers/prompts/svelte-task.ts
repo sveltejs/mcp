@@ -15,6 +15,8 @@ ${available_docs}
 
 </available-docs>
 
+If you need testing patterns for Svelte components using vitest-browser-svelte (real browser testing), you can invoke the \`get-sveltest-patterns\` tool with pattern types like "setup", "component-testing", "form-testing", "runes-testing", "locators", "mocking", "troubleshooting", or "best-practices". This provides modern testing patterns for Svelte 5 applications.
+
 Every time you write a Svelte component or a Svelte module you MUST invoke the \`svelte-autofixer\` tool providing the code. The tool will return a list of issues or suggestions. If there are any issues or suggestions you MUST fix them and call the tool again with the updated code. You MUST keep doing this until the tool returns no issues or suggestions. Only then you can return the code to the user.
 
 This is the task you will work on:
