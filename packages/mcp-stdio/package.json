@@ -9,7 +9,7 @@
 		"url": "https://github.com/sveltejs/mcp/issues"
 	},
 	"bin": {
-		"svelte-mcp": "./dist/index.js"
+		"svelte-mcp": "./dist/index.mjs"
 	},
 	"repository": {
 		"type": "git",
