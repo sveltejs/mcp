@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.12
+
+### Patch Changes
+
+- chore: update tmcp ([#99](https://github.com/sveltejs/mcp/pull/99))
+
 ## 0.1.11
 
 ### Patch Changes
