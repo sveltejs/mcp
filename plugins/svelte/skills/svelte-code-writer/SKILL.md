@@ -1,5 +1,5 @@
 ---
-name: svelte5-code-writer
+name: svelte-code-writer
 description: Expert guidance for writing proper Svelte 5 code with runes-based reactivity. Use when writing Svelte 5 components, migrating from Svelte 4, or troubleshooting Svelte 5 syntax. Covers $state, $derived, $effect, $props, $bindable, event handling, snippets, TypeScript integration, and common pitfalls.
 ---
 
