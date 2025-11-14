@@ -6,13 +6,13 @@
 
 ```svelte
 <script lang="ts">
-  interface Props {
-    name: string;
-    age: number;
-    email?: string;
-  }
-  
-  let { name, age, email }: Props = $props();
+	interface Props {
+		name: string;
+		age: number;
+		email?: string;
+	}
+
+	let { name, age, email }: Props = $props();
 </script>
 ```
 
@@ -22,7 +22,7 @@ For simple components:
 
 ```svelte
 <script lang="ts">
-  let { name, age }: { name: string; age: number } = $props();
+	let { name, age }: { name: string; age: number } = $props();
 </script>
 ```
 
@@ -32,9 +32,9 @@ For simple components:
 
 ```svelte
 <script lang="ts">
-  let count: number = $state(0);
-  let name: string = $state('Alice');
-  let user: User | null = $state(null);
+	let count: number = $state(0);
+	let name: string = $state('Alice');
+	let user: User | null = $state(null);
 </script>
 ```
 
@@ -42,12 +42,12 @@ For simple components:
 
 ```svelte
 <script lang="ts">
-  // Will be set later
-  let data = $state<Data | undefined>();
-  
-  $effect(() => {
-    fetchData().then(d => data = d);
-  });
+	// Will be set later
+	let data = $state<Data | undefined>();
+
+	$effect(() => {
+		fetchData().then((d) => (data = d));
+	});
 </script>
 ```
 
@@ -55,14 +55,14 @@ For simple components:
 
 ```svelte
 <script lang="ts">
-  interface Todo {
-    id: number;
-    text: string;
-    done: boolean;
-  }
-  
-  let todos = $state<Todo[]>([]);
-  let user = $state<User>({ name: '', email: '' });
+	interface Todo {
+		id: number;
+		text: string;
+		done: boolean;
+	}
+
+	let todos = $state<Todo[]>([]);
+	let user = $state<User>({ name: '', email: '' });
 </script>
 ```
 
@@ -70,18 +70,18 @@ For simple components:
 
 ```svelte
 <script lang="ts">
-  class Counter {
-    // Will be initialized in constructor
-    count = $state() as number;
-    
-    constructor(initial: number) {
-      this.count = initial;
-    }
-    
-    increment() {
-      this.count++;
-    }
-  }
+	class Counter {
+		// Will be initialized in constructor
+		count = $state() as number;
+
+		constructor(initial: number) {
+			this.count = initial;
+		}
+
+		increment() {
+			this.count++;
+		}
+	}
 </script>
 ```
 
@@ -89,22 +89,22 @@ For simple components:
 
 ```svelte
 <script lang="ts">
-  let count = $state(0);
-  
-  // Type is inferred
-  let doubled = $derived(count * 2);
-  
-  // Explicit type
-  let message: string = $derived(`Count is ${count}`);
-  
-  // Complex derivation
-  let summary = $derived.by((): Summary => {
-    return {
-      count,
-      doubled: count * 2,
-      status: count > 10 ? 'high' : 'low'
-    };
-  });
+	let count = $state(0);
+
+	// Type is inferred
+	let doubled = $derived(count * 2);
+
+	// Explicit type
+	let message: string = $derived(`Count is ${count}`);
+
+	// Complex derivation
+	let summary = $derived.by((): Summary => {
+		return {
+			count,
+			doubled: count * 2,
+			status: count > 10 ? 'high' : 'low',
+		};
+	});
 </script>
 ```
 
@@ -114,42 +114,42 @@ For simple components:
 
 ```svelte
 <script lang="ts">
-  interface Props {
-    // Required props
-    id: number;
-    name: string;
-    
-    // Optional props
-    email?: string;
-    age?: number;
-    
-    // Props with defaults (optional)
-    role?: 'admin' | 'user';
-    active?: boolean;
-    
-    // Functions
-    onClick?: (event: MouseEvent) => void;
-    onSubmit: (data: FormData) => void;
-    
-    // Snippets
-    children?: Snippet;
-    header?: Snippet;
-    row?: Snippet<[Item]>;
-  }
-  
-  let {
-    id,
-    name,
-    email,
-    age,
-    role = 'user',
-    active = true,
-    onClick,
-    onSubmit,
-    children,
-    header,
-    row
-  }: Props = $props();
+	interface Props {
+		// Required props
+		id: number;
+		name: string;
+
+		// Optional props
+		email?: string;
+		age?: number;
+
+		// Props with defaults (optional)
+		role?: 'admin' | 'user';
+		active?: boolean;
+
+		// Functions
+		onClick?: (event: MouseEvent) => void;
+		onSubmit: (data: FormData) => void;
+
+		// Snippets
+		children?: Snippet;
+		header?: Snippet;
+		row?: Snippet<[Item]>;
+	}
+
+	let {
+		id,
+		name,
+		email,
+		age,
+		role = 'user',
+		active = true,
+		onClick,
+		onSubmit,
+		children,
+		header,
+		row,
+	}: Props = $props();
 </script>
 ```
 
@@ -157,23 +157,23 @@ For simple components:
 
 ```svelte
 <script lang="ts" generics="T extends { id: number }">
-  interface Props {
-    items: T[];
-    onSelect: (item: T) => void;
-    renderItem?: Snippet<[T]>;
-  }
-  
-  let { items, onSelect, renderItem }: Props = $props();
+	interface Props {
+		items: T[];
+		onSelect: (item: T) => void;
+		renderItem?: Snippet<[T]>;
+	}
+
+	let { items, onSelect, renderItem }: Props = $props();
 </script>
 
 {#each items as item (item.id)}
-  <button onclick={() => onSelect(item)}>
-    {#if renderItem}
-      {@render renderItem(item)}
-    {:else}
-      {item.id}
-    {/if}
-  </button>
+	<button onclick={() => onSelect(item)}>
+		{#if renderItem}
+			{@render renderItem(item)}
+		{:else}
+			{item.id}
+		{/if}
+	</button>
 {/each}
 ```
 
@@ -181,12 +181,12 @@ For simple components:
 
 ```svelte
 <script lang="ts" generics="T, U extends keyof T">
-  interface Props {
-    data: T;
-    key: U;
-  }
-  
-  let { data, key }: Props = $props();
+	interface Props {
+		data: T;
+		key: U;
+	}
+
+	let { data, key }: Props = $props();
 </script>
 
 <p>{data[key]}</p>
@@ -196,16 +196,16 @@ For simple components:
 
 ```svelte
 <script lang="ts" generics="T extends Record<string, any>">
-  interface Props {
-    data: T;
-    keys: Array<keyof T>;
-  }
-  
-  let { data, keys }: Props = $props();
+	interface Props {
+		data: T;
+		keys: Array<keyof T>;
+	}
+
+	let { data, keys }: Props = $props();
 </script>
 
 {#each keys as key}
-  <div>{key}: {data[key]}</div>
+	<div>{key}: {data[key]}</div>
 {/each}
 ```
 
@@ -215,9 +215,9 @@ For simple components:
 
 ```svelte
 <script lang="ts">
-  import type { Snippet } from 'svelte';
-  
-  let { children }: { children?: Snippet } = $props();
+	import type { Snippet } from 'svelte';
+
+	let { children }: { children?: Snippet } = $props();
 </script>
 
 {@render children?.()}
@@ -227,19 +227,21 @@ For simple components:
 
 ```svelte
 <script lang="ts">
-  import type { Snippet } from 'svelte';
-  
-  interface User {
-    id: number;
-    name: string;
-  }
-  
-  let { row }: { row: Snippet<[User]> } = $props();
-  let users: User[] = [/* ... */];
+	import type { Snippet } from 'svelte';
+
+	interface User {
+		id: number;
+		name: string;
+	}
+
+	let { row }: { row: Snippet<[User]> } = $props();
+	let users: User[] = [
+		/* ... */
+	];
 </script>
 
 {#each users as user}
-  {@render row(user)}
+	{@render row(user)}
 {/each}
 ```
 
@@ -247,13 +249,13 @@ For simple components:
 
 ```svelte
 <script lang="ts">
-  import type { Snippet } from 'svelte';
-  
-  let {
-    cell
-  }: {
-    cell: Snippet<[number, number, string]>  // row, col, value
-  } = $props();
+	import type { Snippet } from 'svelte';
+
+	let {
+		cell,
+	}: {
+		cell: Snippet<[number, number, string]>; // row, col, value
+	} = $props();
 </script>
 
 {@render cell(0, 0, 'A1')}
@@ -263,15 +265,15 @@ For simple components:
 
 ```svelte
 <script lang="ts">
-  import type { Snippet } from 'svelte';
-  
-  let {
-    header,
-    footer
-  }: {
-    header?: Snippet;
-    footer?: Snippet;
-  } = $props();
+	import type { Snippet } from 'svelte';
+
+	let {
+		header,
+		footer,
+	}: {
+		header?: Snippet;
+		footer?: Snippet;
+	} = $props();
 </script>
 
 {@render header?.()}
@@ -283,13 +285,13 @@ For simple components:
 
 ```svelte
 <script lang="ts">
-  let {
-    value = $bindable(''),
-    count = $bindable(0)
-  }: {
-    value?: string;
-    count?: number;
-  } = $props();
+	let {
+		value = $bindable(''),
+		count = $bindable(0),
+	}: {
+		value?: string;
+		count?: number;
+	} = $props();
 </script>
 ```
 
@@ -299,12 +301,12 @@ For simple components:
 
 ```svelte
 <script lang="ts">
-  import type { Component } from 'svelte';
-  import ComponentA from './A.svelte';
-  import ComponentB from './B.svelte';
-  
-  // Type for dynamic component
-  let Current: Component<{ name: string }> = $state(ComponentA);
+	import type { Component } from 'svelte';
+	import ComponentA from './A.svelte';
+	import ComponentB from './B.svelte';
+
+	// Type for dynamic component
+	let Current: Component<{ name: string }> = $state(ComponentA);
 </script>
 
 <Current name="test" />
@@ -316,15 +318,15 @@ Extract props from a component:
 
 ```svelte
 <script lang="ts">
-  import type { ComponentProps } from 'svelte';
-  import MyComponent from './MyComponent.svelte';
-  
-  type MyProps = ComponentProps<typeof MyComponent>;
-  
-  const props: MyProps = {
-    name: 'Alice',
-    age: 30
-  };
+	import type { ComponentProps } from 'svelte';
+	import MyComponent from './MyComponent.svelte';
+
+	type MyProps = ComponentProps<typeof MyComponent>;
+
+	const props: MyProps = {
+		name: 'Alice',
+		age: 30,
+	};
 </script>
 
 <MyComponent {...props} />
@@ -334,9 +336,9 @@ Extract props from a component:
 
 ```svelte
 <script lang="ts">
-  import MyComponent from './MyComponent.svelte';
-  
-  let instance: MyComponent;
+	import MyComponent from './MyComponent.svelte';
+
+	let instance: MyComponent;
 </script>
 
 <MyComponent bind:this={instance} />
@@ -348,21 +350,21 @@ Extract props from a component:
 
 ```svelte
 <script lang="ts">
-  function handleClick(event: MouseEvent) {
-    const button = event.currentTarget as HTMLButtonElement;
-    console.log(button.textContent);
-  }
-  
-  function handleInput(event: Event) {
-    const input = event.target as HTMLInputElement;
-    console.log(input.value);
-  }
-  
-  function handleSubmit(event: SubmitEvent) {
-    event.preventDefault();
-    const form = event.currentTarget as HTMLFormElement;
-    const formData = new FormData(form);
-  }
+	function handleClick(event: MouseEvent) {
+		const button = event.currentTarget as HTMLButtonElement;
+		console.log(button.textContent);
+	}
+
+	function handleInput(event: Event) {
+		const input = event.target as HTMLInputElement;
+		console.log(input.value);
+	}
+
+	function handleSubmit(event: SubmitEvent) {
+		event.preventDefault();
+		const form = event.currentTarget as HTMLFormElement;
+		const formData = new FormData(form);
+	}
 </script>
 
 <button onclick={handleClick}>Click</button>
@@ -374,13 +376,13 @@ Extract props from a component:
 
 ```svelte
 <script lang="ts">
-  interface Events {
-    click?: (event: MouseEvent) => void;
-    submit?: (data: FormData) => void;
-    change?: (value: string) => void;
-  }
-  
-  let { click, submit, change }: Events = $props();
+	interface Events {
+		click?: (event: MouseEvent) => void;
+		submit?: (data: FormData) => void;
+		change?: (value: string) => void;
+	}
+
+	let { click, submit, change }: Events = $props();
 </script>
 ```
 
@@ -390,20 +392,20 @@ Extract props from a component:
 
 ```svelte
 <script lang="ts">
-  let div: HTMLDivElement;
-  let input: HTMLInputElement;
-  let canvas: HTMLCanvasElement;
-  
-  $effect(() => {
-    if (div) {
-      console.log(div.offsetWidth);
-    }
-    
-    if (canvas) {
-      const ctx = canvas.getContext('2d');
-      // ctx is CanvasRenderingContext2D | null
-    }
-  });
+	let div: HTMLDivElement;
+	let input: HTMLInputElement;
+	let canvas: HTMLCanvasElement;
+
+	$effect(() => {
+		if (div) {
+			console.log(div.offsetWidth);
+		}
+
+		if (canvas) {
+			const ctx = canvas.getContext('2d');
+			// ctx is CanvasRenderingContext2D | null
+		}
+	});
 </script>
 
 <div bind:this={div}>Content</div>
@@ -420,11 +422,11 @@ Extend HTML attributes for custom elements:
 import type { HTMLAttributes } from 'svelte/elements';
 
 declare module 'svelte/elements' {
-  export interface SvelteHTMLElements {
-    'custom-element': HTMLAttributes<HTMLElement> & {
-      'custom-prop'?: string;
-    };
-  }
+	export interface SvelteHTMLElements {
+		'custom-element': HTMLAttributes<HTMLElement> & {
+			'custom-prop'?: string;
+		};
+	}
 }
 ```
 
@@ -432,33 +434,28 @@ declare module 'svelte/elements' {
 
 ```svelte
 <script lang="ts">
-  import type { Action } from 'svelte/action';
-  
-  interface ClickOutsideParams {
-    enabled: boolean;
-    callback: () => void;
-  }
-  
-  const clickOutside: Action<HTMLElement, ClickOutsideParams> = (
-    node,
-    params
-  ) => {
-    function handleClick(event: MouseEvent) {
-      if (params.enabled && !node.contains(event.target as Node)) {
-        params.callback();
-      }
-    }
-    
-    $effect(() => {
-      document.addEventListener('click', handleClick);
-      return () => document.removeEventListener('click', handleClick);
-    });
-  };
+	import type { Action } from 'svelte/action';
+
+	interface ClickOutsideParams {
+		enabled: boolean;
+		callback: () => void;
+	}
+
+	const clickOutside: Action<HTMLElement, ClickOutsideParams> = (node, params) => {
+		function handleClick(event: MouseEvent) {
+			if (params.enabled && !node.contains(event.target as Node)) {
+				params.callback();
+			}
+		}
+
+		$effect(() => {
+			document.addEventListener('click', handleClick);
+			return () => document.removeEventListener('click', handleClick);
+		});
+	};
 </script>
 
-<div use:clickOutside={{ enabled: true, callback: () => {} }}>
-  Content
-</div>
+<div use:clickOutside={{ enabled: true, callback: () => {} }}>Content</div>
 ```
 
 ## Wrapper Components
@@ -467,17 +464,17 @@ declare module 'svelte/elements' {
 
 ```svelte
 <script lang="ts">
-  import type { HTMLButtonAttributes } from 'svelte/elements';
-  
-  interface Props extends HTMLButtonAttributes {
-    variant?: 'primary' | 'secondary';
-  }
-  
-  let { variant = 'primary', children, ...rest }: Props = $props();
+	import type { HTMLButtonAttributes } from 'svelte/elements';
+
+	interface Props extends HTMLButtonAttributes {
+		variant?: 'primary' | 'secondary';
+	}
+
+	let { variant = 'primary', children, ...rest }: Props = $props();
 </script>
 
 <button class={variant} {...rest}>
-  {@render children?.()}
+	{@render children?.()}
 </button>
 ```
 
@@ -485,21 +482,21 @@ declare module 'svelte/elements' {
 
 ```svelte
 <script lang="ts">
-  import type { SvelteHTMLElements } from 'svelte/elements';
-  
-  let {
-    as = 'div',
-    children,
-    ...rest
-  }: {
-    as?: keyof SvelteHTMLElements;
-    children?: Snippet;
-    [key: string]: any;
-  } = $props();
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
+	let {
+		as = 'div',
+		children,
+		...rest
+	}: {
+		as?: keyof SvelteHTMLElements;
+		children?: Snippet;
+		[key: string]: any;
+	} = $props();
 </script>
 
 <svelte:element this={as} {...rest}>
-  {@render children?.()}
+	{@render children?.()}
 </svelte:element>
 ```
 
@@ -509,18 +506,18 @@ If still using stores:
 
 ```svelte
 <script lang="ts">
-  import { writable, type Writable } from 'svelte/store';
-  
-  interface User {
-    name: string;
-    email: string;
-  }
-  
-  const user: Writable<User | null> = writable(null);
+	import { writable, type Writable } from 'svelte/store';
+
+	interface User {
+		name: string;
+		email: string;
+	}
+
+	const user: Writable<User | null> = writable(null);
 </script>
 
 {#if $user}
-  <p>{$user.name}</p>
+	<p>{$user.name}</p>
 {/if}
 ```
 
@@ -530,21 +527,21 @@ If still using stores:
 
 ```svelte
 <script lang="ts">
-  type State =
-    | { status: 'idle' }
-    | { status: 'loading' }
-    | { status: 'success'; data: Data }
-    | { status: 'error'; error: Error };
-  
-  let state = $state<State>({ status: 'idle' });
+	type State =
+		| { status: 'idle' }
+		| { status: 'loading' }
+		| { status: 'success'; data: Data }
+		| { status: 'error'; error: Error };
+
+	let state = $state<State>({ status: 'idle' });
 </script>
 
 {#if state.status === 'loading'}
-  <p>Loading...</p>
+	<p>Loading...</p>
 {:else if state.status === 'success'}
-  <DataView data={state.data} />
+	<DataView data={state.data} />
 {:else if state.status === 'error'}
-  <p>Error: {state.error.message}</p>
+	<p>Error: {state.error.message}</p>
 {/if}
 ```
 
@@ -552,15 +549,15 @@ If still using stores:
 
 ```svelte
 <script lang="ts">
-  type Props =
-    | { mode: 'view'; data: Data }
-    | { mode: 'edit'; data: Data; onSave: (data: Data) => void };
-  
-  let props = $props() as Props;
+	type Props =
+		| { mode: 'view'; data: Data }
+		| { mode: 'edit'; data: Data; onSave: (data: Data) => void };
+
+	let props = $props() as Props;
 </script>
 
 {#if props.mode === 'edit'}
-  <button onclick={() => props.onSave(props.data)}>Save</button>
+	<button onclick={() => props.onSave(props.data)}>Save</button>
 {/if}
 ```
 
@@ -568,23 +565,18 @@ If still using stores:
 
 ```svelte
 <script lang="ts">
-  function isUser(value: unknown): value is User {
-    return (
-      typeof value === 'object' &&
-      value !== null &&
-      'name' in value &&
-      'email' in value
-    );
-  }
-  
-  let data: unknown = $state(null);
-  
-  $effect(() => {
-    if (isUser(data)) {
-      // data is User here
-      console.log(data.name);
-    }
-  });
+	function isUser(value: unknown): value is User {
+		return typeof value === 'object' && value !== null && 'name' in value && 'email' in value;
+	}
+
+	let data: unknown = $state(null);
+
+	$effect(() => {
+		if (isUser(data)) {
+			// data is User here
+			console.log(data.name);
+		}
+	});
 </script>
 ```
 
@@ -594,20 +586,20 @@ Recommended settings:
 
 ```json
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+	"compilerOptions": {
+		"target": "ES2022",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"verbatimModuleSyntax": true,
+		"isolatedModules": true,
+		"strict": true,
+		"skipLibCheck": true,
+		"resolveJsonModule": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules"]
 }
 ```
 
@@ -617,17 +609,17 @@ Recommended settings:
 
 ```svelte
 <script lang="ts">
-  let items = $state<Item[]>([]);
-  
-  // Type not inferred automatically
-  let first = $derived.by(() => {
-    return items[0]; // May need explicit return type
-  });
-  
-  // Better: Add explicit type
-  let first = $derived.by((): Item | undefined => {
-    return items[0];
-  });
+	let items = $state<Item[]>([]);
+
+	// Type not inferred automatically
+	let first = $derived.by(() => {
+		return items[0]; // May need explicit return type
+	});
+
+	// Better: Add explicit type
+	let first = $derived.by((): Item | undefined => {
+		return items[0];
+	});
 </script>
 ```
 
@@ -635,12 +627,12 @@ Recommended settings:
 
 ```svelte
 <script lang="ts">
-  import type { Snippet } from 'svelte';
-  
-  // Must specify tuple type for parameters
-  let { row }: { row: Snippet<[Item]> } = $props();
-  
-  // Not: Snippet<Item> (incorrect)
+	import type { Snippet } from 'svelte';
+
+	// Must specify tuple type for parameters
+	let { row }: { row: Snippet<[Item]> } = $props();
+
+	// Not: Snippet<Item> (incorrect)
 </script>
 ```
 
@@ -648,13 +640,13 @@ Recommended settings:
 
 ```svelte
 <script lang="ts" generics="T">
-  // Must constrain generic if accessing properties
-  interface Props {
-    items: T[]; // Works
-    getKey: (item: T) => string; // Works
-  }
-  
-  // If you need to access item.id:
-  // generics="T extends { id: string }"
+	// Must constrain generic if accessing properties
+	interface Props {
+		items: T[]; // Works
+		getKey: (item: T) => string; // Works
+	}
+
+	// If you need to access item.id:
+	// generics="T extends { id: string }"
 </script>
 ```
