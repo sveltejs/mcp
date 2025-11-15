@@ -14,14 +14,20 @@ export class AnthropicProvider {
 	private apiKey: string;
 	name = 'Anthropic';
 
-	constructor(model_id: Model, api_key: string) {
+	constructor(model_id: Model, api_key: string, base_url: string = 'https://api.anthropic.com/v1') {
 		if (!api_key) {
 			throw new Error('ANTHROPIC_API_KEY is required');
 		}
 		this.apiKey = api_key;
-		this.client = new Anthropic({ apiKey: api_key, timeout: 1800000 });
 		this.modelId = model_id;
-		this.baseUrl = 'https://api.anthropic.com/v1';
+		// Remove trailing slash if present to prevent double slashes in URLs
+		this.baseUrl = base_url.replace(/\/$/, '');
+
+		this.client = new Anthropic({
+			apiKey: api_key,
+			timeout: 1800000,
+			baseURL: this.baseUrl,
+		});
 	}
 
 	get_client(): Anthropic {
@@ -108,8 +114,7 @@ export class AnthropicProvider {
 						error,
 					);
 					throw new Error(
-						`Failed to get batch status after ${max_retries} retries: ${
-							error instanceof Error ? error.message : String(error)
+						`Failed to get batch status after ${max_retries} retries: ${error instanceof Error ? error.message : String(error)
 						}`,
 					);
 				}

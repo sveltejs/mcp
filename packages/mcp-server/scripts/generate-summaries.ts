@@ -74,6 +74,9 @@ async function main() {
 		process.exit(1);
 	}
 
+	// Get base URL (optional, defaults to Anthropic's API)
+	const base_url = process.env.ANTHROPIC_BASE_URL;
+
 	// Get all sections
 	console.log('📚 Fetching documentation sections...');
 	let sections = await get_sections();
@@ -121,7 +124,7 @@ async function main() {
 
 	// Initialize Anthropic client
 	console.log('🤖 Initializing Anthropic API...');
-	const anthropic = new AnthropicProvider('claude-sonnet-4-5-20250929', api_key);
+	const anthropic = new AnthropicProvider('claude-sonnet-4-5-20250929', api_key, base_url);
 
 	// Prepare batch requests
 	console.log('📦 Preparing batch requests...');
