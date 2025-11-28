@@ -1,6 +1,7 @@
 {
 	"$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
-	"name": "dev.svelte/svelte",
+	"name": "dev.svelte/mcp",
+	"title": "Svelte MCP",
 	"description": "The official Svelte MCP server providing docs and autofixing tools for Svelte development",
 	"repository": {
 		"id": "1054419133",

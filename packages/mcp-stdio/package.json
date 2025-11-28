@@ -3,7 +3,7 @@
 	"version": "0.1.12",
 	"type": "module",
 	"license": "MIT",
-	"mcpName": "dev.svelte/svelte",
+	"mcpName": "dev.svelte/mcp",
 	"homepage": "https://github.com/sveltejs/mcp#readme",
 	"bugs": {
 		"url": "https://github.com/sveltejs/mcp/issues"
