@@ -1,5 +1,13 @@
 # @sveltejs/mcp
 
+## 0.1.12
+
+### Patch Changes
+
+- fix: update server name on mcp registry ([`60297b3`](https://github.com/sveltejs/mcp/commit/60297b3c49bf110b48908e61b5d5d902ea1bdf39))
+
+- chore: update tmcp ([#99](https://github.com/sveltejs/mcp/pull/99))
+
 ## 0.1.11
 
 ### Patch Changes
