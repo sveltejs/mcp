@@ -17,7 +17,7 @@
 		".": "./src/index.ts"
 	},
 	"peerDependencies": {
-		"drizzle-orm": "^0.44.0"
+		"drizzle-orm": "^0.45.0"
 	},
 	"dependencies": {
 		"@mcp-ui/server": "catalog:ai",
