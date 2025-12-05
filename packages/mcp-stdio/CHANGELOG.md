@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.13
+
+### Patch Changes
+
+- fix: revert name change and add title ([`98efa1e`](https://github.com/sveltejs/mcp/commit/98efa1e09ebcca7827b10dc6bc8e1699fc1e5171))
+
 ## 0.1.12
 
 ### Patch Changes
