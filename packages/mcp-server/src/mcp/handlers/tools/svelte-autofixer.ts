@@ -5,6 +5,7 @@ import { add_compile_issues } from '../../autofixers/add-compile-issues.js';
 import { add_eslint_issues } from '../../autofixers/add-eslint-issues.js';
 import { add_autofixers_issues } from '../../autofixers/add-autofixers-issues.js';
 import { icons } from '../../icons/index.js';
+import { tool } from 'tmcp/utils';
 
 export function svelte_autofixer(server: SvelteMcp) {
 	server.tool(
@@ -65,29 +66,15 @@ export function svelte_autofixer(server: SvelteMcp) {
 				if (server.ctx.sessionId && server.ctx.custom?.track) {
 					await server.ctx.custom?.track?.(server.ctx.sessionId, 'svelte-autofixer-wrong-version');
 				}
-				return {
-					isError: true,
-					content: [
-						{
-							type: 'text',
-							text: `The desired_svelte_version MUST be either 4 or 5 but received "${desired_svelte_version_unchecked}"`,
-						},
-					],
-				};
+				return tool.error(
+					`The desired_svelte_version MUST be either 4 or 5 but received "${desired_svelte_version_unchecked}"`,
+				);
 			}
 
 			const desired_svelte_version = parsed_version.output;
 
 			if (async && +desired_svelte_version < 5) {
-				return {
-					isError: true,
-					content: [
-						{
-							type: 'text',
-							text: `The async option can only be used with Svelte version 5 or higher.`,
-						},
-					],
-				};
+				return tool.error('The async option can only be used with Svelte version 5 or higher.');
 			}
 
 			const content: {
@@ -126,15 +113,7 @@ export function svelte_autofixer(server: SvelteMcp) {
 				content.require_another_tool_call_after_fixing = true;
 			}
 
-			return {
-				content: [
-					{
-						type: 'text',
-						text: JSON.stringify(content),
-					},
-				],
-				structuredContent: content,
-			};
+			return tool.structured(content);
 		},
 	);
 }

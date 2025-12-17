@@ -3,6 +3,7 @@ import * as v from 'valibot';
 import { get_sections, fetch_with_timeout, format_sections_list } from '../../utils.js';
 import { SECTIONS_LIST_INTRO, SECTIONS_LIST_OUTRO } from './prompts.js';
 import { icons } from '../../icons/index.js';
+import { tool } from 'tmcp/utils';
 
 export function get_documentation(server: SvelteMcp) {
 	server.tool(
@@ -107,14 +108,7 @@ export function get_documentation(server: SvelteMcp) {
 				final_text += `\n\n---\n\n${SECTIONS_LIST_INTRO}\n\n${formatted_sections}\n\n${SECTIONS_LIST_OUTRO}`;
 			}
 
-			return {
-				content: [
-					{
-						type: 'text',
-						text: final_text,
-					},
-				],
-			};
+			return tool.text(final_text);
 		},
 	);
 }

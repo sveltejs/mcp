@@ -2,6 +2,7 @@ import type { SvelteMcp } from '../../index.js';
 import { format_sections_list } from '../../utils.js';
 import { SECTIONS_LIST_INTRO, SECTIONS_LIST_OUTRO } from './prompts.js';
 import { icons } from '../../icons/index.js';
+import { tool } from 'tmcp/utils';
 
 export function list_sections(server: SvelteMcp) {
 	server.tool(
@@ -17,14 +18,7 @@ export function list_sections(server: SvelteMcp) {
 			}
 			const formatted_sections = await format_sections_list();
 
-			return {
-				content: [
-					{
-						type: 'text',
-						text: `${SECTIONS_LIST_INTRO}\n\n${formatted_sections}\n\n${SECTIONS_LIST_OUTRO}`,
-					},
-				],
-			};
+			return tool.text(`${SECTIONS_LIST_INTRO}\n\n${formatted_sections}\n\n${SECTIONS_LIST_OUTRO}`);
 		},
 	);
 }
