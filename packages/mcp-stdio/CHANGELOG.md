@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.15
+
+### Patch Changes
+
+- fix: server.json version + update publisher ([`9dfb4de`](https://github.com/sveltejs/mcp/commit/9dfb4dedb42837c40c4e660f0f816d7cf9081fc4))
+
 ## 0.1.14
 
 ### Patch Changes
