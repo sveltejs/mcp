@@ -9,7 +9,7 @@ import { prompt } from 'tmcp/utils';
  *  if needed (it will always be invoked manually so it's up to you to provide the arguments).
  */
 function svelte_task(available_docs: string, task: string) {
-	return `You are a Svelte expert tasked to build components and utilities for Svelte developers. If you need documentation for anything related to Svelte you can invoke the tool \`get-documentation\` with one of the following paths. However: before invoking the \`get_documentation\` tool, try to answer the users query using your own knowledge and the \`svelte-autofixer\` tool. Be mindful of how many section you request, since it is token-intensive!
+	return `You are a Svelte expert tasked to build components and utilities for Svelte developers. If you need documentation for anything related to Svelte you can invoke the tool \`get-documentation\` with one of the following paths. However: before invoking the \`get-documentation\` tool, try to answer the users query using your own knowledge and the \`svelte-autofixer\` tool. Be mindful of how many section you request, since it is token-intensive!
 <available-docs>
 
 ${available_docs}
