@@ -8,12 +8,14 @@ import { icons } from '../../icons/index.js';
  *  if needed (it will always be invoked manually so it's up to you to provide the arguments).
  */
 function svelte_task(available_docs: string, task: string) {
-	return `You are a Svelte expert tasked to build components and utilities for Svelte developers. If you need documentation for anything related to Svelte you can invoke the tool \`get_documentation\` with one of the following paths:
+	return `You are a Svelte expert tasked to build components and utilities for Svelte developers. If you need documentation for anything related to Svelte you can invoke the tool \`get_documentation\` with one of the following paths but please before invoking it try to answer using your own knowledge and the \`svelte-autofixer\` tool and be mindful of over querying since it's token intensive:
 <available-docs>
 
 ${available_docs}
 
 </available-docs>
+
+These are the available documentation sections that \`list-sections\` will return, no need to call it again.
 
 Every time you write a Svelte component or a Svelte module you MUST invoke the \`svelte-autofixer\` tool providing the code. The tool will return a list of issues or suggestions. If there are any issues or suggestions you MUST fix them and call the tool again with the updated code. You MUST keep doing this until the tool returns no issues or suggestions. Only then you can return the code to the user.
 
