@@ -1,6 +1,7 @@
 import type { SvelteMcp } from '../../index.js';
 import { get_sections, fetch_with_timeout } from '../../utils.js';
 import { icons } from '../../icons/index.js';
+import { resource } from 'tmcp/utils';
 
 export async function list_sections(server: SvelteMcp) {
 	const sections = await get_sections();
@@ -59,15 +60,7 @@ export async function list_sections(server: SvelteMcp) {
 			if (!section) throw new Error(`Section not found: ${slug}`);
 			const response = await fetch_with_timeout(section.url);
 			const content = await response.text();
-			return {
-				contents: [
-					{
-						uri,
-						type: 'text',
-						text: content,
-					},
-				],
-			};
+			return resource.text(uri, content);
 		},
 	);
 }

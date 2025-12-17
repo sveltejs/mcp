@@ -1,12 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { InMemoryTransport } from '@tmcp/transport-in-memory';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { server } from '../../index.js';
 
-/**
- * Small utility to create a JSON-RPC request without having to always specify as const
- */
-function request<const T>(request: T) {
-	return request;
-}
+const transport = new InMemoryTransport(server);
+
+let session: ReturnType<typeof transport.session>;
 
 async function autofixer_tool_call(
 	code: string,
@@ -14,51 +13,34 @@ async function autofixer_tool_call(
 	desired_svelte_version = 5,
 	async = false,
 ) {
-	const result = await server.receive({
-		jsonrpc: '2.0',
-		id: 2,
-		method: 'tools/call',
-		params: {
-			name: 'svelte-autofixer',
-			arguments: {
-				code,
-				desired_svelte_version,
-				filename: 'App.svelte',
-				async,
-			},
-		},
+	const result = await session.callTool('svelte-autofixer', {
+		code,
+		desired_svelte_version,
+		filename: 'App.svelte',
+		async,
 	});
 
 	expect(result).toBeDefined();
-	expect(result.result).toBeDefined();
 	if (is_error) {
-		return result.result;
+		return result as any;
 	}
-	expect(result.result.structuredContent).toBeDefined();
-	return result.result.structuredContent;
+	expect(result.structuredContent).toBeDefined();
+	return result.structuredContent as any;
 }
 
 describe('svelte-autofixer tool', () => {
 	beforeEach(async () => {
-		const initialize_request = request({
-			jsonrpc: '2.0',
-			id: 1,
-			method: 'initialize',
-			params: {
-				protocolVersion: '2025-06-18',
-				capabilities: {
-					roots: { listChanged: true },
-				},
-				clientInfo: {
-					name: 'test-client',
-					version: '1.0.0',
-				},
-			},
-		});
+		session = transport.session();
 
-		await server.receive(initialize_request, {
-			sessionId: 'svelte-autofixer-session',
-		});
+		session = transport.session();
+		await session.initialize(
+			'2025-06-18',
+			{},
+			{
+				name: 'test-client',
+				version: '1.0.0',
+			},
+		);
 	});
 
 	it('should add suggestions for js parse errors', async () => {

@@ -23,6 +23,7 @@
 		"@mcp-ui/server": "catalog:ai",
 		"@sveltejs/mcp-schema": "workspace:^",
 		"@tmcp/adapter-valibot": "catalog:tmcp",
+		"@tmcp/transport-in-memory": "catalog:tmcp",
 		"@typescript-eslint/parser": "catalog:lint",
 		"eslint": "catalog:lint",
 		"eslint-plugin-svelte": "catalog:lint",

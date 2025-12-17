@@ -2,18 +2,21 @@ import type { SvelteMcp } from '../../index.js';
 import * as v from 'valibot';
 import { format_sections_list } from '../../utils.js';
 import { icons } from '../../icons/index.js';
+import { prompt } from 'tmcp/utils';
 
 /**
  *  Function that actually generates the prompt string. You can use this in the MCP server handler to generate the prompt, it can accept arguments
  *  if needed (it will always be invoked manually so it's up to you to provide the arguments).
  */
 function svelte_task(available_docs: string, task: string) {
-	return `You are a Svelte expert tasked to build components and utilities for Svelte developers. If you need documentation for anything related to Svelte you can invoke the tool \`get_documentation\` with one of the following paths:
+	return `You are a Svelte expert tasked to build components and utilities for Svelte developers. If you need documentation for anything related to Svelte you can invoke the tool \`get_documentation\` with one of the following paths. However: before invoking the \`get_documentation\` tool, try to answer the users query using your own knowledge and the \`svelte-autofixer\` tool. Be mindful of how many section you request, since it is token-intensive!
 <available-docs>
 
 ${available_docs}
 
 </available-docs>
+
+These are the available documentation sections that \`list-sections\` will return, you do not need to call it again.
 
 Every time you write a Svelte component or a Svelte module you MUST invoke the \`svelte-autofixer\` tool providing the code. The tool will return a list of issues or suggestions. If there are any issues or suggestions you MUST fix them and call the tool again with the updated code. You MUST keep doing this until the tool returns no issues or suggestions. Only then you can return the code to the user.
 
@@ -73,17 +76,7 @@ export function setup_svelte_task(server: SvelteMcp) {
 			}
 			const available_docs = await format_sections_list();
 
-			return {
-				messages: [
-					{
-						role: 'user',
-						content: {
-							type: 'text',
-							text: svelte_task(available_docs, task),
-						},
-					},
-				],
-			};
+			return prompt.text(svelte_task(available_docs, task));
 		},
 	);
 }

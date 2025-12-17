@@ -2,6 +2,7 @@ import type { SvelteMcp } from '../../index.js';
 import * as v from 'valibot';
 import { icons } from '../../icons/index.js';
 import { createUIResource } from '@mcp-ui/server';
+import { tool } from 'tmcp/utils';
 
 async function compress_and_encode_text(input: string) {
 	const reader = new Blob([input]).stream().pipeThrough(new CompressionStream('gzip')).getReader();
@@ -82,17 +83,8 @@ export function playground_link(server: SvelteMcp) {
 				if (server.ctx.sessionId && server.ctx.custom?.track) {
 					await server.ctx.custom?.track?.(server.ctx.sessionId, 'playground-link-no-app-svelte');
 				}
-				return {
-					isError: true,
-					content: [
-						{
-							type: 'text',
-							text: JSON.stringify({
-								error: 'The files must contain an App.svelte file as the entry point',
-							}),
-						},
-					],
-				};
+
+				return tool.error('The files must contain an App.svelte file as the entry point');
 			}
 
 			const playground_config = {
