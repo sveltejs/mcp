@@ -42,7 +42,6 @@ describe('playground-link tool', () => {
 				'App.svelte': `Hi there!`,
 			},
 		});
-		console.dir(result, { depth: null });
 		expect(result.structuredContent).toBeDefined();
 		expect(result.content).toStrictEqual(
 			expect.arrayContaining([
