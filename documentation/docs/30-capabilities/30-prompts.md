@@ -34,6 +34,12 @@ You are a Svelte expert tasked to build components and utilities for Svelte deve
 - title: sveltekit-adapter, use_cases: deployment, production builds, hosting setup, choosing deployment platform, configuring adapters, static site generation, node server, vercel, cloudflare, netlify, path: cli/sveltekit-adapter
 - title: tailwindcss, use_cases: project setup, styling, css framework, rapid prototyping, utility-first css, design systems, responsive design, adding tailwind to svelte, path: cli/tailwind
 - title: vitest, use_cases: testing, unit tests, component testing, test setup, quality assurance, ci/cd pipelines, test-driven development, path: cli/vitest
+- title: Getting Started with Sveltest, use_cases: testing setup, vitest-browser-svelte configuration, browser testing, real browser testing, svelte 5 testing, modern testing setup, path: sveltest/getting-started
+- title: Sveltest Testing Patterns, use_cases: component testing, form testing, async testing, runes testing, browser testing, testing patterns, svelte 5 testing, path: sveltest/testing-patterns
+- title: Sveltest Browser Testing, use_cases: real browser testing, vitest browser mode, playwright integration, browser automation, e2e testing, client-side testing, path: sveltest/browser-testing
+- title: Sveltest Client-Server Alignment, use_cases: full-stack testing, client-server testing, integration testing, form validation testing, api testing, type-safe testing, path: sveltest/client-server-alignment
+- title: Sveltest Common Patterns, use_cases: testing patterns, reusable tests, component testing templates, test structure, accessibility testing, mock verification, path: sveltest/common-patterns
+- title: Sveltest Troubleshooting, use_cases: testing issues, debugging tests, common testing problems, strict mode violations, test hanging, mock signature errors, path: sveltest/troubleshooting
 - title: Introduction, use_cases: learning sveltekit, project setup, understanding framework basics, choosing between svelte and sveltekit, getting started with full-stack apps, path: kit/introduction
 - title: Creating a project, use_cases: project setup, starting new sveltekit app, initial development environment, first-time sveltekit users, scaffolding projects, path: kit/creating-a-project
 - title: Project types, use_cases: deployment, project setup, choosing adapters, ssg, spa, ssr, serverless, mobile apps, desktop apps, pwa, offline apps, browser extensions, separate backend, docker containers, path: kit/project-types
