@@ -1,5 +1,5 @@
 {
-	"$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+	"$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
 	"name": "dev.svelte/mcp",
 	"title": "Svelte MCP",
 	"description": "The official Svelte MCP server providing docs and autofixing tools for Svelte development",
