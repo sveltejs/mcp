@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.14
+
+### Patch Changes
+
+- fix: improve prompt to reduce token usage ([#124](https://github.com/sveltejs/mcp/pull/124))
+
 ## 0.1.13
 
 ### Patch Changes
