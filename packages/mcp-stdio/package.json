@@ -21,7 +21,7 @@
 	],
 	"exports": {
 		".": {
-			"types": "./dist/handlers.d.ts",
+			"types": "./dist/handlers.d.mts",
 			"import": "./dist/handlers.mjs"
 		}
 	},
