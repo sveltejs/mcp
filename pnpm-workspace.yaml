@@ -48,6 +48,7 @@ catalogs:
     dotenv: ^17.2.3
     node-resolve-ts: ^1.0.2
     publint: ^0.3.13
+    sade: 1.8.1
     ts-blank-space: ^0.6.2
     tsdown: ^0.18.0
     typescript: ^5.0.0
