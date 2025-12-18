@@ -19,6 +19,12 @@
 	"files": [
 		"dist"
 	],
+	"exports": {
+		".": {
+			"types": "./dist/handlers.d.ts",
+			"import": "./dist/handlers.mjs"
+		}
+	},
 	"publishConfig": {
 		"access": "public"
 	},
@@ -41,6 +47,7 @@
 	},
 	"dependencies": {
 		"eslint": "catalog:lint",
+		"sade": "^1.8.1",
 		"tmcp": "catalog:tmcp"
 	}
 }
