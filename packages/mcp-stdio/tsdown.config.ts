@@ -2,7 +2,7 @@ import { defineConfig } from 'tsdown';
 
 export default defineConfig([
 	{
-		entry: ['./src/index.ts'],
+		entry: ['./src/index.ts', './src/handlers.ts'],
 		platform: 'node',
 		define: {
 			// some eslint-plugin-svelte code expects __filename to exists but in an ESM environment it does not.
@@ -13,7 +13,9 @@ export default defineConfig([
 		// the require would fail once executed in a project without eslint installed.
 		external: ['eslint'],
 		publint: true,
-		dts: false,
+		dts: {
+			eager: true,
+		},
 		treeshake: true,
 		clean: true,
 		target: 'esnext',

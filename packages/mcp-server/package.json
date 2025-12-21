@@ -14,7 +14,8 @@
 		"debug:generate-summaries": "DEBUG_MODE=1 node scripts/generate-summaries.ts --experimental-strip-types"
 	},
 	"exports": {
-		".": "./src/index.ts"
+		".": "./src/index.ts",
+		"./handlers": "./src/mcp/handlers/tools/handlers.ts"
 	},
 	"peerDependencies": {
 		"drizzle-orm": "^0.45.0"

@@ -128,6 +128,9 @@ catalogs:
     publint:
       specifier: ^0.3.13
       version: 0.3.13
+    sade:
+      specifier: 1.8.1
+      version: 1.8.1
     ts-blank-space:
       specifier: ^0.6.2
       version: 0.6.2
@@ -384,6 +387,9 @@ importers:
       eslint:
         specifier: catalog:lint
         version: 9.36.0(jiti@2.6.0)
+      sade:
+        specifier: catalog:tooling
+        version: 1.8.1
       tmcp:
         specifier: catalog:tmcp
         version: 1.19.0(typescript@5.9.2)
