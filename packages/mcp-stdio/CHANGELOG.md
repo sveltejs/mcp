@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.16
+
+### Patch Changes
+
+- feat: expose tools as JS api + cli ([#128](https://github.com/sveltejs/mcp/pull/128))
+
 ## 0.1.15
 
 ### Patch Changes
