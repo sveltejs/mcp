@@ -53,6 +53,18 @@ describe('svelte-autofixer tool', () => {
 		);
 	});
 
+	it('should add suggestions for snippets declared in script tag', async () => {
+		const content = await autofixer_tool_call(`<script>
+			{#snippet my_snippet()}
+				some content
+			{/snippet}
+		</script>`);
+		expect(content.issues.length).toBeGreaterThan(0);
+		expect(content.suggestions).toContain(
+			"The code can't be compiled because a Javascript parse error. The error suggests you have a `{#snippet ...}` block inside the `<script>` tag. Snippets are template syntax and should be declared in the markup section of the component, not in the script. Move the snippet outside of the `<script>` tag. Snippets declared in the markup can also be accessed in the script tag in case you need them.",
+		);
+	});
+
 	it('should error out if async is true with a version less than 5', async () => {
 		const content = await autofixer_tool_call(
 			`<script>
