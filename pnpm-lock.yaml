@@ -47,8 +47,8 @@ catalogs:
       specifier: ^3.12.5
       version: 3.12.5
     globals:
-      specifier: ^16.0.0
-      version: 16.4.0
+      specifier: ^17.0.0
+      version: 17.0.0
     prettier:
       specifier: ^3.4.2
       version: 3.6.2
@@ -195,7 +195,7 @@ importers:
         version: 3.12.5(eslint@9.36.0(jiti@2.6.0))(svelte@5.39.6)(ts-node@10.9.2(@types/node@24.5.2)(typescript@5.9.2))
       globals:
         specifier: catalog:lint
-        version: 16.4.0
+        version: 17.0.0
       node-resolve-ts:
         specifier: catalog:tooling
         version: 1.0.2
@@ -277,7 +277,7 @@ importers:
         version: 3.12.5(eslint@9.36.0(jiti@2.6.0))(svelte@5.39.6)(ts-node@10.9.2(@types/node@24.5.2)(typescript@5.9.2))
       globals:
         specifier: catalog:lint
-        version: 16.4.0
+        version: 17.0.0
       prettier:
         specifier: catalog:lint
         version: 3.6.2
@@ -2831,6 +2831,10 @@ packages:
 
   globals@16.4.0:
     resolution: {integrity: sha512-ob/2LcVVaVGCYN+r14cnwnoDPUufjiYgSqRhiFD0Q1iI4Odora5RE8Iv1D24hAz5oMophRGkGz+yuvQmmUMnMw==}
+    engines: {node: '>=18'}
+
+  globals@17.0.0:
+    resolution: {integrity: sha512-gv5BeD2EssA793rlFWVPMMCqefTlpusw6/2TbAVMy0FzcG8wKJn4O+NqJ4+XWmmwrayJgw5TzrmWjFgmz1XPqw==}
     engines: {node: '>=18'}
 
   globalthis@1.0.4:
@@ -6794,6 +6798,8 @@ snapshots:
   globals@14.0.0: {}
 
   globals@16.4.0: {}
+
+  globals@17.0.0: {}
 
   globalthis@1.0.4:
     dependencies:
