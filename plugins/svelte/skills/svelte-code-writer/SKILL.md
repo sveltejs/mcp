@@ -1,9 +1,70 @@
 ---
 name: svelte-code-writer
-description: Expert guidance for writing proper Svelte 5 code with runes-based reactivity. Use when writing Svelte 5 components, migrating from Svelte 4, or troubleshooting Svelte 5 syntax. Covers $state, $derived, $effect, $props, $bindable, event handling, snippets, TypeScript integration, and common pitfalls.
+description: Expert guidance for writing proper Svelte 5 code with runes-based reactivity. Use when writing Svelte 5 components, migrating from Svelte 4, or troubleshooting Svelte 5 syntax. Covers $state, $derived, $effect, $props, $bindable, event handling, snippets, TypeScript integration, and common pitfalls. Includes CLI tools for documentation lookup and code analysis.
 ---
 
 # Svelte 5 Code Writer
+
+## CLI Tools
+
+You have access to `@sveltejs/mcp` CLI for Svelte-specific assistance. Use these commands via `npx`:
+
+### List Documentation Sections
+
+```bash
+npx @sveltejs/mcp list-sections
+```
+
+Lists all available Svelte 5 and SvelteKit documentation sections with titles and paths.
+
+### Get Documentation
+
+```bash
+npx @sveltejs/mcp get-documentation "<section1>,<section2>,..."
+```
+
+Retrieves full documentation for specified sections. Use after `list-sections` to fetch relevant docs.
+
+**Example:**
+
+```bash
+npx @sveltejs/mcp get-documentation "$state,$derived,$effect"
+```
+
+### Svelte Autofixer
+
+```bash
+npx @sveltejs/mcp svelte-autofixer "<code_or_path>" [options]
+```
+
+Analyzes Svelte code and suggests fixes for common issues.
+
+**Options:**
+
+- `--async` - Enable async Svelte mode (default: false)
+- `--svelte-version` - Target version: 4 or 5 (default: 5)
+
+**Examples:**
+
+```bash
+# Analyze inline code (escape $ as \$)
+npx @sveltejs/mcp svelte-autofixer '<script>let count = \$state(0);</script>'
+
+# Analyze a file
+npx @sveltejs/mcp svelte-autofixer ./src/lib/Component.svelte
+
+# Target Svelte 4
+npx @sveltejs/mcp svelte-autofixer ./Component.svelte --svelte-version 4
+```
+
+**Important:** When passing code with runes (`$state`, `$derived`, etc.) via the terminal, escape the `$` character as `\$` to prevent shell variable substitution.
+
+## Workflow
+
+1. **Uncertain about syntax?** Run `list-sections` then `get-documentation` for relevant topics
+2. **Writing new code?** Apply patterns from Quick Reference below
+3. **Reviewing/debugging?** Run `svelte-autofixer` on the code to detect issues
+4. **Always validate** - Run `svelte-autofixer` before finalizing any Svelte component
 
 ## Quick Reference
 
@@ -24,21 +85,20 @@ Svelte 5 uses **runes** (functions starting with `$`) for explicit reactivity:
 
 <button onclick={() => count++}>
 	<!-- Event attributes -->
-	{count} × 2 = {doubled}
+	{count} x 2 = {doubled}
 </button>
 ```
 
-## Core Workflow
+## Rune Selection Guide
 
-1. **Choose the right rune:**
-   - Computing from state? → Use `$derived`
-   - Managing reactive values? → Use `$state`
-   - Side effects (DOM, network, etc.)? → Use `$effect`
-   - Component props? → Use `$props`
-
-2. **Apply the pattern** (see references below for details)
-
-3. **Add TypeScript types** for props and state
+| Need                               | Rune         | Notes                       |
+| ---------------------------------- | ------------ | --------------------------- |
+| Reactive value                     | `$state`     | Primitives, objects, arrays |
+| Computed from other state          | `$derived`   | 90% of "effect" use cases   |
+| Side effects (DOM, network, timer) | `$effect`    | Use sparingly               |
+| Component inputs                   | `$props`     | Always type with interface  |
+| Two-way binding                    | `$bindable`  | Only when truly needed      |
+| Large non-reactive data            | `$state.raw` | Skip deep proxy overhead    |
 
 ## Key Patterns
 
@@ -70,7 +130,7 @@ Svelte 5 uses **runes** (functions starting with `$`) for explicit reactivity:
 
 ### Side Effects: $effect
 
-**Use `$effect` only for side effects, not derivations, try to avoid reassign state in it:**
+**Use `$effect` only for side effects, not derivations. Avoid reassigning state in it:**
 
 ```svelte
 <script lang="ts">
@@ -134,6 +194,9 @@ Svelte 5 uses **runes** (functions starting with `$`) for explicit reactivity:
 	} = $props();
 </script>
 
+{@render header?.()}
+{@render children?.()}
+
 <!-- Parent -->
 <Child>
 	{#snippet header()}
@@ -142,41 +205,37 @@ Svelte 5 uses **runes** (functions starting with `$`) for explicit reactivity:
 
 	Default content here
 </Child>
-
-{@render header?.()}
-{@render children?.()}
 ```
 
 ## Common Pitfalls
 
-**❌ Don't synchronize state with $effect:**
+### Don't synchronize state with $effect
 
 ```svelte
+<!-- WRONG -->
 let doubled = $state(0);
-$effect(() => { doubled = count * 2; });  // Wrong!
+$effect(() => { doubled = count * 2; });
+
+<!-- CORRECT -->
+let doubled = $derived(count * 2);
 ```
 
-**✅ Use $derived instead:**
+### Don't mutate non-bindable props
 
 ```svelte
-let doubled = $derived(count * 2); // Correct!
-```
-
-**❌ Don't mutate non-bindable props:**
-
-```svelte
+<!-- WRONG -->
 let {count} = $props(); count++; // Warning!
+
+<!-- CORRECT: Use callbacks -->
+let {(count, onIncrement)} = $props(); onIncrement();
+
+<!-- CORRECT: Use $bindable -->
+let {(count = $bindable(0))} = $props(); count++;
 ```
 
-**✅ Use callbacks or $bindable:**
+### Don't use Svelte 4 syntax
 
-```svelte
-let {(count, onIncrement)} = $props(); onIncrement(); // Correct!
-```
-
-## Migration from Svelte 4
-
-| Svelte 4                 | Svelte 5                            |
+| Svelte 4 (Wrong)         | Svelte 5 (Correct)                  |
 | ------------------------ | ----------------------------------- |
 | `let count = 0`          | `let count = $state(0)`             |
 | `$: doubled = count * 2` | `let doubled = $derived(count * 2)` |
@@ -184,6 +243,23 @@ let {(count, onIncrement)} = $props(); onIncrement(); // Correct!
 | `export let prop`        | `let { prop } = $props()`           |
 | `on:click={handler}`     | `onclick={handler}`                 |
 | `<slot />`               | `{@render children?.()}`            |
+
+### Always clean up effects
+
+```svelte
+$effect(() => {
+	const interval = setInterval(() => console.log('tick'), 1000);
+	return () => clearInterval(interval); // Required!
+});
+```
+
+### Always use keys in lists
+
+```svelte
+{#each items as item (item.id)}
+	<Item {item} />
+{/each}
+```
 
 ## Detailed References
 
