@@ -1,5 +1,37 @@
 # @sveltejs/mcp
 
+## 0.1.16
+
+### Patch Changes
+
+- feat: expose tools as JS api + cli ([#128](https://github.com/sveltejs/mcp/pull/128))
+
+## 0.1.15
+
+### Patch Changes
+
+- fix: server.json version + update publisher ([`9dfb4de`](https://github.com/sveltejs/mcp/commit/9dfb4dedb42837c40c4e660f0f816d7cf9081fc4))
+
+## 0.1.14
+
+### Patch Changes
+
+- fix: improve prompt to reduce token usage ([#124](https://github.com/sveltejs/mcp/pull/124))
+
+## 0.1.13
+
+### Patch Changes
+
+- fix: revert name change and add title ([`98efa1e`](https://github.com/sveltejs/mcp/commit/98efa1e09ebcca7827b10dc6bc8e1699fc1e5171))
+
+## 0.1.12
+
+### Patch Changes
+
+- fix: update server name on mcp registry ([`60297b3`](https://github.com/sveltejs/mcp/commit/60297b3c49bf110b48908e61b5d5d902ea1bdf39))
+
+- chore: update tmcp ([#99](https://github.com/sveltejs/mcp/pull/99))
+
 ## 0.1.11
 
 ### Patch Changes
