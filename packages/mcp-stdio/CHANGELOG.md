@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.17
+
+### Patch Changes
+
+- fix: add suggestion for snippets declared in script tag ([#132](https://github.com/sveltejs/mcp/pull/132))
+
 ## 0.1.16
 
 ### Patch Changes
