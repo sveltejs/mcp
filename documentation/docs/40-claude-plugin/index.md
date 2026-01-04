@@ -1,3 +1,3 @@
 ---
-title: Claude Plugin
+title: Claude Code Plugin
 ---

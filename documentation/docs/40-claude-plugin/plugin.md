@@ -2,9 +2,9 @@
 title: Overview
 ---
 
-The open source [repository](https://github.com/sveltejs/mcp) containing the code for the MCP server is also a claude code marketplace.
+The open source [repository](https://github.com/sveltejs/mcp) containing the code for the MCP server is also a Claude Code Marketplace plugin.
 
-The marketplace allow you to install the `svelte` plugin which will give you both the remote MCP server and a [skill](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview) to instruct the LLM on how to properly write svelte 5 code.
+The marketplace allow you to install the `svelte` plugin which will give you both the remote MCP server and a [skill](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview) to instruct the LLM on how to properly write Svelte 5 code.
 
 ## Installation
 
