@@ -46,14 +46,6 @@ Read the file to understand the current implementation.
 
 Apply edits following Svelte 5 best practices:
 
-- Use `$state()` for reactive state (not plain `let`)
-- Use `$derived()` for computed values (not `$effect` for derivations)
-- Use `$props()` for component props (not `export let`)
-- Use `$effect()` only for side effects, always include cleanup
-- Use `onclick={handler}` syntax (not `on:click`)
-- Use snippets and `{@render}` (not slots)
-- Always type props with TypeScript interfaces
-
 ### 4. Validate Changes
 
 After editing, ALWAYS call `svelte-autofixer` with the updated code to check for issues.
@@ -61,72 +53,6 @@ After editing, ALWAYS call `svelte-autofixer` with the updated code to check for
 ### 5. Fix Any Issues
 
 If the autofixer reports problems, fix them and re-validate until no issues remain.
-
-## Key Svelte 5 Patterns
-
-### State
-
-```svelte
-<script lang="ts">
-	let count = $state(0);
-	let items = $state<string[]>([]);
-</script>
-```
-
-### Derived Values
-
-```svelte
-<script lang="ts">
-	let doubled = $derived(count * 2);
-	let total = $derived.by(() => items.reduce((a, b) => a + b, 0));
-</script>
-```
-
-### Props
-
-```svelte
-<script lang="ts">
-	interface Props {
-		name: string;
-		count?: number;
-		onchange?: (value: string) => void;
-	}
-	let { name, count = 0, onchange }: Props = $props();
-</script>
-```
-
-### Effects (use sparingly)
-
-```svelte
-<script lang="ts">
-	$effect(() => {
-		const interval = setInterval(() => console.log(count), 1000);
-		return () => clearInterval(interval); // Always cleanup!
-	});
-</script>
-```
-
-### Snippets
-
-```svelte
-<script lang="ts">
-	import type { Snippet } from 'svelte';
-	let { header, children }: { header?: Snippet; children?: Snippet } = $props();
-</script>
-
-{@render header?.()}
-{@render children?.()}
-```
-
-## Common Mistakes to Catch
-
-1. Using `$effect` to synchronize state (should use `$derived`)
-2. Missing cleanup in effects
-3. Using `on:click` instead of `onclick`
-4. Using `export let` instead of `$props()`
-5. Using `<slot>` instead of snippets
-6. Missing keys in `{#each}` blocks
-7. Plain `let` for values that should be reactive
 
 ## Output Format
 
