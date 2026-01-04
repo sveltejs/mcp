@@ -6,6 +6,6 @@ Claude Skills are a set of MD files that live in your `.claude` folder (or that 
 
 With those markdown files you can steer the agent behaviours and, in our case, we teach him how to properly write Svelte 5 code. The advantage over the MCP server is that the relevant tokens are only loaded when they are needed (so if you ask the LLM to write a Typescript utility in a Svelte project it will not load the skill in the context).
 
-You can find the skill inside the [`sveltejs/mcp`](https://github.com/sveltejs/mcp/plugins/svelte/skills) repo (it's in the `/plugins/svelte/skills` folder) and you can download it as a zip file to load it in your Claude web/desktop or to extract it inside your `.claude` folder.
+You can find the skill inside the [`sveltejs/mcp`](https://github.com/sveltejs/mcp/tree/main/plugins/svelte/skills) repo (it's in the `/plugins/svelte/skills` folder). You can also download the latest zip file from the [releases page](https://github.com/sveltejs/mcp/releases?q=svelte-code-writer) to load it in your Claude web/desktop or to extract it inside your `.claude` folder.
 
 If you are using claude code you can also install it through the [svelte marketplace](plugin).
