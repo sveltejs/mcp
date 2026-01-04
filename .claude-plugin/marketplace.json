@@ -1,0 +1,13 @@
+{
+	"name": "svelte",
+	"owner": {
+		"name": "Svelte"
+	},
+	"plugins": [
+		{
+			"name": "svelte",
+			"source": "./plugins/svelte",
+			"description": "A plugin for all things Svelte development, MCP, skills, and more."
+		}
+	]
+}
