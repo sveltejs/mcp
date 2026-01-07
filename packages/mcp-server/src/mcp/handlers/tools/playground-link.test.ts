@@ -72,7 +72,7 @@ describe('playground-link tool', () => {
 		const playground_tool = tools.tools.find((t) => t.name === 'playground-link');
 		expect(playground_tool).toBeDefined();
 		expect(playground_tool?._meta).toStrictEqual({
-			'ui/resourceUri': 'ui://svelte/playground-link',
+			ui: { resourceUri: 'ui://svelte/playground-link' },
 		});
 	});
 
