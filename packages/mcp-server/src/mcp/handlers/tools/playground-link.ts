@@ -127,7 +127,6 @@ const playground_ui_resource = createUIResource({
 		
 		// Listen for render data from the adapter (for MCP Apps hosts)
 		window.addEventListener('message', (event) => {
-			//document.getElementById('loading').innerHTML+= '(received message: ' + JSON.stringify(event.data) + ')<hr/>';
 			if (event.data.type === 'ui-lifecycle-iframe-render-data') {
 				const renderData = event.data.payload.renderData || {};
 				const toolOutput = renderData.toolOutput;
@@ -190,6 +189,10 @@ export function playground_link(server: SvelteMcp) {
 			_meta: {
 				ui: {
 					resourceUri: playground_ui_resource.resource.uri,
+					csp: {
+						connectDomains: ['https://svelte.dev'],
+						resourceDomains: ['https://svelte.dev'],
+					},
 				},
 			},
 		},
