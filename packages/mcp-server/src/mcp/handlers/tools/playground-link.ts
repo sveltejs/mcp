@@ -142,6 +142,7 @@ const playground_ui_resource = createUIResource({
 				params: {
 					width,
 					height
+					}
 				}, '*');
 		}
 		// Signal that the widget is ready
