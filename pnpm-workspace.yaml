@@ -5,7 +5,7 @@ packages:
 catalogs:
   ai:
     '@anthropic-ai/sdk': ^0.71.0
-    '@mcp-ui/server': ^5.12.0
+    '@mcp-ui/server': ^5.16.3
     '@modelcontextprotocol/inspector': ^0.18.0
   lint:
     '@eslint/compat': ^2.0.0

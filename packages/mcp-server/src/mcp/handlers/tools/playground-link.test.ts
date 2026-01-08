@@ -67,6 +67,24 @@ describe('playground-link tool', () => {
 		);
 	});
 
+	it('should have tool _meta with resource URI for MCP Apps hosts', async () => {
+		const tools = await session.listTools();
+		const playground_tool = tools.tools.find((t) => t.name === 'playground-link');
+		expect(playground_tool).toBeDefined();
+		expect(playground_tool?._meta).toStrictEqual({
+			ui: { resourceUri: 'ui://svelte/playground-link' },
+		});
+	});
+
+	it('should expose a resource for MCP Apps hosts', async () => {
+		const resources = await session.listResources();
+		const playground_resource = resources.resources.find(
+			(r) => r.uri === 'ui://svelte/playground-link',
+		);
+		expect(playground_resource).toBeDefined();
+		expect(playground_resource?.name).toBe('playground-link-ui');
+	});
+
 	it('should not create a playground link if App.svelte is missing', async () => {
 		const result = await session.callTool<{ url: string }>('playground-link', {
 			name: 'My Playground',
