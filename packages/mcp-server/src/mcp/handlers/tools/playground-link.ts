@@ -189,10 +189,6 @@ export function playground_link(server: SvelteMcp) {
 			_meta: {
 				ui: {
 					resourceUri: playground_ui_resource.resource.uri,
-					csp: {
-						connectDomains: ['https://svelte.dev'],
-						resourceDomains: ['https://svelte.dev'],
-					},
 				},
 			},
 		},
