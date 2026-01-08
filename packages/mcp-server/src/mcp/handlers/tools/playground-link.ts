@@ -102,6 +102,17 @@ export async function playground_link_handler({
 const playground_ui_resource = createUIResource({
 	uri: 'ui://svelte/playground-link',
 	encoding: 'text',
+	resourceProps: {
+		_meta: {
+			ui: {
+				csp: {
+					connectDomains: ['https://svelte.dev'],
+					resourceDomains: ['https://svelte.dev'],
+					frameDomains: ['https://svelte.dev'],
+				},
+			},
+		},
+	},
 	content: {
 		type: 'rawHtml',
 		// This is a placeholder HTML - the actual iframe URL will be set per-request
