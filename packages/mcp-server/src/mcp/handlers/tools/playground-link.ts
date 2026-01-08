@@ -133,6 +133,17 @@ const playground_ui_resource = createUIResource({
 	<div class="loading" id="loading">Loading playground...</div>
 	<iframe id="playground" allow="clipboard-write"></iframe>
 	<script>
+		function size_changed() {
+			const width = document.body.scrollWidth;
+			const height = document.body.scrollHeight;
+			window.parent.postMessage({
+				jsonrpc: '2.0',
+				method: 'ui/notifications/size-changed',
+				params: {
+					width,
+					height
+				}, '*');
+		}
 		// Signal that the widget is ready
 		window.parent.postMessage({ type: 'ui-lifecycle-iframe-ready' }, '*');
 		
@@ -150,6 +161,9 @@ const playground_ui_resource = createUIResource({
 					const embedUrl = toolOutput.structuredContent.url.replace('/playground#', '/playground/embed#');
 					iframe.src = embedUrl;
 					iframe.style.display = 'block';
+					iframe.addEventListener("load", () => {
+						size_changed();
+					});
 					loading.style.display = 'none';
 				}
 			}
