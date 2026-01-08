@@ -135,13 +135,12 @@ const playground_ui_resource = createUIResource({
 	<script>
 		function size_changed() {
 			const width = document.body.scrollWidth;
-			const height = document.body.scrollHeight;
 			window.parent.postMessage({
 				jsonrpc: '2.0',
 				method: 'ui/notifications/size-changed',
 				params: {
 					width,
-					height
+					height: 800
 					}
 				}, '*');
 		}
