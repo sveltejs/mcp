@@ -4,5 +4,14 @@
 	"version": "1.0.0",
 	"author": {
 		"name": "Svelte"
+	},
+	"lspServers": {
+		"svelte": {
+			"command": "svelte-language-server",
+			"args": ["--stdio"],
+			"extensionToLanguage": {
+				".svelte": "svelte"
+			}
+		}
 	}
 }
