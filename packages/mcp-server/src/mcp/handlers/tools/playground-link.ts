@@ -109,6 +109,7 @@ const playground_ui_resource = createUIResource({
 					connectDomains: ['https://svelte.dev'],
 					resourceDomains: ['https://svelte.dev'],
 					frameDomains: ['https://svelte.dev'],
+					baseUriDomains: ['https://svelte.dev'],
 				},
 			},
 		},
@@ -229,18 +230,6 @@ export function playground_link(server: SvelteMcp) {
 							type: 'text',
 							text: JSON.stringify({ url: result.url }),
 						},
-						// Embedded resource for MCP-UI hosts (no adapter, uses externalUrl)
-						createUIResource({
-							uri: 'ui://svelte/playground-link',
-							content: {
-								type: 'externalUrl',
-								iframeUrl: result.iframe_url,
-							},
-							uiMetadata: {
-								'preferred-frame-size': ['100%', '1200px'],
-							},
-							encoding: 'text',
-						}),
 					],
 					structuredContent: { url: result.url },
 				};
