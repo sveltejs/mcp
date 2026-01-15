@@ -1,8 +1,8 @@
-import type { SvelteMcp } from '../../index.js';
-import * as v from 'valibot';
-import { icons } from '../../icons/index.js';
 import { createUIResource } from '@mcp-ui/server';
 import { tool } from 'tmcp/utils';
+import * as v from 'valibot';
+import { icons } from '../../icons/index.js';
+import type { SvelteMcp } from '../../index.js';
 
 async function compress_and_encode_text(input: string) {
 	const reader = new Blob([input]).stream().pipeThrough(new CompressionStream('gzip')).getReader();
@@ -97,7 +97,106 @@ export async function playground_link_handler({
 	};
 }
 
+// Create the UI resource for MCP Apps hosts (with adapter)
+// This will be registered as a resource that MCP Apps hosts can fetch
+const playground_ui_resource = createUIResource({
+	uri: 'ui://svelte/playground-link',
+	encoding: 'text',
+	resourceProps: {
+		_meta: {
+			ui: {
+				csp: {
+					connectDomains: ['https://svelte.dev'],
+					resourceDomains: ['https://svelte.dev'],
+					frameDomains: ['https://svelte.dev'],
+					baseUriDomains: ['https://svelte.dev'],
+				},
+			},
+		},
+	},
+	content: {
+		type: 'rawHtml',
+		// This is a placeholder HTML - the actual iframe URL will be set per-request
+		// MCP Apps hosts receive the tool input/output via postMessage
+		htmlString: `<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+		html, body { width: 100%; height: 100%; }
+		iframe { width: 100%; height: 100%; border: none; display: none; }
+		.loading { display: flex; align-items: center; justify-content: center; height: 100%; font-family: system-ui, sans-serif; color: #666; }
+	</style>
+</head>
+<body>
+	<div class="loading" id="loading">Loading playground...</div>
+	<iframe id="playground" allow="clipboard-write"></iframe>
+	<script>
+		function size_changed() {
+			const width = document.body.scrollWidth;
+			window.parent.postMessage({
+				jsonrpc: '2.0',
+				method: 'ui/notifications/size-changed',
+				params: {
+					width,
+					height: 800
+					}
+				}, '*');
+		}
+		// Signal that the widget is ready
+		window.parent.postMessage({ type: 'ui-lifecycle-iframe-ready' }, '*');
+		
+		// Listen for render data from the adapter (for MCP Apps hosts)
+		window.addEventListener('message', (event) => {
+			if (event.data.type === 'ui-lifecycle-iframe-render-data') {
+				const renderData = event.data.payload.renderData || {};
+				const toolOutput = renderData.toolOutput;
+				
+				// The tool output contains the iframe URL
+				if (toolOutput && toolOutput.structuredContent && toolOutput.structuredContent.url) {
+					const iframe = document.getElementById('playground');
+					const loading = document.getElementById('loading');
+					// Convert the URL to embed URL
+					const embedUrl = toolOutput.structuredContent.url.replace('/playground#', '/playground/embed#');
+					iframe.src = embedUrl;
+					iframe.style.display = 'block';
+					iframe.addEventListener("load", () => {
+						size_changed();
+					});
+					loading.style.display = 'none';
+				}
+			}
+		});
+	</script>
+</body>
+</html>`,
+	},
+	uiMetadata: {
+		'preferred-frame-size': ['100%', '1200px'],
+	},
+	adapters: {
+		mcpApps: { enabled: true },
+	},
+});
+
 export function playground_link(server: SvelteMcp) {
+	// Register the UI resource so MCP Apps hosts can fetch it
+	server.resource(
+		{
+			name: 'playground-link-ui',
+			description: 'UI resource for the Svelte Playground widget',
+			uri: playground_ui_resource.resource.uri,
+			icons,
+		},
+		() => {
+			return {
+				contents: [playground_ui_resource.resource],
+			};
+		},
+	);
+
 	server.tool(
 		{
 			name: 'playground-link',
@@ -112,6 +211,12 @@ export function playground_link(server: SvelteMcp) {
 				openWorldHint: false,
 			},
 			icons,
+			// For MCP Apps hosts - points to the registered resource
+			_meta: {
+				ui: {
+					resourceUri: playground_ui_resource.resource.uri,
+				},
+			},
 		},
 		async ({ files, name, tailwind }) => {
 			if (server.ctx.sessionId && server.ctx.custom?.track) {
@@ -125,6 +230,7 @@ export function playground_link(server: SvelteMcp) {
 							type: 'text',
 							text: JSON.stringify({ url: result.url }),
 						},
+						// Embedded resource for MCP-UI hosts (no adapter, uses externalUrl)
 						createUIResource({
 							uri: 'ui://svelte/playground-link',
 							content: {
