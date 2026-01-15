@@ -28,6 +28,7 @@
 	},
 	"devDependencies": {
 		"@opencode-ai/plugin": "catalog:ai",
-		"@valibot/to-json-schema": "catalog:tooling"
+		"@valibot/to-json-schema": "catalog:tooling",
+		"@types/node": "catalog:tooling"
 	}
 }
