@@ -1,0 +1,31 @@
+{
+	"type": "object",
+	"properties": {
+		"mcp": {
+			"type": "object",
+			"properties": {
+				"type": {
+					"enum": [
+						"remote",
+						"local"
+					]
+				},
+				"enabled": {
+					"type": "boolean"
+				}
+			},
+			"required": []
+		},
+		"subagent": {
+			"type": "object",
+			"properties": {
+				"enabled": {
+					"type": "boolean"
+				}
+			},
+			"required": []
+		}
+	},
+	"required": [],
+	"$schema": "http://json-schema.org/draft-07/schema#"
+}

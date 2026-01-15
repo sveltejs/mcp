@@ -1,0 +1,39 @@
+---
+title: Overview
+---
+
+OpenCode has a [Plugin System](https://opencode.ai/docs/plugins/) that allows developer to add MCP servers, agents, commands programmatically. Svelte has it's own OpenCode plugin published under `@sveltejs/opencode`.
+
+## Installation
+
+To install the plugin in OpenCode you can edit your [OpenCode config]() (either the global or the local one) adding `@sveltejs/opencode` to the list of plugins
+
+```json
+{
+	"$schema": "https://opencode.ai/config.json",
+	"plugin": ["@sveltejs/opencode"]
+}
+```
+
+That's it! You now have the Svelte MCP server and the [file editor subagent](opencode-subagent) configured for you.
+
+## Configuration
+
+The default configuration for the Svelte opencode plugin looks like this
+
+```json
+{
+	"$schema": "https://raw.githubusercontent.com/sveltejs/mcp/refs/heads/main/packages/opencode/schema.json",
+	"mcp": {
+		"type": "remote",
+		"enabled": true
+	},
+	"subagent": {
+		"enabled": true
+	}
+}
+```
+
+but if you prefer you can enable only the subagent, only the MCP, or configure the kind of MCP server you want to use ("local" or "remote").
+
+You can place this file in `~/.config/opencode/svelte.json` or ,if you have an `OPENCODE_CONFIG_DIR` environment variable specified, at `$OPENCODE_CONFIG_DIR/svelte.json`

@@ -20,4 +20,4 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - run: pnpm dlx pkg-pr-new publish --compact './packages/mcp-stdio' --pnpm
+      - run: pnpm dlx pkg-pr-new publish --compact './packages/mcp-stdio' './packages/opencode' --pnpm
