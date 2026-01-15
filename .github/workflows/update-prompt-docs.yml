@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: 24
           package-manager-cache: false # pnpm is not installed yet
@@ -37,7 +37,7 @@ jobs:
           npm i -g pnpm@$PNPM_VER
 
       - name: Setup Node.js with pnpm cache
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: 24
           package-manager-cache: true # caches pnpm via packageManager field in package.json
@@ -56,7 +56,7 @@ jobs:
 
       - name: Create Pull Request
         if: steps.git-check.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@98357b18bf14b5342f975ff684046ec3b2a07725
+        uses: peter-evans/create-pull-request@98357b18bf14b5342f975ff684046ec3b2a07725 # v8.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'docs: update prompts documentation'
