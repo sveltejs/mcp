@@ -6,7 +6,7 @@ The open source [repository](https://github.com/sveltejs/mcp) containing the cod
 
 The marketplace allows you to install the `svelte` plugin which will give you both the remote MCP server, a [skill](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview) to instruct the LLM on how to properly write Svelte 5 code, and a specialized agent for editing Svelte files.
 
-If possible, we recommended that you instruct the LLM to execute MCP calls with the agent (you can explicitly mention an agent in your message to delegate work to it) when creating or editing `.svelte` files or `.svelte.ts`/`.svelte.js` modules as it helps save context by handling Svelte-specific tasks more efficiently.
+If possible, we recommend that you instruct the LLM to execute MCP calls with the agent (you can explicitly mention an agent in your message to delegate work to it) when creating or editing `.svelte` files or `.svelte.ts`/`.svelte.js` modules as it helps save context by handling Svelte-specific tasks more efficiently.
 
 ## Installation
 
