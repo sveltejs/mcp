@@ -113,28 +113,32 @@ export function get_mcp_config(ctx: PluginInput) {
 		if (path && existsSync(path)) {
 			const result = load_config_file(path);
 			if (result.parse_error) {
-				ctx.client.tui.showToast({
-					body: {
-						title: 'Svelte: Invalid opencode plugin config',
-						message: `${result.parse_error}\nUsing default values`,
-						variant: 'warning',
-						duration: 7000,
-					},
-				});
+				setTimeout(() => {
+					ctx.client.tui.showToast({
+						body: {
+							title: 'Svelte: Invalid opencode plugin config',
+							message: `${result.parse_error}\nUsing default values`,
+							variant: 'warning',
+							duration: 7000,
+						},
+					});
+				}, 7000);
 				return default_config;
 			}
 			const parsed = v.safeParse(config_schema, result.data);
 			if (parsed.success) {
 				return merge_with_defaults(parsed.output);
 			} else {
-				ctx.client.tui.showToast({
-					body: {
-						title: 'Svelte: Invalid opencode plugin config',
-						message: `${result.parse_error}\nUsing default values`,
-						variant: 'warning',
-						duration: 7000,
-					},
-				});
+				setTimeout(() => {
+					ctx.client.tui.showToast({
+						body: {
+							title: 'Svelte: Invalid opencode plugin config',
+							message: `${result.parse_error}\nUsing default values`,
+							variant: 'warning',
+							duration: 7000,
+						},
+					});
+				}, 7000);
 			}
 		}
 	}
