@@ -57,7 +57,7 @@ The `[scope]` must be `user`, `project` or `local`.
 
 ## OpenCode
 
-You can automatically configure the MCP server using the [opencode plugin](opencode-plugin) (recommended). If you prefer to configure the MCP server manually, run:
+You can automatically configure the MCP server using the [OpenCode plugin](opencode-plugin) (recommended). If you prefer to configure the MCP server manually, run:
 
 ```bash
 opencode mcp add
