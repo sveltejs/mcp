@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.18
+
+### Patch Changes
+
+- feat: expose playground link as MCP App ([#138](https://github.com/sveltejs/mcp/pull/138))
+
 ## 0.1.17
 
 ### Patch Changes
