@@ -18,6 +18,7 @@
 		"test": "npm run test:unit -- --run",
 		"test:watch": "npm run test:unit -- --watch",
 		"inspect": "pnpm mcp-inspector",
+		"generate-opencode-jsonschema": "pnpm --filter @sveltejs/opencode run generate-schema",
 		"generate-summaries": "pnpm --filter @sveltejs/mcp-server run generate-summaries",
 		"generate-prompt-docs": "node --import node-resolve-ts/register scripts/update-docs-prompts.ts",
 		"debug:generate-summaries": "pnpm --filter @sveltejs/mcp-server run debug:generate-summaries",

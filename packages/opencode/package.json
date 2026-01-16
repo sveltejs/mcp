@@ -1,0 +1,35 @@
+{
+	"name": "@sveltejs/opencode",
+	"version": "0.0.1",
+	"type": "module",
+	"license": "MIT",
+	"homepage": "https://github.com/sveltejs/mcp#readme",
+	"bugs": {
+		"url": "https://github.com/sveltejs/mcp/issues"
+	},
+	"scripts": {
+		"check": "tsc --noEmit",
+		"generate-schema": "node --import node-resolve-ts/register scripts/generate-schema.ts"
+	},
+	"files": [
+		"index.ts",
+		"config.ts",
+		"instructions"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sveltejs/mcp.git",
+		"path": "packages/opencode"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"dependencies": {
+		"valibot": "catalog:tooling"
+	},
+	"devDependencies": {
+		"@opencode-ai/plugin": "catalog:ai",
+		"@valibot/to-json-schema": "catalog:tooling",
+		"@types/node": "catalog:tooling"
+	}
+}

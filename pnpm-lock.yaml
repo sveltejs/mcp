@@ -15,6 +15,9 @@ catalogs:
     '@modelcontextprotocol/inspector':
       specifier: ^0.18.0
       version: 0.18.0
+    '@opencode-ai/plugin':
+      specifier: ^1.1.21
+      version: 1.1.21
   lint:
     '@eslint/compat':
       specifier: ^2.0.0
@@ -116,6 +119,9 @@ catalogs:
     '@types/node':
       specifier: ^24.3.1
       version: 24.5.2
+    '@valibot/to-json-schema':
+      specifier: ^1.5.0
+      version: 1.5.0
     '@vercel/analytics':
       specifier: ^1.5.0
       version: 1.5.0
@@ -141,8 +147,8 @@ catalogs:
       specifier: ^5.0.0
       version: 5.9.2
     valibot:
-      specifier: ^1.1.0
-      version: 1.1.0
+      specifier: ^1.2.0
+      version: 1.2.0
     vite:
       specifier: ^7.0.4
       version: 7.1.7
@@ -316,7 +322,7 @@ importers:
     dependencies:
       '@mcp-ui/server':
         specifier: catalog:ai
-        version: 5.16.3(hono@4.11.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zod@3.25.76)
+        version: 5.16.3(hono@4.11.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zod@4.1.8)
       '@sveltejs/mcp-schema':
         specifier: workspace:^
         version: link:../mcp-schema
@@ -365,7 +371,7 @@ importers:
     devDependencies:
       '@anthropic-ai/sdk':
         specifier: catalog:ai
-        version: 0.71.0(zod@3.25.76)
+        version: 0.71.0(zod@4.1.8)
       '@sveltejs/kit':
         specifier: catalog:svelte
         version: 2.43.5(@sveltejs/vite-plugin-svelte@6.2.1(svelte@5.39.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1)))(svelte@5.39.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1))
@@ -415,6 +421,22 @@ importers:
       vitest:
         specifier: catalog:tooling
         version: 4.0.1(@types/node@24.5.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1)
+
+  packages/opencode:
+    dependencies:
+      valibot:
+        specifier: catalog:tooling
+        version: 1.2.0(typescript@5.9.2)
+    devDependencies:
+      '@opencode-ai/plugin':
+        specifier: catalog:ai
+        version: 1.1.21
+      '@types/node':
+        specifier: catalog:tooling
+        version: 24.5.2
+      '@valibot/to-json-schema':
+        specifier: catalog:tooling
+        version: 1.5.0(valibot@1.2.0(typescript@5.9.2))
 
 packages:
 
@@ -1078,6 +1100,12 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@opencode-ai/plugin@1.1.21':
+    resolution: {integrity: sha512-oAWVlKG7LACGFYawfdHGMN6e+6lyN6F+zPVncFUB99BrTl/TjELE5gTZwU7MalGpjwfU77yslBOZm4BXVAYGvw==}
+
+  '@opencode-ai/sdk@1.1.21':
+    resolution: {integrity: sha512-4M6lBjRPlPz99Rb5rS5ZqKrb0UDDxOT9VTG06JpNxvA7ynTd8C50ckc2NGzWtvjarmxfaAk1VeuBYN/cq2pIKQ==}
 
   '@oven/bun-darwin-aarch64@1.3.5':
     resolution: {integrity: sha512-8GvNtMo0NINM7Emk9cNAviCG3teEgr3BUX9be0+GD029zIagx2Sf54jMui1Eu1IpFm7nWHODuLEefGOQNaJ0gQ==}
@@ -1958,6 +1986,11 @@ packages:
     resolution: {integrity: sha512-82Vv6x7sOYhv5YmTRgSppSqj1nn2pMCk5BqCMGWYp0V/fq+qirrbGncqZAtZ09/lrO40ne/7z8ejwE728aVreg==}
     peerDependencies:
       valibot: ^1.1.0
+
+  '@valibot/to-json-schema@1.5.0':
+    resolution: {integrity: sha512-GE7DmSr1C2UCWPiV0upRH6mv0cCPsqYGs819fb6srCS1tWhyXrkGGe+zxUiwzn/L1BOfADH4sNjY/YHCuP8phQ==}
+    peerDependencies:
+      valibot: ^1.2.0
 
   '@vercel/analytics@1.5.0':
     resolution: {integrity: sha512-MYsBzfPki4gthY5HnYN7jgInhAZ7Ac1cYDoRWFomwGHWEX7odTEzbtg9kf/QSo7XEsEAqlQugA6gJ2WS2DEa3g==}
@@ -4232,6 +4265,14 @@ packages:
       typescript:
         optional: true
 
+  valibot@1.2.0:
+    resolution: {integrity: sha512-mm1rxUsmOxzrwnX5arGS+U4T25RdvpPjPN4yR0u9pUBov9+zGVtO84tif1eY4r6zWxVxu3KzIyknJy3rxfRZZg==}
+    peerDependencies:
+      typescript: '>=5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
@@ -4443,13 +4484,16 @@ packages:
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
+  zod@4.1.8:
+    resolution: {integrity: sha512-5R1P+WwQqmmMIEACyzSvo4JXHY5WiAFHRMg+zBZKgKS+Q1viRa0C1hmUKtHltoIFKtIdki3pRxkmpP74jnNYHQ==}
+
 snapshots:
 
-  '@anthropic-ai/sdk@0.71.0(zod@3.25.76)':
+  '@anthropic-ai/sdk@0.71.0(zod@4.1.8)':
     dependencies:
       json-schema-to-ts: 3.1.1
     optionalDependencies:
-      zod: 3.25.76
+      zod: 4.1.8
 
   '@babel/generator@7.28.5':
     dependencies:
@@ -5022,10 +5066,10 @@ snapshots:
       - encoding
       - supports-color
 
-  '@mcp-ui/server@5.16.3(hono@4.11.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zod@3.25.76)':
+  '@mcp-ui/server@5.16.3(hono@4.11.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zod@4.1.8)':
     dependencies:
-      '@modelcontextprotocol/ext-apps': 0.2.2(@modelcontextprotocol/sdk@1.25.1(hono@4.11.1)(zod@3.25.76))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zod@3.25.76)
-      '@modelcontextprotocol/sdk': 1.25.1(hono@4.11.1)(zod@3.25.76)
+      '@modelcontextprotocol/ext-apps': 0.2.2(@modelcontextprotocol/sdk@1.25.1(hono@4.11.1)(zod@4.1.8))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zod@4.1.8)
+      '@modelcontextprotocol/sdk': 1.25.1(hono@4.11.1)(zod@4.1.8)
     transitivePeerDependencies:
       - '@cfworker/json-schema'
       - hono
@@ -5034,11 +5078,11 @@ snapshots:
       - supports-color
       - zod
 
-  '@modelcontextprotocol/ext-apps@0.2.2(@modelcontextprotocol/sdk@1.25.1(hono@4.11.1)(zod@3.25.76))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zod@3.25.76)':
+  '@modelcontextprotocol/ext-apps@0.2.2(@modelcontextprotocol/sdk@1.25.1(hono@4.11.1)(zod@4.1.8))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zod@4.1.8)':
     dependencies:
-      '@modelcontextprotocol/sdk': 1.25.1(hono@4.11.1)(zod@3.25.76)
+      '@modelcontextprotocol/sdk': 1.25.1(hono@4.11.1)(zod@4.1.8)
       prettier: 3.6.2
-      zod: 3.25.76
+      zod: 4.1.8
     optionalDependencies:
       '@oven/bun-darwin-aarch64': 1.3.5
       '@oven/bun-darwin-x64': 1.3.5
@@ -5168,6 +5212,28 @@ snapshots:
       - hono
       - supports-color
 
+  '@modelcontextprotocol/sdk@1.25.1(hono@4.11.1)(zod@4.1.8)':
+    dependencies:
+      '@hono/node-server': 1.19.7(hono@4.11.1)
+      ajv: 8.17.1
+      ajv-formats: 3.0.1(ajv@8.17.1)
+      content-type: 1.0.5
+      cors: 2.8.5
+      cross-spawn: 7.0.6
+      eventsource: 3.0.7
+      eventsource-parser: 3.0.6
+      express: 5.1.0
+      express-rate-limit: 7.5.1(express@5.1.0)
+      jose: 6.1.3
+      json-schema-typed: 8.0.2
+      pkce-challenge: 5.0.0
+      raw-body: 3.0.1
+      zod: 4.1.8
+      zod-to-json-schema: 3.25.0(zod@4.1.8)
+    transitivePeerDependencies:
+      - hono
+      - supports-color
+
   '@napi-rs/wasm-runtime@1.1.0':
     dependencies:
       '@emnapi/core': 1.7.1
@@ -5188,6 +5254,13 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
+
+  '@opencode-ai/plugin@1.1.21':
+    dependencies:
+      '@opencode-ai/sdk': 1.1.21
+      zod: 4.1.8
+
+  '@opencode-ai/sdk@1.1.21': {}
 
   '@oven/bun-darwin-aarch64@1.3.5':
     optional: true
@@ -5913,6 +5986,10 @@ snapshots:
   '@valibot/to-json-schema@1.3.0(valibot@1.1.0(typescript@5.9.2))':
     dependencies:
       valibot: 1.1.0(typescript@5.9.2)
+
+  '@valibot/to-json-schema@1.5.0(valibot@1.2.0(typescript@5.9.2))':
+    dependencies:
+      valibot: 1.2.0(typescript@5.9.2)
 
   '@vercel/analytics@1.5.0(@sveltejs/kit@2.43.5(@sveltejs/vite-plugin-svelte@6.2.1(svelte@5.39.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1)))(svelte@5.39.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1)))(react@18.3.1)(svelte@5.39.6)':
     optionalDependencies:
@@ -8269,6 +8346,10 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.2
 
+  valibot@1.2.0(typescript@5.9.2):
+    optionalDependencies:
+      typescript: 5.9.2
+
   vary@1.1.2: {}
 
   vite-plugin-devtools-json@1.0.0(vite@7.1.7(@types/node@24.5.2)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1)):
@@ -8454,4 +8535,10 @@ snapshots:
     dependencies:
       zod: 3.25.76
 
+  zod-to-json-schema@3.25.0(zod@4.1.8):
+    dependencies:
+      zod: 4.1.8
+
   zod@3.25.76: {}
+
+  zod@4.1.8: {}
