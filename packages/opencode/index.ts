@@ -1,11 +1,17 @@
 import type { Plugin } from '@opencode-ai/plugin';
+import { readdir } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { get_mcp_config } from './config.js';
+
+const current_dir = dirname(fileURLToPath(import.meta.url));
 
 export const svelte_plugin: Plugin = async (ctx) => {
 	return {
 		async config(input) {
 			input.agent ??= {};
 			input.mcp ??= {};
+			input.instructions ??= [];
 			// by default we use svelte as the name for the svelte MCP server
 			let svelte_mcp_name = 'svelte';
 			// we loop over every mcp server to see if any of them is already the svelte MCP server
@@ -22,6 +28,12 @@ export const svelte_plugin: Plugin = async (ctx) => {
 				}
 			}
 			const mcp_config = get_mcp_config(ctx);
+
+			if (mcp_config.instructions?.enabled !== false) {
+				const instructions_dir = join(current_dir, 'instructions');
+				const instructions_paths = await readdir(instructions_dir);
+				input.instructions.push(...instructions_paths.map((file) => join(instructions_dir, file)));
+			}
 
 			// if the user doesn't have the MCP server already we add one based on config
 			if (!input.mcp[svelte_mcp_name] && mcp_config.mcp?.enabled !== false) {

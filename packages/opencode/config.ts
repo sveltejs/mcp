@@ -12,6 +12,9 @@ const default_config = {
 	subagent: {
 		enabled: true,
 	},
+	instructions: {
+		enabled: true,
+	},
 };
 
 export const config_schema = v.object({
@@ -22,6 +25,11 @@ export const config_schema = v.object({
 		}),
 	),
 	subagent: v.optional(
+		v.object({
+			enabled: v.optional(v.boolean()),
+		}),
+	),
+	instructions: v.optional(
 		v.object({
 			enabled: v.optional(v.boolean()),
 		}),
@@ -91,6 +99,10 @@ function merge_with_defaults(user_config: Partial<McpConfig>): McpConfig {
 		subagent: {
 			...default_config.subagent,
 			...user_config.subagent,
+		},
+		instructions: {
+			...default_config.instructions,
+			...user_config.instructions,
 		},
 	};
 }

@@ -24,6 +24,15 @@
 				}
 			},
 			"required": []
+		},
+		"instructions": {
+			"type": "object",
+			"properties": {
+				"enabled": {
+					"type": "boolean"
+				}
+			},
+			"required": []
 		}
 	},
 	"required": [],
