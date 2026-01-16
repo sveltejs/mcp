@@ -22,7 +22,7 @@ export const svelte_plugin: Plugin = async (ctx) => {
 					(mcp?.type === 'local' &&
 						mcp.command.some((cmd: string) => cmd.includes('@sveltejs/mcp')))
 				) {
-					// if we found the svelte MCP server, we store its name a break
+					// if we found the svelte MCP server, we store its name and break
 					svelte_mcp_name = name;
 					break;
 				}
