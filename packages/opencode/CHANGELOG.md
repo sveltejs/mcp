@@ -1,5 +1,11 @@
 # @sveltejs/opencode
 
+## 0.0.3
+
+### Patch Changes
+
+- chore: add README to opencode plugin ([`71295bc`](https://github.com/sveltejs/mcp/commit/71295bc11fb7bac6703e655f5fddead29967353c))
+
 ## 0.0.2
 
 ### Patch Changes
