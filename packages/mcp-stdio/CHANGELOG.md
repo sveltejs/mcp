@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.19
+
+### Patch Changes
+
+- chore: update svelte ([`7447744`](https://github.com/sveltejs/mcp/commit/74477448cea44ec21684ea4d39f2c5c7133b5150))
+
 ## 0.1.18
 
 ### Patch Changes
