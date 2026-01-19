@@ -32,7 +32,7 @@ catalogs:
     '@sveltejs/adapter-vercel': ^6.0.0
     '@sveltejs/kit': ^2.42.2
     '@sveltejs/vite-plugin-svelte': ^6.0.0
-    svelte: ^5.39.2
+    svelte: ^5.47.0
     svelte-check: ^4.0.0
   tmcp:
     '@tmcp/adapter-valibot': ^0.1.4
