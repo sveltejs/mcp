@@ -5,7 +5,6 @@ import { redirect } from '@sveltejs/kit';
 import { track } from '@vercel/analytics/server';
 
 export async function handle({ event, resolve }) {
-	console.log('MCP Remote request:', event.request.method, event.url.href);
 	if (event.request.method === 'GET') {
 		const accept = event.request.headers.get('accept');
 		if (accept) {
