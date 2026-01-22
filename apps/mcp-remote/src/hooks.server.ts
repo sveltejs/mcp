@@ -5,6 +5,7 @@ import { redirect } from '@sveltejs/kit';
 import { track } from '@vercel/analytics/server';
 
 export async function handle({ event, resolve }) {
+	console.log('MCP Remote request:', event.request.method, event.url.href);
 	if (event.request.method === 'GET') {
 		const accept = event.request.headers.get('accept');
 		if (accept) {
@@ -33,7 +34,7 @@ export async function handle({ event, resolve }) {
 	// 200 or the MCP client will complain)
 	if (mcp_response && event.request.method === 'GET') {
 		try {
-			return mcp_response;
+			return new Response(null, { status: 405 });
 		} finally {
 			try {
 				await mcp_response.body?.cancel();
