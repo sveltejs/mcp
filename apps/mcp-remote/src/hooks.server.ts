@@ -25,5 +25,6 @@ export async function handle({ event, resolve }) {
 					await track(event, { session_id, ...(extra ? { extra } : {}) });
 				},
 	});
+	console.log('MCP Response:', mcp_response?.status);
 	return mcp_response ?? resolve(event);
 }
