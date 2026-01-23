@@ -25,6 +25,8 @@ export async function handle({ event, resolve }) {
 					await track(event, { session_id, ...(extra ? { extra } : {}) });
 				},
 	});
-	console.log('MCP Response:', mcp_response?.status);
+	if (mcp_response?.status === 202) {
+		console.log(await event.request.clone().text());
+	}
 	return mcp_response ?? resolve(event);
 }
