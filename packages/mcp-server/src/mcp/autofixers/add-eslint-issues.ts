@@ -35,6 +35,7 @@ function base_config(svelte_config: Config): ESLint.Options['baseConfig'] {
 				'svelte/prefer-writable-derived': 'warn',
 				'svelte/require-event-dispatcher-types': 'warn',
 				'svelte/require-store-reactive-access': 'warn',
+				'svelte/no-inspect': 'off',
 			},
 
 			languageOptions: {
