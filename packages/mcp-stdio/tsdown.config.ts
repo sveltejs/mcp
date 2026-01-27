@@ -19,5 +19,6 @@ export default defineConfig([
 		treeshake: true,
 		clean: true,
 		target: 'esnext',
+		inlineOnly: false,
 	},
 ]);
