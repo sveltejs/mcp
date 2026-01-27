@@ -58,7 +58,7 @@ describe('playground-link tool', () => {
 					type: 'resource',
 					resource: expect.objectContaining({
 						uri: 'ui://svelte/playground-link',
-						mimeType: 'text/uri-list',
+						mimeType: 'text/html;profile=mcp-app',
 						_meta: { 'mcpui.dev/ui-preferred-frame-size': ['100%', '1200px'] },
 						text: expect.stringMatching(/^https:\/\/svelte\.dev\/playground\/embed#H4sIA/),
 					}),
