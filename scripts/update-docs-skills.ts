@@ -70,9 +70,11 @@ ${frontmatter.description}
 <details>
 	<summary>View skill content</summary>
 
+<!-- prettier-ignore-start -->
 ~~~markdown
 ${body}
 ~~~
+<!-- prettier-ignore-end -->
 
 </details>
 
