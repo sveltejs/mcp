@@ -6,6 +6,18 @@ interface SkillFrontmatter {
 	description: string;
 }
 
+function get_backtick_fence(content: string): string {
+	const backtick_pattern = /`{3,}/g;
+	let max_backticks = 3;
+
+	let match;
+	while ((match = backtick_pattern.exec(content)) !== null) {
+		max_backticks = Math.max(max_backticks, match[0].length);
+	}
+
+	return '`'.repeat(max_backticks + 1);
+}
+
 function parse_frontmatter(
 	content: string,
 ): { frontmatter: SkillFrontmatter; body: string } | null {
@@ -60,6 +72,7 @@ for (const skill_name of skill_dirs) {
 		}
 
 		const { frontmatter, body } = parsed;
+		const fence = get_backtick_fence(body);
 
 		content += `## \`${frontmatter.name}\`
 
@@ -71,9 +84,9 @@ ${frontmatter.description}
 	<summary>View skill content</summary>
 
 <!-- prettier-ignore-start -->
-~~~markdown
+${fence}markdown
 ${body}
-~~~
+${fence}
 <!-- prettier-ignore-end -->
 
 </details>

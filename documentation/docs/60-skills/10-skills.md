@@ -18,7 +18,7 @@ CLI tools for Svelte 5 documentation lookup and code analysis. MUST be used when
 	<summary>View skill content</summary>
 
 <!-- prettier-ignore-start -->
-~~~markdown
+````markdown
 # Svelte 5 Code Writer
 
 ## CLI Tools
@@ -80,7 +80,7 @@ npx @sveltejs/mcp svelte-autofixer ./Component.svelte --svelte-version 4
 1. **Uncertain about syntax?** Run `list-sections` then `get-documentation` for relevant topics
 2. **Reviewing/debugging?** Run `svelte-autofixer` on the code to detect issues
 3. **Always validate** - Run `svelte-autofixer` before finalizing any Svelte component
-~~~
+````
 <!-- prettier-ignore-end -->
 
 </details>
