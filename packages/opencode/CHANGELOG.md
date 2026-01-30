@@ -1,5 +1,11 @@
 # @sveltejs/opencode
 
+## 0.1.0
+
+### Minor Changes
+
+- feat: distribute skills through opencode plugin ([#151](https://github.com/sveltejs/mcp/pull/151))
+
 ## 0.0.3
 
 ### Patch Changes
