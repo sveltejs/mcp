@@ -1,5 +1,11 @@
 # @sveltejs/opencode
 
+## 0.1.1
+
+### Patch Changes
+
+- fix: actually push skills to right config path ([`c2c1b3e`](https://github.com/sveltejs/mcp/commit/c2c1b3e5e788b14eea17cd37a83ca55433cc4072))
+
 ## 0.1.0
 
 ### Minor Changes
