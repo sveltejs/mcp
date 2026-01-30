@@ -33,6 +33,15 @@
 				}
 			},
 			"required": []
+		},
+		"skills": {
+			"type": "object",
+			"properties": {
+				"enabled": {
+					"type": "boolean"
+				}
+			},
+			"required": []
 		}
 	},
 	"required": [],

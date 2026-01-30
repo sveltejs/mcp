@@ -15,6 +15,9 @@ const default_config = {
 	instructions: {
 		enabled: true,
 	},
+	skills: {
+		enabled: true,
+	},
 };
 
 export const config_schema = v.object({
@@ -30,6 +33,11 @@ export const config_schema = v.object({
 		}),
 	),
 	instructions: v.optional(
+		v.object({
+			enabled: v.optional(v.boolean()),
+		}),
+	),
+	skills: v.optional(
 		v.object({
 			enabled: v.optional(v.boolean()),
 		}),
@@ -103,6 +111,10 @@ function merge_with_defaults(user_config: Partial<McpConfig>): McpConfig {
 		instructions: {
 			...default_config.instructions,
 			...user_config.instructions,
+		},
+		skills: {
+			...default_config.skills,
+			...user_config.skills,
 		},
 	};
 }
