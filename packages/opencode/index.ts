@@ -12,6 +12,8 @@ export const svelte_plugin: Plugin = async (ctx) => {
 			input.agent ??= {};
 			input.mcp ??= {};
 			input.instructions ??= [];
+			// @ts-expect-error -- types are wrong in the opencode package...will fix there and remove this
+			input.skills ??= [];
 			// by default we use svelte as the name for the svelte MCP server
 			let svelte_mcp_name = 'svelte';
 			// we loop over every mcp server to see if any of them is already the svelte MCP server
@@ -33,6 +35,12 @@ export const svelte_plugin: Plugin = async (ctx) => {
 				const instructions_dir = join(current_dir, 'instructions');
 				const instructions_paths = await readdir(instructions_dir);
 				input.instructions.push(...instructions_paths.map((file) => join(instructions_dir, file)));
+			}
+
+			if (mcp_config.skills?.enabled !== false) {
+				const skills_dir = join(current_dir, 'skills');
+				// @ts-expect-error -- skills is a new opencode feature
+				input.skills.push(skills_dir);
 			}
 
 			// if the user doesn't have the MCP server already we add one based on config

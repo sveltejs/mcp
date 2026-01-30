@@ -14,7 +14,8 @@
 	"files": [
 		"index.ts",
 		"config.ts",
-		"instructions"
+		"instructions",
+		"skills"
 	],
 	"repository": {
 		"type": "git",
