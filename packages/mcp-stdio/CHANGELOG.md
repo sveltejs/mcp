@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.20
+
+### Patch Changes
+
+- fix: turn off no-inspect in eslint for mcp ([`2245cb2`](https://github.com/sveltejs/mcp/commit/2245cb2dc9e2d217869b6a800795ce59ffb40c51))
+
 ## 0.1.19
 
 ### Patch Changes
