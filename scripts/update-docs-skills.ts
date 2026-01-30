@@ -44,17 +44,7 @@ function parse_frontmatter(
 	};
 }
 
-let content = `---
-title: Overview
----
-
-This is the list of available skills provided by the Svelte MCP package. Skills are sets of instructions that AI agents can load on-demand to help with specific tasks.
-
-Skills are available in both the Claude Code plugin (installed via the marketplace) and the OpenCode plugin (\`@sveltejs/opencode\`). They can also be manually installed in your \`.claude/skills/\` or \`.opencode/skills/\` folder.
-
-You can download the latest skills from the [releases page](https://github.com/sveltejs/mcp/releases) or find them in the [\`plugins/svelte/skills\`](https://github.com/sveltejs/mcp/tree/main/plugins/svelte/skills) folder.
-
-`;
+let content = '';
 
 const skills_dir = './plugins/svelte/skills';
 const skill_dirs = (await fs.readdir(skills_dir)).filter((name) => !name.startsWith('.'));
@@ -97,4 +87,6 @@ ${fence}
 	}
 }
 
-await fs.writeFile('./documentation/docs/60-skills/10-skills.md', content.trim() + '\n');
+const generated_dir = './documentation/docs/60-skills/.generated';
+await fs.mkdir(generated_dir, { recursive: true });
+await fs.writeFile(path.join(generated_dir, 'skills.md'), content.trim() + '\n');

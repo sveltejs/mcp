@@ -1,13 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-let content = `---
-title: Prompts
----
-
-This is the list of available prompts provided by the MCP server. Prompts are selected by the user and are sent as a user message. They can be useful to write repetitive instructions for the LLM on how to properly use the MCP server.
-
-`;
+let content = '';
 
 const prompts_generators = fs.glob('./packages/mcp-server/src/mcp/handlers/prompts/*.ts');
 
@@ -33,4 +27,6 @@ ${await module.generate_for_docs()}
 `;
 }
 
-await fs.writeFile('./documentation/docs/30-capabilities/30-prompts.md', content.trim() + '\n');
+const generated_dir = './documentation/docs/30-capabilities/.generated';
+await fs.mkdir(generated_dir, { recursive: true });
+await fs.writeFile(path.join(generated_dir, 'prompts.md'), content.trim() + '\n');
