@@ -10,7 +10,7 @@
 			"description": "A plugin for all things Svelte development, MCP, skills, and more.",
 			"lspServers": {
 				"svelte": {
-					"command": "svelte-language-server",
+					"command": "svelteserver",
 					"args": ["--stdio"],
 					"extensionToLanguage": {
 						".svelte": "svelte"
