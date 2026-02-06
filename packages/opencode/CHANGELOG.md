@@ -1,5 +1,11 @@
 # @sveltejs/opencode
 
+## 0.1.2
+
+### Patch Changes
+
+- feat: allow for local opencode config ([#156](https://github.com/sveltejs/mcp/pull/156))
+
 ## 0.1.1
 
 ### Patch Changes
