@@ -71,8 +71,15 @@ function get_config_paths() {
 		}
 	}
 
-	// returning config_dir first so it has higher priority
-	return [config_dir_path, global_path];
+	// Project-local: ./.opencode/svelte.json (cwd)
+	let project_path: string | null = null;
+	const project_config = join(process.cwd(), '.opencode', 'svelte.json');
+	if (existsSync(project_config)) {
+		project_path = project_config;
+	}
+
+	// Lowest priority first, highest priority last (project overrides global)
+	return [global_path, config_dir_path, project_path];
 }
 
 function load_config_file(config_path: string): ConfigLoadResult {
@@ -121,6 +128,9 @@ function merge_with_defaults(user_config: Partial<McpConfig>): McpConfig {
 
 export function get_mcp_config(ctx: PluginInput) {
 	const config_paths = get_config_paths();
+	let merged: Partial<McpConfig> = {};
+
+	// Iterate from lowest to highest priority, merging as we go
 	for (const path of config_paths) {
 		if (path && existsSync(path)) {
 			const result = load_config_file(path);
@@ -129,23 +139,28 @@ export function get_mcp_config(ctx: PluginInput) {
 					ctx.client.tui.showToast({
 						body: {
 							title: 'Svelte: Invalid opencode plugin config',
-							message: `${result.parse_error}\nUsing default values`,
+							message: `${result.parse_error} (${path})\nSkipping this config file`,
 							variant: 'warning',
 							duration: 7000,
 						},
 					});
 				}, 7000);
-				return default_config;
+				continue;
 			}
 			const parsed = v.safeParse(config_schema, result.data);
 			if (parsed.success) {
-				return merge_with_defaults(parsed.output);
+				merged = {
+					mcp: { ...merged.mcp, ...parsed.output.mcp },
+					subagent: { ...merged.subagent, ...parsed.output.subagent },
+					instructions: { ...merged.instructions, ...parsed.output.instructions },
+					skills: { ...merged.skills, ...parsed.output.skills },
+				};
 			} else {
 				setTimeout(() => {
 					ctx.client.tui.showToast({
 						body: {
 							title: 'Svelte: Invalid opencode plugin config',
-							message: `${result.parse_error}\nUsing default values`,
+							message: `Invalid config schema (${path})\nSkipping this config file`,
 							variant: 'warning',
 							duration: 7000,
 						},
@@ -155,5 +170,5 @@ export function get_mcp_config(ctx: PluginInput) {
 		}
 	}
 
-	return default_config;
+	return merge_with_defaults(merged);
 }
