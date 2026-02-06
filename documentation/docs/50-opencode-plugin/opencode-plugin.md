@@ -33,6 +33,9 @@ The default configuration for the Svelte OpenCode plugin looks like this...
 	},
 	"skills": {
 		"enabled": true
+	},
+	"instructions": {
+		"enabled": true
 	}
 }
 ```
