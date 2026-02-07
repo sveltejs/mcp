@@ -17,7 +17,7 @@ jobs:
     name: Release
     runs-on: ${{ matrix.os }}
     outputs:
-      published: ${{ steps.changesets.outputs.published }}
+      publishedPackages: ${{ steps.changesets.outputs.publishedPackages }}
     strategy:
       matrix:
         # pseudo-matrix for convenience, NEVER use more than a single combination
@@ -64,7 +64,7 @@ jobs:
 
   publish-mcp:
     needs: release
-    if: needs.release.outputs.published == 'true'
+    if: contains(needs.release.outputs.publishedPackages, '"@sveltejs/mcp"')
     uses: ./.github/workflows/publish-mcp.yml
     secrets:
       MCP_KEY: ${{ secrets.MCP_KEY }}
