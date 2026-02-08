@@ -95,10 +95,7 @@ export async function get_documentation_handler({
 	const failed_sections = sections.filter(
 		(s) =>
 			!available_sections.some(
-				(a) =>
-					a.title.toLowerCase() === s.toLowerCase() ||
-					a.slug === s ||
-					a.url === s,
+				(a) => a.title.toLowerCase() === s.toLowerCase() || a.slug === s || a.url === s,
 			),
 	);
 
@@ -135,9 +132,7 @@ export async function get_documentation_handler({
 	// Similar results then errors
 	for (const { requested, matches } of fuzzy_results) {
 		if (matches.length > 0) {
-			const match_list = matches
-				.map((m) => `- title: ${m.title}, section: ${m.slug}`)
-				.join('\n');
+			const match_list = matches.map((m) => `- title: ${m.title}, section: ${m.slug}`).join('\n');
 			parts.push(
 				`${matches.length} similar result${matches.length > 1 ? 's' : ''} for "${requested}":\n${match_list}`,
 			);
