@@ -36,6 +36,6 @@ function foo(getBar) {
 		$effect(() => {
 			update(node, getBar());
 		});
-	}
+	};
 }
 ```

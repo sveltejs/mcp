@@ -10,7 +10,7 @@ Styles are generally scoped in Svelte components and if possible they should rem
 </div>
 
 <style>
-	div :global(span){
+	div :global(span) {
 		color: red;
 	}
 </style>
@@ -21,8 +21,5 @@ Styles are generally scoped in Svelte components and if possible they should rem
 If a component uses CSS variables in his styling you can automatically pass them using a style prop.
 
 ```svelte
-<Slider
-	--track-color="black"
-	--thumb-color="rgb({r} {g} {b})"
-/>
+<Slider --track-color="black" --thumb-color="rgb({r} {g} {b})" />
 ```

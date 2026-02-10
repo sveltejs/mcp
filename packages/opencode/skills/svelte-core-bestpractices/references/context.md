@@ -44,15 +44,13 @@ You can store reactive state in context...
 	import Child from './Child.svelte';
 
 	let counter = $state({
-		count: 0
+		count: 0,
 	});
 
 	setContext('counter', counter);
 </script>
 
-<button onclick={() => counter.count += 1}>
-	increment
-</button>
+<button onclick={() => (counter.count += 1)}> increment </button>
 
 <Child />
 <Child />
@@ -62,9 +60,7 @@ You can store reactive state in context...
 ...though note that if you _reassign_ `counter` instead of updating it, you will 'break the link' — in other words instead of this...
 
 ```svelte
-<button onclick={() => counter = { count: 0 }}>
-	reset
-</button>
+<button onclick={() => (counter = { count: 0 })}> reset </button>
 ```
 
 ...you must do this:
@@ -102,7 +98,7 @@ When you have state shared by many different components, you might be tempted to
 export const myGlobalState = $state({
 	user: {
 		// ...
-	}
+	},
 	// ...
 });
 ```

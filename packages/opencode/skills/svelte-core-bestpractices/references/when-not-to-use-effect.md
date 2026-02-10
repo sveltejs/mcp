@@ -74,7 +74,7 @@ Instead, use `oninput` callbacks or — better still — [function bindings](bin
 </label>
 
 <label>
-	<input type="range" +++bind:value={() => left, updateLeft}+++ max={total} />
+	<input type="range" +++bind:value="{(() => left, updateLeft)}+++" max={total} />
 	{left}/{total} left
 </label>
 ```
