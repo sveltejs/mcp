@@ -1,5 +1,11 @@
 # @sveltejs/opencode
 
+## 0.1.3
+
+### Patch Changes
+
+- fix: better subagent instructions to use MCP or skill ([#163](https://github.com/sveltejs/mcp/pull/163))
+
 ## 0.1.2
 
 ### Patch Changes
