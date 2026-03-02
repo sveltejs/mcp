@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'plugins/svelte/skills/**'
+      - 'tools/skills/**'
   workflow_dispatch:
 
 permissions: {}
@@ -26,7 +26,7 @@ jobs:
       - name: Find all skills
         id: find-skills
         run: |
-          skills=$(ls -d plugins/svelte/skills/*/ | xargs -I {} basename {} | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          skills=$(ls -d tools/skills/*/ | xargs -I {} basename {} | jq -R -s -c 'split("\n") | map(select(length > 0))')
           echo "skills=$skills" >> $GITHUB_OUTPUT
 
   release:
@@ -49,7 +49,7 @@ jobs:
 
       - name: Create zip
         run: |
-          cd plugins/svelte/skills
+          cd tools/skills
           zip -r ${{ matrix.skill }}.zip ${{ matrix.skill }}/
 
       - name: Create Release
@@ -60,7 +60,7 @@ jobs:
           body: |
             Automated release of the ${{ matrix.skill }} skill.
 
-            This release was triggered by changes to the `plugins/svelte/skills/${{ matrix.skill }}/` directory.
-          files: plugins/svelte/skills/${{ matrix.skill }}.zip
+            This release was triggered by changes to the `tools/skills/${{ matrix.skill }}/` directory.
+          files: tools/skills/${{ matrix.skill }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

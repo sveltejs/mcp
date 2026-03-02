@@ -6,7 +6,7 @@
 	"plugins": [
 		{
 			"name": "svelte",
-			"source": "./plugins/svelte",
+			"source": "./plugins/claude/svelte",
 			"description": "A plugin for all things Svelte development, MCP, skills, and more.",
 			"lspServers": {
 				"svelte": {
