@@ -46,7 +46,7 @@ function parse_frontmatter(
 
 let content = '';
 
-const skills_dir = './plugins/svelte/skills';
+const skills_dir = './tools/skills';
 const skill_dirs = (await fs.readdir(skills_dir)).filter((name) => !name.startsWith('.'));
 
 for (const skill_name of skill_dirs) {

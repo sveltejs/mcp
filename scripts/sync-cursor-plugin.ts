@@ -1,15 +1,15 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-const CURSOR_PLUGIN_DIR = './svelte-cursor';
-const CLAUDE_PLUGIN_DIR = './plugins/svelte';
-const AGENTS_MD_PATH = './instructions/AGENTS.md';
+const CURSOR_PLUGIN_DIR = './plugins/cursor/svelte';
+const TOOLS_PLUGIN_DIR = './tools';
+const AGENTS_MD_PATH = './tools/instructions/AGENTS.md';
 
 /**
  * Sync skills from Claude plugin to Cursor plugin (direct copy)
  */
 async function sync_skills() {
-	const source = path.join(CLAUDE_PLUGIN_DIR, 'skills');
+	const source = path.join(TOOLS_PLUGIN_DIR, 'skills');
 	const dest = path.join(CURSOR_PLUGIN_DIR, 'skills');
 
 	await fs.rm(dest, { recursive: true, force: true });
@@ -23,7 +23,7 @@ async function sync_skills() {
  * stripping Claude-specific frontmatter fields (permissionMode)
  */
 async function sync_agents() {
-	const source = path.join(CLAUDE_PLUGIN_DIR, 'agents');
+	const source = path.join(TOOLS_PLUGIN_DIR, 'agents');
 	const dest = path.join(CURSOR_PLUGIN_DIR, 'agents');
 
 	await fs.rm(dest, { recursive: true, force: true });
