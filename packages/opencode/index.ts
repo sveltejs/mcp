@@ -39,10 +39,20 @@ export const svelte_plugin: Plugin = async (ctx) => {
 				input.instructions.push(...instructions_paths.map((file) => join(instructions_dir, file)));
 			}
 
-			if (mcp_config.skills?.enabled !== false) {
+			const skills_enabled = mcp_config.skills?.enabled;
+			if (skills_enabled !== false) {
 				const skills_dir = join(current_dir, 'skills');
-				// @ts-expect-error -- skills is a new opencode feature
-				input.skills.paths.push(skills_dir);
+				if (Array.isArray(skills_enabled)) {
+					// only add specific skill directories by name
+					for (const skill_name of skills_enabled) {
+						const skill_path = join(skills_dir, skill_name);
+						// @ts-expect-error -- skills is a new opencode feature
+						input.skills.paths.push(skill_path);
+					}
+				} else {
+					// @ts-expect-error -- skills is a new opencode feature
+					input.skills.paths.push(skills_dir);
+				}
 			}
 
 			// if the user doesn't have the MCP server already we add one based on config
