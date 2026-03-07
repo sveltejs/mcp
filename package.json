@@ -28,7 +28,9 @@
 		"sync-claude-plugin": "node scripts/sync-claude-plugin.ts",
 		"sync-cursor-plugin": "node scripts/sync-cursor-plugin.ts",
 		"sync-opencode-plugin": "node scripts/sync-opencode-plugin.ts",
-		"bump-plugin-versions": "node scripts/bump-plugin-versions.ts"
+		"bump-plugin-versions": "node scripts/bump-plugin-versions.ts",
+		"resolve-references": "node scripts/resolve-references.ts",
+		"postresolve-references": "pnpm format"
 	},
 	"keywords": [
 		"svelte",
