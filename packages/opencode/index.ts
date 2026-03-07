@@ -46,16 +46,18 @@ export const svelte_plugin: Plugin = async (ctx) => {
 			}
 
 			// if the user doesn't have the MCP server already we add one based on config
-			if (!input.mcp[svelte_mcp_name] && mcp_config.mcp?.enabled !== false) {
+			if (!input.mcp[svelte_mcp_name]) {
 				if (mcp_config.mcp?.type === 'remote') {
 					input.mcp[svelte_mcp_name] = {
 						type: 'remote',
 						url: 'https://mcp.svelte.dev/mcp',
+						enabled: mcp_config.mcp?.enabled ?? true,
 					};
 				} else {
 					input.mcp[svelte_mcp_name] = {
 						type: 'local',
 						command: ['npx', '-y', '@sveltejs/mcp'],
+						enabled: mcp_config.mcp?.enabled ?? true,
 					};
 				}
 			}
