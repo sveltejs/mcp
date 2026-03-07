@@ -16,31 +16,57 @@ const default_config = {
 		enabled: true,
 	},
 	skills: {
-		enabled: true,
+		enabled: true as boolean | string[],
 	},
 };
 
 export const config_schema = v.object({
-	mcp: v.optional(
-		v.object({
-			type: v.optional(v.picklist(['remote', 'local'])),
-			enabled: v.optional(v.boolean()),
-		}),
+	mcp: v.pipe(
+		v.optional(
+			v.object({
+				type: v.optional(v.picklist(['remote', 'local'])),
+				enabled: v.optional(v.boolean()),
+			}),
+		),
+		v.description(
+			"Configuration for the MCP. You can chose if it should be enabled or not and the transport to use 'remote' (default) and 'local'.",
+		),
 	),
-	subagent: v.optional(
-		v.object({
-			enabled: v.optional(v.boolean()),
-		}),
+	subagent: v.pipe(
+		v.optional(
+			v.object({
+				enabled: v.optional(v.boolean()),
+			}),
+		),
+		v.description('Configuration for the subagent. You can choose if it should be enabled or not.'),
 	),
-	instructions: v.optional(
-		v.object({
-			enabled: v.optional(v.boolean()),
-		}),
+	instructions: v.pipe(
+		v.optional(
+			v.object({
+				enabled: v.optional(v.boolean()),
+			}),
+		),
+		v.description(
+			'Configuration for the automatic AGENTS.md injection. You can choose if it should be enabled or not.',
+		),
+		v.description(
+			'Configuration for the automatic AGENTS.md injection. You can choose if it should be enabled or not.',
+		),
 	),
-	skills: v.optional(
-		v.object({
-			enabled: v.optional(v.boolean()),
-		}),
+	skills: v.pipe(
+		v.optional(
+			v.object({
+				enabled: v.pipe(
+					v.optional(v.union([v.boolean(), v.array(v.string())])),
+					v.description(
+						'It can be either a boolean or an array containing the skills that you want to enable',
+					),
+				),
+			}),
+		),
+		v.description(
+			'Configuration for the skills. You can choose if it they should be enabled or not, or specify an array of skill names to enable only specific skills.',
+		),
 	),
 });
 
