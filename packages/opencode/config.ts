@@ -18,6 +18,8 @@ const default_config = {
 	skills: {
 		enabled: true,
 	},
+	model: undefined as string | undefined,
+	variant: undefined as string | undefined,
 };
 
 export const config_schema = v.object({
@@ -42,6 +44,8 @@ export const config_schema = v.object({
 			enabled: v.optional(v.boolean()),
 		}),
 	),
+	model: v.optional(v.string()),
+	variant: v.optional(v.string()),
 });
 
 export type McpConfig = v.InferInput<typeof config_schema>;
@@ -123,6 +127,8 @@ function merge_with_defaults(user_config: Partial<McpConfig>): McpConfig {
 			...default_config.skills,
 			...user_config.skills,
 		},
+		model: user_config.model ?? default_config.model,
+		variant: user_config.variant ?? default_config.variant,
 	};
 }
 
@@ -154,6 +160,8 @@ export function get_mcp_config(ctx: PluginInput) {
 					subagent: { ...merged.subagent, ...parsed.output.subagent },
 					instructions: { ...merged.instructions, ...parsed.output.instructions },
 					skills: { ...merged.skills, ...parsed.output.skills },
+					model: parsed.output.model ?? merged.model,
+					variant: parsed.output.variant ?? merged.variant,
 				};
 			} else {
 				setTimeout(() => {

@@ -42,6 +42,14 @@
 				}
 			},
 			"required": []
+		},
+		"model": {
+			"type": "string",
+			"description": "Model identifier for the svelte-file-editor agent (e.g., 'anthropic/claude-sonnet-4-20250514')"
+		},
+		"variant": {
+			"type": "string",
+			"description": "Variant identifier for the svelte-file-editor agent (e.g., 'coding')"
 		}
 	},
 	"required": [],
