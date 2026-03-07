@@ -1,5 +1,11 @@
 # @sveltejs/opencode
 
+## 0.1.5
+
+### Patch Changes
+
+- feat(opencode): mcp enabled option is passed to opencode ([#171](https://github.com/sveltejs/ai-tools/pull/171))
+
 ## 0.1.4
 
 ### Patch Changes
