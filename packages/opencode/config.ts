@@ -4,6 +4,18 @@ import { homedir } from 'os';
 import { join } from 'path';
 import * as v from 'valibot';
 
+// Schema for individual agent configuration
+const agent_config_schema = v.object({
+	model: v.pipe(
+		v.optional(v.string()),
+		v.description('Model identifier for the agent (e.g., "anthropic/claude-sonnet-4-20250514")'),
+	),
+	variant: v.pipe(
+		v.optional(v.string()),
+		v.description('Variant identifier for the agent (e.g., "coding")'),
+	),
+});
+
 const default_config = {
 	mcp: {
 		type: 'remote' as 'remote' | 'local',
@@ -11,6 +23,7 @@ const default_config = {
 	},
 	subagent: {
 		enabled: true,
+		agents: {} as Record<string, v.InferInput<typeof agent_config_schema>>,
 	},
 	instructions: {
 		enabled: true,
@@ -21,26 +34,50 @@ const default_config = {
 };
 
 export const config_schema = v.object({
-	mcp: v.optional(
-		v.object({
-			type: v.optional(v.picklist(['remote', 'local'])),
-			enabled: v.optional(v.boolean()),
-		}),
+	mcp: v.pipe(
+		v.optional(
+			v.object({
+				type: v.optional(v.picklist(['remote', 'local'])),
+				enabled: v.optional(v.boolean()),
+			}),
+		),
+		v.description(
+			"Configuration for the MCP. You can chose if it should be enabled or not and the transport to use 'remote' (default) and 'local'.",
+		),
 	),
-	subagent: v.optional(
-		v.object({
-			enabled: v.optional(v.boolean()),
-		}),
+	subagent: v.pipe(
+		v.optional(
+			v.object({
+				enabled: v.optional(v.boolean()),
+				agents: v.optional(v.record(v.string(), agent_config_schema)),
+			}),
+		),
+		v.description('Configuration for the subagent. You can choose if it should be enabled or not.'),
 	),
-	instructions: v.optional(
-		v.object({
-			enabled: v.optional(v.boolean()),
-		}),
+	instructions: v.pipe(
+		v.optional(
+			v.object({
+				enabled: v.optional(v.boolean()),
+			}),
+		),
+		v.description(
+			'Configuration for the automatic AGENTS.md injection. You can choose if it should be enabled or not.',
+		),
 	),
-	skills: v.optional(
-		v.object({
-			enabled: v.optional(v.boolean()),
-		}),
+	skills: v.pipe(
+		v.optional(
+			v.object({
+				enabled: v.pipe(
+					v.optional(v.union([v.boolean(), v.array(v.string())])),
+					v.description(
+						'It can be either a boolean or an array containing the skills that you want to enable',
+					),
+				),
+			}),
+		),
+		v.description(
+			'Configuration for the skills. You can choose if it they should be enabled or not, or specify an array of skill names to enable only specific skills.',
+		),
 	),
 });
 
@@ -112,8 +149,12 @@ function merge_with_defaults(user_config: Partial<McpConfig>): McpConfig {
 			...user_config.mcp,
 		},
 		subagent: {
-			...default_config.subagent,
+			enabled: default_config.subagent.enabled,
 			...user_config.subagent,
+			agents: {
+				...default_config.subagent.agents,
+				...user_config.subagent?.agents,
+			},
 		},
 		instructions: {
 			...default_config.instructions,
@@ -151,7 +192,11 @@ export function get_mcp_config(ctx: PluginInput) {
 			if (parsed.success) {
 				merged = {
 					mcp: { ...merged.mcp, ...parsed.output.mcp },
-					subagent: { ...merged.subagent, ...parsed.output.subagent },
+					subagent: {
+						...merged.subagent,
+						...parsed.output.subagent,
+						agents: { ...merged.subagent?.agents, ...parsed.output.subagent?.agents },
+					},
 					instructions: { ...merged.instructions, ...parsed.output.instructions },
 					skills: { ...merged.skills, ...parsed.output.skills },
 				};
