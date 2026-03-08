@@ -22,9 +22,9 @@ const agent_names = get_agent_names(agents_dir);
 
 if (agent_names.length > 0) {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const agent = (json_schema as any).properties?.agent;
-	if (agent) {
-		agent.propertyNames = {
+	const agents = (json_schema as any).properties?.subagent?.properties?.agents;
+	if (agents) {
+		agents.propertyNames = {
 			anyOf: [{ enum: agent_names }, { type: 'string' }],
 		};
 	}

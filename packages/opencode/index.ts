@@ -151,7 +151,7 @@ After completing your work, provide:
 				};
 
 				// Get per-agent config from svelte.json (if any)
-				const svelte_file_editor_config = mcp_config.agent?.['svelte-file-editor'];
+				const svelte_file_editor_config = mcp_config.subagent?.agents?.['svelte-file-editor'];
 
 				// Configure agent from svelte.json only
 				// Priority: svelte.json agent config > defaults

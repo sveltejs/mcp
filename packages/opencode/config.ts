@@ -23,6 +23,7 @@ const default_config = {
 	},
 	subagent: {
 		enabled: true,
+		agents: {} as Record<string, v.InferInput<typeof agent_config_schema>>,
 	},
 	instructions: {
 		enabled: true,
@@ -30,7 +31,6 @@ const default_config = {
 	skills: {
 		enabled: true,
 	},
-	agent: {} as Record<string, v.InferInput<typeof agent_config_schema>>,
 };
 
 export const config_schema = v.object({
@@ -49,6 +49,7 @@ export const config_schema = v.object({
 		v.optional(
 			v.object({
 				enabled: v.optional(v.boolean()),
+				agents: v.optional(v.record(v.string(), agent_config_schema)),
 			}),
 		),
 		v.description('Configuration for the subagent. You can choose if it should be enabled or not.'),
@@ -77,10 +78,6 @@ export const config_schema = v.object({
 		v.description(
 			'Configuration for the skills. You can choose if it they should be enabled or not, or specify an array of skill names to enable only specific skills.',
 		),
-	),
-	agent: v.pipe(
-		v.optional(v.record(v.string(), agent_config_schema)),
-		v.description('Per-agent configuration. Configure model and variant for specific agents.'),
 	),
 });
 
@@ -152,8 +149,12 @@ function merge_with_defaults(user_config: Partial<McpConfig>): McpConfig {
 			...user_config.mcp,
 		},
 		subagent: {
-			...default_config.subagent,
+			enabled: default_config.subagent.enabled,
 			...user_config.subagent,
+			agents: {
+				...default_config.subagent.agents,
+				...user_config.subagent?.agents,
+			},
 		},
 		instructions: {
 			...default_config.instructions,
@@ -162,10 +163,6 @@ function merge_with_defaults(user_config: Partial<McpConfig>): McpConfig {
 		skills: {
 			...default_config.skills,
 			...user_config.skills,
-		},
-		agent: {
-			...default_config.agent,
-			...user_config.agent,
 		},
 	};
 }
@@ -195,10 +192,13 @@ export function get_mcp_config(ctx: PluginInput) {
 			if (parsed.success) {
 				merged = {
 					mcp: { ...merged.mcp, ...parsed.output.mcp },
-					subagent: { ...merged.subagent, ...parsed.output.subagent },
+					subagent: {
+						...merged.subagent,
+						...parsed.output.subagent,
+						agents: { ...merged.subagent?.agents, ...parsed.output.subagent?.agents },
+					},
 					instructions: { ...merged.instructions, ...parsed.output.instructions },
 					skills: { ...merged.skills, ...parsed.output.skills },
-					agent: { ...merged.agent, ...parsed.output.agent },
 				};
 			} else {
 				setTimeout(() => {
