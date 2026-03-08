@@ -80,9 +80,7 @@ export const config_schema = v.object({
 	),
 	agent: v.pipe(
 		v.optional(v.record(v.string(), agent_config_schema)),
-		v.description(
-			'Per-agent configuration. Configure model and variant for specific agents like "svelte-file-editor".',
-		),
+		v.description('Per-agent configuration. Configure model and variant for specific agents.'),
 	),
 });
 

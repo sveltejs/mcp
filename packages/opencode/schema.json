@@ -86,7 +86,7 @@
 				},
 				"required": []
 			},
-			"description": "Per-agent configuration. Configure model and variant for specific agents like \"svelte-file-editor\"."
+			"description": "Per-agent configuration. Configure model and variant for specific agents."
 		}
 	},
 	"required": [],
