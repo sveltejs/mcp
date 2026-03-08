@@ -149,13 +149,21 @@ After completing your work, provide:
 						[`${svelte_mcp_name}_*`]: true,
 					},
 				};
+
+				// Get per-agent config from svelte.json (if any)
+				const svelte_file_editor_config = mcp_config.agent?.['svelte-file-editor'];
+
 				// merge user config with defaults (user config takes precedence)
+				// Priority: input.agent > svelte.json agent config > defaults
 				input.agent['svelte-file-editor'] = {
 					...default_config,
+					...(svelte_file_editor_config?.model !== undefined && {
+						model: svelte_file_editor_config.model,
+					}),
+					...(svelte_file_editor_config?.variant !== undefined && {
+						variant: svelte_file_editor_config.variant,
+					}),
 					...input.agent['svelte-file-editor'],
-					// Apply model/variant from svelte.json if configured
-					...(mcp_config.model && { model: mcp_config.model }),
-					...(mcp_config.variant && { variant: mcp_config.variant }),
 				};
 			}
 		},

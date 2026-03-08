@@ -14,7 +14,8 @@
 					"type": "boolean"
 				}
 			},
-			"required": []
+			"required": [],
+			"description": "Configuration for the MCP. You can chose if it should be enabled or not and the transport to use 'remote' (default) and 'local'."
 		},
 		"subagent": {
 			"type": "object",
@@ -23,7 +24,8 @@
 					"type": "boolean"
 				}
 			},
-			"required": []
+			"required": [],
+			"description": "Configuration for the subagent. You can choose if it should be enabled or not."
 		},
 		"instructions": {
 			"type": "object",
@@ -32,24 +34,59 @@
 					"type": "boolean"
 				}
 			},
-			"required": []
+			"required": [],
+			"description": "Configuration for the automatic AGENTS.md injection. You can choose if it should be enabled or not."
 		},
 		"skills": {
 			"type": "object",
 			"properties": {
 				"enabled": {
-					"type": "boolean"
+					"anyOf": [
+						{
+							"type": "boolean"
+						},
+						{
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					],
+					"description": "It can be either a boolean or an array containing the skills that you want to enable"
 				}
 			},
-			"required": []
+			"required": [],
+			"description": "Configuration for the skills. You can choose if it they should be enabled or not, or specify an array of skill names to enable only specific skills."
 		},
-		"model": {
-			"type": "string",
-			"description": "Model identifier for the svelte-file-editor agent (e.g., 'anthropic/claude-sonnet-4-20250514')"
-		},
-		"variant": {
-			"type": "string",
-			"description": "Variant identifier for the svelte-file-editor agent (e.g., 'coding')"
+		"agent": {
+			"type": "object",
+			"propertyNames": {
+				"anyOf": [
+					{
+						"enum": [
+							"svelte-file-editor"
+						]
+					},
+					{
+						"type": "string"
+					}
+				]
+			},
+			"additionalProperties": {
+				"type": "object",
+				"properties": {
+					"model": {
+						"type": "string",
+						"description": "Model identifier for the agent (e.g., \"anthropic/claude-sonnet-4-20250514\")"
+					},
+					"variant": {
+						"type": "string",
+						"description": "Variant identifier for the agent (e.g., \"coding\")"
+					}
+				},
+				"required": []
+			},
+			"description": "Per-agent configuration. Configure model and variant for specific agents like \"svelte-file-editor\"."
 		}
 	},
 	"required": [],
