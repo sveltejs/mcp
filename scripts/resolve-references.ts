@@ -78,15 +78,15 @@ function extract_section(content: string, hash: string) {
 }
 
 /**
- * Removes the `title` and `skill` fields from markdown frontmatter, if present.
+ * Removes the `title`, `skill`, and `NOTE` fields from markdown frontmatter, if present.
  * Removes the entire frontmatter block if they were the only fields.
  */
-function remove_frontmatter_title(content: string) {
+function remove_frontmatter_unneeded_fields(content: string) {
 	const frontmatter_match = content.match(/^---\n([\s\S]*?)\n---\n?/);
 	if (!frontmatter_match) return content;
 
 	const frontmatter = frontmatter_match[1]!;
-	const lines = frontmatter.split('\n').filter((line) => !line.match(/^(title|skill)\s*:/));
+	const lines = frontmatter.split('\n').filter((line) => !line.match(/^(title|skill|NOTE)\s*:/));
 
 	if (lines.length === 0) {
 		// frontmatter is now empty — remove the whole block
@@ -106,7 +106,9 @@ function derive_name(link: string) {
 	return segments[segments.length - 1] ?? 'reference';
 }
 
-const content = remove_llm_ignore_blocks(remove_frontmatter_title(await get_content(file)));
+const content = remove_llm_ignore_blocks(
+	remove_frontmatter_unneeded_fields(await get_content(file)),
+);
 
 // Match markdown links that are either:
 // 1. Relative paths (not starting with http://, https://, mailto:, #, or /)
