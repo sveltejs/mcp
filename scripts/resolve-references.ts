@@ -78,15 +78,15 @@ function extract_section(content: string, hash: string) {
 }
 
 /**
- * Removes the `title` field from markdown frontmatter, if present.
- * Removes the entire frontmatter block if `title` was the only field.
+ * Removes the `title` and `skill` fields from markdown frontmatter, if present.
+ * Removes the entire frontmatter block if they were the only fields.
  */
 function remove_frontmatter_title(content: string) {
 	const frontmatter_match = content.match(/^---\n([\s\S]*?)\n---\n?/);
 	if (!frontmatter_match) return content;
 
 	const frontmatter = frontmatter_match[1]!;
-	const lines = frontmatter.split('\n').filter((line) => !line.match(/^title\s*:/));
+	const lines = frontmatter.split('\n').filter((line) => !line.match(/^(title|skill)\s*:/));
 
 	if (lines.length === 0) {
 		// frontmatter is now empty — remove the whole block
