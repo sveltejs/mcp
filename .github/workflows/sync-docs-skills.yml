@@ -63,6 +63,7 @@ jobs:
             file="${full_path#$SVELTE_DEV_ROOT/}"
             name=$(grep '^name: ' "$full_path" | head -1 | sed 's/^name: *//')
             repo="${file#$DOCS_PREFIX}"
+            repo="${repo#/}"
             repo="${repo%%/*}"
 
             output_dir="tools/skills/$name"
