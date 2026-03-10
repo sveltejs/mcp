@@ -32,7 +32,7 @@ The default configuration for the Svelte OpenCode plugin looks like this...
 		"enabled": true
 	},
 	"skills": {
-		"enabled": true // it can also be an array of all the skills to enable
+		"enabled": true // it can also be an array of all the skills to enable like ['svelte-core-bestpractices']
 	},
 	"instructions": {
 		"enabled": true
