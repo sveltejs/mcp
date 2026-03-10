@@ -29,7 +29,15 @@ The default configuration for the Svelte OpenCode plugin looks like this...
 		"enabled": true
 	},
 	"subagent": {
-		"enabled": true
+		"enabled": true,
+		"agents": {
+			"svelte-file-editor": {
+				"model": "other-model", // defaults to the same as main agent,
+				"temperature": 1, // default to unset
+				"top_p": 0.7, // default to unset,
+				"maxSteps": 20 // default to unlimited
+			}
+		}
 	},
 	"skills": {
 		"enabled": true // it can also be an array of all the skills to enable like ['svelte-core-bestpractices']
