@@ -14,7 +14,8 @@
 					"type": "boolean"
 				}
 			},
-			"required": []
+			"required": [],
+			"description": "Configuration for the MCP. You can chose if it should be enabled or not and the transport to use 'remote' (default) and 'local'."
 		},
 		"subagent": {
 			"type": "object",
@@ -23,7 +24,8 @@
 					"type": "boolean"
 				}
 			},
-			"required": []
+			"required": [],
+			"description": "Configuration for the subagent. You can choose if it should be enabled or not."
 		},
 		"instructions": {
 			"type": "object",
@@ -32,16 +34,39 @@
 					"type": "boolean"
 				}
 			},
-			"required": []
+			"required": [],
+			"description": "Configuration for the automatic AGENTS.md injection. You can choose if it should be enabled or not."
 		},
 		"skills": {
 			"type": "object",
 			"properties": {
 				"enabled": {
-					"type": "boolean"
+					"anyOf": [
+						{
+							"type": "boolean"
+						},
+						{
+							"type": "array",
+							"items": {
+								"anyOf": [
+									{
+										"enum": [
+											"svelte-code-writer",
+											"svelte-core-bestpractices"
+										]
+									},
+									{
+										"type": "string"
+									}
+								]
+							}
+						}
+					],
+					"description": "It can be either a boolean or an array containing the skills that you want to enable"
 				}
 			},
-			"required": []
+			"required": [],
+			"description": "Configuration for the skills. You can choose if it they should be enabled or not, or specify an array of skill names to enable only specific skills."
 		}
 	},
 	"required": [],
