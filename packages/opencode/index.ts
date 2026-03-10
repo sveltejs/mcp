@@ -161,8 +161,14 @@ After completing your work, provide:
 					...(svelte_file_editor_config?.model !== undefined && {
 						model: svelte_file_editor_config.model,
 					}),
-					...(svelte_file_editor_config?.variant !== undefined && {
-						variant: svelte_file_editor_config.variant,
+					...(svelte_file_editor_config?.temperature !== undefined && {
+						temperature: svelte_file_editor_config.temperature,
+					}),
+					...(svelte_file_editor_config?.maxSteps !== undefined && {
+						maxSteps: svelte_file_editor_config.maxSteps,
+					}),
+					...(svelte_file_editor_config?.top_p !== undefined && {
+						top_p: svelte_file_editor_config.top_p,
 					}),
 				};
 			}

@@ -10,9 +10,19 @@ const agent_config_schema = v.object({
 		v.optional(v.string()),
 		v.description('Model identifier for the agent (e.g., "anthropic/claude-sonnet-4-20250514")'),
 	),
-	variant: v.pipe(
-		v.optional(v.string()),
-		v.description('Variant identifier for the agent (e.g., "coding")'),
+	temperature: v.pipe(
+		v.optional(v.number()),
+		v.description('Temperature setting for the agent (e.g., 0.7)'),
+	),
+	top_p: v.pipe(
+		v.optional(v.number()),
+		v.description(
+			'Control response diversity with the top_p option. Alternative to temperature for controlling randomness.',
+		),
+	),
+	maxSteps: v.pipe(
+		v.optional(v.number()),
+		v.description('Maximum number of steps the agent can take (e.g., 10)'),
 	),
 });
 
