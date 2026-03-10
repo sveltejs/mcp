@@ -73,16 +73,7 @@ export const svelte_plugin: Plugin = async (ctx) => {
 			}
 			if (mcp_config.subagent?.enabled !== false) {
 				// we add the editor subagent that will be used when editing Svelte files to prevent wasting context on the main agent
-				const default_config: {
-					color: '#ff3e00';
-					mode: 'subagent';
-					prompt: string;
-					description: string;
-					permission: { bash: 'ask'; edit: 'allow'; webfetch: 'ask' };
-					tools: Record<string, boolean>;
-					model?: string;
-					variant?: string;
-				} = {
+				const default_config: (typeof input.agent)[string] = {
 					color: '#ff3e00',
 					mode: 'subagent',
 					prompt: `You are a Svelte 5 expert responsible for writing, editing, and validating Svelte components and modules. You have access to the Svelte MCP server which provides documentation and code analysis tools. Always use the tools from the svelte MCP server to fetch documentation with \`get_documentation\` and validating the code with \`svelte_autofixer\`. If the autofixer returns any issue or suggestions try to solve them.
