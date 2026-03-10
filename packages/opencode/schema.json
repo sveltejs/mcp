@@ -16,18 +16,43 @@
 			},
 			"required": [],
 			"description": "Configuration for the MCP. You can chose if it should be enabled or not and the transport to use 'remote' (default) and 'local'."
-			"required": [],
-			"description": "Configuration for the MCP. You can chose if it should be enabled or not and the transport to use 'remote' (default) and 'local'."
 		},
 		"subagent": {
 			"type": "object",
 			"properties": {
 				"enabled": {
 					"type": "boolean"
+				},
+				"agents": {
+					"type": "object",
+					"propertyNames": {
+						"anyOf": [
+							{
+								"enum": [
+									"svelte-file-editor"
+								]
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"additionalProperties": {
+						"type": "object",
+						"properties": {
+							"model": {
+								"type": "string",
+								"description": "Model identifier for the agent (e.g., \"anthropic/claude-sonnet-4-20250514\")"
+							},
+							"variant": {
+								"type": "string",
+								"description": "Variant identifier for the agent (e.g., \"coding\")"
+							}
+						},
+						"required": []
+					}
 				}
 			},
-			"required": [],
-			"description": "Configuration for the subagent. You can choose if it should be enabled or not."
 			"required": [],
 			"description": "Configuration for the subagent. You can choose if it should be enabled or not."
 		},
@@ -38,8 +63,6 @@
 					"type": "boolean"
 				}
 			},
-			"required": [],
-			"description": "Configuration for the automatic AGENTS.md injection. You can choose if it should be enabled or not."
 			"required": [],
 			"description": "Configuration for the automatic AGENTS.md injection. You can choose if it should be enabled or not."
 		},
