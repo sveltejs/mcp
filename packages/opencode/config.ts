@@ -29,7 +29,7 @@ const default_config = {
 		enabled: true,
 	},
 	skills: {
-		enabled: true,
+		enabled: true as boolean | string[],
 	},
 };
 

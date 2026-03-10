@@ -16,6 +16,8 @@
 			},
 			"required": [],
 			"description": "Configuration for the MCP. You can chose if it should be enabled or not and the transport to use 'remote' (default) and 'local'."
+			"required": [],
+			"description": "Configuration for the MCP. You can chose if it should be enabled or not and the transport to use 'remote' (default) and 'local'."
 		},
 		"subagent": {
 			"type": "object",
@@ -26,6 +28,8 @@
 			},
 			"required": [],
 			"description": "Configuration for the subagent. You can choose if it should be enabled or not."
+			"required": [],
+			"description": "Configuration for the subagent. You can choose if it should be enabled or not."
 		},
 		"instructions": {
 			"type": "object",
@@ -34,6 +38,8 @@
 					"type": "boolean"
 				}
 			},
+			"required": [],
+			"description": "Configuration for the automatic AGENTS.md injection. You can choose if it should be enabled or not."
 			"required": [],
 			"description": "Configuration for the automatic AGENTS.md injection. You can choose if it should be enabled or not."
 		},
@@ -48,7 +54,17 @@
 						{
 							"type": "array",
 							"items": {
-								"type": "string"
+								"anyOf": [
+									{
+										"enum": [
+											"svelte-code-writer",
+											"svelte-core-bestpractices"
+										]
+									},
+									{
+										"type": "string"
+									}
+								]
 							}
 						}
 					],
@@ -57,36 +73,6 @@
 			},
 			"required": [],
 			"description": "Configuration for the skills. You can choose if it they should be enabled or not, or specify an array of skill names to enable only specific skills."
-		},
-		"agent": {
-			"type": "object",
-			"propertyNames": {
-				"anyOf": [
-					{
-						"enum": [
-							"svelte-file-editor"
-						]
-					},
-					{
-						"type": "string"
-					}
-				]
-			},
-			"additionalProperties": {
-				"type": "object",
-				"properties": {
-					"model": {
-						"type": "string",
-						"description": "Model identifier for the agent (e.g., \"anthropic/claude-sonnet-4-20250514\")"
-					},
-					"variant": {
-						"type": "string",
-						"description": "Variant identifier for the agent (e.g., \"coding\")"
-					}
-				},
-				"required": []
-			},
-			"description": "Per-agent configuration. Configure model and variant for specific agents."
 		}
 	},
 	"required": [],
