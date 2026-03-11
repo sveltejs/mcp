@@ -4,6 +4,28 @@ import { homedir } from 'os';
 import { join } from 'path';
 import * as v from 'valibot';
 
+// Schema for individual agent configuration
+const agent_config_schema = v.object({
+	model: v.pipe(
+		v.optional(v.string()),
+		v.description('Model identifier for the agent (e.g., "anthropic/claude-sonnet-4-20250514")'),
+	),
+	temperature: v.pipe(
+		v.optional(v.number()),
+		v.description('Temperature setting for the agent (e.g., 0.7)'),
+	),
+	top_p: v.pipe(
+		v.optional(v.number()),
+		v.description(
+			'Control response diversity with the top_p option. Alternative to temperature for controlling randomness.',
+		),
+	),
+	maxSteps: v.pipe(
+		v.optional(v.number()),
+		v.description('Maximum number of steps the agent can take (e.g., 10)'),
+	),
+});
+
 const default_config = {
 	mcp: {
 		type: 'remote' as 'remote' | 'local',
@@ -11,6 +33,7 @@ const default_config = {
 	},
 	subagent: {
 		enabled: true,
+		agents: {} as Record<string, v.InferInput<typeof agent_config_schema>>,
 	},
 	instructions: {
 		enabled: true,
@@ -36,6 +59,7 @@ export const config_schema = v.object({
 		v.optional(
 			v.object({
 				enabled: v.optional(v.boolean()),
+				agents: v.optional(v.record(v.string(), agent_config_schema)),
 			}),
 		),
 		v.description('Configuration for the subagent. You can choose if it should be enabled or not.'),
@@ -45,9 +69,6 @@ export const config_schema = v.object({
 			v.object({
 				enabled: v.optional(v.boolean()),
 			}),
-		),
-		v.description(
-			'Configuration for the automatic AGENTS.md injection. You can choose if it should be enabled or not.',
 		),
 		v.description(
 			'Configuration for the automatic AGENTS.md injection. You can choose if it should be enabled or not.',
@@ -138,8 +159,12 @@ function merge_with_defaults(user_config: Partial<McpConfig>): McpConfig {
 			...user_config.mcp,
 		},
 		subagent: {
-			...default_config.subagent,
+			enabled: default_config.subagent.enabled,
 			...user_config.subagent,
+			agents: {
+				...default_config.subagent.agents,
+				...user_config.subagent?.agents,
+			},
 		},
 		instructions: {
 			...default_config.instructions,
@@ -177,7 +202,11 @@ export function get_mcp_config(ctx: PluginInput) {
 			if (parsed.success) {
 				merged = {
 					mcp: { ...merged.mcp, ...parsed.output.mcp },
-					subagent: { ...merged.subagent, ...parsed.output.subagent },
+					subagent: {
+						...merged.subagent,
+						...parsed.output.subagent,
+						agents: { ...merged.subagent?.agents, ...parsed.output.subagent?.agents },
+					},
 					instructions: { ...merged.instructions, ...parsed.output.instructions },
 					skills: { ...merged.skills, ...parsed.output.skills },
 				};

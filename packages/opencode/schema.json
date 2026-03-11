@@ -22,6 +22,43 @@
 			"properties": {
 				"enabled": {
 					"type": "boolean"
+				},
+				"agents": {
+					"type": "object",
+					"propertyNames": {
+						"anyOf": [
+							{
+								"enum": [
+									"svelte-file-editor"
+								]
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"additionalProperties": {
+						"type": "object",
+						"properties": {
+							"model": {
+								"type": "string",
+								"description": "Model identifier for the agent (e.g., \"anthropic/claude-sonnet-4-20250514\")"
+							},
+							"temperature": {
+								"type": "number",
+								"description": "Temperature setting for the agent (e.g., 0.7)"
+							},
+							"top_p": {
+								"type": "number",
+								"description": "Control response diversity with the top_p option. Alternative to temperature for controlling randomness."
+							},
+							"maxSteps": {
+								"type": "number",
+								"description": "Maximum number of steps the agent can take (e.g., 10)"
+							}
+						},
+						"required": []
+					}
 				}
 			},
 			"required": [],
