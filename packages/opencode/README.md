@@ -36,39 +36,76 @@ The plugin injects instructions that teach the agent how to effectively use the 
 
 ## Configuration
 
-The default configuration:
+Create `svelte.json` to customize how the plugin configures MCP, the Svelte subagent, instructions, and skills.
 
 ```json
 {
-	"$schema": "https://raw.githubusercontent.com/sveltejs/ai-tools/refs/heads/main/packages/opencode/schema.json",
+	"$schema": "https://svelte.dev/opencode/schema.json",
 	"mcp": {
 		"type": "remote",
 		"enabled": true
 	},
 	"subagent": {
-		"enabled": true
+		"enabled": true,
+		"agents": {
+			"svelte-file-editor": {
+				"model": "anthropic/claude-sonnet-4-20250514",
+				"temperature": 0.7,
+				"top_p": 0.9,
+				"maxSteps": 20
+			}
+		}
 	},
 	"instructions": {
 		"enabled": true
+	},
+	"skills": {
+		"enabled": ["svelte-code-writer", "svelte-core-bestpractices"]
 	}
 }
 ```
 
+### Defaults
+
+If omitted, the plugin uses these defaults:
+
+- `mcp.type`: `"remote"`
+- `mcp.enabled`: `true`
+- `subagent.enabled`: `true`
+- `subagent.agents`: `{}`
+- `instructions.enabled`: `true`
+- `skills.enabled`: `true`
+
 ### Configuration Options
 
-| Option                 | Type                    | Default    | Description                                                                      |
-| ---------------------- | ----------------------- | ---------- | -------------------------------------------------------------------------------- |
-| `mcp.type`             | `"remote"` \| `"local"` | `"remote"` | Use the remote server at `mcp.svelte.dev` or run locally via `npx @sveltejs/mcp` |
-| `mcp.enabled`          | `boolean`               | `true`     | Enable/disable the MCP server                                                    |
-| `subagent.enabled`     | `boolean`               | `true`     | Enable/disable the Svelte file editor subagent                                   |
-| `instructions.enabled` | `boolean`               | `true`     | Enable/disable agent instructions injection                                      |
+| Option                                           | Type                  | Default    | Description                                                                                    |
+| ------------------------------------------------ | --------------------- | ---------- | ---------------------------------------------------------------------------------------------- |
+| `mcp.type`                                       | `"remote" \| "local"` | `"remote"` | Use `https://mcp.svelte.dev/mcp` (`remote`) or run `@sveltejs/mcp` via `npx` (`local`).        |
+| `mcp.enabled`                                    | `boolean`             | `true`     | Enable or disable the Svelte MCP server entry.                                                 |
+| `subagent.enabled`                               | `boolean`             | `true`     | Enable or disable registration of the `svelte-file-editor` subagent.                           |
+| `subagent.agents.svelte-file-editor.model`       | `string`              | main agent | Override the model used by the Svelte file editor subagent.                                    |
+| `subagent.agents.svelte-file-editor.temperature` | `number`              | unset      | Set temperature for the subagent.                                                              |
+| `subagent.agents.svelte-file-editor.top_p`       | `number`              | unset      | Set top-p sampling for the subagent.                                                           |
+| `subagent.agents.svelte-file-editor.maxSteps`    | `number`              | unlimited  | Limit the number of steps the subagent can execute.                                            |
+| `instructions.enabled`                           | `boolean`             | `true`     | Enable or disable automatic instruction-file injection.                                        |
+| `skills.enabled`                                 | `boolean \| string[]` | `true`     | Enable all skills (`true`), disable all skills (`false`), or enable only specific skill names. |
 
-### Config File Location
+### Supported Skill Names
 
-Place your configuration at one of these locations:
+When using `skills.enabled` as an array, these built-in names are currently available:
 
-- `~/.config/opencode/svelte.json` (global)
-- `$OPENCODE_CONFIG_DIR/svelte.json` (if `OPENCODE_CONFIG_DIR` is set, takes priority)
+- `svelte-code-writer`
+- `svelte-core-bestpractices`
+
+### Config File Locations and Precedence
+
+The plugin reads from these files (lowest priority first, highest priority last):
+
+- `~/.config/opencode/svelte.json`
+- `$OPENCODE_CONFIG_DIR/svelte.json` (when `OPENCODE_CONFIG_DIR` is set)
+- `.opencode/svelte.json` in the current project
+
+If the same key is defined in multiple files, the later location overrides earlier ones.
 
 ## License
 
