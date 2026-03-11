@@ -1,5 +1,15 @@
 # @sveltejs/opencode
 
+## 0.1.5
+
+### Patch Changes
+
+- fix: merge user-configured svelte-file-editor agent settings ([#176](https://github.com/sveltejs/ai-tools/pull/176))
+
+- feat(opencode): mcp enabled option is passed to opencode ([#171](https://github.com/sveltejs/ai-tools/pull/171))
+
+- feat: allow enabling a specific skill in opencode plugin ([#174](https://github.com/sveltejs/ai-tools/pull/174))
+
 ## 0.1.4
 
 ### Patch Changes
