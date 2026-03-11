@@ -64,7 +64,7 @@ jobs:
 
   publish-mcp:
     needs: release
-    if: contains(needs.release.outputs.publishedPackages, '"@sveltejs/ai-tools"')
+    if: contains(needs.release.outputs.publishedPackages, '"@sveltejs/mcp"')
     uses: ./.github/workflows/publish-mcp.yml
     secrets:
       MCP_KEY: ${{ secrets.MCP_KEY }}
