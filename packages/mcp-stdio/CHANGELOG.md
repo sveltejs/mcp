@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.21
+
+### Patch Changes
+
+- feat: display similar result & error at the end ([#161](https://github.com/sveltejs/ai-tools/pull/161))
+
 ## 0.1.20
 
 ### Patch Changes
