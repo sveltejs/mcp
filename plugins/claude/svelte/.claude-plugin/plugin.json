@@ -8,9 +8,7 @@
 	"lspServers": {
 		"svelte": {
 			"command": "svelteserver",
-			"args": [
-				"--stdio"
-			],
+			"args": ["--stdio"],
 			"extensionToLanguage": {
 				".svelte": "svelte"
 			}

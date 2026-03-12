@@ -5,10 +5,5 @@
 	"author": {
 		"name": "Svelte"
 	},
-	"keywords": [
-		"svelte",
-		"sveltekit",
-		"mcp",
-		"autofixer"
-	]
+	"keywords": ["svelte", "sveltekit", "mcp", "autofixer"]
 }
