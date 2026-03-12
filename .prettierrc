@@ -10,6 +10,12 @@
 			"options": {
 				"parser": "svelte"
 			}
+		},
+		{
+			"files": "**/references/*.md",
+			"options": {
+				"embeddedLanguageFormatting": "off"
+			}
 		}
 	]
 }
