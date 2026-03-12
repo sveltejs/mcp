@@ -17,6 +17,10 @@ To get the most out of the MCP server we recommend including the following promp
 
 > [!NOTE] This is already setup for you when using `npx sv add mcp`
 
+<!-- prettier-ignore-start -->
+````markdown
 @include .generated/agents.md
+````
+<!-- prettier-ignore-end -->
 
 If your MCP client supports it, we also recommend using the [svelte-task](prompts#svelte-task) prompt to instruct the LLM on the best way to use the MCP server.

@@ -18,9 +18,11 @@ ${module.docs_description}
 <details>
 	<summary>Copy the prompt</summary>
 
-\`\`\`md
+<!-- prettier-ignore-start -->
+\`\`\`\`markdown
 ${await module.generate_for_docs()}
-\`\`\`
+\`\`\`\`
+<!-- prettier-ignore-end -->
 
 </details>
 
