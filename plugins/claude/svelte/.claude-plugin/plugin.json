@@ -1,14 +1,16 @@
 {
 	"name": "svelte",
 	"description": "A plugin for all things related to Svelte development, MCP, skills, and more.",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"author": {
 		"name": "Svelte"
 	},
 	"lspServers": {
 		"svelte": {
 			"command": "svelteserver",
-			"args": ["--stdio"],
+			"args": [
+				"--stdio"
+			],
 			"extensionToLanguage": {
 				".svelte": "svelte"
 			}
