@@ -46,20 +46,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline --ignore-scripts
 
-      - name: Sync Claude plugin
-        run: pnpm sync-claude-plugin
-
-      - name: Sync Cursor plugin
-        run: pnpm sync-cursor-plugin
-
-      - name: Sync OpenCode plugin
-        run: pnpm sync-opencode-plugin && pnpm generate-opencode-jsonschema
+      - name: Sync plugins
+        run: pnpm sync-plugins
 
       - name: Generate skills documentation
         run: pnpm generate-skill-docs
-
-      - name: Bump plugin versions for changed plugins
-        run: pnpm bump-plugin-versions
 
       - name: Check for changes
         id: git-check
