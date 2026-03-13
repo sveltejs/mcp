@@ -1,5 +1,11 @@
 # @sveltejs/mcp
 
+## 0.1.22
+
+### Patch Changes
+
+- fix: broaden checks for imported runes because LLMs are unhinged ([#185](https://github.com/sveltejs/ai-tools/pull/185))
+
 ## 0.1.21
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @sveltejs/opencode
 
+## 0.1.6
+
+### Patch Changes
+
+- chore: sync skills from svelte.dev ([#178](https://github.com/sveltejs/ai-tools/pull/178))
+
+- fix: update svelte-file-editor agent to use proper name ([#183](https://github.com/sveltejs/ai-tools/pull/183))
+
 ## 0.1.5
 
 ### Patch Changes
