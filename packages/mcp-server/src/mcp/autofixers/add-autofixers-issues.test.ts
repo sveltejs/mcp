@@ -344,86 +344,110 @@ describe('add_autofixers_issues', () => {
 	});
 
 	describe('imported_runes', () => {
-		describe.each([{ source: 'svelte' }, { source: 'svelte/runes' }])(
-			'from "$source"',
-			({ source }) => {
-				describe.each(dollarless_runes)('single import ($rune)', ({ rune }) => {
-					it(`should add suggestions when importing '${rune}' from '${source}'`, () => {
-						const content = run_autofixers_on_code(`
+		describe.each([
+			{ source: 'svelte' },
+			{ source: 'svelte/runes' },
+			{ source: '@sveltejs/runes' },
+			{ source: '@sveltejs/vite-plugin-svelte' },
+		])('from "$source"', ({ source }) => {
+			describe.each(dollarless_runes)('single import ($rune)', ({ rune }) => {
+				it(`should add suggestions when importing '${rune}' from '${source}'`, () => {
+					const content = run_autofixers_on_code(`
 					<script>
 						import { ${rune} } from '${source}';
 					</script>`);
 
-						expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
-						expect(content.suggestions).toContain(
-							`You are importing "${rune}" from "${source}". This is not necessary, all runes are globally available. Please remove this import and use "$${rune}" directly.`,
-						);
-					});
+					expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+					expect(content.suggestions).toContain(
+						`You are importing "${rune}" from "${source}". This is not necessary, all runes are globally available. Please remove this import and use "$${rune}" directly.`,
+					);
+				});
 
-					it(`should add suggestions when importing "${rune}" as the default export from '${source}'`, () => {
-						const content = run_autofixers_on_code(`
+				it(`should add suggestions when importing "${rune}" as the default export from '${source}'`, () => {
+					const content = run_autofixers_on_code(`
 					<script>
 						import ${rune} from '${source}';
 					</script>`);
 
-						expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
-						expect(content.suggestions).toContain(
-							`You are importing "${rune}" from "${source}". This is not necessary, all runes are globally available. Please remove this import and use "$${rune}" directly.`,
-						);
-					});
+					expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+					expect(content.suggestions).toContain(
+						`You are importing "${rune}" from "${source}". This is not necessary, all runes are globally available. Please remove this import and use "$${rune}" directly.`,
+					);
+				});
 
-					it(`should add suggestions when importing '${rune}' as the namespace export from '${source}'`, () => {
-						const content = run_autofixers_on_code(`
+				it(`should add suggestions when importing '${rune}' as the namespace export from '${source}'`, () => {
+					const content = run_autofixers_on_code(`
 					<script>
 						import * as ${rune} from '${source}';
 					</script>`);
 
-						expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
-						expect(content.suggestions).toContain(
-							`You are importing "${rune}" from "${source}". This is not necessary, all runes are globally available. Please remove this import and use "$${rune}" directly.`,
-						);
-					});
+					expect(content.suggestions.length).toBeGreaterThanOrEqual(1);
+					expect(content.suggestions).toContain(
+						`You are importing "${rune}" from "${source}". This is not necessary, all runes are globally available. Please remove this import and use "$${rune}" directly.`,
+					);
 				});
+			});
 
-				it(`should add suggestions when importing multiple runes from '${source}'`, () => {
-					const content = run_autofixers_on_code(`
+			it(`should add suggestions when importing multiple runes from '${source}'`, () => {
+				const content = run_autofixers_on_code(`
 					<script>
 						import { onMount, state, effect } from '${source}';
 					</script>`);
 
-					expect(content.suggestions.length).toBeGreaterThanOrEqual(2);
-					expect(content.suggestions).toContain(
-						`You are importing "state" from "${source}". This is not necessary, all runes are globally available. Please remove this import and use "$state" directly.`,
-					);
-					expect(content.suggestions).toContain(
-						`You are importing "effect" from "${source}". This is not necessary, all runes are globally available. Please remove this import and use "$effect" directly.`,
-					);
-				});
+				expect(content.suggestions.length).toBeGreaterThanOrEqual(2);
+				expect(content.suggestions).toContain(
+					`You are importing "state" from "${source}". This is not necessary, all runes are globally available. Please remove this import and use "$state" directly.`,
+				);
+				expect(content.suggestions).toContain(
+					`You are importing "effect" from "${source}". This is not necessary, all runes are globally available. Please remove this import and use "$effect" directly.`,
+				);
+			});
 
-				it(`should not add suggestions when importing other identifiers from '${source}'`, () => {
-					const content = run_autofixers_on_code(`
+			it(`should not add suggestions when importing other identifiers from '${source}'`, () => {
+				const content = run_autofixers_on_code(`
 					<script>
 						import { onMount } from '${source}';
 					</script>`);
 
-					expect(content.suggestions).not.toContain(
-						`You are importing "onMount" from "${source}". This is not necessary, all runes are globally available. Please remove this import and use "$onMount" directly.`,
-					);
-				});
-			},
-		);
+				expect(content.suggestions).not.toContain(
+					`You are importing "onMount" from "${source}". This is not necessary, all runes are globally available. Please remove this import and use "$onMount" directly.`,
+				);
+			});
+		});
 
 		describe.each(dollarless_runes)('importing $rune from external lib', ({ rune }) => {
-			it(`should not add suggestions when importing from packages that are not svelte`, () => {
+			it(`should not add suggestions when importing from packages whose name doesn't contain svelte`, () => {
+				const content = run_autofixers_on_code(`
+				<script>
+					import { ${rune} } from 'something-something';
+				</script>`);
+
+				expect(content.suggestions).not.toContain(
+					`You are importing "${rune}" from "something-something". This is not necessary, all runes are globally available. Please remove this import and use "$${rune}" directly.`,
+				);
+			});
+
+			it(`should add suggestions with a different hint when importing from packages whose name contains svelte but it's not official`, () => {
 				const content = run_autofixers_on_code(`
 				<script>
 					import { ${rune} } from 'svelte-something-something';
 				</script>`);
 
-				expect(content.suggestions).not.toContain(
-					`You are importing "${rune}" from "svelte-something-something". This is not necessary, all runes are globally available. Please remove this import and use "$${rune}" directly.`,
+				expect(content.suggestions).toContain(
+					`You are importing "${rune}" from "svelte-something-something". If you are trying to import runes to use them this is not necessary, all runes are globally available. Please remove this import and use "$${rune}" directly. If you are importing the function from a separate library ignore this suggestion.`,
 				);
 			});
+		});
+
+		it('should not add the imported_runes suggestion when importing derived from svelte/store', () => {
+			const content = run_autofixers_on_code(`
+			<script>
+				import { derived } from 'svelte/store';
+			</script>`);
+
+			expect(content.suggestions).not.toContain(
+				'You are importing "derived" from "svelte/store". This is not necessary, all runes are globally available. Please remove this import and use "$derived" directly.',
+			);
 		});
 	});
 
