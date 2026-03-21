@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Opencode
 ---
 
 OpenCode has a [plugin system](https://opencode.ai/docs/plugins/) that allows developers to add MCP servers, agents and commands programmatically. Svelte has an OpenCode plugin published under `@sveltejs/opencode`.
