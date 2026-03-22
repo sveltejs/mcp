@@ -2,7 +2,7 @@
 title: Overview
 ---
 
-Since creating, editing or analyzing a Svelte file is an atomic operation we recommend creating a sub-agent that your main agent can invoke whenever it needs to interact with a Svelte component. You can write your own or take inspiration from the one available in the [`ai-tools`](https://github.com/ai-tools/tools/subagent) repository: a specialized subagent called `svelte-file-editor` designed for creating, editing, and reviewing Svelte files.
+Since creating, editing or analyzing a Svelte file is an atomic operation we recommend creating a sub-agent that your main agent can invoke whenever it needs to interact with a Svelte component. You can write your own or take inspiration from the one available in the [`ai-tools`](https://github.com/sveltejs/ai-tools/tree/main/tools/agents) repository: a specialized subagent called `svelte-file-editor` designed for creating, editing, and reviewing Svelte files.
 
 <details>
 	<summary>View subagent definition</summary>

@@ -2,7 +2,7 @@
 title: Overview
 ---
 
-The following pages will guide you on how to setup and use all the ai tools officially maintained by the Svelte team.
+The following pages will guide you on how to setup and use all the AI tools officially maintained by the Svelte team.
 
 Currently there are four main tools, each one targeting a specific area, all meant to allow an agent to write correct and good Svelte code:
 

@@ -48,15 +48,9 @@ The output is a structured text list of sections, including each section's title
 
 Fetches the full documentation for one or more sections.
 
-```bash
 npx -y @sveltejs/mcp get-documentation 'svelte/$state'
-```
-
-To request multiple sections, pass them as a single comma-separated argument:
-
-```bash
+# or
 npx -y @sveltejs/mcp get-documentation 'svelte/$state,svelte/await-expressions'
-```
 
 Each section can be matched by title or by documentation path. If a section cannot be found, the CLI returns an error plus similar matches when available.
 
