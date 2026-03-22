@@ -22,17 +22,13 @@ Available commands:
 - `get-documentation <sections>`
 - `svelte-autofixer <code_or_path>`
 
-You can inspect the available options with:
+You can learn more about the commands with
 
 ```bash
 npx -y @sveltejs/mcp --help
 npx -y @sveltejs/mcp <command> --help
+npx -y @sveltejs/mcp --version
 ```
-
-The top-level CLI also supports:
-
-- `-h`, `--help` - show help
-- `-v`, `--version` - show the installed version
 
 ## `list-sections`
 
@@ -49,7 +45,9 @@ The output is a structured text list of sections, including each section's title
 Fetches the full documentation for one or more sections.
 
 npx -y @sveltejs/mcp get-documentation 'svelte/$state'
+
 # or
+
 npx -y @sveltejs/mcp get-documentation 'svelte/$state,svelte/await-expressions'
 
 Each section can be matched by title or by documentation path. If a section cannot be found, the CLI returns an error plus similar matches when available.
