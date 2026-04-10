@@ -1,5 +1,9 @@
 {
 	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"allowImportingTsExtensions": true,
+		"types": ["@types/node"]
+	},
 	"include": ["index.ts", "config.ts", "agents.ts", "scripts/*"],
 	"exclude": ["node_modules"]
 }
