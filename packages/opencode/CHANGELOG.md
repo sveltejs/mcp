@@ -1,5 +1,11 @@
 # @sveltejs/opencode
 
+## 0.1.7
+
+### Patch Changes
+
+- fix: import `ts` files directly ([#190](https://github.com/sveltejs/ai-tools/pull/190))
+
 ## 0.1.6
 
 ### Patch Changes
