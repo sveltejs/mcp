@@ -18,6 +18,12 @@
 		"instructions",
 		"skills"
 	],
+	"exports": {
+		"./server": {
+			"types": "./index.ts",
+			"import": "./index.ts"
+		}
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/sveltejs/ai-tools.git",
