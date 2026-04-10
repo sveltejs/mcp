@@ -1,6 +1,6 @@
 {
 	"name": "@sveltejs/opencode",
-	"version": "0.1.7",
+	"version": "0.1.8",
 	"type": "module",
 	"license": "MIT",
 	"homepage": "https://github.com/sveltejs/ai-tools#readme",
