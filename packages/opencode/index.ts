@@ -2,8 +2,8 @@ import type { Plugin } from '@opencode-ai/plugin';
 import { readdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { agents } from './agents.js';
-import { get_mcp_config } from './config.js';
+import { agents } from './agents.ts';
+import { get_mcp_config } from './config.ts';
 
 const current_dir = dirname(fileURLToPath(import.meta.url));
 
