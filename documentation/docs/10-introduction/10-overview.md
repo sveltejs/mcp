@@ -6,9 +6,9 @@ The following pages will guide you on how to setup and use all the AI tools offi
 
 Currently there are four main tools, each one targeting a specific area, all meant to allow an agent to write correct and good Svelte code:
 
+- [Instructions](instructions): small prompt always injected in your sessions to make your agent more aware of the available tools
 - [MCP Server](mcp): with tools, prompt and resources to give your agent more context pulling directly from the official Svelte documentation and using static analysis to correct common generative AI pitfalls.
 - [Skills](skills): lazy loaded descriptions that instruct your agent on what are the Svelte best practices (or on how to use the [`@sveltejs/mcp` cli](cli) to access the same tools as the MCP server)
-- [Instructions](instructions): small prompt always injected in your sessions to make your agent more aware of the available tools
 - [Subagents](subagent): focused agents that your agent can invoke in parallel to execute atomic operations in a separate context window
 
 When building your perfect workflow don't hesitate to remove what you consider superfluous: the tools are designed to work together but each piece can be powerful by itself.
