@@ -83,7 +83,6 @@ Located in `src/lib/server/analyze/`:
 
 Required environment variables:
 
-- `DATABASE_URL`: SQLite database path (default: `file:test.db`)
 - `VOYAGE_API_KEY`: API key for embeddings support (optional)
 
 When connected to the svelte-llm MCP server, you have access to comprehensive Svelte 5 and SvelteKit documentation. Here's how to use the available tools effectively:

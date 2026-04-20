@@ -24,10 +24,6 @@ catalogs:
     prettier-plugin-svelte: ^3.3.3
     svelte-eslint-parser: ^1.4.0
     typescript-eslint: ^8.44.0
-  orm:
-    '@libsql/client': ^0.17.0
-    drizzle-kit: ^0.31.0
-    drizzle-orm: ^0.45.0
   svelte:
     '@sveltejs/adapter-vercel': ^6.0.0
     '@sveltejs/kit': ^2.42.2
