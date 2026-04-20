@@ -1,33 +1,45 @@
 import { basename } from 'node:path';
-import type { SvelteMcp } from '../../index.js';
+import { tool } from 'tmcp/utils';
 import * as v from 'valibot';
+import { add_autofixers_issues } from '../../autofixers/add-autofixers-issues.js';
 import { add_compile_issues } from '../../autofixers/add-compile-issues.js';
 import { add_eslint_issues } from '../../autofixers/add-eslint-issues.js';
-import { add_autofixers_issues } from '../../autofixers/add-autofixers-issues.js';
 import { icons } from '../../icons/index.js';
-import { tool } from 'tmcp/utils';
+import { type SvelteMcp } from '../../index.js';
 
-const autofixer_schema = v.object({
-	code: v.string(),
-	desired_svelte_version: v.pipe(
-		v.union([v.string(), v.number()]),
-		v.description(
-			'The desired svelte version...if possible read this from the package.json of the user project, otherwise use some hint from the wording (if the user asks for runes it wants version 5). Default to 5 in case of doubt.',
+function get_autofixer_schema(stdio: boolean) {
+	let code = v.string();
+	if (stdio) {
+		// we only add the description if we are running in stdio, this saves a few tokens for the remote server
+		code = v.pipe(
+			v.string(),
+			v.description(
+				"The code to be processed by the autofixer. It can also be a path to a file containing the code. If the file doesn't exists the string will be treated as the code",
+			),
+		);
+	}
+	return v.object({
+		code,
+		desired_svelte_version: v.pipe(
+			v.union([v.string(), v.number()]),
+			v.description(
+				'The desired svelte version...if possible read this from the package.json of the user project, otherwise use some hint from the wording (if the user asks for runes it wants version 5). Default to 5 in case of doubt.',
+			),
 		),
-	),
-	async: v.pipe(
-		v.optional(v.boolean()),
-		v.description(
-			'If true the code is an async component/module and might use await in the markup or top-level awaits in the script tag. If possible check the svelte.config.js/svelte.config.ts to check if the option is enabled otherwise asks the user if they prefer using it or not. You can only use this option if the version is 5.',
+		async: v.pipe(
+			v.optional(v.boolean()),
+			v.description(
+				'If true the code is an async component/module and might use await in the markup or top-level awaits in the script tag. If possible check the svelte.config.js/svelte.config.ts to check if the option is enabled otherwise asks the user if they prefer using it or not. You can only use this option if the version is 5.',
+			),
 		),
-	),
-	filename: v.pipe(
-		v.optional(v.string()),
-		v.description(
-			'The filename of the component if available, it MUST be only the Component name with .svelte or .svelte.ts extension and not the entire path.',
+		filename: v.pipe(
+			v.optional(v.string()),
+			v.description(
+				'The filename of the component if available, it MUST be only the Component name with .svelte or .svelte.ts extension and not the entire path.',
+			),
 		),
-	),
-});
+	});
+}
 
 const autofixer_output_schema = v.object({
 	issues: v.array(v.string()),
@@ -40,7 +52,7 @@ export async function svelte_autofixer_handler({
 	desired_svelte_version: desired_svelte_version_unchecked,
 	async,
 	filename: filename_or_path,
-}: v.InferInput<typeof autofixer_schema>) {
+}: v.InferInput<ReturnType<typeof get_autofixer_schema>>) {
 	// we validate manually because some clients don't support union in the input schema (looking at you cursor)
 	const parsed_version = v.safeParse(
 		v.union([v.literal(4), v.literal(5), v.literal('4'), v.literal('5')]),
@@ -110,7 +122,7 @@ export function svelte_autofixer(server: SvelteMcp) {
 			title: 'Svelte Autofixer',
 			description:
 				'Given a svelte component or module returns a list of suggestions to fix any issues it has. This tool MUST be used whenever the user is asking to write svelte code before sending the code back to the user',
-			schema: autofixer_schema,
+			schema: get_autofixer_schema(server.ctx.custom?.stdio ?? false),
 			outputSchema: autofixer_output_schema,
 			annotations: {
 				title: 'Svelte Autofixer',
@@ -129,6 +141,18 @@ export function svelte_autofixer(server: SvelteMcp) {
 			if (server.ctx.sessionId && server.ctx.custom?.track) {
 				await server.ctx.custom?.track?.(server.ctx.sessionId, 'svelte-autofixer');
 			}
+
+			// we only do this if we know we are running in stdio mode (only stdio pass the context as true)
+			if (server.ctx.custom?.stdio) {
+				const [exists_sync, read_file] = await Promise.all([
+					import('node:fs').then((mod) => mod.existsSync),
+					import('node:fs/promises').then((mod) => mod.readFile),
+				]);
+				if (exists_sync(code)) {
+					code = await read_file(code, 'utf-8');
+				}
+			}
+
 			try {
 				const content = await svelte_autofixer_handler({
 					code,
