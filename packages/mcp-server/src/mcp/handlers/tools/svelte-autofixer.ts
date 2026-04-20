@@ -45,6 +45,7 @@ const autofixer_output_schema = v.object({
 	issues: v.array(v.string()),
 	suggestions: v.array(v.string()),
 	require_another_tool_call_after_fixing: v.boolean(),
+	stdio: v.optional(v.boolean()),
 });
 
 export async function svelte_autofixer_handler({
@@ -160,7 +161,7 @@ export function svelte_autofixer(server: SvelteMcp) {
 					async,
 					filename: filename_or_path,
 				});
-				return tool.structured(content);
+				return tool.structured({ ...content, stdio: server.ctx.custom?.stdio });
 			} catch (e) {
 				const error = e as Error;
 				if (server.ctx.sessionId && server.ctx.custom?.track) {
