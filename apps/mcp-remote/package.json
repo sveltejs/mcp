@@ -23,10 +23,6 @@
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
 		"test:watch": "npm run test:unit -- --watch",
-		"db:push": "drizzle-kit push",
-		"db:generate": "drizzle-kit generate",
-		"db:migrate": "drizzle-kit migrate",
-		"db:studio": "drizzle-kit studio",
 		"inspect": "pnpm mcp-inspector"
 	},
 	"keywords": [
@@ -46,8 +42,6 @@
 		"@sveltejs/vite-plugin-svelte": "catalog:svelte",
 		"@types/node": "catalog:tooling",
 		"@typescript-eslint/parser": "catalog:lint",
-		"drizzle-kit": "catalog:orm",
-		"drizzle-orm": "catalog:orm",
 		"eslint-config-prettier": "catalog:lint",
 		"eslint-plugin-svelte": "catalog:lint",
 		"globals": "catalog:lint",
@@ -62,7 +56,6 @@
 		"vitest": "catalog:tooling"
 	},
 	"dependencies": {
-		"@sveltejs/mcp-schema": "workspace:^",
 		"@sveltejs/mcp-server": "workspace:^",
 		"@tmcp/transport-http": "catalog:tmcp",
 		"@vercel/analytics": "catalog:tooling",
