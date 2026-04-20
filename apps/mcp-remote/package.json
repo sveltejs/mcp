@@ -35,7 +35,6 @@
 	"devDependencies": {
 		"@eslint/compat": "catalog:lint",
 		"@eslint/js": "catalog:lint",
-		"@libsql/client": "catalog:orm",
 		"@modelcontextprotocol/inspector": "catalog:ai",
 		"@sveltejs/adapter-vercel": "catalog:svelte",
 		"@sveltejs/kit": "catalog:svelte",
