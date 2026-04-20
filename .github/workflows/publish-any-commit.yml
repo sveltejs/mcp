@@ -20,4 +20,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      # Opencode doesn't have a build step
+      - name: Build Stdio
+        run: pnpm build
+        with:
+          cwd: ./packages/mcp-stdio
+
       - run: pnpm dlx pkg-pr-new publish --compact './packages/mcp-stdio' './packages/opencode' --pnpm
