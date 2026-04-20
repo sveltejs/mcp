@@ -7,6 +7,8 @@ import { add_eslint_issues } from '../../autofixers/add-eslint-issues.js';
 import { icons } from '../../icons/index.js';
 import { type SvelteMcp } from '../../index.js';
 
+let cached_schema: ReturnType<typeof get_autofixer_schema> | null = null;
+
 function get_autofixer_schema(stdio: boolean) {
 	let code = v.string();
 	if (stdio) {
@@ -45,7 +47,6 @@ const autofixer_output_schema = v.object({
 	issues: v.array(v.string()),
 	suggestions: v.array(v.string()),
 	require_another_tool_call_after_fixing: v.boolean(),
-	stdio: v.optional(v.boolean()),
 });
 
 export async function svelte_autofixer_handler({
@@ -123,7 +124,11 @@ export function svelte_autofixer(server: SvelteMcp) {
 			title: 'Svelte Autofixer',
 			description:
 				'Given a svelte component or module returns a list of suggestions to fix any issues it has. This tool MUST be used whenever the user is asking to write svelte code before sending the code back to the user',
-			schema: get_autofixer_schema(server.ctx.custom?.stdio ?? false),
+			get schema() {
+				return (
+					cached_schema ?? (cached_schema = get_autofixer_schema(server.ctx.custom?.stdio ?? false))
+				);
+			},
 			outputSchema: autofixer_output_schema,
 			annotations: {
 				title: 'Svelte Autofixer',
@@ -161,7 +166,7 @@ export function svelte_autofixer(server: SvelteMcp) {
 					async,
 					filename: filename_or_path,
 				});
-				return tool.structured({ ...content, stdio: server.ctx.custom?.stdio });
+				return tool.structured(content);
 			} catch (e) {
 				const error = e as Error;
 				if (server.ctx.sessionId && server.ctx.custom?.track) {
