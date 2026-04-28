@@ -69,6 +69,8 @@ export function parse(code: string, file_path: string) {
 			return this.all_references.find((r) => r.identifier === id);
 		},
 		is_rune(call: CallExpression, rune?: (typeof runes)[number][]) {
+			// it should always be a call expression but we check just in case because sometimes it's any and TS doesn't complain
+			if (call.type !== 'CallExpression') return false;
 			if (call.callee.type !== 'Identifier' && call.callee.type !== 'MemberExpression')
 				return false;
 			const id = call.callee.type === 'Identifier' ? call.callee : call.callee.object;
