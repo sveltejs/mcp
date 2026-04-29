@@ -19,5 +19,8 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+      # Opencode doesn't have a build step
+      - name: Build Stdio
+        run: pnpm --filter @sveltejs/mcp run build
 
       - run: pnpm dlx pkg-pr-new publish --compact './packages/mcp-stdio' './packages/opencode' --pnpm
