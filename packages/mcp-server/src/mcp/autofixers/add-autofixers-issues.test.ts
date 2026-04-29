@@ -775,5 +775,16 @@ describe('add_autofixers_issues', () => {
 				`You are reading the stateful variable "$x" with a "$" prefix. Stateful variables are not stores and should be read without the "$". Please read it as a normal variable "x"`,
 			);
 		});
+
+		// https://github.com/sveltejs/ai-tools/issues/200
+		it('should not crash when reading $-prefixed identifier for variable initialized with member expression', () => {
+			expect(() =>
+				run_autofixers_on_code(`<div>{$x}</div>
+
+					<script>
+					const x = foo.bar;
+					</script>`),
+			).not.toThrow();
+		});
 	});
 });

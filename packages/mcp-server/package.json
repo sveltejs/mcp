@@ -17,12 +17,8 @@
 		".": "./src/index.ts",
 		"./handlers": "./src/mcp/handlers/tools/handlers.ts"
 	},
-	"peerDependencies": {
-		"drizzle-orm": "^0.45.0"
-	},
 	"dependencies": {
 		"@mcp-ui/server": "catalog:ai",
-		"@sveltejs/mcp-schema": "workspace:^",
 		"@tmcp/adapter-valibot": "catalog:tmcp",
 		"@tmcp/transport-in-memory": "catalog:tmcp",
 		"@typescript-eslint/parser": "catalog:lint",

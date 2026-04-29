@@ -1,6 +1,5 @@
 import { dev } from '$app/environment';
 import { http_transport } from '$lib/mcp/index.js';
-import { db } from '$lib/server/db/index.js';
 import { redirect } from '@sveltejs/kit';
 import { track } from '@vercel/analytics/server';
 
@@ -17,7 +16,6 @@ export async function handle({ event, resolve }) {
 		}
 	}
 	const mcp_response = await http_transport.respond(event.request, {
-		db,
 		// only add analytics in production
 		track: dev
 			? undefined

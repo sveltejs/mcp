@@ -1,5 +1,17 @@
 # @sveltejs/opencode
 
+## 0.1.8
+
+### Patch Changes
+
+- fix: add `server` export to opencode plugin ([`96c50ac`](https://github.com/sveltejs/ai-tools/commit/96c50acae2b4131a6c72d3579a73c44ab9158b18))
+
+## 0.1.7
+
+### Patch Changes
+
+- fix: import `ts` files directly ([#190](https://github.com/sveltejs/ai-tools/pull/190))
+
 ## 0.1.6
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
 	"name": "@sveltejs/opencode",
-	"version": "0.1.6",
+	"version": "0.1.8",
 	"type": "module",
 	"license": "MIT",
 	"homepage": "https://github.com/sveltejs/ai-tools#readme",
@@ -14,9 +14,16 @@
 	"files": [
 		"index.ts",
 		"config.ts",
+		"agents.ts",
 		"instructions",
 		"skills"
 	],
+	"exports": {
+		"./server": {
+			"types": "./index.ts",
+			"import": "./index.ts"
+		}
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/sveltejs/ai-tools.git",

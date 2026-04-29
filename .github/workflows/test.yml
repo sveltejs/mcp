@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
         with:
           version: 10.28.2
 
@@ -32,13 +32,9 @@ jobs:
       - name: Build project
         run: pnpm run build
         env:
-          DATABASE_URL: file:test.db
           VOYAGE_API_KEY: dummy-key
-          DATABASE_TOKEN: dummy-key
 
       - name: Run tests
         run: pnpm run test
         env:
-          DATABASE_URL: file:test.db
           VOYAGE_API_KEY: dummy-key
-          DATABASE_TOKEN: dummy-key
