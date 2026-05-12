@@ -27,7 +27,7 @@ $effect(() => {
 
 > [!NOTE] `$derived` is given an expression, _not_ a function. If you need to use a function (because the expression is complex, for example) use `$derived.by`.
 
-Deriveds are writable — you can assign to them, just like `$state`, except that they will re-evaluate when their expression changes.
+The derived variables are writable — you can assign to them, just like `$state`, except that they will re-evaluate when their expression changes.
 
 If the derived expression is an object or array, it will be returned as-is — it is _not_ made deeply reactive. You can, however, use `$state` inside `$derived.by` in the rare cases that you need this.
 
