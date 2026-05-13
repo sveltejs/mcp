@@ -1,3 +1,3 @@
 ---
-title: MCP Server
+title: MCP server
 ---
