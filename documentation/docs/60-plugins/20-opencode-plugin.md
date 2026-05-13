@@ -6,7 +6,7 @@ OpenCode has a [plugin system](https://opencode.ai/docs/plugins/) that allows de
 
 ## Installation
 
-To install the plugin in OpenCode you can edit your [OpenCode config](https://opencode.ai/docs/config/) (either the global or the local one), adding `@sveltejs/opencode` to the list of plugins.
+To install the plugin you can edit your [OpenCode config](https://opencode.ai/docs/config/) (either the global or the local one), adding `@sveltejs/opencode` to the list of plugins.
 
 ```json
 {
@@ -15,39 +15,40 @@ To install the plugin in OpenCode you can edit your [OpenCode config](https://op
 }
 ```
 
-That's it! You now have the Svelte MCP server, [skills](skills), and the [file editor subagent](subagent) configured for you.
+That's it! You now have the Svelte [MCP server](mcp), [skills](skills), and the `svelte-file-editor` [subagent](subagent) configured for you.
 
 ## Configuration
 
-The default configuration for the Svelte OpenCode plugin looks like this...
+By default, everything is enabled, but you can configure the plugin by adding a configuration file:
+
+- locally, in `.opencode/svelte.json`
+- globally, in `~/.config/opencode/svelte.json` (or, if you have specified the environment variable, in `$OPENCODE_CONFIG_DIR/svelte.json`)
 
 ```json
 {
 	"$schema": "https://svelte.dev/opencode/schema.json",
 	"mcp": {
-		"type": "remote",
+		"type": "remote", // or "local" — defaults to remote
 		"enabled": true
 	},
 	"subagent": {
 		"enabled": true,
 		"agents": {
 			"svelte-file-editor": {
-				"model": "other-model", // defaults to the same as main agent,
-				"temperature": 1, // default to unset
-				"top_p": 0.7, // default to unset,
-				"maxSteps": 20 // default to unlimited
+				"model": "<other-model>", // defaults to the same as main agent
+				"temperature": 1, // defaults to unset
+				"top_p": 0.7, // defaults to unset
+				"maxSteps": 20 // defaults to unlimited
 			}
 		}
 	},
 	"skills": {
-		"enabled": true // it can also be an array of all the skills to enable like ['svelte-core-bestpractices']
+		// this can be `true`, or an array of skills to enable
+		// e.g. ["svelte-core-bestpractices"]
+		"enabled": true
 	},
 	"instructions": {
 		"enabled": true
 	}
 }
 ```
-
-...but if you prefer, you can enable only the subagent, only the MCP, only the skills (`enabled` supports both a boolean or an array containing the name of all the skills to enable), or configure the kind of MCP server you want to use (`local` or `remote`).
-
-You can place this file in `./.opencode/svelte.json` (in your project), in `~/.config/opencode/svelte.json` or, if you have an `OPENCODE_CONFIG_DIR` environment variable specified, at `$OPENCODE_CONFIG_DIR/svelte.json`.
