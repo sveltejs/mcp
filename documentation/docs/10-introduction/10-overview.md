@@ -4,7 +4,7 @@ title: Overview
 
 The following pages will help you set up and use the AI tools officially maintained by the Svelte team.
 
-There are four tools, designed to help your agent write robust, correct Svelte code. They are designed to work together, but each can be used individually:
+There are four tools, designed to help your agent write correct, robust Svelte code. They are designed to work together, but each can be used individually:
 
 - [Instructions](instructions): small prompt always injected into your session to make your agent more aware of the available tools
 - [MCP Server](mcp): with tools, prompts and resources to give your agent more context, by pulling directly from the official Svelte documentation and using static analysis to correct common generative AI pitfalls
