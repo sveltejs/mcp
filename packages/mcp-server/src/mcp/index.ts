@@ -24,6 +24,7 @@ export const server = new McpServer(
 	},
 ).withContext<{
 	track?: (sessionId: string, event: string, extra?: string) => Promise<void>;
+	stdio?: boolean;
 }>();
 
 export type SvelteMcp = typeof server;

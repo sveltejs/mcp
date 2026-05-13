@@ -6,9 +6,18 @@ settings:
 
 catalogs:
   ai:
+    '@anthropic-ai/sdk':
+      specifier: ^0.71.0
+      version: 0.71.2
+    '@mcp-ui/server':
+      specifier: ^6.0.0
+      version: 6.0.0
     '@modelcontextprotocol/inspector':
       specifier: ^0.19.0
       version: 0.19.0
+    '@opencode-ai/plugin':
+      specifier: ^1.1.44
+      version: 1.1.44
   lint:
     '@eslint/compat':
       specifier: ^2.0.0
@@ -16,12 +25,27 @@ catalogs:
     '@eslint/js':
       specifier: ^9.36.0
       version: 9.39.2
+    '@types/eslint-scope':
+      specifier: ^8.3.2
+      version: 8.4.0
     '@typescript-eslint/parser':
       specifier: ^8.44.0
       version: 8.54.0
+    '@typescript-eslint/types':
+      specifier: ^8.44.0
+      version: 8.54.0
+    eslint:
+      specifier: ^9.36.0
+      version: 9.39.2
     eslint-config-prettier:
       specifier: ^10.0.1
       version: 10.1.8
+    eslint-plugin-import:
+      specifier: ^2.32.0
+      version: 2.32.0
+    eslint-plugin-pnpm:
+      specifier: ^1.3.0
+      version: 1.5.0
     eslint-plugin-svelte:
       specifier: ^3.12.5
       version: 3.14.0
@@ -37,6 +61,9 @@ catalogs:
     svelte-eslint-parser:
       specifier: ^1.4.0
       version: 1.4.1
+    typescript-eslint:
+      specifier: ^8.44.0
+      version: 8.54.0
   svelte:
     '@sveltejs/adapter-vercel':
       specifier: ^6.0.0
@@ -54,22 +81,64 @@ catalogs:
       specifier: ^4.0.0
       version: 4.3.5
   tmcp:
+    '@tmcp/adapter-valibot':
+      specifier: ^0.1.5
+      version: 0.1.5
     '@tmcp/transport-http':
-      specifier: ^0.8.4
-      version: 0.8.4
+      specifier: ^0.8.5
+      version: 0.8.5
+    '@tmcp/transport-in-memory':
+      specifier: ^0.0.6
+      version: 0.0.6
+    '@tmcp/transport-stdio':
+      specifier: ^0.4.2
+      version: 0.4.2
     tmcp:
-      specifier: ^1.19.0
-      version: 1.19.2
+      specifier: ^1.19.3
+      version: 1.19.3
   tooling:
+    '@changesets/cli':
+      specifier: ^2.29.7
+      version: 2.29.8
+    '@svitejs/changesets-changelog-github-compact':
+      specifier: ^1.2.0
+      version: 1.2.0
+    '@types/estree':
+      specifier: ^1.0.8
+      version: 1.0.8
     '@types/node':
       specifier: ^24.3.1
       version: 24.10.9
+    '@valibot/to-json-schema':
+      specifier: ^1.5.0
+      version: 1.5.0
     '@vercel/analytics':
       specifier: ^2.0.0
       version: 2.0.1
+    dotenv:
+      specifier: ^17.2.3
+      version: 17.2.3
+    node-resolve-ts:
+      specifier: ^1.0.2
+      version: 1.0.2
+    publint:
+      specifier: ^0.3.13
+      version: 0.3.17
+    sade:
+      specifier: 1.8.1
+      version: 1.8.1
+    ts-blank-space:
+      specifier: ^0.7.0
+      version: 0.7.0
+    tsdown:
+      specifier: ^0.20.0
+      version: 0.20.1
     typescript:
       specifier: ^5.0.0
       version: 5.9.3
+    valibot:
+      specifier: ^1.2.0
+      version: 1.2.0
     vite:
       specifier: ^7.0.4
       version: 7.3.1
@@ -79,6 +148,9 @@ catalogs:
     vitest:
       specifier: ^4.0.0
       version: 4.0.18
+    zimmerframe:
+      specifier: ^1.1.4
+      version: 1.1.4
 
 importers:
 
@@ -149,13 +221,13 @@ importers:
         version: link:../../packages/mcp-server
       '@tmcp/transport-http':
         specifier: catalog:tmcp
-        version: 0.8.4(tmcp@1.19.2(typescript@5.9.3))
+        version: 0.8.5(tmcp@1.19.3(typescript@5.9.3))
       '@vercel/analytics':
         specifier: catalog:tooling
         version: 2.0.1(@sveltejs/kit@2.50.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.48.4)(vite@7.3.1(@types/node@24.10.9)(yaml@2.8.2)))(svelte@5.48.4)(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.9)(yaml@2.8.2)))(react@18.3.1)(svelte@5.48.4)
       tmcp:
         specifier: catalog:tmcp
-        version: 1.19.2(typescript@5.9.3)
+        version: 1.19.3(typescript@5.9.3)
     devDependencies:
       '@eslint/compat':
         specifier: catalog:lint
@@ -225,10 +297,10 @@ importers:
         version: 6.0.0(hono@4.11.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zod@4.1.8)
       '@tmcp/adapter-valibot':
         specifier: catalog:tmcp
-        version: 0.1.5(tmcp@1.19.2(typescript@5.9.3))(valibot@1.2.0(typescript@5.9.3))
+        version: 0.1.5(tmcp@1.19.3(typescript@5.9.3))(valibot@1.2.0(typescript@5.9.3))
       '@tmcp/transport-in-memory':
         specifier: catalog:tmcp
-        version: 0.0.5(tmcp@1.19.2(typescript@5.9.3))
+        version: 0.0.6(tmcp@1.19.3(typescript@5.9.3))
       '@typescript-eslint/parser':
         specifier: catalog:lint
         version: 8.54.0(eslint@9.39.2)(typescript@5.9.3)
@@ -246,7 +318,7 @@ importers:
         version: 1.4.1(svelte@5.48.4)
       tmcp:
         specifier: catalog:tmcp
-        version: 1.19.2(typescript@5.9.3)
+        version: 1.19.3(typescript@5.9.3)
       ts-blank-space:
         specifier: catalog:tooling
         version: 0.7.0
@@ -292,14 +364,14 @@ importers:
         version: 1.8.1
       tmcp:
         specifier: catalog:tmcp
-        version: 1.19.2(typescript@5.9.3)
+        version: 1.19.3(typescript@5.9.3)
     devDependencies:
       '@sveltejs/mcp-server':
         specifier: workspace:^
         version: link:../mcp-server
       '@tmcp/transport-stdio':
         specifier: catalog:tmcp
-        version: 0.4.1(tmcp@1.19.2(typescript@5.9.3))
+        version: 0.4.2(tmcp@1.19.3(typescript@5.9.3))
       '@types/node':
         specifier: catalog:tooling
         version: 24.10.9
@@ -1725,8 +1797,8 @@ packages:
     peerDependencies:
       tmcp: ^1.16.3
 
-  '@tmcp/transport-http@0.8.4':
-    resolution: {integrity: sha512-n/4oIYjHyX5i6LFC3+qlxtc/IIv1xoqLhPVbdA5VYDyUWU6QRBU3+ffMXQuAPs0Q6Z+ZCzcO30V90yRMAxuriQ==}
+  '@tmcp/transport-http@0.8.5':
+    resolution: {integrity: sha512-qQLqiCTtbxtTSswqOn/782df7O57RxI/yLUtCDQ++kHEhbmDUc8glmmtGJ3mrb7yPSPoM5VF2Pc2Q5cA6quzLA==}
     peerDependencies:
       '@tmcp/auth': ^0.3.3 || ^0.4.0
       tmcp: ^1.18.0
@@ -1734,13 +1806,13 @@ packages:
       '@tmcp/auth':
         optional: true
 
-  '@tmcp/transport-in-memory@0.0.5':
-    resolution: {integrity: sha512-m8l4+GdCj3NNwVxClnE8fV0yVn5ihpXhIsoOTG3CxeKoC/4H5+HPXeIIb25uSfFt6rccDfqH7DDPjMGDfPtoXA==}
+  '@tmcp/transport-in-memory@0.0.6':
+    resolution: {integrity: sha512-j+xcfQa7ksiIkA/8s3SAsTnM3GeZTd+X8F++Mv/tAT91+UkCzyhemPz0MqW7i1ruxJyIWooOB6JhWCsyF+LvhA==}
     peerDependencies:
       tmcp: ^1.17.0
 
-  '@tmcp/transport-stdio@0.4.1':
-    resolution: {integrity: sha512-464x8HNrvjLLtKZsrFWUL13GnBFFtrNoWxnE0rHbcmQSYRqtS8WseWtQCYstj2Vcg9kRlIUVFGDIljGNP4/N4A==}
+  '@tmcp/transport-stdio@0.4.2':
+    resolution: {integrity: sha512-OLVLJzUXAKsCvenkjPf5ygli9ZcbEv3Lcei/ry+DB4T1NzvDc1oU3m41zYtHhAmbES1h6om3T9f/zonBSDFMRQ==}
     peerDependencies:
       tmcp: ^1.16.3
 
@@ -3757,8 +3829,8 @@ packages:
     resolution: {integrity: sha512-PSkbLUoxOFRzJYjjxHJt9xro7D+iilgMX/C9lawzVuYiIdcihh9DXmVibBe8lmcFrRi/VzlPjBxbN7rH24q8/Q==}
     engines: {node: '>=14.0.0'}
 
-  tmcp@1.19.2:
-    resolution: {integrity: sha512-/AEG/jlzflGKqCKm7GNdhz50VtFlN+3vcnKd+iQJXcHdIPrpCRMolEj57SfgcXcfE2ouX7J6Q05gPKsS2NZhKg==}
+  tmcp@1.19.3:
+    resolution: {integrity: sha512-plz/TLKNFrdfQN32LjCTN6ULy6pynfGPgHcU7KGCI5dBrxQ9Mub99SmcYuzxEkLjJooQuOD3gosSwZEl1htOtw==}
 
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
@@ -5410,31 +5482,31 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@tmcp/adapter-valibot@0.1.5(tmcp@1.19.2(typescript@5.9.3))(valibot@1.2.0(typescript@5.9.3))':
+  '@tmcp/adapter-valibot@0.1.5(tmcp@1.19.3(typescript@5.9.3))(valibot@1.2.0(typescript@5.9.3))':
     dependencies:
       '@standard-schema/spec': 1.1.0
       '@valibot/to-json-schema': 1.5.0(valibot@1.2.0(typescript@5.9.3))
-      tmcp: 1.19.2(typescript@5.9.3)
+      tmcp: 1.19.3(typescript@5.9.3)
       valibot: 1.2.0(typescript@5.9.3)
 
-  '@tmcp/session-manager@0.2.1(tmcp@1.19.2(typescript@5.9.3))':
+  '@tmcp/session-manager@0.2.1(tmcp@1.19.3(typescript@5.9.3))':
     dependencies:
-      tmcp: 1.19.2(typescript@5.9.3)
+      tmcp: 1.19.3(typescript@5.9.3)
 
-  '@tmcp/transport-http@0.8.4(tmcp@1.19.2(typescript@5.9.3))':
+  '@tmcp/transport-http@0.8.5(tmcp@1.19.3(typescript@5.9.3))':
     dependencies:
-      '@tmcp/session-manager': 0.2.1(tmcp@1.19.2(typescript@5.9.3))
+      '@tmcp/session-manager': 0.2.1(tmcp@1.19.3(typescript@5.9.3))
       esm-env: 1.2.2
-      tmcp: 1.19.2(typescript@5.9.3)
+      tmcp: 1.19.3(typescript@5.9.3)
 
-  '@tmcp/transport-in-memory@0.0.5(tmcp@1.19.2(typescript@5.9.3))':
+  '@tmcp/transport-in-memory@0.0.6(tmcp@1.19.3(typescript@5.9.3))':
     dependencies:
       json-rpc-2.0: 1.7.1
-      tmcp: 1.19.2(typescript@5.9.3)
+      tmcp: 1.19.3(typescript@5.9.3)
 
-  '@tmcp/transport-stdio@0.4.1(tmcp@1.19.2(typescript@5.9.3))':
+  '@tmcp/transport-stdio@0.4.2(tmcp@1.19.3(typescript@5.9.3))':
     dependencies:
-      tmcp: 1.19.2(typescript@5.9.3)
+      tmcp: 1.19.3(typescript@5.9.3)
 
   '@tsconfig/node10@1.0.12': {}
 
@@ -7625,7 +7697,7 @@ snapshots:
 
   tinyrainbow@3.0.3: {}
 
-  tmcp@1.19.2(typescript@5.9.3):
+  tmcp@1.19.3(typescript@5.9.3):
     dependencies:
       '@standard-schema/spec': 1.1.0
       json-rpc-2.0: 1.7.1

@@ -14,7 +14,9 @@ const cli = sade('svelte-mcp');
 
 cli.command('__mcp', '', { default: true }).action(() => {
 	const transport = new StdioTransport(server);
-	transport.listen();
+	transport.listen({
+		stdio: true,
+	});
 });
 
 cli

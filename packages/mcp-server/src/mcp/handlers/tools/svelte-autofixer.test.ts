@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { writeFileSync, unlinkSync } from 'node:fs';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { InMemoryTransport } from '@tmcp/transport-in-memory';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { server } from '../../index.js';
@@ -12,13 +15,18 @@ async function autofixer_tool_call(
 	is_error = false,
 	desired_svelte_version = 5,
 	async = false,
+	ctx?: { stdio?: boolean },
 ) {
-	const result = await session.callTool('svelte-autofixer', {
-		code,
-		desired_svelte_version,
-		filename: 'App.svelte',
-		async,
-	});
+	const result = await session.callTool(
+		'svelte-autofixer',
+		{
+			code,
+			desired_svelte_version,
+			filename: 'App.svelte',
+			async,
+		},
+		ctx,
+	);
 
 	expect(result).toBeDefined();
 	if (is_error) {
@@ -145,5 +153,41 @@ describe('svelte-autofixer tool', () => {
 		expect(content.content[0].text).toContain(
 			'The desired_svelte_version MUST be either 4 or 5 but received "3"',
 		);
+	});
+
+	it('should read file content from path when stdio context is true', async () => {
+		const tmp_file = join(tmpdir(), `svelte-autofixer-test-${Date.now()}.svelte`);
+		const file_content = `<script>
+			$state count = 0;
+		</script>`;
+
+		writeFileSync(tmp_file, file_content, 'utf-8');
+
+		try {
+			// with stdio: true, the file is read from disk and parsed, producing issues
+			const content = await autofixer_tool_call(tmp_file, false, 5, false, { stdio: true });
+			expect(content.issues.length).toBeGreaterThan(0);
+			expect(content.suggestions.length).toBeGreaterThan(0);
+		} finally {
+			unlinkSync(tmp_file);
+		}
+	});
+
+	it('should treat file path as code when stdio context is not set', async () => {
+		const tmp_file = join(tmpdir(), `svelte-autofixer-test-${Date.now()}.svelte`);
+		const file_content = `<script>
+			$state count = 0;
+		</script>`;
+
+		writeFileSync(tmp_file, file_content, 'utf-8');
+
+		try {
+			// without stdio context, the path string is treated as raw code (plain text), no issues
+			const content = await autofixer_tool_call(tmp_file, false, 5, false);
+			expect(content.issues).toHaveLength(0);
+			expect(content.suggestions).toHaveLength(0);
+		} finally {
+			unlinkSync(tmp_file);
+		}
 	});
 });
