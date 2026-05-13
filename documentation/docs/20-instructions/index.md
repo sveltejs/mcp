@@ -1,3 +1,3 @@
 ---
-title: AGENTS.md
+title: Instructions
 ---
