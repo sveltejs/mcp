@@ -1,5 +1,15 @@
 # @sveltejs/mcp
 
+## 0.1.23
+
+### Patch Changes
+
+- feat: allow stdio mcp to read the content of the file directly ([#198](https://github.com/sveltejs/ai-tools/pull/198))
+
+- fix: handle non call expressions passed to `is_rune` ([#201](https://github.com/sveltejs/ai-tools/pull/201))
+
+- chore: remove db requirement ([#196](https://github.com/sveltejs/ai-tools/pull/196))
+
 ## 0.1.22
 
 ### Patch Changes
