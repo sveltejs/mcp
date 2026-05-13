@@ -2,7 +2,7 @@
 title: Overview
 ---
 
-The Svelte MCP ([Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro)) server can help your LLM or agent of choice write better Svelte code. It works by providing documentation relevant to the task at hand, and statically analysing generated code so that it can suggest fixes and best practices.
+The Svelte MCP ([Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro)) server can help your agent write better Svelte code. It works by providing relevant documentation, and statically analysing generated code so that it can suggest fixes and best practices.
 
 ## Setup
 
