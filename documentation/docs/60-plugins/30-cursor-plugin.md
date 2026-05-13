@@ -2,13 +2,19 @@
 title: Cursor
 ---
 
-Cursor has a [plugin system](https://cursor.com/docs/plugins) that can bundle rules, skills, agents, commands, MCP servers, and hooks. This repository also ships a Svelte Cursor plugin under `plugins/cursor/svelte`.
+Cursor has a [plugin system](https://cursor.com/docs/plugins) that can bundle rules, skills, agents, commands, MCP servers, and hooks.
 
-The plugin gives you the remote Svelte MCP server, Cursor [skills](skills), an always-on rule that tells the model how to use the Svelte MCP tools correctly, and the `svelte-file-editor` agent for working on `.svelte` files and `.svelte.ts`/`.svelte.js` modules.
+The Svelte plugin gives you the remote Svelte MCP server, Cursor [skills](skills), an always-on rule that tells the model how to use the Svelte MCP tools correctly, and the `svelte-file-editor` subagent for working on `.svelte` files and `.svelte.ts`/`.svelte.js` modules. The source is available in the [`sveltejs/ai-tools`](https://github.com/sveltejs/ai-tools/tree/main/plugins/cursor/svelte) repo.
 
 ## Installation
 
-To install the plugin you can access [this page](https://cursor.com/marketplace/svelte) or search for "Svelte" from the Cursor marketplace panel. Plugins can be installed either for the current project or at user level.
+Install the plugin from the [Cursor Marketplace](https://cursor.com/marketplace/svelte) with the following command:
+
+```
+/add-plugin svelte
+```
+
+Plugins can be installed either for the current project or at user level.
 
 Once installed, Cursor will discover the plugin components automatically:
 
@@ -16,4 +22,4 @@ Once installed, Cursor will discover the plugin components automatically:
 - rules and skills appear in Cursor's rules UI
 - the `svelte-file-editor` agent becomes available in chat
 
-> [!NOTE] The Cursor CLI does not support plugins yet; in Cloud Agents only MCP servers from plugins are currently supported.
+> [!NOTE] The Cursor CLI does not support plugins yet. Plugin support in [Cloud Agents](https://cursor.com/docs/cloud-agent) is limited to MCP servers.
