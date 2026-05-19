@@ -123,7 +123,7 @@ export function svelte_autofixer(server: SvelteMcp) {
 			name: 'svelte-autofixer',
 			title: 'Svelte Autofixer',
 			description:
-				'Given a svelte component or module returns a list of suggestions to fix any issues it has. This tool MUST be used whenever the user is asking to write svelte code before sending the code back to the user',
+				'Given a svelte component or module returns a list of suggestions to fix any issues it has. This tool MUST be used whenever the user is asking to write svelte code before sending the code back to the user. When a custom-visitor suggestion is a confirmed false positive (e.g. a deliberate `$effect` whose side effect cannot be a `$derived`), silence it with a `// svelte-mcp-ignore <code>` script comment or `<!-- svelte-mcp-ignore <code> -->` markup comment on the line above the triggering node. Available codes: `effect_calls_function`, `effect_assigns_state`, `bind_this_attachment`, `use_action_attachment`, `derived_with_function`, `imported_runes`, `runes_instead_of_store`, `wrong_property_access_state`.',
 			get schema() {
 				return (
 					cached_schema ?? (cached_schema = get_autofixer_schema(server.ctx.custom?.stdio ?? false))
