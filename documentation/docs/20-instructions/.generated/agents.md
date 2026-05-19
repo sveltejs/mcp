@@ -17,6 +17,8 @@ After calling the list-sections tool, you MUST analyze the returned documentatio
 Analyzes Svelte code and returns issues and suggestions.
 You MUST use this tool whenever writing Svelte code before sending it to the user. Keep calling it until no issues or suggestions are returned.
 
+Some custom-visitor suggestions are heuristic and can fire on intentional code (e.g. an `$effect` that imperatively pushes state into a third-party library, where `$derived` genuinely doesn't apply). When you've confirmed a suggestion is a false positive, silence it with a `svelte-mcp-ignore` directive on the line above the triggering node — `// svelte-mcp-ignore <code>` in `<script>` blocks, `<!-- svelte-mcp-ignore <code> -->` in markup. Multiple codes on one directive are space-separated. The autofixer reports stale or typo'd directives as follow-up suggestions so they don't rot.
+
 ### 4. playground-link
 
 Generates a Svelte Playground link with the provided code.

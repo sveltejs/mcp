@@ -18,7 +18,7 @@ ${available_docs}
 
 These are the available documentation sections that \`list-sections\` will return, you do not need to call it again.
 
-Every time you write a Svelte component or a Svelte module you MUST invoke the \`svelte-autofixer\` tool providing the code. The tool will return a list of issues or suggestions. If there are any issues or suggestions you MUST fix them and call the tool again with the updated code. You MUST keep doing this until the tool returns no issues or suggestions. Only then you can return the code to the user.
+Every time you write a Svelte component or a Svelte module you MUST invoke the \`svelte-autofixer\` tool providing the code. The tool will return a list of issues or suggestions. If there are any issues or suggestions you MUST fix them and call the tool again with the updated code. You MUST keep doing this until the tool returns no issues or suggestions. Only then you can return the code to the user. Some custom-visitor suggestions are heuristic and can be confirmed false positives for intentional code; in that case silence the specific suggestion on the line above the triggering node with \`// svelte-mcp-ignore <code>\` in \`<script>\` blocks or \`<!-- svelte-mcp-ignore <code> -->\` in markup, then call the autofixer again to confirm the run is clean.
 
 This is the task you will work on:
 
