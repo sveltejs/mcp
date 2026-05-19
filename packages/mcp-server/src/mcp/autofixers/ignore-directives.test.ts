@@ -1,13 +1,57 @@
 import { describe, expect, it } from 'vitest';
 import { add_autofixers_issues } from './add-autofixers-issues.js';
 
+/** Run the autofixer and strip the trailing ` [<code>]` marker
+ *  from each suggestion so verbatim message assertions stay
+ *  readable. The marker itself is exercised by the dedicated
+ *  `code marker` tests below via `run_raw`. */
 function run(code: string, desired_svelte_version = 5) {
+	const content = run_raw(code, desired_svelte_version);
+	content.suggestions = content.suggestions.map((s) => s.replace(/ \[[a-z_]+\]$/, ''));
+	return content;
+}
+
+function run_raw(code: string, desired_svelte_version = 5) {
 	const content: { issues: string[]; suggestions: string[] } = { issues: [], suggestions: [] };
 	add_autofixers_issues(content, code, desired_svelte_version);
 	return content;
 }
 
 describe('svelte-mcp-ignore', () => {
+	describe('code marker', () => {
+		it('emits a trailing `[effect_calls_function]` marker on the call-in-effect suggestion', () => {
+			const { suggestions } = run_raw(`
+				<script>
+					import { fetch_data } from './data.js';
+					$effect(() => {
+						fetch_data();
+					});
+				</script>`);
+			expect(suggestions).toEqual([expect.stringMatching(/ \[effect_calls_function\]$/)]);
+		});
+
+		it('emits a trailing `[effect_assigns_state]` marker on the state-assigned-in-effect suggestion', () => {
+			const { suggestions } = run_raw(`
+				<script>
+					let count = $state(0);
+					$effect(() => {
+						count = 43;
+					});
+				</script>`);
+			expect(suggestions).toEqual([expect.stringMatching(/ \[effect_assigns_state\]$/)]);
+		});
+
+		it('emits a trailing `[bind_this_attachment]` marker on the bind:this suggestion', () => {
+			const { suggestions } = run_raw(`
+				<script>
+					let el = $state();
+				</script>
+
+				<div bind:this={el}></div>`);
+			expect(suggestions).toEqual([expect.stringMatching(/ \[bind_this_attachment\]$/)]);
+		});
+	});
+
 	describe('effect_calls_function', () => {
 		it('suppresses the suggestion when the directive sits on the previous line (`//` form)', () => {
 			const { suggestions } = run(`

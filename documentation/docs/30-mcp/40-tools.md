@@ -18,21 +18,19 @@ Uses static analysis to provide suggestions for code that your LLM generates. It
 
 ### Suppressing suggestions
 
-Some custom-visitor suggestions are heuristic — they're written to nudge a model toward a Svelte 5 idiom, but they can fire on perfectly reasonable code (e.g. an `$effect` that imperatively pushes state into a third-party library, where `$derived` genuinely doesn't apply). You can silence a single suggestion on the next line with a `svelte-mcp-ignore` comment, modelled after `svelte-ignore` and `eslint-disable-next-line`:
+Heuristic suggestions can fire on intentional code. A `svelte-mcp-ignore` comment on the line above silences one (or several, space-separated). Scope matches `svelte-ignore`: the comment applies to the immediately following line. Stale or typo'd codes are reported back as follow-up suggestions.
 
 ```svelte
 <script>
 	// svelte-mcp-ignore effect_calls_function
 	$effect(() => {
-		external_library.set(value); // not a $derived candidate
+		external_library.set(value);
 	});
 </script>
 
 <!-- svelte-mcp-ignore bind_this_attachment -->
 <canvas bind:this={canvas}></canvas>
 ```
-
-The directive scopes to **the immediately following line** — the same shape `svelte-ignore` uses for compiler warnings. Multiple codes can be listed on one directive (`// svelte-mcp-ignore effect_calls_function effect_assigns_state`). Stale or typo'd codes surface as a follow-up suggestion so the comments don't quietly rot.
 
 Available codes:
 

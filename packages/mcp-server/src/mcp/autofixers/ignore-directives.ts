@@ -206,6 +206,11 @@ function parse_directive(raw: string): string[] | null {
  * node lives on. Visitors pass `node.loc?.start?.line` from
  * whatever node tripped the check — typically the offending
  * call/import/directive itself.
+ *
+ * The emitted message carries the code as a trailing
+ * `[<code>]` marker so an LLM consumer can read the
+ * suggestion and write the matching `svelte-mcp-ignore`
+ * directive without consulting any external docs surface.
  */
 export function push_suggestion(
 	output: { suggestions: string[] },
@@ -217,7 +222,7 @@ export function push_suggestion(
 	if (typeof target_line === 'number' && registry.is_ignored(target_line, code)) {
 		return;
 	}
-	output.suggestions.push(message);
+	output.suggestions.push(`${message} [${code}]`);
 }
 
 /**
