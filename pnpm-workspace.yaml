@@ -1,12 +1,3 @@
-minimumReleaseAge: 1440
-minimumReleaseAgeExclude:
-  - '@sveltejs/*'
-  - svelte
-  - esrap
-  - devalue
-blockExoticSubdeps: true
-engineStrict: true
-
 packages:
   - ./packages/*
   - ./apps/*
