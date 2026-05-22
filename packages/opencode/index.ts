@@ -81,12 +81,7 @@ export const svelte_plugin: Plugin = async (ctx) => {
 						prompt: agent_data.prompt,
 						description: agent_data.description,
 						permission: {
-							bash: 'ask',
-							edit: 'allow',
-							webfetch: 'ask',
-						},
-						tools: {
-							[`${svelte_mcp_name}_*`]: true,
+							[`${svelte_mcp_name}_*`]: 'allow',
 						},
 					};
 
