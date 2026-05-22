@@ -1,5 +1,11 @@
 # @sveltejs/opencode
 
+## 0.1.9
+
+### Patch Changes
+
+- fix: remove restrictive permissions from subagent ([#219](https://github.com/sveltejs/ai-tools/pull/219))
+
 ## 0.1.8
 
 ### Patch Changes
