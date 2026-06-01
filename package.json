@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"description": "The official Svelte MCP server implementation",
 	"type": "module",
-	"packageManager": "pnpm@10.33.4+sha512.1c67b3b359b2d408119ba1ed289f34b8fc3c6873412bec6fd264fbdc82489e510fcbecb9ce9d22dae7f3b76269d8441046014bdca53b9979cd7a561ad631b800",
+	"packageManager": "pnpm@11.5.0+sha512.dbfcc4f81cf48597afd4bc391ffdf12c11f1a9fb83a395bfa6b0a2d9cc2fd8ffebafdb1ccbd529632153f793904c2615b7f09fe1a345473fd1c35845172a8eb1",
 	"scripts": {
 		"build": "pnpm -r run build",
 		"dev": "pnpm --filter @sveltejs/mcp-remote run dev",
